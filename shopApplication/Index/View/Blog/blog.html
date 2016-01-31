@@ -1,0 +1,305 @@
+<extend name="Public:public" />
+<block name="cssFile">
+<style>
+.headerimg:hover{
+  border: 4px solid #626263;
+}
+.headerimg2:hover{
+  border: 4px solid #626263;
+}
+.chose{
+  border: 4px solid #626263;
+}
+</style>
+</block>
+<block name="topJsFile">
+</block>
+<block name="publicBody">
+    <div class="main">
+      <div class="container">
+        <ul class="breadcrumb">
+            <li><a href="__APP__">主页</a></li>
+            <li><a href="<{:U('blogList')}>">博文中心</a></li>
+            <li class="active"><{$blog.title}></li>
+        </ul>
+        <!-- BEGIN SIDEBAR & CONTENT -->
+        <div class="row margin-bottom-40">
+          <!-- BEGIN CONTENT -->
+          <div class="col-md-12 col-sm-12">
+            <div class="content-page">
+              <div class="row">
+
+                <!-- BEGIN LEFT SIDEBAR -->
+                <div class="col-md-12 col-sm-12 blog-item">
+                <h2><{$blog.title}></h2>
+
+                <div class="blog-item-img">
+                    <!-- BEGIN CAROUSEL -->
+                    <if condition="$blog['type'] eq 1">
+                    <div class="front-carousel">
+                      <div id="myCarousel" class="carousel slide">
+                        <!-- Carousel items -->
+                        <div class="carousel-inner">
+                        <volist name="album" id="v" key="k">
+                          <div class='item <if condition="$k eq 1">active</if>'>
+                            <img src="<{$v['images']}>" alt="" width="100%">
+                          </div>
+                          </volist>
+                        </div>
+                        <!-- Carousel nav -->
+                        <a class="carousel-control left" href="#myCarousel" data-slide="prev">
+                          <i class="fa fa-angle-left"></i>
+                        </a>
+                        <a class="carousel-control right" href="#myCarousel" data-slide="next">
+                          <i class="fa fa-angle-right"></i>
+                        </a>
+                      </div>
+                    </div>
+                    <elseif condition="$blog['type'] eq 2" />
+                      <div class="front-carousel">
+                      <div id="myCarousel" class="carousel slide">
+                        <!-- Carousel items -->
+                        <div class="carousel-inner">
+                          <div class="item active">
+                            <!-- BEGIN VIDEO -->
+                            <iframe src="<{$album['video']}>" style="width:100%; border:0" allowfullscreen="" height="500"></iframe>
+                            <!-- END VIDEO -->
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                    </if>
+                    <!-- END CAROUSEL -->
+                  </div>
+
+
+
+                  <blockquote>
+                    <p><{$blog.description}></p>
+                    <small><cite title="Source Title"><{$blog.author}></cite></small>
+                  </blockquote>
+                  <p><{$blog.content|htmlspecialchars_decode}></p>
+                  <ul class="blog-info">
+                    <li><i class="fa fa-user"></i>作者：<{$blog.author}></li>
+                    <li><i class="fa fa-calendar"></i>发表时间：<{$blog.create_time|date="Y-m-d H:i",###}></li>
+                    <li><i class="fa fa-comments"></i>点击量：<{$blog.clicktimes}></li>
+                    <li><i class="fa fa-tags"></i>关键词：<{$blog.keywords}></li>
+                  </ul>
+
+                  <h2><b>评论</b></h2>
+                  <div class="comments">
+                    <volist name="comments" id="v">
+                    <div class="media" style="padding-bottom:10px">
+                      <a href="javascript:;" class="pull-left">
+                      <img src="__PUBLIC__/Index/Header/<{$v['header']}>.png" alt="" class="media-object">
+                      </a>
+                      <div class="media-body" id="comment<{$v['id']}>">
+                        <h4 class="media-heading"><{$v['username']}><span><{$v[comment_time]|date="Y-m-d H:i",###}>/ <a class="reply" href="javascript:;" data-replyid="<{$v['id']}>">回复</a></span></h4>
+                        <div style="word-break:break-all"><{$v['contents']}></div>
+                        <notempty name="v.replies">
+                          <volist name="v.replies" id="vo">
+                        <div class="media">
+                          <a href="javascript:;" class="pull-left">
+                          <img src="__PUBLIC__/Index/Header/<{$vo['header']}>.png" alt="" class="media-object">
+                          </a>
+                          <div class="media-body">
+                            <h4 class="media-heading"><{$vo['username']}><span><{$vo[reply_time]|date="Y-m-d H:i",###}></span></h4>
+                            <div style="word-break:break-all"><{$v['contents']}></div>
+                          </div>
+                        </div>
+                      </volist>
+                      </notempty>
+                      </div>
+                    </div>
+                    </volist>
+
+                    <!--end media-->
+                  </div>
+                  <notempty name="comments">
+                    <div class="media">
+                      <input type="button" class="btn btn-danger" id="commentmore" style="width:100%" value="点击查看更多评论...">
+                    </div>
+                    <else />
+                    <div class="media">
+                      <input type="button" class="btn btn-danger" id="commentmore" style="width:100%" value="暂无更多评论" disabled="disabled">
+                    </div>
+                  </notempty>
+                  <div class="post-comment padding-top-50">
+                    <h2><b>我要评论</b></h2>
+                    <form role="form">
+                      <input type="hidden" name="header" id="header" value="1">
+                      <input type='hidden' name="blog_id" id="blog_id" value="<{$blog['id']}>">
+                    <div class="form-group" style="margin-bottom: 0;">
+                      <label>选择头像：</label>
+                      <label class="radio-inline">
+                      <p><img class="headerimg" src="__PUBLIC__/Index/Header/1.png" width="10%" data-id="1"/>
+                        <img class="headerimg" src="__PUBLIC__/Index/Header/2.png" width="10%" data-id="2"/>
+                        <img class="headerimg" src="__PUBLIC__/Index/Header/3.png" width="10%" data-id="3"/>
+                        <img class="headerimg" src="__PUBLIC__/Index/Header/4.png" width="10%" data-id="4"/>
+                    </p>
+                      </label>
+                  </div>
+                      <div class="form-group">
+                        <label>用户名：</label>
+                        <input class="form-control" type="text" id="username">
+                      </div>
+                      <div class="form-group">
+                        <label>评论信息：</label>
+                        <textarea class="form-control" rows="8" id="contents"></textarea>
+                      </div>
+                      <p><input type="button" class="btn btn-success" id="commentsub" value="提交评论"></p>
+                    </form>
+                  </div>
+                </div>
+
+                <!-- END LEFT SIDEBAR -->
+
+
+              </div>
+            </div>
+          </div>
+          <!-- END CONTENT -->
+        </div>
+        <!-- END SIDEBAR & CONTENT -->
+      </div>
+    </div>
+  </block>
+<block name="bottomJsFile">
+<script src="__PUBLIC__/Plugins/layer/layer.js"></script>
+<script type="text/javascript">
+var blog_id=$('#blog_id').val();
+var lala='';
+var replyid ='';
+var idd='';
+$('.headerimg').live('click',function(){
+     var id=$(this).data('id');
+    $('.headerimg').removeClass('chose');
+    $(this).addClass('chose');
+    $('#header').val(id);
+  });
+
+$('.headerimg2').live('click',function(){
+     var id=$(this).data('id');
+    $('.headerimg2').removeClass('chose');
+    $(this).addClass('chose');
+    $('#header2').val(id);
+  });
+
+$('#commentsub').click(function(){
+  var header=$('#header').val();
+  var username=$.trim($('#username').val());
+  var contents=$.trim($('#contents').val());
+  if(!username){
+    username='匿名';
+  }
+  if(!contents){
+    layer.alert('请填写评论内容！');
+    return false;
+  }
+  $.ajax({
+          url: "__CONTROLLER__/ajaxComment",
+          type: "POST",
+          data: {'header':header,'username':username,'contents':contents,'blog_id':blog_id},
+          dataType: "html",
+          async : true,
+          beforeSend: function(){
+             layer.load();
+          },
+          complete: function(){
+             layer.closeAll('loading');
+          },
+          success: function(data){
+              if(data){
+                  $('.comments').prepend(data);
+                  $('#header').val(1);
+                  $('#username').val('');
+                  $('#contents').val('');
+                  $('.headerimg').removeClass('chose');
+                  }
+                }
+            });
+})
+$('.reply').live('click',function(){
+    idd=$(this).parent().parent().parent();
+    replyid=$(this).data('replyid');
+    lala=layer.open({
+    type: 1,
+    skin: 'layui-layer-lan',
+    closeBtn: 1,
+    shift: 2,
+    shadeClose: true,
+    area: ['700px', '530px'],
+    content: '<div style="padding:30px;"><div class="post-comment"><h2><b>我要回复</b></h2><form role="form"><input type="hidden" name="header" id="header2" value="1"><div class="form-group" style="margin-bottom: 0;"><label>选择头像：</label><label class="radio-inline"><p><img class="headerimg2" src="__PUBLIC__/Index/Header/1.png" width="10%" data-id="1"/><img class="headerimg2" src="__PUBLIC__/Index/Header/2.png" width="10%" data-id="2"/><img class="headerimg2" src="__PUBLIC__/Index/Header/3.png" width="10%" data-id="3"/><img class="headerimg2" src="__PUBLIC__/Index/Header/4.png" width="10%" data-id="4"/></p></label></div><div class="form-group"><label>用户名：</label><input class="form-control" type="text" id="username2"></div><div class="form-group"><label>回复信息：</label><textarea class="form-control" rows="8" id="contents2"></textarea></div><p><input type="button" class="btn btn-success" id="commentreply" value="提交评论"></p></form></div></div>',
+    });
+});
+
+var page = 2;
+$('#commentmore').click(function(){
+  $.ajax({
+          url: "__CONTROLLER__/ajaxCommentmore",
+          type: "POST",
+          data: {'blog_id':blog_id,'page':page},
+          dataType: "html",
+          async : true,
+          beforeSend: function(){
+             layer.load();
+          },
+          complete: function(){
+             layer.closeAll('loading');
+          },
+          success: function(data){
+              if(data!=0){
+                  $('.comments').append(data);
+                  page++;
+                  }else if(data == 0){
+                    $('#commentmore').val('没有更多评论了！');
+                    $('#commentmore').attr('disabled','disabled');
+                  }
+                }
+            });
+});
+
+$('#commentreply').live('click',function(){
+          var header=$('#header2').val();
+          var username=$.trim($('#username2').val());
+          var contents=$.trim($('#contents2').val());
+          // alert(header);
+          // alert(username);
+          // alert(contents);
+          // alert(replyid);
+  if(!username){
+    username='匿名';
+  }
+  if(!contents){
+    layer.alert('请填写评论内容！');
+    return false;
+  }
+  $.ajax({
+          url: "__CONTROLLER__/ajaxCommentreply",
+          type: "POST",
+          data: {'header':header,'username':username,'contents':contents,'blog_id':blog_id,'replyid':replyid},
+          dataType: "html",
+          async : true,
+          beforeSend: function(){
+             layer.load();
+          },
+          complete: function(){
+             layer.closeAll('loading');
+          },
+          success: function(data){
+              if(data){
+                  idd.append(data);
+                  layer.close(lala);
+                  $('#header2').val(1);
+                  $('#username2').val('');
+                  $('#contents2').val('');
+                  $('.headerimg2').removeClass('chose');
+                  }
+                }
+            });
+
+          })
+
+</script>
+</block>

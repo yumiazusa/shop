@@ -1,0 +1,198 @@
+<!-- =====================================================
+    Author: Eden
+    Date:   2015-01-12
+    Function:   公共模板文件中定义的block区域，可以在子模板中继承和覆盖
+ ========================================================= -->
+<!-- 继承 公共模板 开始 -->
+<extend name="Public:blank" />
+<!-- 继承 公共模板 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部CSS文件 开始 -->
+<block name="cssFile">
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap-responsive.min.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-style.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-media.css" />
+    <link href="__PUBLIC__/Admin/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/jquery.gritter.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/uniform.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/select2.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap-wysihtml5.css" />
+    <style>
+        th.list-title {
+            font-size:14px;
+        }
+        td.align-center {
+            text-align:center;
+        }
+        a {
+            color:#27A9E3;
+        }
+        a:hover {
+            color:#f70;
+            text-decoration:underline;
+        }
+    </style>
+</block>
+<!-- 顶部CSS文件 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部JS文件 开始 -->
+<block name="topJsFile">
+    
+</block>
+<!-- 顶部JS文件 结束 -->
+
+<!-- ===================================================== -->
+<!-- 头部部分 开始 -->
+<block name="publicHead">
+    <div id="breadcrumb"> 
+        <a href="__APP__" title="返回系统首页" class="tip-bottom">
+            <i class="icon-home"></i> 
+        管理首页</a> 
+        <a href="SystemConfig/index" class="current">系统配置</a> 
+        <a href="__CONTROLLER__/index" class="current">短信设置</a> 
+    </div>
+    <h1 style="margin-top:10px;">短信配置</h1>
+</block>
+<!-- 头部部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 公共Body部分 开始 -->
+<block name="publicBody">
+    <!-- 将主体包含在 .row-fluid 内部 -->
+    <div class="container-fluid">
+        <hr style="margin:0;">
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="widget-box">
+                    <div class="widget-title">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a data-toggle="tab" href="#tab1">短信接口</a></li>
+                            <li><a data-toggle="tab" href="#tab2">信息模板</a></li>
+                        </ul>
+                    </div>
+                    <div class="widget-content tab-content">
+                        <div id="tab1" class="tab-pane active">
+                            <div class="widget-content nopadding">
+                                <form action="__CONTROLLER__/saveConfig" method="post" class="form-horizontal">
+                                    <div class="control-group">
+                                        <label class="control-label">接口账号(AccountsID) :</label>
+                                        <div class="controls">
+                                            <input type="text" class="span5 tip-right" name="sms_accountsid" value="<{$smsConfig['sms_accountsid']}>" data-original-title="申请的API接账号"/>
+                                            <span class="help-block span5 pull-right text-right">sms_accountsid</span>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">口令(Token) :</label>
+                                        <div class="controls">
+                                            <input type="text" class="span5 tip-right" name="sms_token" value="<{$smsConfig['sms_token']}>" data-original-title="口令" />
+                                            <span class="help-block span5 pull-right text-right">sms_token</span>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">应用密钥(AppID) :</label>
+                                        <div class="controls">
+                                            <input type="text" class="span5 tip-right" name="sms_appid" value="<{$smsConfig['sms_appid']}>" data-original-title="APP应用密钥" />
+                                            <span class="help-block span5 pull-right text-right">sms_appid</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-actions">
+                                        <button type="submit" style="margin-left:180px;" class="btn btn-primary"> 立即保存 </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div id="tab2" class="tab-pane">
+                            <div style="margin-bottom:5px;">
+                                <a href="__CONTROLLER__/addTmp" class="btn btn-primary"><i class="icon-plus"></i> 添加模板 </a>
+                            </div>
+                            <div class="widget-content nopadding">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th class="list-title" style="width:5%;">ID</th>
+                                            <th class="list-title" style="width:10%;">模板名称</th>
+                                            <th class="list-title" style="width:20%;">应用号</th>
+                                            <th class="list-title">模板内容</th>
+                                            <th class="list-title" style="width:20%;">操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="listBox">
+                                        <foreach name="tmpArr" item="tmpArr">
+                                        <tr>
+                                            <td style="text-align:center;"><{$tmpArr['id']}></td>
+                                            <td><{$tmpArr.tmp_title}></td>
+                                            <td style="text-align:center;"><{$tmpArr.tmp_no}></td>
+                                            <td><{$tmpArr.tmp_content}></td>
+                                            <td style="text-align:center;">
+                                                <a href="editTmp/id/<{$tmpArr.id}>"><i class="icon-pencil"></i> 编辑</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+                                                <a href="deleteTmp/id/<{$tmpArr.id}>" onclick="return confirm('您确定删除该模板吗？');"><i class="icon-trash"></i> 删除</a>
+                                            </td>
+                                        </tr>
+                                        </foreach>
+                                        <tr>
+                                            <td colspan="5">
+                                                <div class="pagination alternate text-right" style="margin:0">
+                                                    <{$pageShow}>
+                                                </div>  
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>
+<!-- 公共Body部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- js文件模块 开始 -->
+<block name="footJsFile">
+    <script src="__PUBLIC__/Admin/js/jquery.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.ui.custom.js"></script> 
+    <script src="__PUBLIC__/Admin/js/bootstrap.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.uniform.js"></script> 
+    <script src="__PUBLIC__/Admin/js/select2.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.dataTables.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.tables.js"></script>
+    <script src="__PUBLIC__/Admin/js/matrix.interface.js"></script>
+    <script src="__PUBLIC__/Admin/js/jquery.toggle.buttons.html"></script> 
+    <script src="__PUBLIC__/Admin/js/masked.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.form_common.js"></script> 
+    <script src="__PUBLIC__/Admin/js/wysihtml5-0.3.0.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.peity.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/bootstrap-wysihtml5.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.validate.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.popover.js"></script>
+    <script src="__PUBLIC__/Admin/js/muneopen.js"></script>
+</block>
+<!-- js文件模块 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 底部JS执行区域 开始 -->
+<block name="footScript">
+    <script type="text/javascript">
+        $('.textarea_editor').wysihtml5();
+        function getPageByAjax(url)
+        {
+            $.get(url, function (d){
+                $('#listBox').html(d);
+            });
+        }
+    </script>
+</block>
+<!-- 底部JS执行区域 结束 -->

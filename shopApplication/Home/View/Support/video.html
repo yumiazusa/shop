@@ -1,0 +1,58 @@
+<extend name="Public:public" />
+<block name="cssFile">
+    <link rel = "stylesheet" href = "__PUBLIC__/Home/css/Support/video.css"/>
+    <link rel = "stylesheet" href = "__PUBLIC__/Home/video/video-js.css"/>
+
+
+    <script src="__PUBLIC__/Home/js/jquery.min.js"></script>
+    <script src="__PUBLIC__/Home/video/video.js"></script>
+    <script src="__PUBLIC__/Plugins/layer/layer.js"></script>
+    <style>
+    .img_cover_img {
+    height: 76px;
+    width: 76px;
+    background: url('/Public/Home/images/Support/video-play-ico.png');
+    opacity: 0.9;
+    position: absolute;
+    z-index: 1;
+    margin-left: 40%;
+}
+    </style>
+</block>
+<block name="publicBody">
+
+    <main>
+        <!--第一个视频区域块-->
+        <div class="ad_video">
+            <!--标题-->
+            <p class="ad_video_title">Some video</p>
+            <!--视频区域-->
+            <div class="ad_video_main">
+            <ul>
+            <volist name="list" id="v">
+                <li class="ad_video_block" data-src='<{$v.weburl}>'>
+                    <a href="javascript:;"><div class="img_cover_img"></div><img src = "__PUBLIC__/Home<{$v.simg}>"/><p><{$v.title}></p></a>
+                </li>
+                </volist>
+            </ul>
+            </div>
+        </div>
+    </main>
+</block>
+<block name="bottomJsFile">
+<script>
+$('.ad_video_block').click(function(){
+    var src=$(this).data('src');
+    layer.open({
+    type: 1,
+    title: false,
+    area: ['600px', '450px'],
+    closeBtn: 0,
+    shadeClose: true,
+    skin: 'yourclass',
+    content: '<embed src="'+src+'" quality="high" width="600" height="450" align="middle" allowScriptAccess="always" allowFullScreen="true" mode="transparent" type="application/x-shockwave-flash"></embed>'
+});
+})
+
+</script>
+</block>

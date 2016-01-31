@@ -1,0 +1,54 @@
+<!-- =====================================================
+    Author: Eden
+    Date:   2015-01-12
+    Function:   公共模板文件中定义的block区域，可以在子模板中继承和覆盖
+ ========================================================= -->
+<!-- 继承 公共模板 开始 -->
+<extend name="Public:blank" />
+<!-- 继承 公共模板 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- ===================================================== -->
+<!-- 头部部分 开始 -->
+<block name="publicHead">
+    <div id="breadcrumb">
+        <a href="index.html" title="返回系统主页" class="tip-bottom">
+            <i class="icon-home"></i>
+            管理首页
+            <a href="<{:U('Config/index')}>" class="current">系统设置</a> 
+        </a>
+    </div>
+    <h1 style="margin-top:10px;">邮件配置</h1>
+</block>
+<!-- 头部部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 公共Body部分 开始 -->
+<block name="publicBody">
+    <!-- 将主体包含在 .row-fluid 内部 -->
+    <div class="container-fluid">
+        <hr style="margin:0;">
+        <div class="row-fluid">
+            <div class="span12">
+                这里是全宽的区域
+            </div>
+            <div class="span6">
+                这里是半宽的区域
+            </div>
+            <div class="span6">
+                这里是半宽的区域
+            </div>
+        </div>
+    </div>
+</block>
+<!-- 公共Body部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 底部JS执行区域 开始 -->
+<block name="footScript">
+ <script src="__PUBLIC__/Admin/js/muneopen.js"></script>
+</block>
+<!-- 底部JS执行区域 结束 -->

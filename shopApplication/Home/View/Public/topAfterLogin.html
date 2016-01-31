@@ -1,0 +1,12 @@
+<!-- Extra small button group -->
+<div class="after-login-area">
+    <div class="uname-area">
+        <empty name="thumb">
+            <img src="__PUBLIC__/User/default.jpg" style="width:30px; height:30px; border-radius:50%;" alt="">
+        <else />
+            <img src="<{$thumb}>" style="width:30px; height:30px; border-radius:50%;" alt="">
+        </empty>
+        <a href="<{:U('Member/member')}>" class="uname"><{$Think.session.user.username}></a>
+        <a href="<{:U('Login/logout')}>" class="ulogout">退出</a>
+    </div>
+</div>

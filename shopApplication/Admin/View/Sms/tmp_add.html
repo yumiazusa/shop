@@ -1,0 +1,121 @@
+<!-- =====================================================
+    Author: Eden
+    Date:   2015-01-12
+    Function:   公共模板文件中定义的block区域，可以在子模板中继承和覆盖
+ ========================================================= -->
+<!-- 继承 公共模板 开始 -->
+<extend name="Public:blank" />
+<!-- 继承 公共模板 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部CSS文件 开始 -->
+<block name="cssFile">
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap-responsive.min.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/uniform.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/select2.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-style.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-media.css" />
+    <link href="__PUBLIC__/Admin/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <style>
+        th.list-title {
+            font-size:14px;
+        }
+        td.align-center {
+            text-align:center;
+        }
+    </style>
+</block>
+<!-- 顶部CSS文件 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部JS文件 开始 -->
+<block name="topJsFile">
+    
+</block>
+<!-- 顶部JS文件 结束 -->
+
+<!-- ===================================================== -->
+<!-- 头部部分 开始 -->
+<block name="publicHead">
+    <div id="breadcrumb"> 
+        <a href="__APP__" title="返回系统首页" class="tip-bottom">
+            <i class="icon-home"></i> 
+        管理首页</a> 
+        <a href="__CONTROLLER__/index" class="current">系统配置</a> 
+        <a href="javascript:void(0);" class="current">短信设置</a> 
+    </div>
+    <h1 style="margin-top:10px;">添加短信模板</h1>
+</block>
+<!-- 头部部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 公共Body部分 开始 -->
+<block name="publicBody">
+    <!-- 将主体包含在 .row-fluid 内部 -->
+    <div class="container-fluid">
+        <hr style="margin:0;">
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="widget-box">
+                    <div class="widget-title"> <span class="icon"> <i class="icon-info-sign"></i> </span>
+                        <h5>添加模板</h5>
+                    </div>
+                    <div class="widget-content nopadding">
+                        <form class="form-horizontal" method="post" action="<{:U('Sms/doAddTmp')}>" name="useradd" id="useradd" novalidate="novalidate">
+                            <div class="control-group">
+                                <label class="control-label">模板名称</label>
+                                <div class="controls">
+                                    <input type="text" name="tmp_title" class="tip-right" data-original-title="自己的应用名称" id="tmp_title" />
+                                </div>
+                            <div class="control-group">
+                                <label class="control-label">模板应用编号</label>
+                                <div class="controls">
+                                    <input type="text" name="tmp_no" class="tip-right" data-original-title="API接口上线的模板编号" id="tmp_no" />
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">模板内容</label>
+                                <div class="controls">
+                                    <textarea name="tmp_content" class="span5" style="resize:none;"></textarea>
+                                </div>
+                            </div>
+                          <div class="form-actions">
+                            <input type="submit" value=" 添加 " class="btn btn-primary" style="margin-left:179px; margin-right:30px;">
+                            <a href="__CONTROLLER__/index" class="btn btn-default">返回列表</a>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</block>
+<!-- 公共Body部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- js文件模块 开始 -->
+<block name="footJsFile">
+    <script src="__PUBLIC__/Admin/js/jquery.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.ui.custom.js"></script> 
+    <script src="__PUBLIC__/Admin/js/bootstrap.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.uniform.js"></script> 
+    <script src="__PUBLIC__/Admin/js/select2.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.validate.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.form_validation.js">
+    </script>
+    <script src="__PUBLIC__/Admin/js/muneopen.js"></script>
+</block>
+<!-- js文件模块 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 底部JS执行区域 开始 -->
+<block name="footScript">
+</block>
+<!-- 底部JS执行区域 结束 -->

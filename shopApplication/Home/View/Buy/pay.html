@@ -1,0 +1,189 @@
+<extend name="Public:public" />
+<block name="cssFile">
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/Buy/pay.css"/>
+    <link rel="stylesheet" href = "__PUBLIC__/Home/css/uikit.almost-flat.min.css"/>
+</block>
+
+<block name="topJsFile">
+    <script src="__PUBLIC__/Home/js/holder.js"></script>
+</block>
+
+
+<block name="publicBody">
+
+
+<main>
+
+
+    <!--订单提交成功-->
+    <div class="pay_title">
+        <div class="pay_title_left">
+            <p class="pay_title_left_p">订单提交成功！
+        </div>
+       
+    </div>
+
+    <!--支付选择-->
+    <div class="pay_collect">
+
+        <p>订单编号：<{$order_sn}></p>
+        <p class="pay_collect_list">商　　品：
+        <foreach name="name" item="v">
+        <span><{$v}></span>
+        </foreach>
+        </p>
+        <p>金　　额：￥<{$real_price}></p>
+        <p>配　　送：<{$address}></p>
+        <p style="text-align: right"><a href="<{:U('Order/untreatedOrders',array('id'=>$orderId))}>">查看订单详情>></a></p>
+
+    </div>
+
+    <div class="pay_bank">
+        <ul class="uk-tab uk-tab-grid uk-tab-center" data-uk-tab>
+            <li class="uk-active"><a href="javascript:;" id="tabSelect_1">支付平台</a></li>
+            <li><a href="javascript:;" id="tabSelect_2">银行网银</a></li>
+            <li><a href="javascript:;" id="tabSelect_3">信用卡支付</a></li>
+        </ul>
+
+
+        <div style="display: block" class="pay_bank_zf">
+            <label><p><input type="radio" checked name="bank"/><span class="paypal"></span></p></label>
+            <label><p><input type="radio" name="bank"/><span class="alipay"></span></p></label>
+            <label><p><input type="radio" name="bank"/><span class="unionpay"></span></p></label>
+        </div>
+
+        <div style="display: none" class="pay_bank_yh">
+            <label><p><input type="radio" name="bank"/><span class="bocb2c"></span></p>     </label>
+            <label><p><input type="radio" name="bank"/><span class="ccb"></span></p>        </label>
+            <label><p><input type="radio" name="bank"/><span class="cmb"></span></p>        </label>
+            <label><p><input type="radio" name="bank"/><span class="citic"></span></p>      </label>
+            <label><p><input type="radio" name="bank"/><span class="spanbank"></span></p>   </label>
+            <label><p><input type="radio" name="bank"/><span class="cib"></span></p>        </label>
+            <label><p><input type="radio" name="bank"/><span class="abc"></span></p>        </label>
+            <label><p><input type="radio" name="bank"/><span class="postgc"></span></p>     </label>
+            <label><p><input type="radio" name="bank"/><span class="debit"></span></p>      </label>
+            <label><p><input type="radio" name="bank"/><span class="cmbc"></span></p>       </label>
+            <label><p><input type="radio" name="bank"/><span class="spdb"></span></p>       </label>
+        </div>
+
+        <div style="display: none" class="pay_bank_xyk">
+            <label><p><input type="radio" name="bank"/><span class="bocb2c"></span></p></label>
+            <label><p><input type="radio" name="bank"/><span class="ccb"></span></p></label>
+            <label><p><input type="radio" name="bank"/><span class="cmb"></span></p></label>
+            <label><p><input type="radio" name="bank"/><span class="citic"></span></p></label>
+            <label><p><input type="radio" name="bank"/><span class="spanbank"></span></p></label>
+            <label><p><input type="radio" name="bank"/><span class="cib"></span></p></label>
+            <label><p><input type="radio" name="bank"/><span class="abc"></span></p></label>
+            <label><p><input type="radio" name="bank"/><span class="debit"></span></p></label>
+            <label><p><input type="radio" name="bank"/><span class="cebb"></span></p></label>
+            <label><p><input type="radio" name="bank"/><span class="cmbc"></span></p></label>
+            <label><p><input type="radio" name="bank"/><span class="gdb"></span></p></label>
+            <label><p><input type="radio" name="bank"/><span class="spdb"></span></p></label>
+        </div>
+        <hr/>
+    </div>
+    <div class="pay_button" style="text-align: right">
+        <eq name="cRes.paypal_env" value="sandbox">
+            <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+        <else/>
+            <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+        </eq>
+            <input type="hidden" name="cmd" value="_xclick">
+            <input type="hidden" name="business" value="<{$cRes.paypal_email}>">
+            <input type="hidden" name="notify_url" value="<{$cRes.paypal_api_receive}>">
+            <input type="hidden" name="return" value="<{$cRes.paypal_pay_complete}>">
+            <input type="hidden" name="cancel_return" value="<{$cRes.paypal_cancel_pay}>" />
+            <input type="hidden" name="rm" value="2"> <!-- 1以GET返回，2以POST返回 -->
+            <input type="hidden" name="currency_code" value="<{$cRes.paypal_currency}>">
+            <input type="hidden" name="item_name" value="订单编号:<{$order_sn}>">
+            <input type="hidden" name="amount" value="<{$deail_price}>">
+            <input type="hidden" name="invoice" value="<{$order_sn}>">
+            <input type="hidden" name="custom" value="<{$orderId}>">
+            <input type="hidden" name="lc" value="US"> 
+            <input type="hidden" name="charset" value="utf-8">
+            <input type="submit" class="btn btn-primary btn-lg" value="立即支付" alt="PayPal——最安全便捷的在线支付方式！"/>
+        </form>
+    </div>
+</main>
+
+<footer></footer>
+
+<!--提交后显示-->
+<!--隐藏弹窗-->
+<div class="hidden_msg" style="display: none">
+    <div class="cover">
+        <div class="cover_main">
+            <div class="cover_title">
+                <div class="cover_title_left">订单支付</div>
+                <div class="cover_title_right"><a href="javascript:;" class="uk-close"></a></div>
+            </div>
+            
+            <div class="cover_body">
+                <div class="cover_body_left">
+                    <img data-src="holder.js/360x280/social" />
+                </div>
+                <div class="cover_body_right">
+                    <h3>支付失败?</h3>
+                    <p>额度问题，推荐 <a href="">支付宝快捷支付>></a></p>
+                    <p>其他问题，查看支付 <a href="">常见问题>></a></p>
+                    <button class="btn btn-success">我已完成支付</button>
+                <h6>立即查看 <a href="">订单详情</a>>></h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</block>
+<block name="bottomJsFile">
+
+
+<script>
+
+    //变量
+    var b_height = 0; //document高度
+    var r_height = 0; //滚动条到顶部的高度
+
+    //进行支付
+    $('#sub').click(function(){
+
+        b_height = $(document).height();//页面高度
+        r_height = $(document).scrollTop();//滚动条高度
+
+        $('.hidden_msg').css({display:'block'});
+        $('.cover').css({height:b_height});
+        $('.cover_main').css({marginTop:r_height+100});
+    });
+
+
+    //切换支付方法
+    $('#tabSelect_1').click(function(){
+        $(this).parent().parent().children().removeClass();
+        $(this).parent().addClass('uk-active');
+
+        $('.pay_bank_zf').css({display:'block'});
+
+        $('.pay_bank_xyk').css({display:'none'});
+        $('.pay_bank_yh').css({display:'none'});
+
+    });
+    $('#tabSelect_2').click(function(){
+        $(this).parent().parent().children().removeClass();
+        $(this).parent().addClass('uk-active');
+
+        $('.pay_bank_yh').css({display:'block'});
+
+        $('.pay_bank_zf').css({display:'none'});
+        $('.pay_bank_xyk').css({display:'none'});
+
+    });
+    $('#tabSelect_3').click(function(){
+        $(this).parent().parent().children().removeClass();
+        $(this).parent().addClass('uk-active');
+        $('.pay_bank_xyk').css({display:'block'});
+
+        $('.pay_bank_yh').css({display:'none'});
+        $('.pay_bank_zf').css({display:'none'});
+
+    });
+</script>
+</block>

@@ -1,0 +1,58 @@
+<div class="cart-inner">
+      <if condition="$goods" >
+		<ul class="list-unstyled cart-top-list">
+		   <foreach name="goods" item="v">
+			<li class="cart-li" id="g<{$key}>">
+				<a href="<{:U('ProductDetail/detail/id/'.$v[id])}>"><img src="__PUBLIC__/Product/thumb/<{$v.img}>" alt=""></a>
+				<a href="<{:U('ProductDetail/detail/id/'.$v[id])}>" class="cart-top-product-title"><{$v.pro_name}></a>
+				<span>
+					<b><em>￥<{$v.price}></em> x <{$v.ordernum}> </b>
+					<br />
+					<br />
+					<i onclick="delgw(this)" id="<{$key}>">删除</i>
+				</span>
+			</li>
+			</foreach>
+			
+		</ul>
+		<div class="cart-foot">
+			<div class="cart-total-price">
+				共计<em><{$num}></em>件商品
+				<br/>
+				<strong>合计：<em><{$sum}></em>元</strong>
+			</div>
+			<div class="cart-click">
+				<a href="<{:U('Buy/cart')}>">查看购物车</a>
+			</div>
+		</div>
+	   <else/>
+	      
+              <div style="margin-left:5px;font-family:微软雅黑;height:70px;">您的购物车里还没有商品，快来选购吧</div>
+              <div class="cart-click" style="float:right;margin-top:-26px;">
+                  <a href="__APP__/Product/productList/type/shop/cat/all" class="btn btn-info" style="height:30px;">去选购</a>
+               </div>
+           
+	   </if>
+   </div>
+<script>
+         function delgw(obj){
+         	//alert(1111);
+         	var id = $(obj).attr("id");
+         	var lid ="#g"+id;
+         	//alert(id);
+         	$.ajax({
+         		  url:"__APP__/Buy/del",
+         		  data:{'id':id},
+         		  type:"post",
+         		  success:function(d){
+         		  	if(d ==1){
+         		  		$(lid).remove();
+         	            $(".cart-foot").remove();
+                           window.location.replace("__SELF__");
+                       }
+         		  	}
+         		  
+         	});
+         }
+
+	</script>

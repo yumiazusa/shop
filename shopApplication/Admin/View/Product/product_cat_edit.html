@@ -1,0 +1,216 @@
+<!-- =====================================================
+    Author: Eden
+    Date:   2015-01-12
+    Function:   公共模板文件中定义的block区域，可以在子模板中继承和覆盖
+ ========================================================= -->
+<!-- 继承 公共模板 开始 -->
+<extend name="Public:blank" />
+<!-- 继承 公共模板 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部CSS文件 开始 -->
+<block name="cssFile">
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap-responsive.min.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/uniform.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/select2.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-style.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-media.css" />
+    <link href="__PUBLIC__/Admin/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <style>
+        th.list-title {
+            font-size:14px;
+        }
+        td.align-center {
+            text-align:center;
+        }
+    </style>
+</block>
+<!-- 顶部CSS文件 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部JS文件 开始 -->
+<block name="topJsFile">
+    
+</block>
+<!-- 顶部JS文件 结束 -->
+
+<!-- ===================================================== -->
+<!-- 头部部分 开始 -->
+<block name="publicHead">
+    <div id="breadcrumb"> 
+        <a href="__APP__" title="返回系统首页" class="tip-bottom">
+            <i class="icon-home"></i> 
+        管理首页</a> 
+        <a href="#" class="current">商品管理</a> 
+    </div>
+    <h1 style="margin-top:10px;">商品分类</h1>
+</block>
+<!-- 头部部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 公共Body部分 开始 -->
+<block name="publicBody">
+    <!-- 将主体包含在 .row-fluid 内部 -->
+    <div class="container-fluid">
+        <hr style="margin:0;">
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="widget-box">
+                    <div class="widget-title"> 
+                        <span class="icon"> <i class="icon-info-sign"></i> </span>
+                        <h5>添加商品分类</h5>
+                    </div>
+                    <div class="widget-content nopadding">
+                        <form class="form-horizontal" method="post" action="<{:U('Product/doCatEdit')}>" name="useradd" id="useradd" novalidate="novalidate">
+                            <input type="hidden" value="<{$data.id}>" name="id">
+                            <div class="control-group">
+                                <label class="control-label">选择分类：</label>
+                                <div class="controls">
+                                    <select name="fid" style="width:220px;">
+                                        <option value="0">根分类</option>
+                                        <volist name="fid" id="cats">
+                                            <if condition="$cats[fid] eq 0">
+                                            <option value="<{$cats.id}>"><{$cats.cat_name}></option>
+                                        </if>
+                                        </volist>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">类别名称：</label>
+                                <div class="controls">
+                                    <input type="text" name="cat_name" class="tip-right" data-original-title="指定商品名称" id="cat_name" value="<{$data.cat_name}>" />
+                                    <span id="checkU" available='0'></span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">选择排序：</label>
+                                <div class="controls">
+                                    <input type="text" name="sort" class="tip-right" data-original-title="指定商品排列顺序(数字)" id="sort" value="<{$data.sort}>" />
+                                    <span></span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">是否显示：</label>
+                                <div class="controls">
+                                    <label>
+                                        <input type="radio" name="is_show" id="is_show" value="1" <if condition="$data['is_show'] eq 1"> checked </if> />
+                                        可见
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="is_show" value="0" id="is_show" <if condition="$data['is_show'] eq 0">checked</if> />
+                                        不可见
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                    <label class="control-label">上传导航菜单图：</label>
+                                    <div class="controls">
+                                        <input id="file_upload" type="file" multiple="true" name="file_upload" />
+                                    <div id="imgs"><img width="200px" <eq name="data.nav_pic" value="0"> src="__PUBLIC__/Plugins/1.png" <else />src="__PUBLIC__/Product/nav/<{$data.nav_pic}>"</eq>></div>
+                                    </div>
+                                </div>
+                            <div class="form-actions">
+                                <input type="submit" value=" 编辑 " class="btn btn-primary" style="margin-left:179px; margin-right:30px;">
+                                <a href="__CONTROLLER__/productCats" class="btn btn-default">返回列表</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>
+<!-- 公共Body部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- js文件模块 开始 -->
+<block name="footJsFile">
+    <script src="__PUBLIC__/Admin/js/jquery.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.ui.custom.js"></script> 
+    <script src="__PUBLIC__/Admin/js/bootstrap.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.uniform.js"></script> 
+    <script src="__PUBLIC__/Admin/js/select2.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.validate.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.form_validation.js"></script>
+    <script src="__PUBLIC__/Plugins/jquery.uploadify.js"></script> 
+    <script src="__PUBLIC__/Admin/js/muneopen.js"></script>
+</block>
+<!-- js文件模块 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 底部JS执行区域 开始 -->
+<block name="footScript">
+    <script>
+
+        // 验证分类名
+        $(function (){
+            $('#cat_name').blur(function (){
+                checkUsername(this);
+            });
+
+            $('form#useradd').submit(function () {
+                var objUsername = $('#cat_name')[0];
+                var isUserTure = false;
+                checkUsername(objUsername);
+
+                if ($('#checkU').attr('available') != 1)
+                {
+                    $('#checkU').html('请填写合法用户名').css({'font-size':'12px', 'color':'red'});
+                    return false;
+                }
+                else
+                {
+                    isUserTure = true;
+                }
+
+                if (objUsername)
+                {
+                    return true;
+                }else{
+                return false;
+                }
+            });
+});
+        function checkUsername (obj){
+            var txtVal = $.trim($(obj).val());
+            var oTips = $(obj).next('span');
+            var bool = false;
+
+            if (txtVal.length == 0)
+            {
+                oTips.html('分类名不能为空').css({'font-size':'12px', 'color':'red'});
+                oTips.attr('available', '0');
+                return false;
+            }else{
+                        oTips.html('用户名可用').css({'font-size':'12px', 'color':'green'});
+                        oTips.attr('available', '1');
+
+            }
+        }
+
+        var img = '';
+        $('#file_upload').uploadify({
+                'swf'      : '__PUBLIC__/Plugins/uploadify.swf',
+                'uploader' : '<{:U("Product/uploadNav")}>',
+                'buttonText' : '导航菜单图(一张)',
+                'uploadLimit'   : 1, //设置最大上传文件的数量
+                'fileSizeLimit':'3MB',
+                'onUploadSuccess' : function(file, data, response) {
+                data=data.replace(/"/g,'');
+                data=data.replace("\\",'');
+                img = "<img width='200px' src='__PUBLIC__/Product/nav/"+data+"'><input type='hidden' name='nav_pic' value='"+data+"'>";
+                $('#imgs').html(img);
+                //$('#images').val(data);
+            }
+        });
+    </script>
+</block>
+<!-- 底部JS执行区域 结束 -->

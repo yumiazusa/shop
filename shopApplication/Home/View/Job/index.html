@@ -1,0 +1,200 @@
+<extend name="Public:public" />
+
+
+<block name="cssFile">
+    <link rel = "stylesheet" href = "__PUBLIC__/Home/css/Support/jobs.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/bootstrap.min.css" />
+
+</block>
+
+
+<block name="publicBody">
+    <!--banner image-->
+    <div id="header_img">
+        <img src = "__PUBLIC__/Home/images/Support/list-banner.jpg"/>
+    </div>
+<main>
+    <!--页面一分为二-->
+
+    <!--左测  招聘信息列表-->
+    <div id="main_left">
+
+        <!--招聘类别-->
+        <div class="category">
+            <a href = "__CONTROLLER__/index/id/0" id="cat_0" class="category_click">全　部</a>
+            <foreach name="data" item="vo">
+                <a href = "__CONTROLLER__/index/id/<{$vo.id}>" id="cat_<{$vo.id}>"><{$vo.cat_name}></a>
+            </foreach>
+
+        </div>
+
+        <!--招聘list-->
+        <table class="job_list">
+            <tr id="j01">
+                <th>职位名称</th>
+                <th>所属部门</th>
+                <th>工作地点</th>
+                <th>招聘人数</th>
+                <th>招聘对象</th>
+                <th>发布时间</th>
+            </tr>
+
+            <foreach name="job" item="vo">
+            <tr id="job_<{$vo.id}>">
+                <td><{$vo.job_name}></td>
+                <td><{$vo.department}></td>
+                <td><{$vo.address}></td>
+                <td><{$vo.number}></td>
+                <td><eq name="vo.type" value="0">全职</eq>
+                    <eq name="vo.type" value="1">兼职</eq>
+                    <eq name="vo.type" value="2">实习</eq></td>
+
+                <td><{$vo['add_time'] | date="Y-m-d",###}></td>
+            </tr>
+            </foreach>
+
+        </table>
+
+
+            <div class="pagination alternate" style="float:right;">
+                <{$page}>
+            </div>
+
+
+
+    </div>
+
+
+
+    <!--右侧  新闻-->
+    <div id="main_right">
+        <p class="main_right_p">企业最新新闻</p>
+        <div class="main_right_news">
+            <foreach name="news" item="ne">
+            <p class="news"><a href="__APP__/News/news/id/<{$ne.id}>"><{$ne.title}></a></p>
+            </foreach>
+            </div>
+        <!---->
+        <!--<div class="main_right_ad">-->
+            <!--<img src = "" alt = ""/>-->
+            <!--广告图片轮播-->
+        <!--</div>-->
+        <!---->
+    </div>
+
+
+</main>
+
+    <!--隐藏的招聘详情-->
+    <foreach name="job" item="vs">
+    <div class="job_info job_<{$vs.id}>">
+        <div class="job_info_box">
+            <div class="job_info_box_left">
+                <p class="job_position"><{$vs.job_name}></p>
+                <div>
+
+                    <p>职位名称：<span id="job_position"><{$vs.job_name}></span></p>
+                    <!--<p>职位编码：<span id="">00036</span></p>-->
+                    <p>部　　门：<span id="department"><{$vs.department}></span></p>
+                    <p>招聘对象：<span id="work_time">
+                        <eq name="vs.type" value="0">全职</eq>
+                        <eq name="vs.type" value="1">兼职</eq>
+                        <eq name="vs.type" value="2">实习</eq>
+                    </span>
+                    </p>
+                    <p>工作地区：<span id="work_place"><{$vs.address}></span></p>
+                    <p>岗位类别：<span id=""><{$vs.cat_name}></span></p>
+                    <p>招聘人数：<span id="openinges"><{$vs.number}></span></p>
+
+                    <p>发布日期：<span id="start_time"><{$vs['add_time']|date="Y-m-d",###}></span></p>
+                    <p>招聘类型：<span id="level"><eq name="vs.type" value="0">全职</eq>
+                    <eq name="vs.type" value="1">兼职</eq>
+                    <eq name="vs.type" value="2">实习</eq></span></p>
+
+                    <p>学　　历：<span id="education"><{$vs.edu}></span></p>
+
+                </div>
+
+                <div class="sub_button">
+                    <a href = "javascript:;" class="return_button">返回</a>
+                    <a href = "__CONTROLLER__/apply/id/<{$vs.id}>/" class="write_button">投递简历</a>
+                </div>
+
+            </div>
+
+
+            <!--右侧-->
+            <div class="job_info_box_right">
+                <div class="job_info_box_right_top">
+                    <p>岗位职责：</p>
+                    <{$vs.content}>
+
+                </div>
+                <div class="job_info_box_right_bottom">
+                    <p>任职要求：</p>
+                    <{$vs.condition}>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    </foreach>
+
+</block>
+
+
+
+<block name="bottomJsFile">
+
+
+<script>
+
+    //变量
+
+    var getId = ''; //点击tr获得id,通过id判断要进入哪一个的招聘信息详情
+    var carId = ''; //类别id
+
+    //alert(parseInt($('#main_right').height()));
+    $(function(){
+        //$('.main_left_footer').css({'width':parseInt($('#main_left').css('width'))});
+        $('#main_left').css({'min-height':parseInt($('#main_right').height()) });
+    })
+
+
+
+    //获得点击的招聘id
+    $('tr:not(#j01)').bind('click',function(event){
+        getId = '.'+$(this).attr('id');  //获得要弹出的弹窗class id
+
+        $(getId).show();
+        $('.job_info_box').show();
+        var l = ($(document).width()-960)/2;
+        $('.job_info_box').css({'left':l});
+
+        var h = $(document).height();
+        $('.job_info').css({'height':h});
+
+        event.stopPropagation();
+    });
+    $('.return_button').bind('click',function(){
+        $('.job_info').hide();
+    });
+
+    $('.job_info').bind('click',function(event){
+        $('.job_info').hide();
+        event.stopPropagation();
+    });
+    $('.job_info_box').bind('click',function(event){
+        event.stopPropagation();
+    });
+
+
+$(function(){
+        var i = '#cat_'+'<{:I("get.id")}>';
+        $('.category a').removeClass('category_click');
+        $(i).addClass('category_click');
+
+})
+
+</script>
+</block>

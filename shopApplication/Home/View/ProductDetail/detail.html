@@ -1,0 +1,499 @@
+<extend name="Public:public" />
+    <block name="cssFile">
+    <link href="__PUBLIC__/Home/css/detail.css" rel="stylesheet" type="text/css">
+    <style type="text/css">
+    .detail-con-mon {
+    padding-top: 10%;
+    }
+    .time-item strong{background:#C71C60;color:#fff;font-size:15px;font-family:Arial;padding:0 6px;border-radius:5px;box-shadow:1px 1px 3px rgba(0,0,0,0.2);}
+    .day_show{color:#c71c60;font-size:25px;margin:0 5px;font-family:Arial, Helvetica, sans-serif;}
+    </style>
+    </block>
+    <block name="topJsFile">
+     <script src="__PUBLIC__/Home/js/detail.js"></script>
+     <script src="__PUBLIC__/Home/js/comment.js"></script>
+     <script src="__PUBLIC__/Home/js/cart.js"></script>
+    </block>
+
+    <block name="publicBody">
+    <!--商品的详情-->
+    <div class="detail-content">
+
+        <div class="detail-con-top">
+            <!--商品的左边图片特效-->
+            <div class="detail-con-top-left display-inline-block">
+                <!--轮播图片-->
+                <div class="detail-con-image">
+                    <ul style="width: 500px; padding: 0px; margin: 0px auto;">
+                        <foreach name="goodimgs" item="v">
+                        <li
+                            <if condition="$key eq 0">
+                            class="detail-con-image-li on"
+                            <else/>
+                             class="detail-con-image-li"
+                             </if>
+                         >
+                          <img src="<{$v.images}>">
+                       </li>
+                       </foreach>
+                    </ul>
+                </div>
+                <!--左箭头-->
+                <div class="detail-con-ljt">
+                    <div class="detail-con-larrow detail-con-jt"></div>
+                </div>
+                <!--右箭头-->
+                <div class="detail-con-rjt">
+                    <div class="detail-con-rarrow detail-con-jt"></div>
+                </div>
+                <!--小圆圈-->
+                <div class="detail-con-circle">
+                    <ul>
+                         <foreach name="goodimgs" item="v">
+                          <li
+                          <if condition="$key eq 0">
+                          class="detail-con-dot display-inline-block on"
+                          <else/>
+                           class="detail-con-dot display-inline-block"
+                           </if>
+                          ></li>
+                        </foreach>
+                    </ul>
+                </div>
+            </div>
+            <!--商品的详情参数-->
+            <div class="detail-con-top-right display-inline-block">
+                <div class="detail-con-gname">
+                  <php>
+            if($promote){
+                        if($promote['status']==1){
+                        $price=($data['promote_price'] + $ls[0][prop_price] + $ls1[0][prop_price])*($promote['rate']/100);
+                      }elseif($_SESSION['user'] and $promote['status']==2){
+                        $price=($data['promote_price'] + $ls[0][prop_price] + $ls1[0][prop_price])*($promote['rate']/100);
+                      }elseif(!$_SESSION['user'] and $promote['status']==2){
+                        $price=$data['promote_price'] + $ls[0][prop_price] + $ls1[0][prop_price];
+                      }elseif($promote['status']==3 or $promote['status']==4){
+                        $price=$data['promote_price'] + $ls[0][prop_price] + $ls1[0][prop_price];
+                      }elseif($promote['status']==5){
+                            if($promote['time']==0 or $promote['time']==1){
+                            $price=$data['promote_price'] + $ls[0][prop_price] + $ls1[0][prop_price];
+                            }else{
+                            $price=($data['promote_price'] + $ls[0][prop_price] + $ls1[0][prop_price])*($promote['rate']/100);
+                            }
+                      }
+            }else{
+                        $price=$data['promote_price'] + $ls[0][prop_price] + $ls1[0][prop_price];
+                        }
+                  </php>
+                    <h2><{$data.pro_name}>&nbsp;&nbsp;
+                    <if condition="$promote['status'] eq 1">
+                      <font size="5" color="red" style="float:right">特惠折扣~</font>
+                      <elseif condition="$promote['status'] eq 2" />
+                      <font size="5" color="red" style="float:right">会员特惠~</font>
+                      <elseif condition="$promote['status'] eq 3" />
+                      <font size="5" color="red" style="float:right">购买就赠~</font>
+                      <elseif condition="$promote['status'] eq 4" />
+                      <font size="5" color="red" style="float:right">买满就赠~</font>
+                      <elseif condition="($promote['status'] eq 5) and ($promote['time'] gt 0)" />
+                      <font size="5" color="red" style="float:right">限时抢购~</font>
+                    </if>
+
+                     <!--  <if condition="($data['is_new'] eq 1) AND ($data['is_promote'] neq 1)"><font size="6" color="red" style="float:right">新品~</font><elseif condition="($data['is_new'] neq 1) AND ($data['is_promote'] eq 1)"  /><font size="6" color="#FB0" style="float:right">活动~</font><elseif condition="($data['is_new'] eq 1) AND ($data['is_promote'] eq 1)"  /><font size="6" color="#FB0" style="float:right">活动~</font></if> -->
+
+
+
+
+
+                    </h2>
+                </div>
+                <input type="hidden" value="<{$data.cat_id}>" name="cat_id">
+                <input type="hidden" value="<{$data.id}>" name="proid" id="proid">
+                <input type="hidden" value="<{$data.promote_price}>" name="promote_price" id="promote_price">
+                <input type="hidden" value="<{$price}>" name="price" id="price">
+                <notempty name='promote'>
+                <if condition="$promote['status'] eq 5">
+                  <if condition="$promote['time'] gt 1">
+                  <input type="hidden" value="<{$promote['rate']}>" name="promote" id="promote">
+                  </if>
+                <else />
+                <input type="hidden" value="<{$promote['rate']}>" name="promote" id="promote">
+                </if>
+                </notempty>
+                <div class="detail-con-price">
+                    <h2 class="price">
+                      <if condition="$promote['status'] eq 1">
+                        <span class="older">折扣价:</span>
+                        <span class="newer"><{$price}></span>
+                      <elseif condition="$promote['status'] eq 2" />
+                        <span class="older">会员价:</span>
+                        <span class="newer"><{$price}></span>
+                        <else />
+                        <span class="older">本店价:</span>
+                        <span class="newer"><{$price}></span>
+                      </if>
+
+                        <small>&nbsp;&nbsp;<s>市场价:<{$data.market_price}></small></s>
+                    </h2>
+                </div>
+                <if condition="$promote['status'] eq 3">
+                <div class="detail-con-zp detail-con-top">
+                    <div class="zp display-inline-block detail-con-width-name" style="font-size:14px;">赠　　品:</div>
+                    <div class="detail-con-zping display-inline-block detail-con-width-content">
+                        <ul>
+                            <li class="name">
+                                <img src="__PUBLIC__/Product/thumb/<{$promote['gift']['list_image']}>">
+                                <div class="display-inline-block">
+                                    <a class="zt display-inline-block  text-ellipse" href="<{:U('ProductDetail/detail',array('id'=>$promote['gift']['id']))}>" target='_blank'><{$promote['gift']['pro_name']}></a>
+                                  <span
+                                          class="num">×1
+                                  </span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <elseif condition="$promote['status'] eq 4" />
+                    <div class="detail-con-zp detail-con-top">
+                    <div class="zp display-inline-block detail-con-width-name" style="font-size:14px;">赠　　品:</div>
+                    <div class="detail-con-zping display-inline-block detail-con-width-content">
+                        <ul>
+                            <li class="name">
+                                <img src="__PUBLIC__/Product/thumb/<{$promote['gift']['list_image']}>">
+                                <div class="display-inline-block">
+                                    <a class="zt display-inline-block  text-ellipse" href="<{:U('ProductDetail/detail',array('id'=>$promote['gift']['id']))}>" target='_blank'><{$promote['gift']['pro_name']}></a>
+                                  <span
+                                          class="num">×1&nbsp;&nbsp;&nbsp;(买<{$promote['condition']}><{$data.unit}>就赠)
+                                  </span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                </if>
+                <if condition="($promote['status']) eq 5 and ($promote['time'] eq 1)">
+                <div class="detail-con-zp detail-con-top">
+                    <div class="zp display-inline-block detail-con-width-name" style="font-size:14px;">限时抢购:</div>
+                    <div class="detail-con-zping display-inline-block detail-con-width-content">
+                        <ul>
+                            <li class="name">
+                                <div class="display-inline-block">
+                                <php>
+                                $discountrate=$promote['rate']/10;
+                                </php>
+                                  <span class="newer" style="color:red;">(<{$discountrate}>折~) <small><i>即将开始</i></small></span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <elseif condition="($promote['status'] eq 5) and ($promote['time'] gt 1)" />
+                    <div class="detail-con-zp detail-con-top">
+                    <div class="zp display-inline-block detail-con-width-name" style="font-size:14px;">限时抢购:</div>
+                    <div class="detail-con-zping display-inline-block detail-con-width-content">
+                        <ul>
+                            <li class="name">
+                                <div class="display-inline-block">
+                                  <span>
+                        <div class="time-item">
+                        <span class="day_show" id="day_show<{$data.id}>">0天</span>
+                        <strong id="hour_show<{$data.id}>">0时</strong>
+                        <strong id="minute_show<{$data.id}>">0分</strong>
+                        <strong id="second_show<{$data.id}>">0秒</strong>
+                        </div>
+                                  </span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                </if>
+                <div class="detail-con-color detail-con-top">
+                    <div class="display-inline-block detail-con-select detail-con-width-name" style="font-size:14px;">选择包装:</div>
+                    <div class="display-inline-block detail-con-ys detail-con-width-content">
+                        <ul>
+                           <foreach name="ls" item="v">
+                            <li
+                               <if condition="$key eq 0">
+                               class="detail-con-ys-li display-inline-block detail-con-ys-change"
+                               <else/>
+                                 class="detail-con-ys-li display-inline-block"
+                               </if>
+                               >
+                                <div class="detail-con-yanse" title="<{$v.prop_name}>" style="background: <{$v.prop_value}>;"></div>
+                                <input type="hidden" name="upprice1" id="upprice1" value="<{$v.prop_price}>">
+                                <input type="hidden" name="attr_id1" id="attr_id1" value="<{$v.id}>">
+                            </li>
+                            </foreach>
+                        </ul>
+                    </div>
+                </div>
+                  <div class="detail-con-bab detail-con-top">
+                    <div class="display-inline-block  detail-con-width-name" style="font-size:14px;">选择规格:</div>
+                    <div class="display-inline-block detail-con-banben  detail-con-width-content">
+                        <ul>
+                            <foreach name="nc" item="v">
+                            <li class="display-inline-block ">
+                               <div <if condition="$key eq 0">
+                               class="detail-con-vsion detail-con-change"
+                               <else/>
+                                 class="detail-con-vsion"
+                               </if>
+                               > >
+                                    <div class="detail-con-mon"><{$v.prop_name}></div>
+                                    <input type="hidden" name="attr_id2" id="attr_id2"  value="<{$v.id}>">
+                                    <input type="hidden" name="upprice2" value="<{$v.prop_price}>">
+                                </div>
+                            </li>
+                            </foreach>
+                        </ul>
+                    </div>
+                </div>
+                <div class=" detail-con-top detail-con-sl">
+                    <div class="display-inline-block  detail-con-width-name" style="font-size:14px;">数　　量:</div>
+                    <div class="display-inline-block detail-con-number detail-con-width-content">
+                        <a class="detail-con-minus display-inline-block " href="javascript:void(0)" style="font-size:14px;">-</a>
+                        <input class="display-inline-block" type="text" style="font-size:14px;" readonly name="num" id="num" value="1"/>
+                        <a class="detail-con-add display-inline-block " href="javascript:void(0)" style="font-size:14px;">+</a>
+                    </div>
+                </div>
+                                <div class=" detail-con-top detail-con-sl">
+                    <div class="display-inline-block  detail-con-width-name" style="font-size:14px;">库存 (<{$data.unit}>):</div>
+                    <div class="display-inline-block detail-con-number detail-con-width-content">
+                       <input class="display-inline-block" type="text" style="font-size:14px;" readonly name="storenum" id="storenum" value="<{$data.stock_num}>"/>
+                    </div>
+                </div>
+                <div class="pro_info detail-con-top">
+                    <div class="pro_info_cnt cnt_bier">
+                        <if condition="$data.stock_num gt 0">
+                        <a id="buy_now" class="bug_btn display-inline-block" href="javascript:void(0)" target="_blank">立即购买</a>
+                        <if condition="($promote['status'] neq 5)">
+                        <a id="addBtn" class="add_btn display-inline-block" href="javascript: void(0)">加入购物车</a>
+                        <elseif condition="($promote['status'] eq 5)and ($promote['time'] eq 1)" />
+                        <a id="addBtn" class="add_btn display-inline-block" href="javascript: void(0)">加入购物车</a>
+                        <else />
+                        <a class="add_btn display-inline-block" href="javascript: void(0)" style="background-color:#AFAFAF;cursor:not-allowed" >加入购物车</a>
+                        </if>
+                        <a class="less_btn display-inline-block" href="javascript: void(0)" style="display: none;">缺&nbsp;&nbsp;&nbsp;&nbsp;货</a>
+                        <else />
+                        <a id="buy_now" class="bug_btn display-inline-block" href="javascript:void(0)" target="_blank" style="display:none;">立即购买</a>
+                        <if condition="($promote['status'] neq 5)">
+                        <a id="addBtn" class="add_btn display-inline-block" href="javascript: void(0)" style="display:none;">加入购物车</a>
+                        <elseif condition="($promote['status'] eq 5)and ($promote['time'] eq 1)" />
+                        <a id="addBtn" class="add_btn display-inline-block" href="javascript: void(0)" style="display:none;">加入购物车</a>
+                        <else />
+                        <a class="add_btn display-inline-block" href="javascript: void(0)" style="background-color:#AFAFAF;cursor:not-allowed;display:none;">加入购物车</a>
+                        </if>
+                        <a class="less_btn display-inline-block" href="javascript: void(0)" style="display:block;">缺&nbsp;&nbsp;&nbsp;&nbsp;货</a>
+                        </if>
+                    </div>
+                    <div id="errorTip" class="pro_desc">库存不足</div>
+                </div>
+            </div>
+        </div>
+
+        <!--商品的规格评论等-->
+        <div class="detail-con-bottom">
+            <div class="detail-bottom-title">
+                <ul class="detail-bott-bt">
+                    <li class="display-inline-block active">产品详情</li>
+                    <li class="display-inline-block">规格参数</li>
+                    <li id='remark' class="display-inline-block">评论(<{$count}>条)</li>
+                </ul>
+            </div>
+            <div class="detail-bott-cs">
+                <ul class="detail-bott-js">
+                     <!--产品详情-->
+                    <li class="detail-xq on detail-tab">
+                      <div class="xlj-good-desc">
+                          <{$data.feacher}>
+                       </div>
+                    </li>
+                    <!--规格参数-->
+                    <li class="detail-cs detail-tab">
+                        <div class="left-side">
+                            <div class="detail-cs-left">
+                                <ul class="detail-cs-left-ul">
+                                    <foreach name="gplist" item="v">
+                                          <li
+                                          <if condition="$key eq 0">
+                                          class="current"
+                                          </if>
+                                        ><a href="javascript:;"><{$v.param_title}></a></li>
+                                    </foreach>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="detail-cs-right">
+                           <foreach name="gplist" item="vo">
+                            <div class="info-i info-screen">
+                                 <{$vo.param_content}>
+                            </div>
+                            </foreach>
+                        </div>
+                    </li>
+
+                    <!--用户评论-->
+                    <php>
+                      $five=(round($fivecount/$count,4))*100 + (round($fourcount/$count,4))*100;
+                      $three=(round($threecount/$count,4))*100+(round($twocount/$count,4))*100;
+                      $one=(round($onecount/$count,4))*100;
+                    </php>
+                    <li class="detail-comm detail-tab">
+                      <div class="detail-comm-list">
+                        <ul>
+                          <li class="display-inline-block detail-comm-li" onclick="allcomment(0,<{$data.id}>)">全部<span ></span></li>
+                          <li class="display-inline-block detail-comm-li" onclick="allcomment(1,<{$data.id}>)">好评(<{$five}>%)<span></span></li>
+                          <li class="display-inline-block detail-comm-li" onclick="allcomment(2,<{$data.id}>)">中评(<{$three}>%)<span></span></li>
+                          <li class="display-inline-block detail-comm-li last" onclick="allcomment(3,<{$data.id}>)">差评(<{$one}>%)<span></span></li>
+                        </ul>
+                      </div>
+                      <div class="detail-comment" id="pages">
+                        <ul class="acomment">
+                            <foreach name="comment" item="v">
+                          <li class="detail-pl">
+                            <div class="detail-list">
+                              <div class="user-precent-left display-inline-block">
+                               <empty name="v['thumb']">
+                               <img alt="头像" src="__PUBLIC__/User/default.jpg" class="np-avatar">
+                               <else/>
+                               <img alt="头像" src="<{$v.thumb}>" class="np-avatar">
+                               </empty>
+                              <span><{$v.username}></span>
+                                        </div>
+                              <div class="display-inline-block detail-user-comm">
+                                <div class="user-precent-header">
+                                                 <span class="icon-star icon-star-<{$v.score}> display-inline-block"></span>
+                                                 <span class="user-date" style="font-size:14px;"><{$v.comment_time}></span>
+                                            </div>
+                                <div class="user-precent-content" style="font-size:14px;"><p><{$v.content}></p></div>
+                              </div>
+
+                            </div>
+                            <if condition="$v.replay neq null">
+                            <div class="gl-response">管理员回复：
+                                <span style="color:red;"><{$v['replay']['content']}></span>　　　
+                                <span style="color:red;"><{$v['replay']['replay_time']}></span>
+                            </div>
+                            </if>
+                          </li>
+                          </foreach>
+
+                        </ul>
+                        <div style="height:50px;margin-bottom:16px;">
+                               <{$page}>
+
+                        </div>
+                      </div>
+                      <div class="consulting">
+                         <form id="consultForm" name="consultForm" method="post" onsubmit="return submitComment()" action="javascript:;">
+                                <table>
+                                    <tbody>
+                                    <tr>
+                                        <td class="table-left">评分：</td>
+                                        <td>
+                                           <input type="hidden" name="product_id" id ="product_id" value="<{$data.id}>">
+                                            <input type="radio" checked="checked" id="comment_rank5" class="star" value="5" name="comment_rank">
+                                                <label for="comment_rank5" style="display:inline;">
+                                                   <span class="icon-star icon-star-5 display-inline-block"></span>
+                                                </label>
+                                            <input type="radio" id="comment_rank4" class="star" value="4"  name="comment_rank">
+                                                  <label for="comment_rank4" style="display:inline;">
+                                                     <span class=" icon-star icon-star-4 display-inline-block"></span>
+                                                  </label>
+                                            <input type="radio" id="comment_rank3" class="star"  value="3" name="comment_rank">
+                                                  <label for="comment_rank3" style="display:inline;">
+                                                     <span class=" icon-star icon-star-3 display-inline-block"></span>
+                                                  </label>
+                                            <input type="radio" id="comment_rank2" class="star" value="2" name="comment_rank">
+                                                  <label for="comment_rank2" style="display:inline;">
+                                                      <span class=" icon-star icon-star-2 display-inline-block"></span>
+                                                  </label>
+                                            <input type="radio" id="comment_rank1" class="star" value="1" name="comment_rank">
+                                                  <label for="comment_rank1" style="display:inline;">
+                                                      <span class=" icon-star icon-star-1 display-inline-block"></span>
+                                                  </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="table-left">评价：</td>
+                                        <td><textarea maxlength="200" id="ConsultContent" name="content"></textarea><span style="color:red;" id="comment"></span></td>
+
+                                    </tr>
+                                     <tr>
+                                        <td></td>
+                                        <td><input type="submit" data-val="0" value="提交评论" id="ContentSub" name="submit" class="submit"></td>
+                                     </tr>
+                                </tbody>
+                            </table>
+                          </form>
+                      </div>
+                    </li>
+                    <!--用户评论-->
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    </block>
+
+<block name="bottomJsFile">
+ <script type="text/javascript">
+      var _url ="__CONTROLLER__";
+      var _APP ="__APP__";
+      var _user ="<{$users}>";
+      var time ="<{$promote['time']}>";
+      var n="<{$data['id']}>";
+        $(function () {
+            image(".detail-con-top-left");
+            console.log(<{$goodsData}>)
+            goods(".detail-con-top", <{$goodsData}>);
+            bott();
+            autoScrollBar(".detail-cs");
+        })
+       function getPageByAjax(url){
+            $.get(url, function (d){
+                $('#pages').html(d);
+            });
+        }
+
+        window.onload=function(){
+            var scorllindex ="<{:I('get.remark')}>";
+            if(scorllindex == "1"){
+                var _this =$('#remark');
+                if (!_this.hasClass("active")) {
+                _this.siblings().removeClass("active");
+                _this.addClass("active");
+                $(".detail-bott-js").children("li").removeClass("on").eq(_this.index()).addClass("on");
+                $("html, body").scrollTop(0).animate({scrollTop: $("#remark").offset().top});
+        }
+            }
+            if(time>1){
+              timer(time,n);
+            }
+        };
+
+
+function timer(intDiff,id){
+    window.setInterval(function(){
+    var day=0,
+        hour=0,
+        minute=0,
+        second=0;//时间默认值
+    if(intDiff > 0){
+        day = Math.floor(intDiff / (60 * 60 * 24));
+        hour = Math.floor(intDiff / (60 * 60)) - (day * 24);
+        minute = Math.floor(intDiff / 60) - (day * 24 * 60) - (hour * 60);
+        second = Math.floor(intDiff) - (day * 24 * 60 * 60) - (hour * 60 * 60) - (minute * 60);
+    }
+    if (minute <= 9) minute = '0' + minute;
+    if (second <= 9) second = '0' + second;
+    $('#day_show'+id).html(day+"天");
+    $('#hour_show'+id).html('<s id="h"></s>'+hour+'时');
+    $('#minute_show'+id).html('<s></s>'+minute+'分');
+    $('#second_show'+id).html('<s></s>'+second+'秒');
+    intDiff--;
+    }, 1000);
+}
+    </script>
+    </block>
+</html>

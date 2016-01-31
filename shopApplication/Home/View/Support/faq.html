@@ -1,0 +1,72 @@
+<extend name="Public:public" />
+<block name="cssFile">
+	<link rel="stylesheet" href="__PUBLIC__/Home/css/index.css">
+	<link rel="stylesheet" href="__PUBLIC__/Home/css/support-faq.css">
+</block>
+<block name="publicBody">	
+	<div class="banner"></div>
+
+	<div class="container main">
+		<div class="row">
+			<div class="col-md-12">
+				<ol class="breadcrumb">
+				  	<li><a href="__APP__">首页</a></li>
+				  	<li><a href="###">常见问题</a></li>
+				  	<li>服务与支持</li>
+				</ol>
+			</div>
+			<!-- 左侧菜单 开始 -->
+			<div class="col-md-3">
+				<div class="list-group list-menu">
+
+				  	<a href="#" class="list-group-item active">
+				    	<h1>常见问题</h1>
+				  	</a>
+				  	<foreach name="list" item="v">
+				  	<a href="<{:U('Support/faq/cid/'.$v['id'])}>" class="list-group-item">
+				  		<h4><{$v.cate_name}></h4>
+				  	</a>
+				  	</foreach>
+				  	
+				</div>
+			</div>
+			<!-- 左侧菜单 结束 -->
+			<!-- 右侧菜单 开始 -->
+			<div class="col-md-9">
+				<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+					<!-- 第一条记录 开始 -->
+					<!-- 使用的时间注意：有几个id需要修改 -->
+					<foreach name="datalist" item="v">
+					<div class="panel panel-default">
+						<!-- 这里有一个div中的 id 属性需要修改 -->
+					    <div class="panel-heading" role="tab" id="heading<{$v.id}>">
+					      <h4 class="panel-title">
+					      	<!-- 这里的 aria-expanded 属性和 aria-controls需要修改 -->
+					        <a class="faq-title" data-toggle="collapse" data-parent="#accordion" href="#collapse<{$v.id}>" aria-expanded="true" aria-controls="collapse<{$v.id}>">
+					          <{$v.title}>
+					        </a>
+					      </h4>
+					    </div>
+					    <!-- 这里的 div 中的 id 和 aria-labelledby 需要修改 -->
+					    <div id="collapse<{$v.id}>" 
+                          <if condition="$key eq 0">
+					      class="panel-collapse collapse in"
+                          <else/>
+                           class="panel-collapse collapse"
+                           </if>
+					       role="tabpanel" aria-labelledby="heading<{$v.id}>">
+					      <div class="panel-body faq-content">
+					         <{$v.faq_content}>
+					      </div>
+					    </div>
+					</div>
+					<!-- 第一条记录 结束 -->	
+					</foreach>
+				</div>
+			</div>
+			<!-- 右侧菜单 结束 -->
+			
+		</div>
+	</div>
+</block>
+	

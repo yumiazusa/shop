@@ -1,0 +1,70 @@
+<extend name="Public:member1"/>
+<block name="cssFile">
+<link href="__PUBLIC__/Home/css/member.css" rel="stylesheet" type="text/css">
+<link href="__PUBLIC__/Home/css/order.css" rel="stylesheet" type="text/css">
+<link href="__PUBLIC__/Home/css/pubmember.css" rel="stylesheet" type="text/css">
+</block>
+<block name="topJsFile">
+<script src="__PUBLIC__/Home/js/member.js"></script>
+</block>
+<block name="publicBody"> 
+<div class="member-zt-right display-inline-block">
+<div class="member-address">
+	<span>申请退换货</span>
+		</div>
+		 <!--更换部分开始-->
+		 <div class="mc" style="margin-top: 30px;width:870px;margin-left:26px;">
+			<table class="tb-void tb-top">
+			<colgroup>
+				<col width="110">
+				<col width="300">
+				<col width="220">
+				</colgroup>
+				<thead>
+				<tr>
+				<th>订单编号</th>
+				<th>订单商品</th>
+				<th>
+					下单时间
+				</th>
+				</tr>
+				</thead>
+				<tbody>
+				<foreach name="orderlist" item="v">
+				<tr>
+				<td><a href="<{:U('Order/viewOrder/',array('id'=>$v['id']))}>" target="_blank"><{$v.order_sn}></a></td>
+				<td>
+		        <div class="list-h">
+			    <ul>
+			    <foreach name="v['list']" item="vo">
+				<li class="display-inline-block">
+					<div class="p-img">
+						<img width="50" height="50" src="__PUBLIC__/Product/thumb/<{$vo['prolist']['list_image']}>" title="<{$vo['prolist']['pro_name']}>">
+					</div>
+						<if condition="$vo['sale'] neq null">
+						<div class="btns">
+						<a class="btn-class" href="<{:U('Custom/returnDetail',array('id'=>$vo['prolist']['id'],'ids'=>$v['id']))}>">查看</a>
+						</div>
+						<else/>
+						<div class="btns">
+						<a class="btn-class" href="<{:U('Custom/applyProcess',array('id'=>$vo['prolist']['id'],'ids'=>$v['id']))}>">申请</a>
+					    </div>
+						</if>
+						</li>　
+					    </foreach>
+					    </ul>
+		                           </div>
+	                            </td>
+	                            <td><div class="ftx03"><{$v['order_date']|date="Y-m-d H:i:s",###}></div></td>
+                             </tr>
+                             </foreach>
+                           </tbody>
+                  </table>
+                    <div class="pagination alternate" style="float:right;">
+                           <{$page}>
+                    </div>
+                </div>        
+               <!--更换部分结束-->
+                		
+	    </div>
+	</block>

@@ -1,0 +1,22 @@
+.banner {
+    height:220px;
+    background:#41C78A url(../images/faq-banner.jpg) no-repeat center -20px;
+}
+.main {
+    padding-top:30px;
+    padding-bottom:30px;
+    background:#fff;
+    border-left:1px solid #ededed;
+    border-right:1px solid #ededed;
+}
+a.faq-title {
+    text-decoration:none;
+}
+a.faq-title:hover {
+    text-decoration:none;
+}
+.faq-content {
+    line-height:26px;
+    color:#333;
+    font-size:14px;
+}

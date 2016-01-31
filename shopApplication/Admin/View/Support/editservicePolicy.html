@@ -1,0 +1,129 @@
+<!--添加新闻 -->
+<!-- 继承 公共模板 开始 -->
+<extend name="Public:blank" />
+<!-- 继承 公共模板 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部CSS文件 开始 -->
+<block name="cssFile">
+<link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap.min.css" />
+<link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap-responsive.min.css" />
+<link rel="stylesheet" href="__PUBLIC__/Admin/css/colorpicker.css" />
+<link rel="stylesheet" href="__PUBLIC__/Admin/css/datepicker.css" />
+<link rel="stylesheet" href="__PUBLIC__/Admin/css/uniform.css" />
+<link rel="stylesheet" href="__PUBLIC__/Admin/css/select2.css" />
+<link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-style.css" />
+<link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-media.css" />
+<link rel="stylesheet" href="__PUBLIC__/Admin/css/uniform.css" />
+<link rel="stylesheet" href="__PUBLIC__/Admin/css/select2.css" />
+<link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-style.css" />
+<link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-media.css" />
+<link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap-wysihtml5.css" />
+<link href="__PUBLIC__/Admin/font-awesome/css/font-awesome.css" rel="stylesheet" />
+<link rel="stylesheet" href="__PUBLIC__/Admin/css/adv.css" />
+<link rel="stylesheet" href="__PUBLIC__/editor/themes/default/default.css" />
+</block>
+<!-- 顶部CSS文件 结束 -->
+   
+<!-- ===================================================== -->
+
+<!-- 顶部JS文件 开始 -->
+<block name="topJsFile">
+    <script src="__PUBLIC__/Admin/js/jquery.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/adv.js"></script>
+</block>
+<!-- 顶部JS文件 结束 -->
+
+<!-- ===================================================== -->
+<!-- 头部部分 开始 -->
+<block name="publicHead">
+    <div id="breadcrumb">
+        <a href="index.html" title="返回系统主页" class="tip-bottom">
+            <i class="icon-home"></i>
+            管理首页
+        </a>
+    </div>
+    <div style="margin-top:10px;">
+        
+     </div>
+</block>
+<!-- 头部部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 公共Body部分 开始 -->
+<block name="publicBody">
+    <!-- 将主体包含在 .row-fluid 内部 -->
+    <div class="container-fluid">
+              <div class="row-fluid">
+                 <div class="span12">
+                   <div class="widget-box">
+                      <div class="widget-title"> 
+                          <span class="icon"> <i class="icon-align-justify"></i> </span>
+                         <h5></h5>
+                      </div>
+                      <div class="widget-content nopadding">
+                         <form action="__CONTROLLER__/doEditservicepolicy" method="post" class="form-horizontal" onsubmit="return dosubmit()" enctype="multipart/form-data">
+                          <input type="hidden" name="id" value="<{$list.id}>"> 
+                            <div class="control-group">
+                                <label class="control-label">注册服务协议:</label>
+                                <div class="controls">
+                                   <textarea class="span11" style="width:400px;" id="news_content" name="contents"><{$list.contents}></textarea>
+                                </div>
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-success">保存</button>
+                                <a class="btn btn-success" href="<{:U('policy')}>">返回</a>
+                            </div>
+                         </form>
+                      </div>
+                   </div>
+                 </div>
+              </div>
+    </div>
+
+</block>
+<!-- 公共Body部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- js文件模块 开始 -->
+<block name="footJsFile">
+    
+</block>
+<!-- js文件模块 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 底部JS执行区域 开始 -->
+<block name="footScript">
+
+<script src="__PUBLIC__/Admin/js/jquery.ui.custom.js"></script> 
+<script src="__PUBLIC__/Admin/js/bootstrap.min.js"></script> 
+<script src="__PUBLIC__/Admin/js/bootstrap-colorpicker.js"></script> 
+<script src="__PUBLIC__/Admin/js/bootstrap-datepicker.js"></script> 
+<script src="__PUBLIC__/Admin/js/jquery.toggle.buttons.html"></script> 
+<script src="__PUBLIC__/Admin/js/masked.js"></script> 
+<script src="__PUBLIC__/Admin/js/jquery.uniform.js"></script> 
+<script src="__PUBLIC__/Admin/js/select2.min.js"></script> 
+<script src="__PUBLIC__/Admin/js/matrix.js"></script> 
+<script src="__PUBLIC__/Admin/js/matrix.form_common.js"></script> 
+<script src="__PUBLIC__/Admin/js/wysihtml5-0.3.0.js"></script> 
+<script src="__PUBLIC__/Admin/js/jquery.peity.min.js"></script> 
+<script src="__PUBLIC__/Admin/js/bootstrap-wysihtml5.js"></script> 
+<script charset="utf-8" src="__PUBLIC__/editor/kindeditor.js"></script>
+<script charset="utf-8" src="__PUBLIC__/editor/lang/zh_CN.js"></script>
+<script src="__PUBLIC__/Admin/js/muneopen.js"></script>
+    <script type="text/javascript">
+      $('.textarea_editor').wysihtml5();
+      var editor;
+      KindEditor.ready(function(K) {
+        editor = K.create('#news_content', {
+            
+        });
+      });
+
+    </script>
+</block>
+<!-- 底部JS执行区域 结束 -->

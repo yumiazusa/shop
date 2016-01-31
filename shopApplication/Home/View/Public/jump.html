@@ -1,0 +1,71 @@
+<?php
+    if(C('LAYOUT_ON')) {
+        echo '{__NOLAYOUT__}';
+    }
+?>
+<!DOCTYPE html>
+<html lang="en">
+<title>404</title>
+<head>
+    <meta charset="UTF-8">
+    <title>跳转提示</title>
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/bootstrap.min.css">
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/jump.css">
+    <script src="__PUBLIC__/Home/js/jquery.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1 logo">
+                <a href="__APP__"><img src="__PUBLIC__/Home/images/foot-logo.png" alt=""></a>
+            </div>
+            <div class="col-md-10 col-md-offset-1 main">
+                <h3 class="tips">提示信息：</h3>
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2 contents">
+                        <?php if(isset($message)) {?>
+                        <div class="media">
+                            <a class="media-left" href="#">
+                                <img src="__PUBLIC__/Home/images/ignore.png" alt="...">
+                            </a>
+                            <div class="media-body">
+                                <h5 class="media-heading" style="padding-left:10px; padding-top:10px;">友情提示：<?php echo($message); ?></h5>
+                                <p style="padding-left:10px; padding-top:10px;">您可以从这里<a id="href" href="<?php echo($jumpUrl); ?>">返回上一页</a>， 或者<a href="__APP__">前往首页</a></p>
+                            </div>
+                        </div>
+                        <?php }else{?>
+                        <div class="media">
+                            <a class="media-left" href="#">
+                                <img src="__PUBLIC__/Home/images/reg_error.png" alt="...">
+                            </a>
+                            <div class="media-body">
+                                <h5 class="media-heading" style="padding-left:10px; padding-top:10px;">友情提示：<?php echo($error); ?></h5>
+                                <p style="padding-left:10px; padding-top:10px;">您可以从这里<a id="href" href="<?php echo($jumpUrl); ?>">返回上一页</a>， 或者<a href="__APP__">前往首页</a></p>
+                            </div>
+                        </div>
+                        <?php }?>
+                    </div>
+                    <div class="col-md-8 col-md-offset-2 contents gray-color">
+                        <p>如果您的浏览器 <b id="wait"><?php echo($waitSecond); ?></b> 秒后未发生跳转，请<a href="">点击这里</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+    <script src="__PUBLIC__/Home/js/bootstrap.min.js"></script>
+    <script>
+        (function(){
+            var wait = document.getElementById('wait'),href = document.getElementById('href').href;
+            var interval = setInterval(function(){
+                var time = --wait.innerHTML;
+                if(time <= 0) {
+                    location.href = href;
+                    clearInterval(interval);
+                };
+            }, 1000);
+        })();
+    </script>
+</html>

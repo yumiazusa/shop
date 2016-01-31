@@ -1,0 +1,30 @@
+body {
+    background-color: #ededed;
+}
+* {
+    font-family:"Hiragino Sans GB","helvetica","microsoft yahei";
+    color:#555;
+}
+.logo {
+    padding-top:50px;
+    padding-bottom:20px;
+    border-bottom:5px solid #00acff;
+}
+.main {
+    height:500px;
+    background:#fff;
+}
+h3.tips {
+    color:#888;
+    border-bottom: 1px solid #cdcdcd;
+    line-height:40px;
+}
+.contents {
+    margin-top:50px;
+}
+.gray-color {
+    margin-top:150px;
+}
+.gray-color p {
+    color:#aaa;
+}

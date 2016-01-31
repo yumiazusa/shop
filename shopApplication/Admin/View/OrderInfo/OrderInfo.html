@@ -1,0 +1,313 @@
+<!-- =====================================================
+    Author: Eden
+    Date:   2015-01-12
+    Function:   公共模板文件中定义的block区域，可以在子模板中继承和覆盖
+ ========================================================= -->
+<!-- 继承 公共模板 开始 -->
+<extend name="Public:blank"/>
+<!-- 继承 公共模板 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部CSS文件 开始 -->
+<block name="cssFile">
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap-responsive.min.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/uniform.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/select2.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-style.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-media.css"/>
+    <link href="__PUBLIC__/Admin/font-awesome/css/font-awesome.css" rel="stylesheet"/>
+    <style>
+        td.text-center {
+            text-align: center;
+        }
+
+        a.title-link {
+            color: #0066ff;
+        }
+
+        .gritter-item {
+            background: none repeat scroll 0 0 #f74d4d;
+            box-shadow: 3px 3px 20px #000;
+            display: none;
+            color: #fff;
+            font-size: 14px;
+            padding: 7px 10px 10px;
+            width: 250px;
+            position: fixed;
+            z-index: 1999;
+            top: 150px;
+            right: 100px;
+        }
+    </style>
+</block>
+<!-- 顶部CSS文件 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部JS文件 开始 -->
+<block name="topJsFile">
+
+</block>
+<!-- 顶部JS文件 结束 -->
+
+<!-- ===================================================== -->
+<!-- 头部部分 开始 -->
+<block name="publicHead">
+    <div id="breadcrumb">
+        <a href="index.html" title="返回系统主页" class="tip-bottom">
+            <i class="icon-home"></i>
+            管理首页
+            <a href="#" class="current">订单详情</a>
+        </a>
+    </div>
+    <h1 style="margin-top:10px;width:250px;">订单信息</h1>
+    <span><a style="margin-top:5px; margin-right: 30px;float: right; " id="print" href="javascript:a();">[打印订单]</a>
+    </span>
+</block>
+<!-- 头部部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 公共Body部分 开始 -->
+<block name="publicBody">
+
+    <!-- 将主体包含在 .row-fluid 内部 -->
+    <div class="container-fluid ddd">
+        <hr style="margin:0;clear: right;">
+        <div class="row-fluid">
+            <div class="span12">
+                <div>
+                    <div class="control-group">
+                        <div class="widget-box">
+                            <div class="widget-title"> </span>
+                                <h5>商品信息</h5><h5>订单号:<{$order.order_sn}></h5><h5 style="color:red"
+                                   id="price_error"></h5>
+
+                                <eq name="order.order_status" value="0">
+                                    <span style="background:#30c8d3;" class="icon-trash label label-info">已取消</span>
+                                </eq>
+                                <eq name="order.order_status" value="1">
+                                    <span style="background:#968400;" class="icon-tasks label label-info">待付款</span>
+                                </eq>
+                                <eq name="order.order_status" value="2">
+                                    <span style="background:#ff6cc8;" class="icon-time label label-info">待发货</span>
+                                </eq>
+                                <eq name="order.order_status" value="3">
+                                    <span style="background:#313fd3;" class="icon-truck label label-info">已发货</span>
+                                </eq>
+                                <eq name="order.order_status" value="4">
+                                    <span style="background:#00cb00;" class="icon-ok label label-info">已完成</span>
+                                </eq>
+                            </div>
+                            <div class="widget-content nopadding">
+                                <table class="table table-bordered table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>商品货号</th>
+                                        <th>商品图片</th>
+                                        <th>商品名</th>
+                                        <th>商品颜色</th>
+                                        <th>商品数量</th>
+                                        <th>促销</th>
+                                        <th>商品单价</th>
+
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    <foreach name="data" item="vo">
+
+                                        <tr>
+                                            <td style="text-align:center;vertical-align: middle;"><{++$a}></td>
+                                            <td style="text-align:center;vertical-align: middle;"><{$vo.pro_sn}></td>
+                                            <td style="text-align:center;vertical-align: middle;"><img src="__PUBLIC__/Product/thumb/<{$vo.list_image}>" style="width:40px;height:40px;"/></td>
+                                            <td style="text-align:center;vertical-align: middle;"><{$vo.pro_name}></td>
+                                            <td style="text-align:center;vertical-align: middle;"><{$vo.product_color}></td>
+                                            <td style="text-align:center;vertical-align: middle;"><{$vo.product_number}></td>
+                                            <td style="text-align:center;vertical-align: middle;">
+                                            <empty name="vo.promote_status">
+                                            <a href="javascript:void(0);" data-toggle="modal" class="btn btn-mini" disabled style="cursor:not-allowed;">未促销</a>
+                                            <else />
+                                            <if condition="$vo['promote_status'] eq 5">
+                                            <a href="javascript:void(0);" data-toggle="modal" class="btn btn-mini btn-danger" disabled style="cursor:not-allowed;">限时抢购</a>
+                                            <elseif condition="$vo['promote_status'] eq 1"/>
+                                            <a href="javascript:void(0);" data-toggle="modal" class="btn btn-mini btn-danger" disabled style="cursor:not-allowed;">折扣</a>
+                                            <elseif condition="$vo['promote_status'] eq 2"/>
+                                            <a href="javascript:void(0);" data-toggle="modal" class="btn btn-mini btn-danger" disabled style="cursor:not-allowed;">会员折扣</a>
+                                            <elseif condition="$vo['promote_status'] eq 3"/>
+                                            <a href="javascript:void(0);" data-toggle="modal" class="btn btn-mini btn-danger" disabled style="cursor:not-allowed;">买赠</a></br><font size="1"><{$vo.gift}> x1</font>
+                                            <elseif condition="$vo['promote_status'] eq 4"/>
+                                            <a href="javascript:void(0);" data-toggle="modal" class="btn btn-mini btn-danger" disabled style="cursor:not-allowed;">满赠</a>
+                                        </br><font size="1"><{$vo.gift}> x1</font>
+                                            <elseif condition="$vo['promote_status'] eq 6"/>
+                                            <a href="javascript:void(0);" data-toggle="modal" class="btn btn-mini btn-danger" disabled style="cursor:not-allowed;">组合</a>
+                                            </if>
+                                            </empty>
+
+
+
+
+
+
+                                            </td>
+                                            <td style="text-align:center;vertical-align: middle;"><{$vo.product_price}></td>
+                                            <div style="display: none"><{$sum += $vo['product_number'] *
+                                                $vo['product_price']}>
+                                            </div>
+                                        </tr>
+
+                                    </foreach>
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="widget-title"><h5>商品总价:　￥<{$worth}></h5>　　　　　　　　　<h5>支付价格:　￥<{$price}> <font color="red">(含运费)</font></h5></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid ddd">
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="widget-box">
+                    <div class="widget-title">
+                        <h5>用户信息</h5>
+                    </div>
+                    <div class="widget-content nopadding">
+                        <table class="table table-bordered table-striped">
+                            <tbody>
+                            <tr class="even gradeC">
+                                <td style="width: 85px;">收货人:</td>
+                                <td><{$address.reciver_user}></td>
+                                <td style="width:85px;">电话:</td>
+                                <td><{$address.reciver_phone}></td>
+                            </tr>
+                            <tr class="even gradeC">
+                                <td>地址:</td>
+                                <td colspan="3">
+                                    <{$address['province']}>　<{$address['city']}>　<{$address['area']}>　<{$address['street']}>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="widget-box">
+                    <div class="widget-title">
+                        <h5>物流信息</h5>
+                    </div>
+                    <div class="widget-content nopadding">
+                        <table class="table table-bordered table-striped">
+                            <tbody>
+                            <tr class="even gradeC">
+                                <td>收货人:</td>
+                                <td><{$address.reciver_user}></td>
+                                <td>电话:</td>
+                                <td><{$address.reciver_phone}></td>
+                            </tr>
+                            <tr class="even gradeC">
+                                <td>地址:</td>
+                                <td colspan="3">
+                                <{$address['province']}>　<data{$address['city']}>　<{$address['area']}>　<{$address['street']}>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <div style="padding-top:20px; padding-bottom:20px; text-align:center;">
+            <a href="javascript:a();" class="btn btn-primary " style="margin-right:20px"> 打印订单 </a>
+            <a type="submit" href="javascript:history.go(-1);" class="btn btn-default"> 返回列表 </a>
+        </div>
+    </div>
+    <!---->
+    <!--<div class="gritter-item">-->
+    <!--<div class="gritter-close"></div>-->
+    <!--<div class="gritter-with-image"><span class="gritter-title"></span>-->
+
+    <!--<p class="gritter-msg"></p></div>-->
+    <!--<div style="clear:both"></div>-->
+    <!--</div>-->
+
+</block>
+<!-- 公共Body部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- js文件模块 开始 -->
+<block name="footJsFile">
+    <script src="__PUBLIC__/Admin/js/jquery.min.js"></script>
+    <script src="__PUBLIC__/Admin/js/jquery.ui.custom.js"></script>
+    <script src="http://code.jquery.com/jquery-migrate-1.1.0.js"></script>
+    <script src="__PUBLIC__/Admin/js/bootstrap.min.js"></script>
+    <script src="__PUBLIC__/Admin/js/jquery.uniform.js"></script>
+    <script src="__PUBLIC__/Admin/js/select2.min.js"></script>
+    <script src="__PUBLIC__/Admin/js/jquery.dataTables.min.js"></script>
+    <script src="__PUBLIC__/Admin/js/matrix.js"></script>
+    <script src="__PUBLIC__/Admin/js/matrix.tables.js"></script>
+    <script src="__PUBLIC__/Admin/js/jquery.jqprint-0.3.js"></script>
+    <script src="__PUBLIC__/Admin/js/muneopen.js"></script>
+</block>
+<!-- js文件模块 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 底部JS执行区域 开始 -->
+<block name="footScript">
+
+    <script>
+        $('.address').bind('mouseover', function () {
+            $('.gritter-item').stop(true, true);
+            $('.gritter-item').delay(1).slideDown(300);
+            var aid = $(this).attr('id');
+            var data = {'id': aid};
+            $.post('__CONTROLLER__/getUserAddress', data, function (a) {
+                var s = a.reciver_user;
+                $('.gritter-title').html('收件人：' + s);
+                $('.gritter-msg').html('<br>联系方式：<strong> ' + a.reciver_phone + '</strong><br>详细地址：' + a.province + a.city + a.area + a.street + '</td>');
+            })
+        })
+
+        $('.address').bind('mouseout', function () {
+
+            $('.gritter-item').delay(3000).slideUp(300);
+
+        })
+
+
+        var sum =<{$worth}>;  //商品总价
+        var pay =<{$price}>;   //支付价格
+        var x = pay / sum * 100;
+        if (x >= 1) {
+
+        } else {
+
+            $('#price_error').html("支付的价格只相当于总价的" + x + "%,请检查!");
+        }
+
+
+        //打印输出
+        function a() {
+            $(".ddd").jqprint();
+        }
+    </script>
+</block>
+<!-- 底部JS执行区域 结束 -->

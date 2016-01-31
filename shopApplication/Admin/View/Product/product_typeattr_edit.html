@@ -1,0 +1,198 @@
+<!-- =====================================================
+    Author: Eden
+    Date:   2015-01-12
+    Function:   公共模板文件中定义的block区域，可以在子模板中继承和覆盖
+ ========================================================= -->
+<!-- 继承 公共模板 开始 -->
+<extend name="Public:blank" />
+<!-- 继承 公共模板 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部CSS文件 开始 -->
+<block name="cssFile">
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap-responsive.min.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/uniform.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/select2.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-style.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-media.css" />
+    <link href="__PUBLIC__/Admin/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link rel="stylesheet" href="__PUBLIC__/editor/themes/default/default.css" />
+    <style>
+        th.list-title {
+            font-size:14px;
+        }
+        td.align-center {
+            text-align:center;
+        }
+        table#param table {
+            border:none;
+        }
+        table#param td {
+            border:none;
+        }
+    </style>
+</block>
+<!-- 顶部CSS文件 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部JS文件 开始 -->
+<block name="topJsFile">
+    
+</block>
+<!-- 顶部JS文件 结束 -->
+
+<!-- ===================================================== -->
+<!-- 头部部分 开始 -->
+<block name="publicHead">
+    <div id="breadcrumb"> 
+        <a href="__APP__" title="返回系统首页" class="tip-bottom">
+            <i class="icon-home"></i> 
+        管理首页</a> 
+        <a href="#" class="current">系统设置</a> 
+    </div>
+    <h1 style="margin-top:10px;">商品类型属性添加</h1>
+</block>
+<!-- 头部部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 公共Body部分 开始 -->
+<block name="publicBody">
+    <!-- 将主体包含在 .row-fluid 内部 -->
+    <div class="container-fluid">
+        <hr style="margin:0;">
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="widget-box">
+                    <div class="widget-title"> <span class="icon"> <i class="icon-info-sign"></i> </span>
+                        <h5>修改<{$type_name}>属性</h5>
+                    </div>
+                    <div class="widget-content nopadding">
+                        <form class="form-horizontal" method="post" action="<{:U('doTypeAttrEdit')}>" name="attradd" id="attradd">
+                            <div class="control-group">
+                                <label class="control-label">属性名称：</label>
+                                <div class="controls">
+                                    <input type="hidden" name="type_id" value="<{$attr.type_id}>">
+                                    <input type="hidden" name="type_name" value="<{$type_name}>">
+                                    <input type="hidden" name="id" value="<{$attr.id}>">
+                                    <input type="text" name="attr_name" id="attr_name" value="<{$attr.attr_name}>" />
+                                </div>
+                            </div>
+                                <div class="control-group">
+                                    <label class="control-label">属性类型：</label>
+                                <div class="controls">
+                                    <label>
+                                        <input type="radio" name="attr_type" value="唯一" <if condition="$attr['attr_type'] eq '唯一'" >checked</if>/>
+                                        唯一
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="attr_type" value="单选" <if condition="$attr['attr_type'] eq '单选'" >checked</if>/>
+                                        单选
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">单选属性可选值：</label>
+                                <div class="controls">
+                                    <textarea name="attr_values"  style="width:400px; height:140px;"><{$attr.attr_values}></textarea>
+                                    （属性类型为单选时填写，多个属性值用逗号分开，如 XX <font style="color:red; font-size:25px;">,</font> XX）
+                                </div>
+                            </div>
+
+                          <div class="form-actions">
+                            <input type="submit" value=" 修改 " id="sub" class="btn btn-primary" style="margin-left:179px; margin-right:30px;">
+                            <a href="<{:U('typeAttr',array('id'=>$attr['type_id'],'type_name'=>$type_name))}>" class="btn btn-default">返回列表</a>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</block>
+<!-- 公共Body部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- js文件模块 开始 -->
+<block name="footJsFile">
+    <script src="__PUBLIC__/Admin/js/jquery.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.ui.custom.js"></script> 
+    <script src="__PUBLIC__/Admin/js/bootstrap.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.uniform.js"></script> 
+    <script src="__PUBLIC__/Admin/js/select2.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.validate.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.form_validation.js"></script>
+    <script charset="utf-8" src="__PUBLIC__/editor/kindeditor.js"></script>
+    <script charset="utf-8" src="__PUBLIC__/editor/lang/zh_CN.js"></script>
+    <script src="__PUBLIC__/Admin/js/muneopen.js"></script>
+</block>
+<!-- js文件模块 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 底部JS执行区域 开始 -->
+<block name="footScript">
+    <script>
+        // 编辑器
+        var editor;
+        KindEditor.ready(function(K) {
+                editor = K.create('#param_content', {
+                    resizeType : 1,
+                    uploadJson : '__PUBLIC__/editor/php/upload_param_json.php'
+                });
+        });
+
+
+        /*
+        $('#sub').click(function (){
+
+            var title = $('#param_title').val();        // 标题的值
+
+            // 编辑中的方法，为了获取textarea中的值
+            editor.sync();
+            var content = $('#param_content').val();    // 内容的值
+
+            // 对值进行验证
+            if (title.length == 0 || content.length == 0)
+            {
+                alert('有必填项没有填写');         // 需要修改
+                return false;
+            }
+
+            var data = {
+                'pro_id': <{$Think.get.id}>,
+                'param_title': title,
+                'param_content': content
+            };
+
+            $.post('<{:U("Product/doAddParamByAjax")}>', data, function (d){
+
+                // 如果返回为空，不进行操作返回
+                if (d == null)
+                {
+                    return false;   
+                }
+
+                var html = '';
+                for (var i in d)
+                {
+                    html += '<tbody><tr><td style="width:180px; text-align:right;">标题：</td><td>'+d[i].param_title+'</td></tr><tr><td>内容：</td><td>'+unescape(d[i].param_content)+'</td></tr></tbody>';
+                }
+                $('table#param-area').html(html);
+
+
+
+            });
+
+
+
+        });
+*/
+    </script>
+</block>
+<!-- 底部JS执行区域 结束 -->

@@ -1,0 +1,260 @@
+*{
+	margin: 0;
+	padding:0;
+	}
+body html{
+	position: relative;
+
+	}
+
+main{
+    background: #fff;
+    width:100%;
+    height: auto;
+    padding-top: 30px;
+}
+
+/*购物车流程显示*/
+.cart_title{
+	height:100px;
+	background:#ccc;
+	width:100%;
+	}
+
+.cart_progress_bar {
+    background: url("../../../Home/images/Buy/store_bg.png") no-repeat scroll 0 -68px rgba(0, 0, 0, 0);
+    height: 34px;
+    margin: 59px auto;
+    overflow: hidden;
+    width: 584px;
+}
+.cart_progress_bar li.current {
+    color: #ffffff;
+}
+.cart_progress_bar li {
+    color: #999999;
+    display: inline-block;
+    float: left;
+    font-size: 14px;
+    height: 33px;
+    line-height: 33px;
+    padding-left: 35px;
+    width: 163px;
+    text-align: center;
+}
+
+
+
+
+/*支付title*/
+.pay_title{
+	width: 80%;
+	height:60px;
+	background: rgba(204, 204, 204, 0.27);
+	margin: 0px auto;
+	border-radius: 3px;
+	}
+/*左边*/
+.pay_title_left{
+	float: left;
+	width:70%;
+	height:60px;
+	line-height: 60px;
+	padding-left: 15px;
+	}
+/*右边*/
+.pay_title_right{
+		 float: left;
+		 width:30%;
+		 height:60px;
+		line-height: 60px;
+		 }
+/*左边文字*/
+.pay_title_left_p{
+	font-size: 28px;
+	color: red;
+	}
+.pay_title_left_p span{
+	font-size: 15px;
+	}
+/*右边文字*/
+.pay_title_right_p{
+	color:#000;
+	font-size: 28px;
+	}
+.pay_title_right_p span{
+	color: red;
+	}
+
+/*******************/
+.pay_collect{
+	width: 80%;
+	margin: 0px auto;
+	padding: 20px;
+	}
+.pay_collect_list span{
+	margin-right: 5px;
+	}
+
+
+/***************/
+.pay_bank{
+	width: 80%;
+	margin: 0px auto;
+	padding: 20px;
+	}
+
+/*银行列表*/
+.alipay, .unionpay, .ccb, .cmb, .spdb, .citic, .spanbank, .cib,
+.abc, .postgc, .bocb2c, .cmb, .debit, .cebb, .cmbc, .gdb
+{
+	display: inline-block;
+	width: 145px;
+	height: 35px;
+	overflow: hidden;
+	background: url(../../../Home/images/Buy/bank.png) left top no-repeat #fff;
+	vertical-align: middle;
+	border: none;
+	}
+.paypal{
+    display: inline-block;
+    width: 145px;
+    height: 53px;
+    overflow: hidden;
+    background: url(../../../Home/images/Buy/paypal_logo.gif) left top no-repeat #fff;
+    vertical-align: middle;
+    border: none;
+
+	}
+.alipay{
+	background-position: 0 -2220px;
+	}
+.unionpay{
+	background-position: 0 -2270px;
+	}
+.ccb{
+	background-position: 0 -70px;
+	}
+.cmb{
+	background-position: 0 -35px;
+	}
+.spdb{
+	background-position: 0 -175px;
+	}
+.citic{
+	background-position: 0 -420px;
+	}
+.spanbank{
+	background-position: 0 -490px;
+	}
+.cib{
+	background-position: 0 -245px;
+	}
+.abc{
+	background-position: 0 -105px;
+	}
+.postgc{
+	background-position: 0 -525px;
+	}
+.bocb2c{
+	background-position: 0 -140px;
+	}
+.cmb{
+	background-position: 0 -35px;
+	}
+.debit{
+	background-position: 0 -350px;
+	}
+.cebb{
+	background-position: 0 -315px;
+	}
+.cmbc{
+	background-position: 0 -385px;
+	}
+.gdb{
+	background-position: 0 -455px;
+	}
+
+
+.pay_bank_zf, .pay_bank_yh, .pay_bank_xyk{
+	padding: 20px;
+	}
+.pay_bank_zf p{
+	width:160px;
+	height:35px;
+	display: inline-block;
+	padding: 0;
+	zoom: 1;
+	}
+.pay_bank_yh p{
+	width:160px;
+	height:35px;
+	display: inline-block;
+	padding: 0;
+	zoom: 1;
+	}
+.pay_bank_xyk p{
+	width:160px;
+	height:35px;
+	display: inline-block;
+	padding: 0;
+	zoom: 1;
+}
+.pay_button{
+	width:80%;
+	margin: 0px auto;
+	padding: 20px;
+	}
+
+
+/*遮罩层*/
+.cover{
+	position: absolute;
+	height:100px;
+	width:100%;
+	top: 0;
+	z-index: 99;
+	background: rgba(0, 0, 0, 0.45);
+	}
+
+.cover_main{
+	width:600px;
+	height:340px;
+	background: #fff;
+	margin: 0px auto;
+	}
+.cover_title{
+	height:50px;
+	line-height: 50px;
+	border-bottom: 1px solid #cccccc;
+	}
+.cover_title_left{
+	float: left;
+	width:560px;
+	color: crimson;
+	padding-left: 20px;
+	font-size: 20px;
+	}
+.cover_title_right{
+	float: left;
+	width:40px;
+	}
+.cover_body_left{
+	float: left;
+	height:280px;
+	width:360px;
+	}
+.cover_body_right{
+	float: left;
+	height:280px;
+	width:240px;
+	padding-top: 40px;
+	padding-bottom: 20px;
+	padding-left: 30px;
+	}
+.cover_body_right p{
+	font-size: 12px;
+	}
+.cover_body_right button{
+	margin-top: 15px;
+	}

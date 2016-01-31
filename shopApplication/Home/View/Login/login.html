@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/bootstrap.min.css">
+    <!-- 可选的Bootstrap主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/bootstrap-theme.min.css">
+    <!-- <link rel="stylesheet" href="__PUBLIC__/Home/css/user.public.css"> -->
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/user.login.css">
+    <!-- <link href="//libs.baidu.com/fontawesome/4.0.3/css/font-awesome.min.css" rel="stylesheet"> -->
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="__PUBLIC__/Home/js/jquery.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <php>
+             $logo2=C('logo2');
+        </php>
+        <div class="row">
+            <div class="col-md-12 logo"><a href="__APP__"><img src="<{$logo2}>" alt=""></a></div>
+        </div>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 main">
+                <div class="cloud"></div>
+                <div class="regist-to-login">
+                    <a href="<{:U('Login/regist')}>">没有账号</a>
+                </div>
+                <form action="__CONTROLLER__/doLogin" method="post" class="bs-example tooltip-demo" name="login-form">
+                    <div class="regist-way">
+                        <h3 class="welcome-back">欢迎光临!</h3>
+                        <input type="hidden" name="cart" value="<{$types}>">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control input-lg txt-input" data-trigger="focus" class="btn btn-default" name="username" id="username" data-toggle="tooltip" placeholder="邮箱/手机号" data-placement="right" title="请输入邮箱名或手机号"/>
+                        <span></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control input-lg txt-input" data-trigger="focus" name="password" id="password" placeholder="用户密码" class="btn btn-default" data-toggle="tooltip" data-placement="right" title="请写8到16位的用户密码" />
+                        <span></span>
+                    </div>
+                    <div class="form-group code-area">
+                        <input type="text" name="code" id="code" class="form-control input-lg txt-input" style="width:120px" placeholder="点击刷新" />
+                        <div></div>
+                        <img src="__CONTROLLER__/code" class="code-img" onclick="this.src=this.src + '?' + Math.random()" alt="">
+                    </div>
+                    <div class="regist-way">
+                        <!-- <input type="button" name="sub" id="phone" value="立即提交信息"> -->
+                        <input type="submit" class="btn btn-info btn-input" value="立即登录">
+                    </div>
+                    <div class="checkbox" style="padding:0px 0 15px;">
+                        <a href="###"> 忘记密码? </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="__PUBLIC__/Home/js/bootstrap.min.js"></script>
+<script src="__PUBLIC__/Home/js/docs.js"></script>
+<script src="__PUBLIC__/Home/js/h.js"></script>
+<script src="__PUBLIC__/Home/js/ie10-viewport-bug-workaround.js"></script>
+<script src="__PUBLIC__/Home/js/ie-emulation-modes-warning.js"></script>
+<script>
+    
+
+    $('#username').blur(function () {
+        checkUserName(this);
+    })
+
+    $('#password').blur(function () {
+        checkPassword(this);
+    });
+
+    $('#code').blur(function () {
+        checkCaptcha(this);
+    });
+
+    $('form[name="login-form"]').submit(function (){
+        var uNameValue = $('#username')[0];
+        var uPassword  = $('#password')[0];
+        var uCaptcha   = $('#code')[0];
+
+        if (checkUserName(uNameValue) &&  checkPassword(uPassword) && checkCaptcha(uCaptcha))
+        {
+            return true;
+        }
+        return false;
+    });
+
+    // 验证码判断
+    function checkCaptcha(obj)
+    {
+        var v = $(obj).val();
+        var oSpan = $(obj).next('div');
+        if (v.length < 4 || v.length > 5)
+        {
+            oSpan.html('验证码长度不合法').css({'font-size':'12px', 'color':'red'});
+            return false;
+        }
+        else
+        {
+            oSpan.html('验证码合法').css({'font-size':'12px', 'color':'green'});
+            return true;
+        }
+    }
+
+    // 验证密码
+    function checkPassword (obj)
+    {
+        var v = $(obj).val();
+        var oSpan = $(obj).next('span');
+        if (v.length < 8)
+        {
+            oSpan.html('密码长度不够').css({'font-size':'12px', 'color':'red'});
+            return false;
+        }
+        else 
+        {
+            oSpan.html('密码可用').css({'font-size':'12px', 'color':'green'});
+            return true;
+        }
+    }
+
+    // 验证用户账户
+    function checkUserName(obj) 
+    {
+        var v = $(obj).val();
+        var oSpan = $(obj).next('span');
+        var bool = false;
+        if (v.length == 0)
+        {
+            oSpan.html('用户账户不能为空').css({'font-size':'12px', 'color':'red'});
+        }
+        else
+        {
+            if (v.match(/^1{1}[3578]{1}\w{9}$/) || v.match(/^[1-9a-zA-Z]+\w+@[\w-]+\.[0-9a-zA-Z]+$/i))
+            {
+                oSpan.html('账号可用').css({'font-size':'12px', 'color':'green'});
+                bool = true; 
+            }
+            else 
+            {
+                oSpan.html('账号不合法').css({'font-size':'12px', 'color':'red'});
+            }
+        }
+        return bool;
+    }
+</script>
+</html>

@@ -1,0 +1,45 @@
+.banner {
+    height:220px;
+    background:#168CD2 url(../images/sp-high-banner.jpg) no-repeat center -20px;
+}
+.main {
+    padding-top:30px;
+    padding-bottom:30px;
+    background:#fff;
+    border-left:1px solid #ededed;
+    border-right:1px solid #ededed;
+}
+div.download-lists {
+    margin-top:55px;
+}
+div.download-lists span {
+    font-size:12px;
+    display:block;
+}
+div.download-lists span em {
+    color:#00acff;
+    font-style:normal;
+}
+.page-padding-right {
+    padding-right:17px;
+}
+.download-btn {
+    padding-top:40px;
+    padding-right:20px;
+}
+.download-info {
+    padding:0 0 50px;
+    font-family:"Hiragino Sans GB","helvetica","microsoft yahei";
+}
+.download-info dl dt {
+    width:90px;
+    padding-right:10px;
+    padding:3px 0;
+}
+.download-info dl dd {
+    margin-left:100px;
+    padding:3px 0;
+}
+.no-history-version {
+    color:#aaa;
+}

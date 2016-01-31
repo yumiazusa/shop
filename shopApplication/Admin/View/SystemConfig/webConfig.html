@@ -1,0 +1,1200 @@
+<!-- 继承 公共模板 开始 -->
+<extend name="Public:blank"/>
+<!-- 继承 公共模板 结束 -->
+
+<!-- ===================================================== -->
+
+
+<!-- 顶部CSS文件 开始 -->
+<block name="cssFile">
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap-responsive.min.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/fullcalendar.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-style.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-media.css"/>
+    <link href="__PUBLIC__/Admin/font-awesome/css/font-awesome.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/jquery.gritter.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/colorpicker.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/uniform.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/select2.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap-wysihtml5.css"/>
+    <link rel="stylesheet" href="__ROOT__/uploadify/uploadify.css"/>
+
+</block>
+<!-- 顶部CSS文件 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部JS文件 开始 -->
+<block name="topJsFile">
+
+</block>
+<!-- 顶部JS文件 结束 -->
+
+<!-- ===================================================== -->
+<!-- 头部部分 开始 -->
+<block name="publicHead">
+    <div id="breadcrumb">
+        <a href="index.html" title="返回系统主页" class="tip-bottom">
+            <i class="icon-home"></i>
+            管理首页
+        </a>
+        <a href="#" class="current">网站配置</a>
+    </div>
+    <h1 style="margin-top:10px;">网站配置</h1>
+</block>
+<!-- 头部部分 结束 -->
+
+<!-- 公共Body部分 开始 -->
+<block name="publicBody">
+
+<!-- 将主体包含在 .row-fluid 内部 -->
+<div class="container-fluid">
+<hr style="margin:0;">
+<div class="row-fluid">
+
+<div class="span12">
+<div class="widget-box">
+<div class="widget-title">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="#tab1" data-toggle="tab">基本配置</a></li>
+        <li class=""><a href="#tab2" data-toggle="tab">安全配置</a></li>
+        <li class=""><a href="#tab3" data-toggle="tab">商城广告</a></li>
+        <li class=""><a href="#tab4" data-toggle="tab">网站LOGO</a></li>
+        <li class=""><a href="#tab5" data-toggle="tab">地图配置</a></li>
+        <li class=""><a href="#tab6" data-toggle="tab">缓存配置</a></li>
+    </ul>
+</div>
+<div class="widget-content tab-content">
+<div class="tab-pane active" id="tab1">
+    <div class="span6">
+        <!--这里是半宽的区域-->
+        <div class="widget-box">
+
+            <div class="widget-content nopadding">
+                <div class="form-horizontal">
+                    <div class="control-group">
+                        <label class="control-label">网站名称　:</label>
+
+                        <div class="controls">
+                            <input type="text" placeholder="网站名称　:" class="span11" id="sy_webname"
+                                   value="<{$data[0]['cvalue']}>">
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">网站开启</label>
+
+                        <div class="controls" id="sy_web_online" sy_web_online="<{$data[1]['cvalue']}>">
+
+
+                            <label class="radio-inline">
+                                <input type="radio" name="sy_web_online" id="sy_web_online1" value="1"> 开启
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="sy_web_online" id="sy_web_online0" value="0"> 关闭
+                            </label>
+
+
+                        </div>
+                    </div>
+
+
+                    <div class="control-group">
+                        <label class="control-label">伪静态设置</label>
+
+                        <div class="controls" id="sy_seo_rewrite" sy_seo_rewrite="<{$data[2]['cvalue']}>">
+
+                            <label class="radio-inline">
+                                <input type="radio" name="sy_seo_rewrite" id="sy_seo_rewrite1" value="1"> 开启
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="sy_seo_rewrite" id="sy_seo_rewrite0" value="0"> 关闭
+                            </label>
+
+
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">站长Email　:</label>
+
+                        <div class="controls">
+                            <input type="text" class="span11" id="sy_webemail" value="<{$data[3]['cvalue']}>">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">备案号　:</label>
+
+                        <div class="controls">
+                            <input type="text" class="span11" id="sy_webrecord" value="<{$data[4]['cvalue']}>">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">电 话　:</label>
+
+                        <div class="controls">
+                            <input type="text" class="span11" id="sy_webtel" value="<{$data[5]['cvalue']}>">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">免费电话　:</label>
+
+                        <div class="controls">
+                            <input type="text" class="span11" id="sy_freewebtel" value="<{$data[6]['cvalue']}>">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">客服QQ　:</label>
+
+                        <div class="controls">
+                            <input type="text" class="span11" id="sy_qq" value="<{$data[7]['cvalue']}>">
+                        </div>
+                        <span style="margin-left:20%">(QQ客服功能请上<a href="http://shang.qq.com/" target="_blank">http://shang.qq.com</a>中开通)</span>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">工作时间　:</label>
+
+                        <div class="controls">
+                            <input type="text" class="span11" id="work_time" value="<{$data[68]['cvalue']}>">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">公司地址　:</label>
+
+                        <div class="controls">
+                            <input type="text" class="span11" id="sy_webadd" value="<{$data[8]['cvalue']}>">
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="span6">
+        <div class="widget-box">
+
+            <div class="widget-content nopadding">
+                <div class="form-horizontal" method="get" action="#">
+
+                    <div class="control-group">
+                        <label class="control-label">网站关闭原因</label>
+
+                        <div class="controls">
+                            <textarea class="span11" id="sy_webclose"><{$data[9]['cvalue']}></textarea>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">网站关键词</label>
+
+                        <div class="controls">
+                            <textarea class="span11" id="sy_webkeyword"><{$data[10]['cvalue']}></textarea>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">网站描述</label>
+
+                        <div class="controls">
+                            <textarea class="span11" id="sy_webmeta"><{$data[11]['cvalue']}></textarea>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">网站版权信息</label>
+
+                        <div class="controls">
+                            <textarea class="span11" id="sy_webcopyright"><{$data[12]['cvalue']}></textarea>
+                        </div>
+                    </div>
+
+
+                    <div class="form-actions">
+                        <div class="btn btn-success" id="tab1sub" type="submit">Save</div>
+                        <div class="btn btn-danger" type="submit">Cancel</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--第二页  安全配置-->
+<div class="tab-pane" id="tab2">
+    <div class="span6">
+        <div class="widget-box">
+
+            <div class="widget-content nopadding">
+                <div class="form-horizontal">
+                    <div class="control-group">
+                        <label class="control-label">系统安全码 :</label>
+
+                        <div class="controls">
+                            <input type="text" placeholder="系统安全码" class="span11" id="sy_safekey"
+                                   value="<{$data[13]['cvalue']}>">
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">过滤关键字</label>
+
+                        <div class="controls">
+                            <textarea class="span11" id="sy_fkeyword"> <{$data[14]['cvalue']}></textarea>
+                        </div>
+                    </div>
+
+
+                    <div class="control-group">
+                        <label class="control-label">替换过滤关键词 :</label>
+
+                        <div class="controls">
+                            <input type="text" placeholder="替换过滤关键词" class="span11" id="sy_fkeyword_all"
+                                   value="<{$data[15]['cvalue']}>">
+                        </div>
+                    </div>
+
+
+                    <div class="control-group">
+                        <label class="control-label">禁止IP访问</label>
+
+                        <div class="controls">
+                            <textarea class="span11" id="sy_bannedip"> <{$data[16]['cvalue']}></textarea>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">禁止IP访问提示</label>
+
+                        <div class="controls">
+                            <input type="text" class="span11" id="sy_bannedip_alert" value="<{$data[17]['cvalue']}>">
+                        </div>
+                    </div>
+
+
+                    <div class="control-group">
+                        <label class="control-label">限制注册用户名</label>
+
+                        <div class="controls">
+                            <textarea class="span11" id="sy_regname"> <{$data[18]['cvalue']}></textarea>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button class="btn btn-success" type="submit" id="tab2sub">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <!--验证码配置-->
+<div class="tab-pane" id="tab3">
+
+    <div class="widget-box">
+
+        <div class="widget-content nopadding">
+            <div class="form-horizontal">
+                <div class="control-group">
+                    <label class="control-label">首页广告第二组</label>
+
+                    <div class="controls">
+                        <label class="radio-inline">
+                            <input type="radio" name="ad2" id="ad2" value="0" <eq name="data[70]['cvalue']" value="0">checked="checked"</eq>> 关
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="ad2" id="ad2" value="1" <eq name="data[70]['cvalue']" value="1">checked="checked"</eq>> 开
+                        </label>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label">首页广告第三组</label>
+
+                    <div class="controls">
+                        <label class="radio-inline">
+                            <input type="radio" name="ad3" id="ad3" value="0" <eq name="data[71]['cvalue']" value="0">checked="checked"</eq>> 关
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="ad3" id="ad3" value="1" <eq name="data[71]['cvalue']" value="1">checked="checked"</eq>> 开
+                        </label>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label">首页广告第四组</label>
+
+                    <div class="controls">
+                        <label class="radio-inline">
+                            <input type="radio" name="ad4" id="ad4" value="0" <eq name="data[72]['cvalue']" value="0">checked="checked"</eq>> 关
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="ad4" id="ad4" value="1" <eq name="data[72]['cvalue']" value="1">checked="checked"</eq>> 开
+                        </label>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label">产品列表页广告</label>
+
+                    <div class="controls">
+                        <label class="radio-inline">
+                            <input type="radio" name="ad5" id="ad5" value="0" <eq name="data[74]['cvalue']" value="0">checked="checked"</eq>> 关
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="ad5" id="ad5" value="1" <eq name="data[74]['cvalue']" value="1">checked="checked"</eq>> 开
+                        </label>
+                    </div>
+                </div>
+
+
+
+                <div class="form-actions">
+                    <button class="btn btn-success" type="submit" id="tab7sub">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- <div class="tab-pane" id="tab3">
+
+    <div class="widget-box">
+
+        <div class="widget-content nopadding">
+            <div class="form-horizontal">
+                <div class="control-group">
+                    <label class="control-label">验证码生成类型</label>
+
+                    <div class="controls" id="code_types" code_types="<{$data[20]['cvalue']}>">
+
+                        <label class="radio-inline">
+                            <input type="radio" name="codes" id="codes1" value="option1"> 数字
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="codes" id="codes2" value="option2"> 字母
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="codes" id="codes3" value="option2"> 数字+字母
+                        </label>
+
+
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label">选择验证码文件类型</label>
+
+                    <div class="controls" id="code_filetype" code_filetype="<{$data[21]['cvalue']}>">
+
+
+                        <label class="radio-inline">
+                            <input type="radio" name="code_filetype" id="code_filetype1" value="option1"> jpg
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="code_filetype" id="code_filetype2" value="option2"> png
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="code_filetype" id="code_filetype3" value="option2"> gif
+                        </label>
+
+
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label">验证码图片大小</label>
+
+                    <div class="controls controls-row">
+                        宽<input class="span2 m-wrap" type="text" id="code_width" value="<{$data[22]['cvalue']}>">
+                        X高<input class="span2 m-wrap" type="text" id="code_height" value="<{$data[23]['cvalue']}>">
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">验证码字符数</label>
+
+                    <div class="controls controls-row">
+                        <input class="span2 m-wrap" type="text" placeholder="数字" id="code_strlength"
+                               value="<{$data[24]['cvalue']}>">验证码字符数
+                    </div>
+                </div>
+
+
+                <div class="form-actions">
+                    <button class="btn btn-success" type="submit" id="tab3sub">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<!--LOGO开始-->
+
+
+<div class="tab-pane" id="tab4">
+    <!--logo-->
+    <div class="span12">
+<!--左侧添加LOGO-->
+        <div class="row-fluid">
+            <div class="span6">
+                <div class="widget-box">
+                    <div class="widget-title"><span class="icon"> <i class="icon-align-justify"></i> </span>
+                        <h5>页头LOGO</h5>
+                    </div>
+                    <div class="widget-content nopadding">
+                        <form action="__CONTROLLER__/upLogo" method="post" class="form-horizontal" enctype="multipart/form-data">
+                            <input type='hidden' name="id" value="1"/>
+                            <div class="control-group">
+                                <div class="controls">
+                                    <input id="file_upload1" type="file" multiple="true" name="file_upload1" />
+                                </div>
+                            </div>
+                        <div class="form-actions">
+                        <input class="btn btn-success" type="submit" value="SAVE" />
+                    </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="widget-box">
+                    <div class="widget-title"><span class="icon"> <i class="icon-align-justify"></i> </span>
+                        <h5>页脚LOGO</h5>
+                    </div>
+                    <div class="widget-content nopadding">
+                        <form action="__CONTROLLER__/upLogo" method="post" class="form-horizontal" enctype="multipart/form-data">
+                            <input type='hidden' name="id" value="2"/>
+                            <div class="control-group">
+                                <div class="controls">
+                                    <input id="file_upload2" type="file" multiple="true" name="file_upload2" />
+                                </div>
+                            </div>
+                        <div class="form-actions">
+                        <input class="btn btn-success" type="submit"  value="SAVE" />
+                    </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="widget-box">
+                    <div class="widget-title"><span class="icon"> <i class="icon-align-justify"></i> </span>
+                        <h5>首页LOGO</h5>
+                    </div>
+                    <div class="widget-content nopadding">
+                        <form action="__CONTROLLER__/upLogo" method="post" class="form-horizontal" enctype="multipart/form-data">
+                            <input type='hidden' name="id" value="3"/>
+                            <div class="control-group">
+                                <div class="controls">
+                                    <input id="file_upload3" type="file" multiple="true" name="file_upload3" />
+                                </div>
+                            </div>
+                        <div class="form-actions">
+                        <input class="btn btn-success" type="submit"  value="SAVE" />
+                    </div>
+                        </form>
+                    </div>
+                </div>
+                    <div class="widget-box">
+                    <div class="widget-title"><span class="icon"> <i class="icon-align-justify"></i> </span>
+                        <h5>首页二级页面LOGO</h5>
+                    </div>
+                    <div class="widget-content nopadding">
+                        <form action="__CONTROLLER__/upLogo" method="post" class="form-horizontal" enctype="multipart/form-data">
+                            <input type='hidden' name="id" value="4"/>
+                            <div class="control-group">
+                                <div class="controls">
+                                    <input id="file_upload4" type="file" multiple="true" name="file_upload4" />
+                                </div>
+                            </div>
+                        <div class="form-actions">
+                        <input class="btn btn-success" type="submit"  value="SAVE" />
+                    </div>
+                        </form>
+                    </div>
+                </div>
+
+                    <div class="widget-box">
+                    <div class="widget-title"><span class="icon"> <i class="icon-align-justify"></i> </span>
+                        <h5>页头标题图标</h5>
+                    </div>
+                    <div class="widget-content nopadding">
+                        <form action="__CONTROLLER__/upLogo" method="post" class="form-horizontal" enctype="multipart/form-data">
+                            <input type='hidden' name="id" value="5"/>
+                            <div class="control-group">
+                                <div class="controls">
+                                    <input id="file_upload5" type="file" multiple="true" name="file_upload5" />
+                                </div>
+                            </div>
+                        <div class="form-actions">
+                        <input class="btn btn-success" type="submit"  value="SAVE" />
+                    </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+<!--右侧显示LOGO-->
+            <div class="span6">
+                <div class="widget-box">
+                    <div class="widget-title"><span class="icon"> <i class="icon-align-justify"></i> </span>
+                        <h5>页头LOGO</h5>
+                    </div>
+                    <div class="widget-content nopadding">
+                        <form action="#" method="get" class="form-horizontal">
+                            <div class="control-group">
+                                <div id="logo1"><img height="50px" src="<{$data[25]['cvalue']}>" onerror="$(this).attr('src','__PUBLIC__/Home/images/user.png')"></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="widget-box">
+                    <div class="widget-title"><span class="icon"> <i class="icon-align-justify"></i> </span>
+                        <h5>页脚LOGO</h5>
+                    </div>
+                    <div class="widget-content nopadding">
+                        <form action="#" method="get" class="form-horizontal">
+                            <div class="control-group">
+                                <div id="logo2"><img height="50px" src="<{$data[51]['cvalue']}>"  onerror="$(this).attr('src','__PUBLIC__/Home/images/user.png')"></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="widget-box">
+                    <div class="widget-title"><span class="icon"> <i class="icon-align-justify"></i> </span>
+                        <h5>首页LOGO</h5>
+                    </div>
+                    <div class="widget-content nopadding">
+                        <form action="#" method="get" class="form-horizontal">
+                            <div class="control-group">
+                                <div id="logo3"><img height="50px" src="<{$data[52]['cvalue']}>" onerror="$(this).attr('src','__PUBLIC__/Home/images/user.png')"></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="widget-box">
+                    <div class="widget-title"><span class="icon"> <i class="icon-align-justify"></i> </span>
+                        <h5>首页二级页面LOGO</h5>
+                    </div>
+                    <div class="widget-content nopadding">
+                        <form action="#" method="get" class="form-horizontal">
+                            <div class="control-group">
+                                <div id="logo4"><img height="50px" src="<{$data[69]['cvalue']}>" onerror="$(this).attr('src','__PUBLIC__/Home/images/user.png')"></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                    <div class="widget-box">
+                    <div class="widget-title"><span class="icon"> <i class="icon-align-justify"></i> </span>
+                        <h5>首页二级页面LOGO</h5>
+                    </div>
+                    <div class="widget-content nopadding">
+                        <form action="#" method="get" class="form-horizontal">
+                            <div class="control-group">
+                                <div id="logo5"><img height="50px" src="<{$data[73]['cvalue']}>" onerror="$(this).attr('src','__PUBLIC__/Home/images/user.png')"></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--LOGO结束-->
+
+
+<div class="tab-pane" id="tab5">
+    <!--地图设置-->
+    <div class="widget-box">
+
+        <div class="widget-content nopadding">
+            <div class="form-horizontal">
+                <!--IP跳转到当前城市： 	跳转   保持默认坐标-->
+                <div class="control-group">
+                    <label class="control-label">IP跳转到当前城市：</label>
+
+                    <div class="controls" id="map_tocity" map_tocity="<{$data[26]['cvalue']}>">
+
+
+                        <label class="radio-inline">
+                            <input type="radio" name="map_tocity" id="map_tocity1" value="option1"> 跳转
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="map_tocity" id="map_tocity0" value="option2"> 保持默认坐标
+                        </label>
+
+
+                    </div>
+                </div>
+                <!--百度地图KEY：-->
+
+                <div class="control-group">
+                    <label class="control-label">百度地图KEY</label>
+
+                    <div class="controls">
+                        <input type="text" class="span11" id="map_key" value="<{$data[27]['cvalue']}>">
+                    </div>
+                </div>
+                <!--默认坐标： X：  Y：-->
+                <div class="control-group">
+                    <label class="control-label">默认坐标</label>
+
+                    <div class="controls controls-row">
+                        X<input class="span2 m-wrap" type="text" placeholder="x坐标" id="map_x"
+                                value="<{$data[28]['cvalue']}>">
+                        Y<input class="span2 m-wrap" type="text" placeholder="y坐标" id="map_y"
+                                value="<{$data[29]['cvalue']}>">
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button class="btn btn-success" id="tab5sub" type="submit">Save</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+
+<div class="tab-pane" id="tab6">
+    <div class="span6">
+        <div class="widget-box">
+
+            <div class="widget-content nopadding">
+                <div class="form-horizontal">
+                    <div class="control-group">
+                        <label class="control-label">Memcache缓存：</label>
+
+                        <div class="controls" id="memcacheon" memcacheon="<{$data[30]['cvalue']}>">
+
+
+                            <label class="radio-inline">
+                                <input type="radio" name="memcacheon" id="memcacheon1" value="option1"> 开启
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="memcacheon" id="memcacheon0" value="option2"> 关闭
+                            </label>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label">Memcache服务器　:</label>
+                            <div class="controls">
+                                <input type="text" id="memcachehost" class="span11" value="<{$data[31]['cvalue']}>">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Memcache端口　:</label>
+
+                            <div class="controls">
+                                <input type="text" id="memcacheport" class="span11" value="<{$data[32]['cvalue']}>">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Memcache缓存时间　:</label>
+
+                            <div class="controls">
+                                <input type="text" id="memcachetime" class="span11" value="<{$data[33]['cvalue']}>">
+                            </div>
+                        </div>
+
+                        <label class="control-label">页面缓存：</label>
+
+                        <div class="controls" id="webcache" webcache="<{$data[34]['cvalue']}>">
+
+
+                            <label class="radio-inline">
+                                <input type="radio" name="webcache" id="webcache1" value="option1"> 开启
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="webcache" id="webcache0" value="option2"> 关闭
+                            </label>
+
+
+                        </div>
+                        <!--页面缓存时间-->
+                        <div class="control-group">
+                            <label class="control-label">页面缓存时间　:</label>
+
+                            <div class="controls">
+                                <input type="text" id="webcachetime" class="span11" value="<{$data[35]['cvalue']}>">
+                            </div>
+                        </div>
+
+
+                        <div class="form-actions">
+                            <div class="btn btn-success" id="tab6sub" type="submit">Save</div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+</div>
+</div>
+
+
+</div>
+</div>
+</block>
+<!-- js文件模块 开始 -->
+<block name="footJsFile">
+
+</block>
+<!-- js文件模块 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 底部JS执行区域 开始 -->
+<block name="footScript">
+<script src="__PUBLIC__/Admin/js/jquery.min.js"></script>
+<script src="__PUBLIC__/Admin/js/jquery.ui.custom.js"></script>
+<script src="__PUBLIC__/Admin/js/bootstrap.min.js"></script>
+<script src="__PUBLIC__/Admin/js/bootstrap-colorpicker.js"></script>
+<script src="__PUBLIC__/Admin/js/bootstrap-datepicker.js"></script>
+<!--<script src="__PUBLIC__/Admin/js/jquery.toggle.buttons.html"></script>-->
+<script src="__PUBLIC__/Admin/js/masked.js"></script>
+<script src="__PUBLIC__/Admin/js/jquery.uniform.js"></script>
+<script src="__PUBLIC__/Admin/js/select2.min.js"></script>
+<script src="__PUBLIC__/Admin/js/matrix.js"></script>
+<!--<script src="__PUBLIC__/Admin/js/matrix.form_common.js"></script>-->
+<script src="__PUBLIC__/Admin/js/wysihtml5-0.3.0.js"></script>
+<script src="__PUBLIC__/Admin/js/jquery.peity.min.js"></script>
+<script src="__PUBLIC__/Admin/js/bootstrap-wysihtml5.js"></script>
+<script charset="utf-8" src="__PUBLIC__/editor/kindeditor.js"></script>
+<script charset="utf-8" src="__PUBLIC__/editor/lang/zh_CN.js"></script>
+<script src="__PUBLIC__/Admin/js/muneopen.js"></script>
+<script type="text/javascript">
+    $('.textarea_editor').wysihtml5();
+    var editor;
+      KindEditor.ready(function(K) {
+        editor = K.create('#news_content', {
+            
+        });
+      });
+</script>
+<script type="text/javascript">
+    // This function is called from the pop-up menus to transfer to
+    // a different page. Ignore if the value returned is a null string:
+    function goPage(newURL) {
+
+        // if url is empty, skip the menu dividers and reset the menu selection to default
+        if (newURL != "") {
+
+            // if url is "-", it is this page -- reset the menu:
+            if (newURL == "-") {
+                resetMenu();
+            }
+            // else, send page to designated URL
+            else {
+                document.location.href = newURL;
+            }
+        }
+    }
+
+    // resets the menu selection upon entry to this page:
+    function resetMenu() {
+        document.gomenu.selector.selectedIndex = 2;
+    }
+
+    /*从数据库获取网站的开启和关闭状态*/
+    var online = 0;
+    online = $('#sy_web_online').attr('sy_web_online');
+
+    /*伪静态设置*/
+    var rewrite = 0;
+    rewrite = $('#sy_seo_rewrite').attr('sy_seo_rewrite');
+
+    /*开启系统验证码*/
+    var codeWeb = 0;
+    codeWeb = $('#code_web').attr('code_web');
+
+    /*验证码类型 1数字 2字母 3混合*/
+    var code_types = 0;
+    codeType = $('#code_types').attr('code_types');
+
+    /*验证文件存储类型*/
+    var code_fileType = 0;
+    code_fileType = $('#code_filetype').attr('code_filetype');
+
+    /*IP跳转到当前城市*/
+    var map_tocity = 0;
+    map_tocity = $('#map_tocity').attr('map_tocity');
+
+    /*是否开启m缓存*/
+    var memcacheon = 0;
+    memcacheon = $('#memcacheon').attr('memcacheon');
+
+    /*是否开启页面缓存*/
+    var webcache = 0;
+    webcache = $('#webcache').attr('webcache');
+
+    //
+    if (online == 1) {
+        $('#sy_web_online1').attr('checked', 'checked');
+    } else {
+        $('#sy_web_online0').attr('checked', 'checked');
+    }
+
+
+    if (rewrite == 1) {
+        $('#sy_seo_rewrite1').attr('checked', 'checked');
+    } else {
+        $('#sy_seo_rewrite0').attr('checked', 'checked');
+    }
+
+
+    $(function () {
+
+        //验证码类型
+        if (codeType == '1') {
+            $('#codes1').attr("checked", "checked");
+
+        } else if (codeType == '2') {
+            $('#codes2').attr("checked", "checked");
+
+        } else if (codeType == '3') {
+            $('#codes3').attr("checked", "checked");
+
+        }
+
+
+        //验证码图片格式
+        if (code_fileType == '1') {
+            $('#code_filetype1').attr("checked", "checked");
+        } else if (code_fileType == '2') {
+            $('#code_filetype2').attr("checked", "checked");
+        } else if (code_fileType == '3') {
+            $('#code_filetype3').attr("checked", "checked");
+        }
+
+    });
+
+    //IP跳转到当前城市
+    if (map_tocity == 1) {
+        $('#map_tocity1').attr('checked', 'checked');
+    } else {
+        $('#map_tocity0').attr('checked', 'checked');
+    }
+
+    //开启mcache缓存
+    if (memcacheon == 1) {
+        $('#memcacheon1').attr('checked', 'checked');
+    } else {
+        $('#memcacheon0').attr('checked', 'checked');
+    }
+
+    //文件缓存
+    if (webcache == 1) {
+        $('#webcache1').attr('checked', 'checked');
+    } else {
+        $('#webcache0').attr('checked', 'checked');
+    }
+
+
+</script>
+<!--上传图片js-->
+<script src="__ROOT__/uploadify/jquery.uploadify.min.js"></script>
+<script src="__PUBLIC__/Plugins/jquery.uploadify.min.js"></script>
+<script>
+    var img = '';
+    $('#file_upload1').uploadify({
+        'swf'      : '__PUBLIC__/Plugins/uploadify.swf',
+        'uploader' : '<{:U("SystemConfig/upLogo/id/1")}>',
+        'buttonText' : '上传图片',
+        'onUploadSuccess' : function(file, data, response) {
+            img = "<img height='200px' src='"+data+"'>";
+
+            $('#logo1').html(img);
+
+        }
+    });
+    $('#file_upload2').uploadify({
+        'swf'      : '__PUBLIC__/Plugins/uploadify.swf',
+        'uploader' : '<{:U("SystemConfig/upLogo/id/2")}>',
+        'buttonText' : '上传图片',
+        'onUploadSuccess' : function(file, data, response) {
+
+            img = "<img height='200px' src='"+data+"'>";
+            $('#logo2').html(img);
+
+        }
+    });
+    $('#file_upload3').uploadify({
+        'swf'      : '__PUBLIC__/Plugins/uploadify.swf',
+        'uploader' : '<{:U("SystemConfig/upLogo/id/3")}>',
+        'buttonText' : '上传图片',
+        'onUploadSuccess' : function(file, data, response) {
+
+            img = "<img height='200px' src='"+data+"'>";
+            $('#logo3').html(img);
+
+        }
+    });
+</script>
+
+
+
+
+
+<script>
+
+
+    //变量
+    //第一页  基本配置
+
+    var webname = '';
+    var web_online = 0;
+    var seo_rewrite = 0;
+    var webtel = '';
+    var webemail = '';
+    var webrecord = '';
+    var freewebtel = '';
+    var qq = '';
+    var webadd = '';
+    var webclose = '';
+    var webkeyword = '';
+    var webmeta = '';
+    var webcopyright = '';
+    var work_time='';
+
+    var data = '';//ajax数据合成
+
+    $('#tab1sub').bind('click', function () {
+
+        //alert($('#sy_web_online input:radio').eq(0).is(":checked"))    //网站开启 true or false
+        //alert($('#sy_seo_rewrite input:radio').eq(0).is(":checked"))    //伪静态
+        //alert($('#sy_webemail').val())    //email
+        //alert($('#sy_webrecord').val())    //
+
+
+        if ($('#sy_web_online input:radio').eq(0).is(":checked")) {
+            web_online = 1;
+        } else {
+            web_online = 0;
+        }
+
+        if ($('#sy_seo_rewrite input:radio').eq(0).is(":checked")) {
+            seo_rewrite = 1;
+        } else {
+            seo_rewrite = 0;
+        }
+
+        webname = $('#sy_webname').val();
+        webemail = $('#sy_webemail').val();
+        webrecord = $('#sy_webrecord').val();
+        webtel = $('#sy_webtel').val();
+        freewebtel = $('#sy_freewebtel').val();
+        qq = $('#sy_qq').val();
+        webadd = $('#sy_webadd').val();
+        webclose = $('#sy_webclose').val();
+        webkeyword = $('#sy_webkeyword').val();
+        webmeta = $('#sy_webmeta').val();
+        webcopyright = $('#sy_webcopyright').val();
+        work_time=$('#work_time').val();
+
+        data = {
+            'sy_webname': webname, 'sy_web_online': web_online, 'sy_seo_rewrite': seo_rewrite,
+            'sy_webemail': webemail, 'sy_webrecor': webrecord, 'sy_webtel': webtel,
+            'sy_freewebtel': freewebtel, 'sy_qq': qq, 'sy_webadd': webadd,
+            'sy_webclose': webclose, 'sy_webkeyword': webkeyword, 'sy_webmeta': webmeta, 'sy_webcopyright': webcopyright,'work_time':work_time
+        };
+
+
+        $.post('__CONTROLLER__/uploadConfig', data, function (a) {
+            alert('修改成功!');
+
+        });
+
+    })
+
+
+</script>
+
+
+<script>
+    //第二页 安全配置
+
+
+    var safekey = '';
+    var fkeyword = '';
+    var fkeyword_all = '';
+    var bannedip = '';
+    var bannedip_alert = '';
+    var regname = '';
+
+
+    $('#tab2sub').bind('click', function () {
+
+        safekey = $('#sy_safekey').val();
+        fkeyword = $('#sy_fkeyword').val();
+        fkeyword_all = $('#sy_fkeyword_all').val();
+        bannedip = $('#sy_bannedip').val();
+        bannedip_alert = $('#sy_bannedip_alert').val();
+        regname = $('#sy_regname').val();
+        data = {
+            "sy_safekey": safekey,
+            "sy_fkeyword": fkeyword,
+            "sy_fkeyword_all": fkeyword_all,
+            "sy_bannedip": bannedip,
+            "sy_bannedip_alert": bannedip_alert,
+            "sy_regname": regname
+        };
+
+        $.post('__CONTROLLER__/uploadConfig', data, function (a) {
+            alert('修改成功!');
+        });
+
+
+    })
+</script>
+
+<script>
+    //验证码配置
+    var types = 0;
+    var filetype = 0;
+    var width = '';
+    var height = '';
+    var strlength = '';
+
+    $('#tab3sub').bind('click', function () {
+
+
+        if ($('#code_types input:radio').eq(0).is(":checked")) {
+            types = 1;
+        } else if ($('#code_types input:radio').eq(1).is(":checked")) {
+            types = 2;
+        } else {
+            types = 3;
+        }
+
+        if ($('#code_filetype input:radio').eq(0).is(":checked")) {
+            filetype = 1;
+        } else if ($('#code_filetype input:radio').eq(1).is(":checked")) {
+            filetype = 2;
+        } else {
+            filetype = 3;
+        }
+
+        width = $('#code_width').val();
+        height = $('#code_height').val();
+        strlength = $('#code_strlength').val();
+
+        data = {
+            'code_type': types,
+            'code_filetype': filetype,
+            'code_width': width,
+            'code_height': height,
+            'code_strlength': strlength
+        };
+
+        $.post('__CONTROLLER__/uploadConfig', data, function (a) {
+            alert('修改成功!');
+        });
+    })
+
+</script>
+<script>
+    //地图设置
+    var map_tocity = 0;
+    var map_key = 0;
+    var map_x = 0;
+    var map_y = 0;
+
+    $('#tab5sub').bind('click', function () {
+
+
+        if ($('#map_tocity input:radio').eq(0).is(":checked")) {
+            map_tocity = 1;
+        } else {
+            map_tocity = 0;
+        }
+
+        map_key = $('#map_key').val();
+        map_x = $('#map_x').val();
+        map_y = $('#map_y').val();
+
+        data = {
+            'map_tocity': map_tocity,
+            'map_key': map_key,
+            'map_x': map_x,
+            'map_y': map_y
+        }
+
+        $.post('__CONTROLLER__/uploadConfig', data, function (a) {
+            alert('修改成功!');
+        });
+    })
+</script>
+<script>
+
+    var memcacheon;
+    var memcachehost;
+    var memcacheport;
+    var memcachetime;
+    var webcache;
+    var webcachetime;
+
+
+    $('#tab6sub').bind('click', function () {
+        if ($('#memcacheon input:radio').eq(0).is(":checked")) {
+            memcacheon = 1;
+        } else {
+            memcacheon = 0;
+        }
+        if ($('#webcache input:radio').eq(0).is(":checked")) {
+            webcache = 1;
+        } else {
+            webcache = 0;
+        }
+
+
+        memcachehost = $('#memcachehost').val();
+        memcacheport = $('#memcacheport').val();
+        memcachetime = $('#memcachetime').val();
+        webcachetime = $('#webcachetime').val();
+
+        data = {
+            'memcacheon': memcacheon,
+            'memcachehost': memcachehost,
+            'memcacheport': memcacheport,
+            'memcachetime': memcachetime,
+            'webcache': webcache,
+            'webcachetime': webcachetime
+
+        }
+
+        $.post('__CONTROLLER__/uploadConfig', data, function (a) {
+            alert('修改成功!');
+        });
+
+    })
+
+$('#tab7sub').bind('click', function () {
+    var ad2 = $("input[name='ad2']:checked").val();
+    var ad3 = $("input[name='ad3']:checked").val();
+    var ad4 = $("input[name='ad4']:checked").val();
+    var ad5 = $("input[name='ad5']:checked").val();
+    data = {
+            'ad2': ad2,
+            'ad3': ad3,
+            'ad4': ad4,
+            'ad5': ad5,
+        }
+    $.post('__CONTROLLER__/uploadConfig', data, function (a) {
+            alert('修改成功!');
+        });
+});
+
+</script>
+
+<!--上传LOGO图片-->
+
+
+</block>
+<!-- 底部JS执行区域 结束 -->
+

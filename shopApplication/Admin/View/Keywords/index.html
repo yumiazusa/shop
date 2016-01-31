@@ -1,0 +1,201 @@
+<!-- =====================================================
+    Author: Eden
+    Date:   2015-01-12
+    Function:   公共模板文件中定义的block区域，可以在子模板中继承和覆盖
+ ========================================================= -->
+<!-- 继承 公共模板 开始 -->
+<extend name="Public:blank" />
+<!-- 继承 公共模板 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部CSS文件 开始 -->
+<block name="cssFile">
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap-responsive.min.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/uniform.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/select2.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-style.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-media.css" />
+    <link href="__PUBLIC__/Admin/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <style>
+        td.text-center {
+            text-align:center;
+        }
+        a.title-link {
+            color:#0066ff;
+        }
+        p.edit, span.kw {
+            padding:2px;
+            margin:0;
+            cursor:pointer;
+        }
+        span.kw {
+            display:inline;
+            padding-right:20px;
+            width: 30%;
+        }
+    </style>
+</block>
+<!-- 顶部CSS文件 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部JS文件 开始 -->
+<block name="topJsFile">
+    
+</block>
+<!-- 顶部JS文件 结束 -->
+
+<!-- ===================================================== -->
+<!-- 头部部分 开始 -->
+<block name="publicHead">
+    <div id="breadcrumb">
+        <a href="index.html" title="返回系统主页" class="tip-bottom">
+            <i class="icon-home"></i>
+            管理首页
+            <a href="#" class="current">系统工具</a> 
+        </a>
+    </div>
+    <h1 style="margin-top:10px;">热搜词管理</h1>
+</block>
+<!-- 头部部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 公共Body部分 开始 -->
+<block name="publicBody">
+    <!-- 将主体包含在 .row-fluid 内部 -->
+    <div class="container-fluid">
+        <hr style="margin:0;">
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="widget-box">
+          <div class="widget-title"> 
+            <span class="icon">
+              <input type="checkbox" id="title-checkbox" name="title-checkbox" />
+            </span>
+            <h5>关键词列表 （共<{$counts}>条记录）</h5>
+          </div>
+          <div class="widget-content nopadding">
+            <form action="__CONTROLLER__/batchDelete" method="post">
+            <table class="table table-bordered table-striped with-check">
+              <thead>
+                <tr>
+                  <th><i class="icon-resize-vertical"></i></th>
+                  <th style="width:5%;">编号</th>
+                  <th>关键字</th>
+                  <th style="width:10%;">累积次数</th>
+                  <th style="width:80px;">操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                <foreach name="kw" item="kw">   
+                  <tr>
+                      <td><input type="checkbox" name="ids[]" value="<{$kw.id}>" /></td>
+                      <td class="text-center"><{$kw.id}></td>
+                      <td><span class="kw" data-id="<{$kw.id}>"><{$kw.keyword}></span></td>
+                      <td class="text-center">
+                          <p class="edit" data-id="<{$kw.id}>" title="双击编辑"><{$kw.times}></p>
+                      </td>
+                      <td class="text-center">
+                          <a href="__CONTROLLER__/delete/id/<{$kw.id}>" title="删除" class="btn btn-danger btn-mini"> <i class="icon-trash"></i> 删除</a>
+                      </td>
+                    </tr>           
+                    </foreach>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="5">
+                      <button type="submit" name="do_batch" class="btn btn-danger" style="margin-top:16px;"><i class="icon-trash"></i> 批量删除</button>
+                      <a  href="#myAlert" data-toggle="modal" class="btn btn-info" style="margin-top:16px;"><i class=" icon-plus"></i> 添加</a>
+                      <div class="pagination alternate text-right pull-right">
+                          <{$page}>
+                      </div>
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
+            </form>
+          </div>
+        </div>
+            </div>
+        </div>
+    </div>
+<div id="myAlert" class="modal hide">
+    <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>添加热搜词</h3>
+    </div>
+    <div class="modal-body">
+        <form action="#" method="get" class="form-horizontal">
+            <div class="control-group">
+              <label class="control-label">关键字 :</label>
+              <div class="controls">
+                <input type="text" class="span2" id="k" placeholder="关键字...">
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label">搜索次数 :</label>
+              <div class="controls">
+                <input type="number" class="span2" id="t" placeholder="搜索次数...">
+              </div>
+            </div>
+          </form>
+    </div>
+    <div class="modal-footer"> 
+        <span style="padding-right:20px; display:none; color:green;" id="add-ok"><i class="icon-ok"></i> 添加成功</span>
+        <a class="btn btn-primary" id="add-keyword" href="javascript:void(0)">添加</a> 
+        <a class="btn" id="add-close" href="javascript:void(0)">关闭</a> 
+    </div>
+</div>
+</block>
+<!-- 公共Body部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- js文件模块 开始 -->
+<block name="footJsFile">
+    <script src="__PUBLIC__/Admin/js/jquery.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.ui.custom.js"></script> 
+    <script src="__PUBLIC__/Admin/js/bootstrap.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.uniform.js"></script> 
+    <script src="__PUBLIC__/Admin/js/select2.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.dataTables.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.tables.js"></script>
+    <script src="__PUBLIC__/Admin/js/muneopen.js"></script>
+</block>
+<!-- js文件模块 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 底部JS执行区域 开始 -->
+<block name="footScript">
+    <script>
+        var saveTimesURL = '__CONTROLLER__/saveTimes';
+        var saveKWURL = '__CONTROLLER__/saveKeyword';
+        var saveAddKT    = '__CONTROLLER__/saveAddKT';
+
+        $('#add-keyword').click(function (){
+            var k = $('#k').val();
+            var t = $('#t').val();
+            var data = {
+                'keyword': k,
+                'times':   t
+            };
+            $.post(saveAddKT, data, function (d){
+                if (d == 1)
+                {
+                    $('#add-ok').show();
+                }
+            });
+        });        
+
+        $('#add-close').click(function (){
+            location.reload();
+        });
+    </script>
+    <script src="__PUBLIC__/Admin/js/ajax.keywords.js"></script>
+</block>
+<!-- 底部JS执行区域 结束 -->

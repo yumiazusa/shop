@@ -1,0 +1,115 @@
+<extend name="Public:member1"/>
+<block name="cssFile">
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/bootstrap.min.css" />
+    <link href="__PUBLIC__/Home/css/member.css" rel="stylesheet" type="text/css">
+    <link href="__PUBLIC__/Home/css/order.css" rel="stylesheet" type="text/css">
+    <link href="__PUBLIC__/Home/css/pubmember.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/bootstrap.min.css"/>
+</block>
+<block name="topJsFile">
+    <script src="__PUBLIC__/Home/js/member.js"></script>
+</block>
+<block name="publicBody">
+    <div class="member-zt-right display-inline-block">
+        <div class="member-address">
+            <span>投诉或建议</span>
+        </div>
+        <!--更换部分开始-->
+        <div class="member-address-add">
+            <input type="button" value="投诉建议" id="suggest" class="btn-5">
+            <label>
+                如果您对我们的商品或者服务有不满之处，请在此提交投诉，我们会尽快给予答复或处理！谢谢！
+            </label>
+        </div>
+        <div style="display:none;" class="complaint">
+            <div id="" class="thickdiv"></div>
+            <div id="" class="thickbox" style="left: 356.5px; top: 259px; width: 542px; height: 334px;">
+                <div class="thickwrap" style="width: 540px;">
+                    <div style="width:520" id="" class="thicktitle">
+                        <span>我的投诉</span>
+                    </div>
+                    <div style="width: 520px; height: 300px; padding-left: 10px; padding-right: 10px;" id="opinioncon"
+                         class="thickcon thickloading">
+                        <div class="form">
+                            <div class="items">
+                                <span>投诉内容：</span>
+
+                                <div>
+                                    <textarea id="textarea" class="area" rows="" cols="" name="opini" id="opini"></textarea>
+
+                                    <div class="clr"></div>
+
+                                </div>
+                                <div class="clr"></div>
+                            </div>
+                            <div id="toAddMethod" class="fl">
+                                <a id="sub" class="btn-5" href="javascript:void(0);">提交</a>
+                            </div>
+                            <div class="clr"></div>
+                        </div>
+                    </div>
+                </div>
+                <a id="thickclose" href="javascript:void(0)">×</a>
+            </div>
+        </div>
+
+
+
+
+        <foreach name="data" item="vo">
+        <div class="suggest">
+            <div>
+                <p>我的投诉:
+                    <span><{$vo.content}></span>
+                    <span style="color:#3B3B3B;font-size:13px;font-weight:normal;"><{$vo.add_time|date="Y-m-d h:i:s",###}></span>
+                </p>
+
+                <p class="gl">管理员回复:
+                    <span class="gl"><{$vo.r_content|default="还没有回复"}></span> <span style="color:#F52917;font-size:13px;font-weight:normal;"><{$vo.r_time|date="Y-m-d h:i:s",###}></span>
+                </p>
+            </div>
+        </div>
+        </foreach>
+
+        <div class="pagination alternate" style="float:right;">
+            <{$page}>
+        </div>
+
+
+    </div>
+    <!--更换部分结束-->
+
+    </div>
+</block>
+
+        <block name="bottomJsFile">
+            <script>
+
+                /**
+                 * 进行留言
+                 */
+                $('#sub').click(function(){
+
+                    if($('#textarea').val() == ''){
+                        alert('内容不能为空!');
+                        return false;
+                    }else{
+                        data = {
+                            'count':$('#textarea').val()
+                        };
+                        $.post('__CONTROLLER__/suggestAdd',data,function(a){
+                            if(a>0){
+                                alert('留言成功!');
+                                $('.complaint').hide();
+                                window.location.reload();
+                            }else{
+                                alert('留言失败!');
+                                $('.complaint').hide();
+                            }
+                        })
+                    }
+
+                })
+
+            </script>
+        </block>

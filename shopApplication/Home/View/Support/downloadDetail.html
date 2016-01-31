@@ -1,0 +1,111 @@
+<extend name="Public:public" />
+<block name="cssFile">
+	<link rel="stylesheet" href="__PUBLIC__/Home/css/index.css">
+	<link rel="stylesheet" href="__PUBLIC__/Home/css/support-download.css">
+</block>
+<block name="publicBody">
+	<div class="banner"></div>
+	
+	<div class="container main">
+		<div class="row">
+			<div class="col-md-12">
+				<ol class="breadcrumb">
+				  	<li><a href="__APP__">首页</a></li>
+				  	<li><a href="###">服务与支持</a></li>
+				  	<li>相关下载</li>
+				</ol>
+			</div>
+			<!-- 左侧菜单 开始 -->
+			<div class="col-md-3">
+				<div class="list-group list-menu">
+				  	<a href="#" class="list-group-item active">
+				    	<h1>相关下载</h1>
+				  	</a>
+				  	<foreach name="datalist" item="v">
+				  	<a href="<{:U('Support/download/id/'.$v['id'])}>" class="list-group-item">
+				  		<h4><{$v.cat_name}></h4>
+				  	</a>
+				  	</foreach>
+				  	
+				</div>
+			</div>
+			<!-- 左侧菜单 结束 -->
+			<!-- 右侧菜单 开始 -->
+			<div class="col-md-9">
+				<div class="row">
+					<div class="col-md-9">
+						<div class="page-header">
+							<h2><{$list.title}></h2>
+						</div>
+					</div>
+					<div class="col-md-3 download-btn">
+					    <if condition="$list.linkurl neq null">
+						  <a href="<{$list[linkurl]}>" class="btn btn-primary btn-lg pull-right">点击下载</a>
+						 <else/>
+						   <a href="<{:U('Support/fileDown/id/'.$list['id'])}>" class="btn btn-primary btn-lg pull-right">点击下载</a>
+						 </if>
+					</div>
+				</div>
+				<div class="download-info">
+					<dl class="dl-horizontal">
+					  	<dt>文件大小：</dt>
+					  	<dd><{$list.filesize}></dd>
+					  	<dt>发布时间：</dt>
+					  	<dd><{$list.ctimes}></dd>
+					  	<dt>描述信息：</dt>
+					  	<dd>
+					  		<{$list.description}>
+					  	</dd>
+					</dl>
+				</div>
+				<div>
+					<ul class="pager">
+					    <li class="previous pull-right"><a href="javascript:history.back()">&larr; 返回上一页</a></li>
+					</ul>
+				</div>
+				<div>
+					<h3>历史版本</h3>
+					<table class="table table-lg">
+
+						<thead>
+							<tr>
+								<th>名称</th>
+								
+								<th>软件大小</th>
+								<th>发布日期</th>
+								<th>下载</th>
+							</tr>
+						</thead>
+						<tbody>
+						    <if condition="$data neq '' ">
+						     <foreach name="data" item="v">
+							<tr>
+								<td><{$v.title}></td>
+							
+								<td><{$v.filesize}></td>
+								<td><{$v.ctime}></td>
+								 <if condition="$v.linkurl neq null">
+								    <td><a href="<{$v[linkurl]}>" class="btn btn-default btn-xs">下载</a></td>
+								<else/>
+								    <td><a href="<{:U('Support/fileDown/id/'.$v['id'])}>" class="btn btn-default btn-xs">下载</a></td>
+								</if>
+							</tr>
+							<else/>
+							<tr>
+								<td class="text-center" colspan="5"><span class="no-history-version">无历史版本</span></td>
+							</tr>
+                            </if>
+							<tr>
+								<td class="text-center" colspan="5"> </td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<!-- 右侧菜单 结束 -->
+			
+		</div>
+	</div>
+</block>
+
+

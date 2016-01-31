@@ -1,0 +1,179 @@
+<extend name="Public:member1"/>
+    <block name="cssFile">
+	<link href="__PUBLIC__/Home/css/member.css" rel="stylesheet" type="text/css">
+	<link href="__PUBLIC__/Home/css/order.css" rel="stylesheet" type="text/css">
+	<link href="__PUBLIC__/Home/css/pubmember.css" rel="stylesheet" type="text/css">
+  <link href="__PUBLIC__/Home/css/show.css" rel="stylesheet" type="text/css">
+	</block>
+	<block name="topJsFile">
+	<script src="__PUBLIC__/Home/js/member.js"></script>
+	</block>
+    <block name="publicBody">        
+	<div class="member-zt-right display-inline-block">
+     		<div class="member-address">
+                  <span>我的订单</span>
+        </div>
+ 		<!--更换部分开始-->
+ 		<div id="hasOrderCon" class="radius_5 content_box" style="display: block;margin-top:20px;">
+            <ul class="ordernav cf ">
+                    <li class="na1 display-inline-block">商品名称</li>
+                    <li class="na2 display-inline-block">价格</li>
+                    <li class="na3 display-inline-block">数量</li>
+                    <li class="na4 display-inline-block">应付金额</li>
+                    <li class="na5 display-inline-block">订单状态</li>
+                    <li class="na6 display-inline-block">操作</li>
+             </ul>
+
+              <if condition="$orderlist neq null">
+              <div id="orderCon" style="width:800px;margin-left:60px;"> 
+
+                 <!--一个订单开始-->  
+                 <foreach name="orderlist" item="v">      
+                 <div class="radius_5 order_table overf">            
+                   <table style="font-size:12px;">   
+                         <thead>
+                            <tr>                        
+                              <th class="order_title" colspan="6">
+                                  <span style="font-size:13px;color:#9F9999;font-weight:normal;">订单号：</span>
+                                    <a class="color_green1 pad_r_10" style="font-size:13px;font-weight:normal;" href="<{:U('Order/viewOrder',array('id'=>$v['id']))}>" title="查看订单"><{$v.order_sn}></a> 
+                                  <span style="font-size:13px;color:#9F9999;font-weight:normal;">下单时间：</span> 
+                                  <span class="color_gray1" style="font-size:13px;color:#9F9999;font-weight:normal;">
+                                  <{$v['order_date']|date="Y-m-d H:i:s",###}></span>
+                               </th> 
+                            </tr>                
+                          </thead>
+                          <tbody> 
+                           
+                            <tr style="padding-bottom:3px;">
+                               <td width="246" class="phone_td" style="height:80px;">
+                                <foreach name="v['list']" item="vo">
+                                   <div class="main_goods cl" style="margin-top:3px;">
+                                      <a title="查看详情" target="_blank" href="<{:U('ProductDetail/detail',array('id'=>$vo['prolist']['id']))}>">
+                                          <img width="80" height="80" src="__PUBLIC__/Product/thumb/<{$vo['prolist']['list_image']}>">
+                                      </a> 
+                                      <h2>
+                                         <a title="查看详情" target="_blank" href="<{:U('ProductDetail/detail',array('id'=>$vo['prolist']['id']))}>" style="font-size:12px;">
+                                                    <{$vo['prolist']['pro_name']}>
+                                         </a>
+                                      </h2>
+                                      <p style="font-size:12px;"><{$vo.product_color}></p> 
+                                    </div>
+                                    <if condition="$vo['prolist']['gift'] neq null">
+                                     <dl class="gifs_goods cl" style="margin:0;">
+                                        <dt class="color_red" style="margin-left:10px;">【赠品】</dt> 
+                                        <dd style="margin-left:56px;">
+                                          <img width="38" height="38" src="__PUBLIC__/Product/thumb/<{$vo['prolist']['gift']['list_image']}>">
+                                          <h2 style="font-size:13px;font-family:微软雅黑;" class="display-inline-block"><{$vo['prolist']['gift']['pro_name']}> X 1</h2>
+                                        </dd> 
+                                    </dl>
+                                    </if>
+                                  </foreach>
+                                </td>
+                                <td width="75" class="color_red color-font">
+                                <foreach name="v['list']" item="vo">
+                                    <div style="150px;line-height:150px;">¥<{$vo.product_price}></div>
+                                </foreach>
+                                </td>
+                                <td width="65" class="color-font">
+                                <foreach name="v['list']" item="vo">
+                                    <div style="150px;line-height:150px;"><{$vo.product_number}></div>
+                                </foreach>
+                                  
+                                </td>
+                                <td width="85" class="color_red color-font" rowspan="2"> ¥<{$v.real_price}>&nbsp;(含运费)</td> 
+                                <td width="75" rowspan="2" class="color-font" style="font-size:12px;">
+                                   已完成
+                                   <div class="tk1"> 
+                                       <a href="javascript:void(0);" class="checkShipping" data-id="<{$v.id}>">追踪</a>
+                                      <div class="show1">
+                                            <h6 style="padding:0; margin:0; text-align:right"><span class="glyphicon glyphicon-remove remove-box" style="cursor:pointer"></span></h6>
+                                            <div class="con-box">
+                                             <img src="__PUBLIC__/Home/images/load.gif" />
+                                            </div>
+                                      </div>
+                                    </div>
+
+                                </td> 
+                                <td width="89" rowspan="2">
+                                    <div style="margin-bottom:10px;text-align:center;">
+                                        <a class="pad_r_10" href="<{:U('Order/viewOrder',array('id'=>$v['id']))}>" style="font-size:12px;">
+                                           查看
+                                        </a>
+                                         <a class="pad_r_10" href="<{:U('ProductDetail/detail',array('id'=>$orderlist[0]['list'][0]['prolist']['id'],'remark'=>'1')
+                                         )}>" style="font-size:12px;">|　评价</a>
+                                    </div>      
+                                </td>
+                            </tr>
+                            
+                            
+                         </tbody>
+                   </table>
+                 </div>
+                 </foreach>
+               
+                   <div class="pagination alternate" style="float:right;">
+                        <{$page}>
+                   </div
+
+                <!--一个订单结束-->
+         
+            </div>
+            <else/>
+            <!--没有订单时的样式开始-->
+            <div id="noOrderCon" class="radius_5 cf ui_hide" style="display:block;">
+                <div class="norder">
+                    <span></span>
+                    <h3 class="">您还没有订单</h3>
+                    <a href="http://www.iuni.com"></a>
+                </div>
+            </div>
+             <!--没有订单时的样式结束-->
+             </if>
+       </div>
+ 		<!--更换部分结束-->    
+</div>
+</block>
+<block name="bottomJsFile">
+    <script>
+        $('.checkShipping').click(function (){
+            $(this).next('div.show1').show();
+            var shippingId = $(this).attr('data-id');
+            var data = {
+                order_id : shippingId
+            };
+            var obj = this;
+            $.post('__CONTROLLER__/checkShipping', data , function (d){
+                if (d == null)
+                {
+                    var html = '<ul class="shipping-list">';
+                    html += '<li>暂无记录</li>';
+                    html += '</ul>';
+                }
+                else
+                {
+                    var objShipping = eval("("+d+")");
+                    var getInfo = objShipping.data;
+                    var html = '<h5 style="text-align:left; font-weight:normal;">'+objShipping.expTextName +'（运单号：'+objShipping.mailNo+'）</h5>';
+                    if (getInfo)
+                    {
+                        html += '<ul class="shipping-list">';
+                        for (var i in getInfo)
+                        {
+                            html += '<li><em>'+getInfo[i].time+'</em> '+getInfo[i].context+'</li>';
+                        }
+                        html += '</ul>';
+                    }
+                    else
+                    {
+                        html += '<span>暂无记录</span>';
+                    }
+                }
+               $(obj).next('div.show1').children('div').html(html);
+
+               $('.remove-box').click(function (){
+                    $('div.show1').hide();
+               });
+            });
+        });
+    </script>
+</block>

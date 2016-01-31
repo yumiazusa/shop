@@ -1,0 +1,380 @@
+<extend name="Public:member1"/>
+<block name="cssFile">
+    <link href="__PUBLIC__/Home/css/member.css" rel="stylesheet" type="text/css">
+    <link href="__PUBLIC__/Home/css/order.css" rel="stylesheet" type="text/css">
+    <link href="__PUBLIC__/Home/css/pubmember.css" rel="stylesheet" type="text/css">
+</block>
+<block name="topJsFile">
+    <script src="__PUBLIC__/Home/js/member.js"></script>
+    <script src="__PUBLIC__/Home/js/date.js"></script>
+    <script src="__PUBLIC__/Home/js/order.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Home/js/swfobject.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/Home/js/fullAvatarEditor.js"></script>
+
+</block>
+<block name="publicBody">
+<!--更换部分开始-->
+<div class="member-zt-right display-inline-block">
+<div class="member-info">
+    <span>基本信息</span>
+</div>
+<div class="info-msg">
+    <ul class="info-msg-list">
+        <li class="display-inline-block list">个人信息</li>
+        <li class="display-inline-block">上传头像</li>
+        <li class="display-inline-block">个人其他信息</li>
+    </ul>
+</div>
+<div class="list-information">
+<ul class="list-ul">
+<!--个人信息开始-->
+<li class="activing">
+    <div name="form1">
+        <table width="700px">
+            <tr>
+                <td>头像：</td>
+                <td>
+                    <empty name="info['thumb']">
+                      <img src="__PUBLIC__/User/default.jpg" style="border-radius:50%;width:100px;height:100px;">
+                    <else />
+                       <img src="<{$info['thumb']}>" style="border-radius:50%;width:100px;height:100px;">
+                    </empty>
+                   
+                    <!--<a href="javascript:void(0)">修改头像</a>-->
+                </td>
+            </tr>
+            <tr>
+                <td>用户名：</td>
+                <!--从session中获取 -->
+                <td><input type="text" id="uname" class="utext" value="<{$users.uname}>"></td>
+            </tr>
+            <tr>
+                <td>性　别：</td>
+                <td>
+                    <input class="sex" type="radio" value="1" name="sex"
+                    <if condition="$info['sex'] eq 1">checked='checked'</if>
+                    >男
+                    <input class="sex" type="radio" value="0" name="sex"
+                    <if condition="$info['sex'] eq 0">checked='checked'</if>
+                    >女
+                    <input class="sex" type="radio" value="2" name="sex"
+                    <if condition="$info['sex'] eq 2">checked='checked'</if>
+                    >保密
+                </td>
+            </tr>
+            <tr>
+                <td width="200">真实姓名：</td>
+                <td><input type="text" id="true_name" class="utext" value="<{$info.true_name}>"></td>
+            </tr>
+            <tr>
+                <td>生　日：</td>
+                <td>
+                    <div class="data_select" style="width:300px;" name="birthday">
+
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>邮　箱：</td>
+                <td><{$users.email}>
+                    <!--<a href="javascript:void(0)">修改</span>-->
+                </td>
+
+            </tr>
+            <tr>
+                <td>所在地：</td>
+                <td>
+                    <{$city}>
+
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="submit" id="sub" value="提交" class="sub" width="20px">
+                </td>
+            </tr>
+        </table>
+    </div>
+</li>
+<!--个人信息结束-->
+
+<!--上传头像开始-->
+<li>
+
+    <div style="width:632px;margin: 0 auto;text-align:center">
+        <div id="up"></div>
+
+    </div>
+    <div class="img">
+        <img/>
+    </div>
+
+</li>
+<!--上传头像结束-->
+
+<!--更多个人信息开始-->
+<li>
+    <div class="form">
+
+        <div class="item">
+            <span class="labels">婚姻状况：</span>
+
+            <div class="fl">
+                <!--<input type="radio" style="display:none"  value="0" name="maritalStatus">-->
+                <input type="radio" value="1" class="jdradio" name="marry"
+                <if condition="$info['marry'] eq 1"> checked="checked"</if>
+                />
+                <label class="mr10" style="font-weight: normal;">未婚</label>
+                <input type="radio" value="2" class="jdradio" name="marry"
+                <if condition="$info['marry'] eq 2"> checked="checked"</if>
+                />
+                <label class="mr10" style="font-weight: normal;">已婚</label>
+                <input type="radio" value="0" class="jdradio" name="marry"
+                <if condition="$info['marry'] eq 0"> checked="checked"</if>
+                />
+                <label class="mr10" style="font-weight: normal;">保密</label>
+            </div>
+        </div>
+        <div class="item">
+            <span class="labels">月收入：</span>
+
+            <div class="fl">
+                <select id="wage" name="wage" class="selt">
+                    <option value="">请选择</option>
+                    <option value="1"
+                    <if condition="($info.wage eq 1)">selected="selected"</if>
+                    >2000元以下</option>
+                    <option value="2"
+                    <if condition="($info.wage eq 2)">selected="selected"</if>
+                    >2000-3999元</option>
+                    <option value="3"
+                    <if condition="($info.wage eq 3)">selected="selected"</if>
+                    >4000-5999元</option>
+                    <option value="4"
+                    <if condition="($info.wage eq 4)">selected="selected"</if>
+                    >6000-7999元</option>
+                    <option value="5"
+                    <if condition="($info.wage eq 5)">selected="selected"</if>
+                    >8000元以上</option>
+                </select>
+            </div>
+        </div>
+        <div class="item">
+            <span class="labels">身份证号码：</span>
+
+            <div class="fl">
+                <div style="display:none" id="cidShowDiv">
+                    <strong></strong>
+                    <a href="javascript:showCidDiv()" class="smod">修改</a>
+                </div>
+                <div style="" id="cidInputDIv">
+                    <input type="text" class="itxt" maxlength="18" value="<{$info.identity}>" id="cid"
+                           name="identity_id">
+
+                    <div class="clr"></div>
+                    <div class="prompt-06"><span id="cid_msg"></span></div>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <span class="labels">教育程度：</span>
+
+            <div class="fl">
+                <select id="edu" name="education" class="selt">
+                    <option value="">请选择</option>
+                    <option value="8"
+                    <eq name="info.education" value="8">selected</eq>
+                    >博士后</option>
+                    <option value="7"
+                    <eq name="info.education" value="7">selected</eq>
+                    >博士</option>
+                    <option value="6"
+                    <eq name="info.education" value="6">selected</eq>
+                    >硕士</option>
+                    <option value="5"
+                    <eq name="info.education" value="5">selected</eq>
+                    >本科</option>
+                    <option value="4"
+                    <eq name="info.education" value="4">selected</eq>
+                    >大专</option>
+                    <option value="3"
+                    <eq name="info.education" value="3">selected</eq>
+                    >中专</option>
+                    <option value="2"
+                    <eq name="info.education" value="2">selected</eq>
+                    >高中</option>
+                    <option value="1"
+                    <eq name="info.education" value="1">selected</eq>
+                    >初中</option>
+                    <option value="0"
+                    <eq name="info.education" value="0">selected</eq>
+                    >保密</option>
+
+                </select>
+            </div>
+        </div>
+        <div class="item">
+            <span class="labels">所在行业：</span>
+
+            <div class="fl">
+                <select id="job" name="job" class="selt">
+                    <option value="">请选择</option>
+                    <option value="0"
+                    <eq name="info.job" value="0">selected</eq>
+                    >保密</option>
+                    <option value="1"
+                    <eq name="info.job" value="1">selected</eq>
+                    >计算机/互联网</option>
+                    <option value="2"
+                    <eq name="info.job" value="2">selected</eq>
+                    >销售/客服/技术支持</option>
+                    <option value="3"
+                    <eq name="info.job" value="3">selected</eq>
+                    >会计/金融/银行/保险</option>
+                    <option value="4"
+                    <eq name="info.job" value="4">selected</eq>
+                    >生产/营运/采购/物流</option>
+                    <option value="5"
+                    <eq name="info.job" value="5">selected</eq>
+                    >生物/制药/医疗/护理</option>
+                    <option value="6"
+                    <eq name="info.job" value="6">selected</eq>
+                    >广告/市场/媒体/艺术</option>
+                    <option value="7"
+                    <eq name="info.job" value="7">selected</eq>
+                    >建筑/房地产</option>
+                    <option value="8"
+                    <eq name="info.job" value="8">selected</eq>
+                    >人事/行政/高级管理</option>
+                    <option value="9"
+                    <eq name="info.job" value="9">selected</eq>
+                    >咨询/法律/教育/科研</option>
+                    <option value="10"
+                    <eq name="info.job" value="10">selected</eq>
+                    >服务业</option>
+                    <option value="11"
+                    <eq name="info.job" value="11">selected</eq>
+                    >公务员/翻译/其他</option>
+
+                </select>
+            </div>
+        </div>
+
+        <div class="item">
+            <span class="labels">&nbsp;</span>
+
+            <div class="fl">
+                <a id="sub2" class="btn-5" href="javascript:void(0)">保存</a>
+            </div>
+        </div>
+    </div>
+</li>
+<!--更多个人信息结束-->
+</ul>
+</div>
+
+</div>
+<!--更换部分结束-->
+</block>
+<block name="bottomJsFile">
+    <script>
+        $(function () {
+
+            createDataSelect("<{$info.birthday}>");
+//            $('#province').val("<{$info.province}>");          //debug
+//            $('#city').val("<{$info.city}>");
+//            $('#area').val("<{$info.area}>");
+        })
+    </script>
+    <script>
+        //提交表单
+        $('#sub').bind('click', function () {
+//
+            if ($('.sex').eq(0).is(":checked")) {
+                sex = 1;
+            }
+            else if ($('.sex').eq(1).is(":checked")) {
+                sex = 0;
+            } else {
+                sex = 2;
+            }
+
+            data = {
+                'uname': $('#uname').val(), 'sex': sex, 'true_name': $('#true_name').val(),
+                'province': $('#province').val(), 'city': $('#city').val(), 'area': $('#area').val(),
+                'birthday_year': $('#birthday_year').val(), 'birthday_month': $('#birthday_month').val(),
+                'birthday_day': $('#birthday_day').val()
+            };
+
+            $.post('__CONTROLLER__/saveInformation', data, function (a) {
+                if (a > 0) {
+                    alert('更新成功!');
+                    window.location.reload();
+                } else {
+                    alert(a)
+                    alert('更新失败!');
+                }
+            })
+
+        })
+
+        $('#sub2').bind('click', function () {
+            if ($('.jdradio').eq(0).is(":checked")) {
+                marry = 1;
+            } else if ($('.jdradio').eq(1).is(':checked')) {
+                marry = 2;
+
+            } else {
+                marry = 3
+            }
+            data = {
+                'marry': marry, 'wage': $("#wage option:selected").val(),
+                'identity': $('#cid').val(), 'education': $('#edu').val(),
+                'job': $('#job').val()
+            }
+
+            $.post('__CONTROLLER__/saveInformation2', data, function (a) {
+                if (a > 0) {
+                    alert('更新成功!')
+                } else {
+                    alert('更新失败!');
+                }
+            });
+
+        });
+    </script>
+    <script>
+
+
+        swfobject.addDomLoadEvent(function () {
+
+            var swf = new fullAvatarEditor("__PUBLIC__/Home/fullAvatarEditor.swf", "__PUBLIC__/Home/expressInstall.swf", "up", {
+                        id: 'swf',
+                        upload_url: "__CONTROLLER__/upimg",	//上传接口
+                        method: 'post',	//传递到上传接口中的查询参数的提交方式。更改该值时，请注意更改上传接口中的查询参数的接收方式
+                        src_upload: 0,		//是否上传原图片的选项，有以下值：0-不上传；1-上传；2-显示复选框由用户选择
+                        isShowUploadResultIcon: true,
+                        tab_visible: false
+                    }, function (msg) {
+
+                        switch(msg.code)
+                        {
+                            case 5 :
+                                if(msg.type == 0)
+                                {
+                                    if(msg.content.sourceUrl)
+                                    {
+
+                                    }
+
+                                }
+                                break;
+                        }
+
+
+                    }
+            );
+        })
+    </script>
+
+</block>

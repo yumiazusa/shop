@@ -1,0 +1,611 @@
+<extend name="Public:public"/>
+<block name="cssFile">
+
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/uikit.almost-flat.min.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/Buy/collect.css"/>
+</block>
+
+
+<block name="publicBody">
+
+<!--主体-->
+<main>
+    <form method="post" action="<{:U('pay')}>">
+        <notempty name="buy_now">
+        <input type='hidden' name='buy_now' value="<{$buy_now}>">
+        </notempty>
+        <!--购物车流程显示-->
+        <div id="cart_title" class="cart_title">
+            <ul class="cart_progress_bar">
+                <li class="current">1　我的购物车</li>
+                <li class="current">　　　　2　填写核对订单信息</li>
+                <li>　　　　3　成功提交订单</li>
+                <div class="store_clear"></div>
+            </ul>
+
+        </div>
+
+
+        <!--收货地址-->
+        <div class="collect_address">
+            <div class="collect_title" style="font-family:微软雅黑;font-size:18px;">收货地址</div>
+            <div class="collect_address_box">
+                <foreach name="address" item="v">
+                    <p style="font-family:微软雅黑;font-size:14px;">
+                        <label style="font-weight: 400"><input type="radio" <eq name="v.is_default" value='1'> checked='checked' </eq> name="shipping_addr_id" value="<{$v.id}>"/>
+                        <span class="collect_address_box_name mr3"><{$v.reciver_user}></span>
+                        <span class="collect_address_box_tphone mr3"><{$v.reciver_phone}></span>
+                        <span class="collect_address_box_province mr3"><{$v.province}></span>
+                        <span class="collect_address_box_city mr3"><{$v.city}></span>
+                        <span class="collect_address_box_district mr3"><{$v.area}></span>
+                        <span class="collect_address_box_street mr3"><{$v.street}></span></label>
+                        <a class="address_modify" href="javascript:;" id="<{$v.id}>" >编辑</a>
+                        <a class="address_delete" href="javascript:void(0);" id="<{$v.id}>" is_default="<{$v.is_default}>">删除</a>
+                    </p>
+                </foreach>
+
+
+
+            </div>
+            <div class="address_btn">
+            <button id="new_address" type="button" class="btn btn-danger"
+                    style="font-family:微软雅黑;font-size:16px;">使用新地址
+            </button>
+        </div>
+        </div>
+
+        <!--支付方式-->
+        <div class="collect_pay">
+            <div class="collect_title" style="font-family:微软雅黑;font-size:18px;">支付方式</div>
+            <div class="collect_pay_box">
+                <p>
+                    <label style="font-weight: 400"><input type="radio" name="pay_type" value="0" checked/> <span class="collect_address_box_name mr3"
+                    style="font-family:微软雅黑;font-size:14px;">在线支付（为保证及时处理您的订单，请您于下单后2小时内完成付款。超出2小时订单将被自动取消。）</span></label>
+                </p>
+
+                <p>
+                    <label style="font-weight: 400"><input type="radio" name="pay_type" value="1"/> <span class="collect_address_box_name mr3"
+                    style="font-family:微软雅黑;font-size:14px;">货到付款</span></label>
+
+                </p>
+
+            </div>
+        </div>
+
+        <!--配送方式-->
+        <div class="collect_way">
+            <div class="collect_title" style="font-family:微软雅黑;font-size:18px;">配送方式</div>
+            <div class="collect_pay_box">
+                <foreach name="ships" item="v">
+                    <p>
+                        <label style="font-weight: 400"><input type="radio" value="<{$v.sid}>" <eq name="v.is_default" value="1"> checked </eq> name="shipping_way"/> <span
+                            class="collect_address_box_name mr3" style="font-family:微软雅黑;font-size:14px;"><{$v['cname'].cname}></span></label>
+                    </p>
+                </foreach>
+            </div>
+        </div>
+
+        <!--送货时间-->
+        <div class="collect_time">
+            <div class="collect_title" style="font-family:微软雅黑;font-size:18px;">送货时间</div>
+            <div class="collect_time_box">
+                <p>
+                    <label style="font-weight: 400"><input type="radio" name="send_time" value="0" checked/> <span class="collect_address_box_name mr3"
+                    style="font-family:微软雅黑;font-size:14px;">工作日休息日假日均可送货</span></label>
+                </p>
+
+                <p>
+                    <label style="font-weight: 400"><input type="radio" name="send_time" value="1"/> <span
+                        class="collect_address_box_name mr3"
+                        style="font-family:微软雅黑;font-size:14px;">只工作日送货,休息日或假日不送</span></label>
+                </p>
+
+                <p>
+                    <label style="font-weight: 400"><input type="radio" name="send_time" value="2"/> <span class="collect_address_box_name mr3"
+                    style="font-family:微软雅黑;font-size:14px;">只休息日或假日送货</span></label>
+                </p>
+
+                <p>
+                    <label style="font-weight: 400"><input type="radio" name="send_time" value="3"/> <span class="collect_address_box_name mr3"
+                    style="font-family:微软雅黑;font-size:14px;">白天没人,尽量安排其它时间送</span></label>
+                </p>
+            </div>
+        </div>
+        <div class="collect_time">
+            <div class="collect_title" style="font-family:微软雅黑;font-size:18px;">备注</div>
+            <div class="collect_time_box">
+                    <div name="apply_wareQuestionDesc" class="item">
+                    <div>
+                    <textarea class="area" rows="6" cols="60" name="comment"></textarea><br>
+                    </div>
+                    <div class="clr">(50字以内)</div>
+                    </div>
+            </div>
+        </div>
+        <!--商品清单-->
+        <div class="collect_list">
+
+            <div class="collect_title" style="font-family:微软雅黑;font-size:18px;">商品清单</div>
+            <div>
+                <table class="uk-table">
+
+                    <thead>
+                    <tr style="font-family:微软雅黑;font-size:15px;">
+                        <th>产品</th>
+                        <th>描述</th>
+                        <th>单价</th>
+                        <th>数量</th>
+                        <th>重量</th>
+                        <th>小计</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <foreach name="goods" item="v">
+                        <tr style="font-family:微软雅黑;font-size:14px;">
+                            <td><img class="cart_image" src="__PUBLIC__/Product/thumb/<{$v.img}>"/></td>
+                            <td>
+                                <p><a href="<{:U('ProductDetail/detail',array('id'=>$v['id']))}>"><{$v.pro_name}>&nbsp;&nbsp;<{$v.color.prop_name}>&nbsp;&nbsp;<{$v.version.prop_name}></a></p>
+                                <if condition="$v['promote']['status'] eq 3">
+                                        <p style="font-family:微软雅黑;font-size:14px;"> 赠送:
+                                            <a href="<{:U('ProductDetail/detail',array('id'=>$v['promote']['gift']['id']))}>" target="_blank"><{$v['promote']['gift']['pro_name']}></a>x<span
+                                                    class="gift_qty">1</span></p>
+                            <elseif condition="$v['promote']['status'] eq 4" />
+                            <if condition="$v['ordernum'] egt $v['promote']['condition']">
+                                <p style="font-family:微软雅黑;font-size:14px;"> 赠送:
+                                            <a href="<{:U('ProductDetail/detail',array('id'=>$v['promote']['gift']['id']))}>" target="_blank"><{$v['promote']['gift']['pro_name']}></a>x<span
+                                                    class="gift_qty">1</span></p>
+                            </if>
+                            </if>
+                            </td>
+                            <td>
+                                <div>￥<{$v.price}></div>
+                            </td>
+                            <td>
+                                <div class="num">
+                                    <span class="qty" style="width:100px;"><{$v.ordernum}>(<{$v.unit}>)</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="weight">
+                                    <span class="qty" style="width:100px;"><{$v.unit_weight}>(<{$v.weight_unit}>) x <{$v.ordernum}></span>
+                                </div>
+                                
+                            </td>
+                            <td style="color:red;">￥<{$v['price'] * $v['ordernum']}></td>
+                        </tr>
+                    </foreach>
+                    <!--    单个商品结束  -->
+
+
+                    </tbody>
+                </table>
+            </div>
+
+
+        </div>
+
+        <!--提交订单-->
+<div class="collect_sub">
+            <div class="collect_sub_left">
+            </div>
+            <div class="collect_sub_right">
+                <p style="font-family:微软雅黑;font-size:14px;margin-bottom:38px;margin-left:0;">商品金额：¥<{$sum}>  |  <span id="shipfee"></span></p>
+                <p style="font-family:微软雅黑;font-size:14px;height:20px;height:20px;text-align:right;">应付总额:
+                        <input type="hidden" name="deail_price" value="<{$sum}>">
+                        <input type="hidden" name="real_price" value="">
+                        <span style="font-size: 28px;color: #db5a47;margin-top:-30px;" id="total"></span>
+                </p>
+                <div class="collect_sub_right_button">
+                    <input style="width: 130px;" id="sub" type="submit" class="btn btn-primary btn-lg" value="提交订单">
+                </div>
+
+            </div>
+</div>
+    </form>
+</main>
+
+<!--添加地址遮罩层-->
+
+
+<!--修改地址遮罩-->
+<div class="address_change" style="display: none">
+    <div class="address_change_cover">
+        <div class="address_change_title">
+            <div class="address_change_title_text">修改地址</div>
+            <div class="address_change_close"><a href="javascript:;" class="uk-close"></a></div>
+        </div>
+        <div class="address_change_main">
+            <p><b>*</b><span>收货人</span><input type="text" id="c_name" name="username"/><b></b></p>
+
+            <p><b>*</b><span>收货地区</span>
+                <{$city}>
+            </p>
+
+            <p><b>*</b><span>详细地址</span><input id="street" type="text" name="detail"/><b></b></p>
+
+            <p><b>*</b><span>手机</span><input type="text" id="phone" name="phone"/><b></b></p>
+
+            <label><p class="address_change_checkbox"><input type="checkbox" id="default"
+                  name="set_default"/><span>设为默认</span>
+            </p></label>
+
+
+            <div class="address_change_btn">
+                <button id="change_yes" style="width: 80px" type="button"
+                        class="btn btn-success btn-sm">确定
+                </button>
+                <button id="change_no" style="width: 80px" type="button"
+                        class="btn btn-default btn-sm">取消
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+</block>
+<block name="bottomJsFile">
+
+<script>
+
+//变量
+var collect = ''; //发票信息
+var b_height = 0; //document高度
+var r_height = 0; //滚动条到顶部的高度
+var weight='<{$weight}>';
+var total ='';
+//提交订单
+$('#sub').click(function () {
+    var _address = $("input[name=shipping_addr_id]:checked").val();
+    var _pay = $("input[name=pay_type]:checked").val();
+    var _send = $("input[name=send_time]:checked").val();
+    if (_address == undefined) {
+        alert("请选择收货地址");
+        return false;
+    }
+    if (_pay == undefined) {
+        alert("请选择支付方式");
+        return false;
+    }
+    if (_send == undefined) {
+        alert("请选择配送方式");
+        return false;
+    }
+});
+
+
+/*发票部分开始*/
+//点击确定按钮
+$('#collect_btn_yes').click(function () {
+    if ($('#collect_com').prop('checked')) {
+        collect = $('#collect_com_input').val();
+    } else {
+        collect = '个人';
+    }
+
+    $('#collect_true').html('　　' + collect);
+    $('#collect_select').hide();
+    $('#collect_btn').hide();
+});
+
+//点击取消按钮
+$('#collect_btn_no').click(function () {
+
+    $('#collect_true').html('　　' + collect);
+    $('#collect_select').hide();
+    $('#collect_btn').hide();
+    $('#collect_com_input').hide();
+
+});
+/*发票部分结束*/
+
+
+
+/*添加和修改地址*/
+
+//关闭按钮
+$('.uk-close').click(function () {
+    $('.address_change').hide();
+});
+$('#change_no').click(function () {
+    $('.address_change').hide();
+})
+
+var h, w;
+$(function () {
+    setSize()
+})
+
+$(window).resize(function () {
+    setSize()
+})
+
+function setSize() {
+    h = $(document).height() + 'px';
+    w = $(document).width() + 'px';
+    $('.address_change').css({'height': h, 'width': w});
+}
+
+
+var name = '';  //收件人
+var phone = '';    //移动电话
+var province;    //省
+var city;    //市
+var area;    //区县
+var street = '';    //街道
+var status;
+var oldId;
+
+//添加地址
+$('#new_address').bind('click', function () {
+    $('.address_change_title_text').html('添加地址');
+    $('.address_change').show();
+    $('.address_change_checkbox').show();
+
+    $('#change_yes').bind('click', function () {
+        name = $('#c_name').val();
+        province = $('#province').val();
+        city = $('#city').val();
+        area = $('#area').val();
+        street = $('#street').val();
+        phone = $('#phone').val();
+        if ($('#default').is(":checked")) {
+            status = 1;
+        } else {
+            status = 0;
+        }
+        if(province =='--请选择省--' || city=='--市--' || area=='--区县--'){
+            alert('区域未选择');
+            // return false;
+        }
+        if (checkReciver() && checkDetail() && checkMobile()) {
+
+            data = {
+                'id': oldId,
+                'reciver_user': name,
+                'province': province,
+                'city': city,
+                'area': area,
+                'street': street,
+                'reciver_phone': phone,
+                'is_default': status
+            };
+
+            $.post('__CONTROLLER__/addressAdd', data, function (a) {
+                if (a > 0) {
+                    $('.address_change').hide();
+
+                    var p = $('<p style="font-family:微软雅黑;font-size:14px;">' +
+                    '<label style="font-weight: 400;"><input type = "radio" name ="shipping_addr_id" checked value="' + a + '"/>' +
+                    '<span class = "collect_address_box_name mr3">' + name + '</span>' +
+                    '<span class = "collect_address_box_tphone mr3">' + phone + '</span>' +
+                    '<span class = "collect_address_box_province mr3">' + province + '</span>' +
+                    '<span class = "collect_address_box_city mr3">' + city + '</span>' +
+                    '<span class = "collect_address_box_district mr3">' + area + '</span>' +
+                    '<span class = "collect_address_box_street mr3">' + street + '</span></label>' +
+                    '<a class = "address_modify" href = "javascript:modify(' + a + ');">编辑</a>' +
+                    '</p>')
+                    $('.collect_address_box').append(p);
+
+                    clear();
+                    alert('添加成功!');
+                    window.location.reload();
+                }
+            })
+        }
+    })
+
+});
+
+//修改地址
+
+$('.collect_address_box .address_modify').click(function(){
+    $('.address_change_title_text').html('修改地址');
+    $('.address_change').show();
+    $('.address_change_checkbox').hide();
+
+
+    oldId = $(this).attr('id');
+    names = $(this).prev().children().eq(1).html();
+    phones = $(this).prev().children().eq(2).html();
+    provinces = $(this).prev().children().eq(3).html();
+    citys = $(this).prev().children().eq(4).html();
+    areas = $(this).prev().children().eq(5).html();
+    streets = $(this).prev().children().eq(6).html();
+
+    $('#c_name').val(names);
+    $('#street').val(streets);
+    $('#phone').val(phones);
+
+    $('.btn-success').bind('click', function () {
+        if (checkReciver() && checkDetail() && checkMobile()) {
+
+            name = $('#c_name').val();
+            province  = $('#province').val();
+            city = $('#city').val();
+            area = $('#area').val();
+            phone = $('#phone').val();
+            street = $('#street').val();
+            if(province =='--请选择省--' || city=='--市--' || area=='--区县--'){
+            alert('区域未选择');
+            // return false;
+        }
+
+            data = {
+                'id': oldId,
+                'reciver_user': name,
+                'province': province,
+                'city': city,
+                'area': area,
+                'street': street,
+                'reciver_phone': phone
+            };
+
+            $.post('__CONTROLLER__/addressUpdate', data, function (a) {
+                if(a>0){
+
+                    $('.address_change').hide();
+
+                    clear();
+                    alert('更新成功!');
+                    window.location.reload();
+                }
+            })
+
+
+        }
+
+
+    })});
+
+$('.collect_address_box .address_delete').click(function(){
+        var id = $(this).attr('id');
+        var is_default=$(this).attr('is_default');
+        $.get('<{:U('addressDelete')}>', { "id": id,'is_default':is_default},
+        function(req) {
+            if(req){
+                alert('删除成功！');
+                window.location.reload();
+            }else{
+                alert('删除失败');
+                window.location.reload();
+            }
+    });
+});
+
+
+//验证收货人
+$("#c_name").blur(function () {
+    checkReciver();
+});
+//验证详细地址
+$("#street").blur(function () {
+    checkDetail();
+});
+//验证手机号
+$("#phone").blur(function () {
+    checkMobile();
+});
+
+//验证收货人
+function checkReciver() {
+    var ischeckReciver = false;
+    var textcolor = "red";
+    var msg = "";
+    var _reciver = $("#c_name");
+    if (_reciver.val() == "") {
+        msg = "请填写收货人";
+        ischeckReciver = false;
+    } else {
+        msg = '';
+        ischeckReciver = true;
+    }
+    //alert(msg);
+    _reciver.next().html(msg);
+    return ischeckReciver;
+
+}
+//验证详细地址
+function checkDetail() {
+    var ischeckDetail = false;
+    var textcolor = "red";
+    var msg = "";
+    var _detail = $("#street");
+    if (_detail.val() == "") {
+        msg = "请填写收货地址";
+        ischeckDetail = false;
+    } else {
+        msg = '';
+        ischeckDetail = true;
+    }
+    //alert(msg);
+    _detail.next().html(msg);
+    return ischeckDetail;
+
+}
+//验证手机号
+function checkMobile() {
+    var ischeckMobile = false;
+    var textcolor = "red";
+    var msg = "";
+    var _mobile = $("#phone");
+    var re = /^1[3|4|5|7|8][0-9]\d{4,8}$/;
+    if (_mobile.val() == "") {
+        msg = "请填写手机号码";
+    } else if (_mobile.val().match(re) == null) {
+        msg = "请填写正确的手机号码";
+        ischeckMobile = false;
+    } else {
+        msg = '';
+        ischeckMobile = true;
+    }
+    //alert(msg);
+    _mobile.next().html(msg);
+    return ischeckMobile;
+
+}
+function clear(){
+
+    oldId = '';
+    name = '';
+    phone = '';
+    province = '';
+    city = '';
+    area = '';
+    street = '';
+    $('#c_name').html();
+    $('#street').html();
+    $('#phone').html();
+}
+
+/**
+ *
+ * @param obj 传入的父节点
+ * 生成个人地址信息
+ */
+function getDress(obj) {
+    name = obj.eq(0).html();
+    tphone = obj.eq(1).html();
+    fphone = obj.eq(2).html();
+    province = obj.eq(3).html();
+    city = obj.eq(4).html();
+    district = obj.eq(5).html();
+    street = obj.eq(6).html();
+    detail = obj.eq(7).html();
+}
+
+$(document).ready(function(){
+    checkshipfee();
+});
+
+$('.collect_pay_box input[name="shipping_way"]').change(function(){
+    checkshipfee();
+})
+
+function checkshipfee(){
+    var ship= $('.collect_pay_box input[name="shipping_way"]:checked').val();
+    var price =eval($('input[name="deail_price"]').val());
+    $.ajax({
+          url: '__CONTROLLER__/shipfee',
+          data:{'ship':ship,'weight':weight},
+          type:"post",
+          success:function(d){
+                if(d ==0){
+                    total = eval(d)+ price;
+                    $('#shipfee').html('运费：包邮');
+                    $('#total').html(total.toFixed(2));
+                    $('input[name="real_price"]').val(total.toFixed(2));
+                }else{
+                    total = eval(d)+ price;
+                    $('#shipfee').html('运费：¥'+d);
+                    $('#total').html(total.toFixed(2));
+                    $('input[name="real_price"]').val(total.toFixed(2));
+                }
+          }
+       });
+    }
+
+</script>
+</block>

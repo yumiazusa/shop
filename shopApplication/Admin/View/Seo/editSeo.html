@@ -1,0 +1,166 @@
+<!--添加SEO位-->
+<!-- 继承 公共模板 开始 -->
+<extend name="Public:blank" />
+<!-- 继承 公共模板 结束 -->
+<!-- 顶部CSS文件 开始 -->
+<block name="cssFile">
+<link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap.min.css" />
+<link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap-responsive.min.css" />
+<link rel="stylesheet" href="__PUBLIC__/Admin/css/colorpicker.css" />
+<link rel="stylesheet" href="__PUBLIC__/Admin/css/datepicker.css" />
+<link rel="stylesheet" href="__PUBLIC__/Admin/css/uniform.css" />
+<link rel="stylesheet" href="__PUBLIC__/Admin/css/select2.css" />
+<link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-style.css" />
+<link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-media.css" />
+<link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap-wysihtml5.css" />
+<!--自定义的广告样式-->
+<link rel="stylesheet" href="__PUBLIC__/Admin/css/adv.css" />
+<link href="__PUBLIC__/Admin/font-awesome/css/font-awesome.css" rel="stylesheet" />
+</block>
+<!-- 顶部CSS文件 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部JS文件 开始 -->
+<block name="topJsFile">
+
+</block>
+<!-- 顶部JS文件 结束 -->
+
+<!-- ===================================================== -->
+<!-- 头部部分 开始 -->
+<block name="publicHead">
+    <div id="breadcrumb">
+        <a href="index.html" title="返回系统主页" class="tip-bottom">
+            <i class="icon-home"></i>
+            管理首页
+        </a>
+    </div>
+    <div style="margin-top:10px;">
+
+     </div>
+</block>
+<!-- 头部部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 公共Body部分 开始 -->
+<block name="publicBody">
+    <!-- 将主体包含在 .row-fluid 内部 -->
+    <div class="container-fluid">
+         <a href="__CONTROLLER__/addSeo"class="btn btn-info"><b>+ 添加SEO</b></a>
+         <div class="add-adv">
+           <a href="__CONTROLLER__/seoList" class="btn btn-info"><b>+  SEO管理</b></a>
+
+        </div>
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="widget-box">
+                <div class="widget-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
+
+                </div>
+                <div class="widget-content nopadding">
+                  <form action="__CONTROLLER__/doeditSeo" method="post" class="form-horizontal">
+
+                    <div class="control-group">
+                    <input type="hidden" name="id" value="<{$list.id}>">
+                      <label class="control-label">SEO类别 :</label>
+                      <div class="controls">
+                        <input type="text" class="span11" style="width:200px;"  name="seoname" value="<{$list.seoname}>"/>
+                      </div>
+                    </div>
+
+                    <div class="control-group">
+                      <label class="control-label">SEO ident :</label>
+                      <div class="controls">
+                        <input type="text" class="span11" style="width:200px;"  name="ident" value="<{$list.ident}>"/>
+                      </div>
+                    </div>
+
+                    <div class="control-group">
+                      <label class="control-label">SEO title :</label>
+                      <div class="controls">
+                        <input type="text" class="span11" style="width:200px;"  name="title" value="<{$list.title}>"/>
+                      </div>
+                    </div>
+
+                    <div class="control-group">
+                      <label class="control-label">SEO keywords :</label>
+                      <div class="controls">
+                        <input type="text" class="span11" style="width:200px;"  name="keywords" value="<{$list.keywords}>"/>
+                      </div>
+                    </div>
+
+                    <div class="control-group">
+                      <label class="control-label">SEO description :</label>
+                      <div class="controls">
+                        <input type="text" class="span11" style="width:200px;"  name="description" value="<{$list.description}>"/>
+                      </div>
+                    </div>
+
+                    <!-- <div class="control-group">
+                      <label class="control-label">SEO description :</label>
+                      <div class="controls">
+                        <input type="text" class="span11" style="width:200px;"  name="affiliation" value="<{$list.affiliation}>"/>
+                      </div>
+                    </div>   -->
+
+                    <!--
+                    <div class="control-group">
+                        <label class="control-label">是否显示</label>
+                        <div class="controls">
+                          <label style="display:inline">
+                             <input type="radio" name="is_show" value="1" <if condition="$data['is_show'] eq 1">checked="checked"</if>/>
+                              是</label>
+                          <label style="display:inline">
+                             <input type="radio" name="is_show" value="0" <if condition="$data['is_show'] eq 0">checked="checked"</if>/>
+                              否</label>
+                    </div>
+                    !-->
+                    <div class="form-actions">
+                      <button type="submit" class="btn btn-success"><b>提交</b></button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+
+        </div>
+    </div>
+</block>
+<!-- 公共Body部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- js文件模块 开始 -->
+<block name="footJsFile">
+
+</block>
+<!-- js文件模块 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 底部JS执行区域 开始 -->
+<block name="footScript">
+   <script src="__PUBLIC__/Admin/js/jquery.min.js"></script>
+<script src="__PUBLIC__/Admin/js/jquery.ui.custom.js"></script>
+<script src="__PUBLIC__/Admin/js/bootstrap.min.js"></script>
+<script src="__PUBLIC__/Admin/js/bootstrap-colorpicker.js"></script>
+<script src="__PUBLIC__/Admin/js/bootstrap-datepicker.js"></script>
+<script src="__PUBLIC__/Admin/js/jquery.toggle.buttons.html"></script>
+<script src="__PUBLIC__/Admin/js/masked.js"></script>
+<script src="__PUBLIC__/Admin/js/jquery.uniform.js"></script>
+<script src="__PUBLIC__/Admin/js/select2.min.js"></script>
+<script src="__PUBLIC__/Admin/js/matrix.js"></script>
+<script src="__PUBLIC__/Admin/js/matrix.form_common.js"></script>
+<script src="__PUBLIC__/Admin/js/wysihtml5-0.3.0.js"></script>
+<script src="__PUBLIC__/Admin/js/jquery.peity.min.js"></script>
+<script src="__PUBLIC__/Admin/js/bootstrap-wysihtml5.js"></script>
+<script src="__PUBLIC__/Admin/js/muneopen.js"></script>
+<script>
+  $('.textarea_editor').wysihtml5();
+</script>
+
+</block>
+<!-- 底部JS执行区域 结束 -->

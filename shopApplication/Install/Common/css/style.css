@@ -1,0 +1,98 @@
+body {
+    background:#111;
+}
+* {
+    font-family:"Hiragino Sans GB","helvetica","microsoft yahei";
+}
+.topbar {
+    height:100px;
+    padding-top:15px;
+    background:#fff url(../images/bg.jpg) repeat-x 0 0;
+    width:100%;
+    border-bottom:1px solid #cdcdcd;
+}
+box {
+    overflow:hidden;
+    background:#fff;
+    margin-top:10px;
+}
+.main {
+    width:100%;
+    background:#f5f5f5;
+    padding-bottom:10px;
+}
+.main-in {
+    margin-bottom:20px;
+    margin-top:10px;
+    min-height:450px;
+    background:#fff;
+    padding:10px;
+    border-radius:5px;
+    overflow:hidden;
+}
+.left {
+    background:#fff;
+}
+.right {
+    overflow:hidden;
+}
+.warning-box {
+    margin-top:10px;
+    margin-bottom:10px;
+}
+.right-body {
+    min-height:350px;
+}
+.agreement {
+    font-size:13px;
+    color:#555;
+    height:350px;
+    overflow-x:hidden;
+    overflow-y:scroll;
+}
+.right-footer {
+    text-align:center;
+    margin-top:20px;
+}
+.agree {
+    margin-right:50px;
+}
+.check-title {
+    height:30px;
+    line-height:28px;
+    padding:0;
+    margin:0;
+    font-size:18px;
+    font-weight:bold;
+    color:#999;
+}
+div#media {
+    width:60%;
+    margin:100px auto;
+}
+.footer {
+    width:100%;
+    height:30px;
+    color:#aaa;
+    margin-top:10px;
+}
+div.copyright {
+    line-height:30px;
+    color:#aaa;
+    font-size:10px;
+}
+.complete {
+    width:100%;
+    padding-top:50px;
+    padding-left:100px;
+}
+.complete  h3 {
+    /*background: url(./Application/Install/Common/image/check.png) no-repeat 0 0;*/
+}
+.complete p {
+    margin-top:20px;
+    padding-left:50px;
+}
+.complete p a {
+    margin-right:20px;
+}

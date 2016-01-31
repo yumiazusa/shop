@@ -1,0 +1,115 @@
+<extend name="Public:public" />
+<block name="cssFile">
+<link rel = "stylesheet" href = "__PUBLIC__/Home/css/Support/supportMap.css"/>
+<style>
+.cover_box{
+    position:relative;
+}
+.maincontainer{
+    min-height: 350px;
+}
+</style>
+</block>
+<block name="topJsFile">
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=UVLq77yrISccQbi4gEXZw4kR"></script>
+</block>
+<block name="publicBody">
+
+    <main>
+        <div class="title">滇晟服务网点查询</div>
+            <div class="row maincontainer">
+                <volist name="option" id="v">
+            <div div class="col-md-4" style="padding-left:5%">
+            <div class="list_box">
+                <b><{$v.name}>:<{$v.cname}></b>
+                <p><{$v.address}></p>
+                <p>电话:<{$v.tel}></p>
+                <p>工作时间：<{$v.wtime}></p>
+                <a class="show_map" href="javascript:;" map_x="<{$v.map_x}>" map_y="<{$v.map_y}>">查看地图</a>
+            </div>
+            </div>
+            </volist>
+            </div>
+
+        <div class="cover">
+            <div class="cover_box">
+
+                <div id="map">
+                    <div id="container" style="width:800px;height:450px"></div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+    </main>
+</block>
+
+<block name="bottomJsFile">
+    <script src="__PUBLIC__/Home/js/jquery.min.js"></script>
+
+    <script>
+
+
+
+        /**************遮罩*************/
+
+        //变量
+        var l = 0;      //默认left边距
+        var w = 0;      //默认浏览器宽度
+        var w1 = 0;      //默认遮罩宽度
+        var h = 0;      //默认浏览器高
+
+        //设置遮罩的宽和高
+        function setSize(){
+            h = parseInt($(document).height());
+            w1 = parseInt($(document).width());
+            $('.cover').css({'height':h,'width':w1});
+            w = parseInt($('.cover_box').css('width'));
+            l = ($(window).width()-w)/2;
+            $('.cover_box').css({'left':l})
+        }
+
+        //加载完成后设置遮罩的宽和高
+        $(function(){
+            setSize();
+        });
+        //点击图片连接  显示遮罩
+        $('.show_map').click(function(){
+            $('.cover').css({'display':'block'});
+
+            x = $(this).attr('map_x');
+            y = $(this).attr('map_y');
+           var map = new BMap.Map("container");
+           var point = new BMap.Point(y, x);
+           map.centerAndZoom(point, 15);
+           var marker = new BMap.Marker(point);
+           map.addOverlay(marker);
+           marker.setAnimation(BMAP_ANIMATION_BOUNCE);
+           map.addControl(new BMap.NavigationControl());    
+           map.addControl(new BMap.ScaleControl());    
+           map.addControl(new BMap.OverviewMapControl());    
+           map.addControl(new BMap.MapTypeControl());    
+        });
+
+        //点击其他位置 隐藏遮罩
+        $('.cover').bind("click",function(event){
+            $('source').attr('src','');
+            $('video').load();
+            $('.cover').css({'display':'none'});
+            event.stopPropagation();    //  阻止事件冒泡
+        });
+
+        //
+        $('.cover_box').bind("click",function(event){
+            event.stopPropagation();    //  阻止事件冒泡
+        });
+
+
+        $(window).resize(function(){
+            setSize();
+        });
+
+    </script>
+</block>

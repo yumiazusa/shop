@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang = "en">
+<head>
+    <meta charset = "UTF-8">
+    <title>Document</title>
+    <link rel = "stylesheet" href = "__PUBLIC__/Home/css/Support/recruitment.css"/>
+    <script src="__PUBLIC__/Home/js/jquery.min.js"></script>
+</head>
+<body>
+    <header></header>
+    <main>
+
+
+        <!--<div class="recruitment_nav">-->
+            <!--<div class="recruitment_nav_img">添加基本信息</div>-->
+            <!--<div class="recruitment_nav_img">上传简历</div>-->
+            <!--<div class="recruitment_nav_img">完成</div>-->
+        <!--</div>-->
+
+        <div class="recruitment_main">
+            <form action = "" method="post">
+                <!--点击上传头像-->
+                <div class="head_img">
+                    <img src = "__PUBLIC__/Home/images/logo1.png" />
+                </div>
+
+                <div class="recruitment_main_input">
+                    <p><span>* </span>姓名　　:　　　　<input type = "text" id="username"/></p>
+                    <p><span>* </span>性别　　:　　　　<input type = "text" id="sex"/></p>
+                    <p><span>* </span>出生日期:　　　　<input type = "text" id="birthday" placeholder="格式:1970-01-01"/></p>
+                    <p><span>* </span>毕业院校:　　　　<input type = "text" id="school"/></p>
+                    <p><span>* </span>最高学历:　　　　<input type = "text" id="education"/></p>
+                    <p><span>* </span>专业　　:　　　　<input type = "text" id="professional"/></p>
+                    <p><span>* </span>英语等级:　　　　<input type = "text" id="english"/></p>
+                    <p><span>* </span>毕业时间:　　　　<input type = "text" id="grad_date" placeholder="格式:1970-01-01"/></p>
+                    <p><span>* </span>工作年限:　　　　<input type = "text" id="experience"/></p>
+                    <p><span>* </span>现居地　:　　　　<input type = "text" id="now_address"/></p>
+                    <p><span>* </span>上传简历:　　　　<input type = "file" id="file"/></p>
+                </div>
+
+            </form>
+        </div>
+    </main>
+    <div id="msg" class="form-horizontal  ">
+        <span class="help-block">请输入真实信息</span>
+    </div>
+    <footer></footer>
+</body>
+
+<script>
+    //变量
+
+    var toTop = 0;
+    var toLift = 0;
+
+    $(function(){
+        toTop = $('input:first').offset().top;
+        $('.help-block').css({'top':toTop});
+    })
+
+
+    $('input').bind('click',function(){
+//        alert($(window).scrollTop())
+        toTop = ($(this).offset().top);
+
+        $('.help-block').css({'top':toTop});
+    })
+</script>
+
+</html>

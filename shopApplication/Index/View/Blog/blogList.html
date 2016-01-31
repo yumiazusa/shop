@@ -1,0 +1,74 @@
+<extend name="Public:public" />
+<block name="publicBody">
+    <div class="main">
+      <div class="container">
+        <ul class="breadcrumb">
+            <li><a href="__APP__">主页</a></li>
+            <li class="active"><a href="<{:U('blogList')}>">博文中心</a></li>
+        </ul>
+        <!-- BEGIN SIDEBAR & CONTENT -->
+        <div class="row margin-bottom-40">
+          <!-- BEGIN CONTENT -->
+          <div class="col-md-12 col-sm-12">
+            <h1>博文中心</h1>
+            <div class="content-page">
+              <div class="row">
+                <!-- BEGIN LEFT SIDEBAR -->
+                <div class="col-md-9 col-sm-9 blog-posts">
+                  <volist name="blogs" id="blog">
+                  <div class="row">
+                  <if condition="$blog['type'] eq 1">
+                    <div class="col-md-4 col-sm-4">
+                      <img class="img-responsive" alt="" src="<{$blog['images']}>">
+                    </div>
+                  <elseif condition="$blog['type'] eq 2" />
+                  <div class="col-md-4 col-sm-4">
+                      <iframe height="205" allowfullscreen="" style="width:100%; border:0" src="<{$blog['video']}>"></iframe>
+                    </div>
+                  </if>
+                    <div class="col-md-8 col-sm-8">
+                      <h2><a href="<{:U('blog',array('id'=>$blog['id']))}>"><{$blog.title}></a></h2>
+                      <ul class="blog-info">
+                        <li><i class="fa fa-calendar"></i> <{$blog.create_time|date="Y-m-d H:i",###}></li>
+                        <li><i class="fa fa-comments"></i><{$blog.clicktimes}></li>
+                        <li><i class="fa fa-tags"></i> <{$blog.author}></li>
+                      </ul>
+                      <p><{$blog.description}></p>
+                      <a href="<{:U('blog',array('id'=>$blog['id']))}>" class="more">阅读全文<i class="icon-angle-right"></i></a>
+                    </div>
+                  </div>
+                  <hr class="blog-post-sep">
+                  </volist>
+                  <{$page}>
+                </div>
+                <!-- END LEFT SIDEBAR -->
+
+                  <div class="col-md-3 col-sm-3 blog-sidebar">
+                  <!-- BEGIN RECENT NEWS -->
+                  <h2>最热博文</h2>
+                  <div class="recent-news margin-bottom-10">
+                  <volist name="blogrank" id="rank">
+                    <div class="row margin-bottom-10">
+                      <div class="col-md-3">
+                        <img class="img-responsive" alt="" src="__PUBLIC__/Index/Blog/<{$rank[list_image]}>">
+                      </div>
+                      <div class="col-md-9 recent-news-inner">
+                        <h3><a href="<{:U('blog',array('id'=>$rank['id']))}>" target="_blank"><{$rank.title|msubstr=0,12,'utf-8',true}></a></h3>
+                        <p><{$rank.description|msubstr=0,15,'utf-8',true}></p>
+                      </div>
+                    </div>
+                    </volist>
+                  </div>
+                  <!-- END RECENT NEWS -->
+
+                </div>
+                <!-- END RIGHT SIDEBAR -->
+              </div>
+            </div>
+          </div>
+          <!-- END CONTENT -->
+        </div>
+        <!-- END SIDEBAR & CONTENT -->
+      </div>
+    </div>
+ </block>

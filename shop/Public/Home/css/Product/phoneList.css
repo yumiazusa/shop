@@ -1,0 +1,349 @@
+*{
+    margin:0;
+    padding:0;
+}
+main{
+
+    width:100%;
+    margin: 0px auto;
+    overflow: hidden;
+    zoom: 1;
+    min-width:1220px;
+}
+
+/*每日推荐*/
+
+.title_box{
+    width:90%;
+    margin:0 auto;
+    overflow:hidden;
+    margin-top:25px;
+}
+.title{
+    width:350px;
+    float:left;
+    height:35px;
+    color: #666;
+    font-family: "microsoft yahei";
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 20px;
+    margin-bottom: 18px;
+    padding-top: 12px;
+
+}
+.pop-tab{
+    float:right;
+    height: 55px;
+    width: 400px;
+}
+
+.item {
+    color: #fff;
+    float: left;
+    font-family: "microsoft yahei";
+    font-size: 14px;
+    height: 50px;
+    line-height: 40px;
+    margin-left: 10px;
+    padding-left: 30px;
+    /*position: relative;*/
+    width: 70px;
+}
+.item1 {
+    background: url("../../../Home/images/Product/phoneTab.png") no-repeat scroll -400px 0 rgba(0, 0, 0, 0);
+}
+.item2 {
+    background: url("../../../Home/images/Product/phoneTab.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+}
+.item3 {
+    background: url("../../../Home/images/Product/phoneTab.png") no-repeat scroll -100px 0 rgba(0, 0, 0, 0);
+}
+.item4 {
+    background: url("../../../Home/images/Product/phoneTab.png") no-repeat scroll -200px 0 rgba(0, 0, 0, 0);
+}
+.item5 {
+    background: url("../../../Home/images/Product/phoneTab.png") no-repeat scroll -300px 0 rgba(0, 0, 0, 0);
+}
+
+.tab1{
+    background: url("../../../Home/images/Product/phoneTab.png") no-repeat scroll -400px 0,url("../../../Home/images/Product/phoneTab.png") no-repeat scroll -395px -60px;
+
+}
+.tab2{
+    background: url("../../../Home/images/Product/phoneTab.png") no-repeat scroll 0 0,url("../../../Home/images/Product/phoneTab.png") no-repeat scroll 6px -60px;
+
+}
+.tab3{
+    background: url("../../../Home/images/Product/phoneTab.png") no-repeat scroll -100px 0,url("../../../Home/images/Product/phoneTab.png") no-repeat scroll -95px -60px;
+
+}
+.tab4{
+    background: url("../../../Home/images/Product/phoneTab.png") no-repeat scroll -200px 0,url("../../../Home/images/Product/phoneTab.png") no-repeat scroll -195px -60px;
+
+}
+.tab5{
+    background: url("../../../Home/images/Product/phoneTab.png") no-repeat scroll -300px 0,url("../../../Home/images/Product/phoneTab.png") no-repeat scroll -295px -60px;
+
+}
+
+/*每日推荐展示*/
+.hot_show {
+    width: 100%;
+    min-width:1220px;
+    height:400px;
+    background:#fff;
+    margin:0 auto;
+    margin-top:20px;
+}
+/*5个手机块*/
+.hot_show_box{
+    width: 90%;
+    min-width:1220px;
+    height:390px;
+    background:#fff;
+    margin:0 auto;
+    padding-left:15px;
+    margin-top:15px;
+
+}
+
+/*单个手机块*/
+.hot_one{
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+    float: left;
+    height: 358px;
+    margin-right: 25px;
+    min-width: 218px;
+    max-width:218px;
+    margin-top:20px;
+}
+.hot_one:nth-of-type(5){
+    margin-right: 0;
+}
+
+.hot_one_image{
+    background-color: #fff;
+    height: 227px;
+    position: relative;
+    text-align: center;
+    width: 100%;
+    padding: 10px 0;
+}
+
+.p_img {
+    display: block;
+
+    overflow:hidden;
+}
+/*图片*/
+.p_img img{
+    vertical-align: middle;
+}
+/*------标签状态------*/
+.p_tag{
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    left: 21px;
+    top: 21px;
+    line-height: 60px;
+    font-size: 16px;
+    color: #fff;
+    font-family: "microsoft yahei";
+
+}
+
+
+/*特价*/
+.p_tag1{
+    background: url('../../../Home/images/Product/phoneTab.png') no-repeat 0 -50px;
+}
+/*新品*/
+.p_tag2{
+    background: url('../../../Home/images/Product/phoneTab.png') no-repeat -100px -50px;
+}
+/*好评*/
+.p_tag3{
+    background: url('../../../Home/images/Product/phoneTab.png') no-repeat -200px -50px;
+}
+/*热销*/
+.p_tag4{
+    background: url('../../../Home/images/Product/phoneTab.png') no-repeat -300px -50px;
+}
+
+.p-arrow {
+    position: absolute;
+    width: 0;
+    height: 0;
+    bottom: 0;
+    left: 100px;
+    overflow: hidden;
+    border-width: 8px;
+    border-style: dashed dashed solid;
+    border-color: transparent transparent #f4f4f4;
+}
+/*手机名称等*/
+.p-name {
+    display: block;
+    margin: 15px 15px 0;
+    line-height: 20px;
+    height: 40px;
+    overflow: hidden;
+    font-family: "microsoft yahei";
+}
+.p-name:hover{
+    color:#e4393c;
+}
+.p-price {
+    padding: 12px 15px 0 15px;
+    color: #333;
+    overflow:hidden;
+}
+.p-price .number {
+    margin-left: 3px;
+    font-size: 24px;
+}
+.promo-words {
+    width: 188px;
+    height: 18px;
+    overflow: hidden;
+    padding: 0 15px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: #e4393c;
+    font-family: "microsoft yahei";
+}
+
+
+
+
+/*类型选择*/
+.line1 {
+    border-top: 1px solid #eaeaea;
+    clear: both;
+}
+.phone_select {
+    background-color: #ffffff;
+    display: block;
+    overflow: auto;
+}
+.phonegroup {
+    margin: 0 auto;
+    width: 1180px;
+}
+.type_select {
+    float: left;
+    margin: 10px 0 5px;
+    width: 390px;
+}
+.type_select_title {
+    font-size: 16px;
+    font-weight: bold;
+    width: 100px;
+}
+.type_select ul {
+     display: block;
+     height: 1%;
+     margin: 10px 0;
+     overflow: auto;
+ }
+ol, ul {
+    list-style: outside none none;
+}
+.type_select ul li {
+    color: #878787;
+    float: left;
+    font-size: 14px;
+    font-weight: normal;
+    height: 31px;
+    line-height: 31px;
+    overflow: hidden;
+    width: 140px;
+}
+li {
+    list-style: outside none none;
+}
+.type_select ul li input {
+    margin-right: 8px;
+}
+input, a, textarea {
+    outline: medium none;
+}
+input, select, button, textarea {
+    font-family: "Microsoft YaHei";
+}
+button, input, select, textarea {
+    font-size: 100%;
+}
+
+/*已选择*/
+.type_selected {
+    height: 24px;
+    padding: 12px;
+}
+.phonegroup {
+    margin: 0 auto;
+    width: 1180px;
+}
+.type_selected ul, .type_selected span {
+    float: left;
+}
+.type_select_title {
+    font-size: 16px;
+    font-weight: bold;
+    width: 100px;
+}
+.type_selected ul, .type_selected span {
+    float: left;
+}
+ol, ul {
+    list-style: outside none none;
+}
+
+.type_selected ul li {
+    background-color: #b2ddcd;
+    border-radius: 2px;
+    color: #878787;
+    float: left;
+    line-height: 24px;
+    margin-right: 10px;
+    padding: 0 0 0 10px;
+}
+
+.type_selected ul li a {
+    border-left: 1px solid #ffffff;
+    display: inline-block;
+    height: 24px;
+    margin-left: 10px;
+    text-align: center;
+    width: 24px;
+}
+.shop_index .hot_goods_list a:hover, a:visited, a:link {
+    color: #b2b2b2;
+}
+a, a:visited, a:link {
+    color: #6a6a6a;
+    outline: medium none;
+    text-decoration: none;
+}
+
+/*查看全部机型*/
+#show_all_mobile {
+    color: #333;
+    float: right;
+    font-size: 13px;
+}
+/*手机列表*/
+.all_show_box{
+    width: 90%;
+    min-width:1220px;
+    /*height:390px;*/
+    margin:0 auto;
+    padding-left:15px;
+
+}
+
+
+

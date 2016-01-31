@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>商城系统安装向导</title>
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/bootstrap.min.css">
+    <!-- 可选的Bootstrap主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="__ROOT__/Application/Install/Common/css/style.css" />
+    <script src="__PUBLIC__/Home/js/jquery.min.js"></script>
+</head>
+<body>
+    <div class="topbar">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                    <img src="__ROOT__/Application/Install/Common/images/logo.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main">
+        <div class="container">
+            <div class="row">
+                <div class="alert alert-warning alert-dismissible col-md-10 col-md-offset-1 warning-box" role="alert">
+                    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <strong>提示信息：</strong> 如果你在安装的过程中遇到任何问题，请发送邮件至 Email:guchengwuyue@163.com.
+                </div>
+                <div class="col-md-10 col-md-offset-1 box" style="background:#fff">
+                    <div class="row">
+                        <div class="main-in col-md-4 left">
+                            <ul class="nav nav-pills nav-stacked">
+                               <li role="presentation" class="active">
+                                    <a href="#"><h2 style="margin:10px;">安装向导</h2></a>
+                                </li>
+                               <li role="presentation" class="active"><a href="#">第一步：阅读许可协议</a></li>
+                               <li role="presentation"><a href="#">第二步：检查安装环境</a></li>
+                               <li role="presentation"><a href="#">第三步：参数设置</a></li>
+                               <li role="presentation"><a href="#">第四步：执行安装</a></li>
+                               <li role="presentation"><a href="#">第五步：安装完成</a></li>
+                            </ul>                 
+                        </div>
+                        <div class="main-in col-md-8 right">
+                            <!-- <div class="right-header">
+                                
+                            </div> -->
+                            <div class="right-body">
+                                <div class="agreement">
+                                    <br />
+                                    <div style="text-align:center; font-size:14px;"><strong>许可协议</strong></div>
+                                    <br/>
+                                    为了使你正确并合法的使用本软件，请你在使用前务必阅读清楚下面的协议条款：<br />
+                                    <strong>一、本授权协议适用且仅适用于 商城系统商城 V1.0版本，商城系统商城官方对本授权协议的最终解释权。</strong><br />
+                                    <strong>二、协议许可的权利</strong> <br />
+                                    1、您可以在完全遵守本最终用户授权协议的基础上，将本软件应用于商业用途。 <br />
+                                    2、您可以在协议规定的约束和限制范围内修改 商城系统商城 源代码或界面风格以适应您的网站要求。 <br />
+                                    3、您拥有使用本软件构建的网站全部内容所有权，并独立承担与这些内容的相关法律义务。<br />       4、获得商业授权之后，您可以将本软件应用于商业用途，同时依据所购买的授权类型中确定的技术支持内容，自购买时刻起，在技术支持期限内拥有通过指定的方式获得指定范围内的技术支持服务。商业授权用户享有反映和提出意见的权力，相关意见将被作为首要考虑，但没有一定被采纳的承诺或保证。 <br />    
+                                    <strong>三、协议规定的约束和限制</strong> <br />            1、未获商业授权之前，不得将本软件用于任何用途。购买商业授权请登陆 www.商城系统商城.com 了解最新说明。<br />   
+                                    2、未经官方许可，不得对本软件或与之关联的商业授权进行出租、出售、抵押或发放子许可证。<br />   
+                                    3、不管你的网站是否整体使用 商城系统商城 ，还是部份栏目使用商城系统商城，在你使用了商城系统商城的网站主页上必须加上商城系统商城官方网址(www.商城系统商城.com)的链接。<br />  
+                                    4、未经官方许可，禁止在商城系统商城 的整体或任何部分基础上以发展任何派生版本、修改版本或第三方版本用于重新分发。<br />  
+                                    5、如果您未能遵守本协议的条款，您的授权将被终止，所被许可的权利将被收回，并承担相应法律责任。 <br />  
+                                    <strong>四、有限担保和免责声明</strong> <br />
+                                    1、本软件及所附带的文件是作为不提供任何明确的或隐含的赔偿或担保的形式提供的。     <br />        2、用户出于自愿而使用本软件，您必须了解使用本软件的风险，在尚未购买产品技术服务之前，我们不承诺对免费用户提供任何形式的技术支持、使用担保，也不承担任何因使用本软件而产生问题的相关责任。 <br />  
+                                    3、电子文本形式的授权协议如同双方书面签署的协议一样，具有完全的和等同的法律效力。您一旦开始确认本协议并安装商城系统商城，即被视为完全理解并接受本协议的各项条款，在享有上述条款授予的权力的同时，受到相关的约束和限制。协议许可范围以外的行为，将直接违反本授权协议并构成侵权，我们有权随时终止授权，责令停止损害，并保留追究相关责任的权力。<br />    
+                                    4、如果本软件带有其它软件的整合API示范例子包，这些文件版权不属于本软件官方，并且这些文件是没经过授权发布的，请参考相关软件的使用许可合法的使用。<br />    
+                                    协议发布时间： 2015年1月25日  <br />      
+                                </div>
+                            </div>
+                            <div class="right-footer">
+                                <a href="javascript:void(0);" class="btn btn-primary agree">同意安装</a>
+                                <button type="button" class="btn btn-default disagree">不同意</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1 copyright" style="font-size:10px;">
+                    Copyright&copy; Imagery意象图文网络工作室所有
+                </div> 
+            </div>
+        </div>
+    </div>
+</body>
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="__PUBLIC__/Home/js/bootstrap.min.js"></script>
+<script>
+    $(function (){
+        $('.agree').click(function (){
+            $.get('__CONTROLLER__/checkBeInstalled', function (d){
+                if (d == 1)
+                {
+                    alert('软件已被安装，请勿重复安装');
+                    return false;
+                }
+                else if (d == 0)
+                {
+                    location.href = '__CONTROLLER__/step_2/agree/yes';                    
+                }
+            });
+        });
+    });
+</script>
+</html>

@@ -1,0 +1,217 @@
+<!-- =====================================================
+    Author: Eden
+    Date:   2015-01-12
+    Function:   公共模板文件中定义的block区域，可以在子模板中继承和覆盖
+ ========================================================= -->
+<!-- 继承 公共模板 开始 -->
+<extend name="Public:blank" />
+<!-- 继承 公共模板 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部CSS文件 开始 -->
+<block name="cssFile">
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap-responsive.min.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/fullcalendar.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-style.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-media.css" />
+    <link href="__PUBLIC__/Admin/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/jquery.gritter.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/colorpicker.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/datepicker.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/uniform.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/select2.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap-wysihtml5.css" />
+    <link rel="stylesheet" href="__PUBLIC__/editor/themes/default/default.css" />
+    <style>
+.control-group{
+    float:left;
+    margin-left:40px;
+}
+
+    </style>
+}
+}
+</block>
+<!-- 顶部CSS文件 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部JS文件 开始 -->
+<block name="topJsFile">
+</block>
+<!-- 顶部JS文件 结束 -->
+
+<!-- ===================================================== -->
+<!-- 头部部分 开始 -->
+<block name="publicHead">
+    <div id="breadcrumb"> 
+        <a href="__APP__" title="返回系统首页" class="tip-bottom">
+            <i class="icon-home"></i> 
+        管理首页</a> 
+        <a href="#" class="current">商品管理</a> 
+    </div>
+    <h1 style="margin-top:10px;">添加商品</h1>
+</block>
+<!-- 头部部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 公共Body部分 开始 -->
+<block name="publicBody">
+    <!-- 将主体包含在 .row-fluid 内部 -->
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+        <form action="<{:U('doAddNum')}>" id="addPro" method="post">
+        <input type="hidden" name="product_id" value="<{$proid}>">
+        <empty name="Num">
+            <div class="widget-content widget-box tab-content">
+                <div class="add">
+                <div class="control-group" style="margin-left:80px;">
+                <label class="control-label">包装颜色属性：</label>
+                <div class="controls">
+                <select name="product_attr[1][]">
+                <volist name="Attrs1" id='vo1'>
+                <option value="<{$vo1.id}>"><{$vo1.prop_name}></option>
+                </volist>
+                </select>
+                </div>
+                </div>
+                <div class="control-group">
+                <label class="control-label">规格属性：</label>
+                <div class="controls">
+                <select name="product_attr[2][]">
+                <volist name="Attrs2" id='vo2'>
+                <option value="<{$vo2.id}>"><{$vo2.prop_name}></option>
+                </volist>
+                </select>
+                </div>
+                </div>
+                <div class="control-group">
+                <label class="control-label">库存：</label>
+                <div class="controls">
+                <input type="text" name="product_number[]" class="span14 tip-right" data-original-title="请输入商品库存量" placeholder="对应属性商品的库存量">
+                </div>
+                </div>
+                <div class="control-group">
+                <a onclick="add(this)" href="#" class="btn btn-info btn-mini add" style="margin-top:25px;"><i class="icon-plus"></i></a>
+                </div>
+                </div>
+            </div>
+            <else />
+                <volist name="Num" id="v" key="k">
+                <div class="widget-content widget-box tab-content">
+                <div class="add">
+                <div class="control-group" style="margin-left:80px;">
+                <label class="control-label">包装颜色属性：</label>
+                <div class="controls">
+                <select name="product_attr[1][]">
+                <volist name="Attrs1" id='vo1'>
+                <php>if(strpos('|'.$v['product_attr'].'|', '|'.$vo1['id'].'|') !== FALSE)
+                    $select = 'selected="selected"';
+                    else
+                    $select = '';
+                </php>
+                <option value="<{$vo1.id}>" <php>echo $select;</php>><{$vo1.prop_name}></option>
+                </volist>
+                </select>
+                </div>
+                </div>
+                <div class="control-group">
+                <label class="control-label">规格属性：</label>
+                <div class="controls">
+                <select name="product_attr[2][]">
+                <volist name="Attrs2" id='vo2'>
+                <php>if(strpos('|'.$v['product_attr'].'|', '|'.$vo2['id'].'|') !== FALSE)
+                    $select = 'selected="selected"';
+                    else
+                    $select = '';
+                </php>
+                <option value="<{$vo2.id}>" <php>echo $select;</php>><{$vo2.prop_name}></option>
+                </volist>
+                </select>
+                </div>
+                </div>
+                <div class="control-group">
+                <label class="control-label">库存：</label>
+                <div class="controls">
+                <input type="text" name="product_number[]" class="span14 tip-right" data-original-title="请输入商品库存量" placeholder="对应属性商品的库存量" value="<{$v.product_number}>">
+                </div>
+                </div>
+                <div class="control-group">
+                <a onclick="add(this)" href="#" class="btn btn-info btn-mini add" style="margin-top:25px;"><i <if condition="$k eq 1"> class="icon-plus" <else/> class="icon-minus" </if>></i></a>
+                </div>
+                </div>
+            </div>
+            </volist>
+            </empty>
+                <div style="padding-top:20px; padding-bottom:20px; text-align:center;">
+                    <button type="submit" class="btn btn-primary btn-large" style="margin-right:20px">提交</button>
+                    <a type="submit" href="<{:U('productList')}>" class="btn btn-default btn-large">返回</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+</block>
+<!-- 公共Body部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- js文件模块 开始 -->
+<block name="footJsFile">
+    <script src="__PUBLIC__/Admin/js/jquery.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/excanvas.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.ui.custom.js"></script> 
+    <script src="__PUBLIC__/Admin/js/bootstrap.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.flot.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.flot.resize.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.peity.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/fullcalendar.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.dashboard.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.gritter.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.interface.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.chat.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.validate.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.form_validation.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.wizard.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.uniform.js"></script> 
+    <script src="__PUBLIC__/Admin/js/select2.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.popover.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.dataTables.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.tables.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.toggle.buttons.html"></script> 
+    <script src="__PUBLIC__/Admin/js/masked.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.form_common.js"></script> 
+    <script src="__PUBLIC__/Admin/js/wysihtml5-0.3.0.js"></script> 
+    <script src="__PUBLIC__/Admin/js/bootstrap-wysihtml5.js"></script> 
+    <script src="__PUBLIC__/Plugins/jquery.uploadify.js"></script> 
+    <script src="__PUBLIC__/Admin/js/bootstrap-colorpicker.js"></script> 
+    <script charset="utf-8" src="__PUBLIC__/editor/kindeditor.js"></script>
+    <script charset="utf-8" src="__PUBLIC__/editor/lang/zh_CN.js"></script>
+    <script src="__PUBLIC__/Admin/js/muneopen.js"></script>
+</block>
+<!-- js文件模块 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 底部JS执行区域 开始 -->
+<block name="footScript">
+<script type="text/javascript">
+function add(o){
+  var li = $(o).parent().parent();
+  if($(o).find('i').attr('class') == 'icon-plus'){
+    var newli=li.clone();
+    newli.find('i').attr('class','icon-minus');
+    li.after(newli);
+  }else{
+    li.remove();
+  }
+}
+</script>
+</block>
+<!-- 底部JS执行区域 结束 -->

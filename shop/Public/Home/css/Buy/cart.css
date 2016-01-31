@@ -1,0 +1,291 @@
+* {
+	margin: 0;
+	padding: 0;
+	
+	font-family:'微软雅黑';
+	}
+
+html, body{
+	position: relative;
+    background: #fff;
+	}
+/*购物车*/
+.cart_box{
+	height: auto;
+	}
+/*购物车流程显示*/
+.cart_title{
+	/*height:100px;*/
+	background: #ffffff;
+	width:100%;
+
+	}
+
+.cart_progress_bar {
+    background: url("../../../Home/images/Buy/store_bg.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    height: 34px;
+    margin: 59px auto;
+    overflow: hidden;
+    width: 584px;
+}
+.cart_progress_bar li.current {
+    color: #ffffff;
+}
+.cart_progress_bar li {
+    color: #999999;
+    display: inline-block;
+    float: left;
+    font-size: 14px;
+    height: 33px;
+    line-height: 33px;
+    padding-left: 35px;
+
+    text-align: center;
+}
+.cart_progress_bar li:nth-child(3){
+	  padding-left: 68px;
+}
+
+
+
+
+
+
+/*购物车头部div*/
+.cart_box_header{
+	width:80%;
+	height:46px;
+	line-height: 40px;
+	margin: 0 auto;
+	margin-top: 15px;
+	border: 1px solid #2bc9ff;
+	border-bottom: 4px solid #2bc9ff;
+	}
+/*购物车标题table*/
+.cart_box_header_table{
+	width:100%;
+	margin: 0 auto;
+	height:38px;
+	margin-top: 5px;
+	line-height: 38px;
+	}
+.cart_box_header_table tr{
+
+	}
+/*购物车头部th的文字对齐方式*/
+.cart_box_header_table th{
+	text-align: center;
+	color:#8EB2FF;
+	}
+/*购物车中商品主体*/
+.cart_box_main{
+	width:80%;
+	margin: 0 auto;
+	line-height: 40px;
+	border: 1px solid #ccc;
+	}
+/*行*/
+.cart_box_main tr{
+	border-bottom: 1px solid #cccccc;
+	}
+/*列*/
+.cart_box_main td{
+	width:16%;
+	height:120px;
+	text-align: center;
+	}
+/*商品图片*/
+.cart_image{
+	width:100px;
+	margin:0 auto;
+	}
+
+/***************************************/
+.num{
+	height:22px;
+	width: auto;
+	}
+/*数量*/
+.qty, .gift_qty{
+	display: inline-block;
+	height: 22px;
+	line-height: 22px;
+	overflow: hidden;
+	vertical-align: top;
+	width: 24px;
+	}
+/*减少产品数量*/
+.minus_num{
+
+	background: url(../../../Home/images/Buy/icon_shopv2.0.png) -201px -42px no-repeat;
+	cursor: pointer;
+	display: inline-block;
+	height: 22px;
+	overflow: hidden;
+	vertical-align: top;
+	width: 22px;
+
+	}
+.minus_num:hover{
+
+	background-position: -154px -42px;
+	/*width: 22px;*/
+	/*height: 22px;*/
+
+	}
+/*增加产品数量*/
+.add_num{
+	background: url(../../../Home/images/Buy/icon_shopv2.0.png) -265px -40px no-repeat;
+	cursor: pointer;
+	display: inline-block;
+	height: 22px;
+	overflow: hidden;
+	vertical-align: top;
+	width: 22px;
+	}
+.add_num:hover{
+
+	background-position: -105px -43px;
+	}
+
+/*******************************************/
+/*赠品图片*/
+.gift_image{
+	width:90px;
+	margin:0 auto;
+
+	}
+/*赠品区高度*/
+.gift_height{
+	width:16%;
+	height:55px !important;
+	text-align: center;
+	background: beige;
+	}
+
+
+/***********************************************/
+
+/*订单信息*/
+
+
+.cart_box_footer{
+	height:80px;
+	width: 80%;
+	margin: 0px auto;
+	}
+
+/*订单信息左*/
+.cart_box_footer_left{
+	float: left;
+	width:60%;
+	height: 80px;
+	}
+/*订单信息左边内容*/
+.cart_box_footer_left p{
+	text-align: center;
+	height:35px;
+	line-height: 35px;
+	margin: 0px auto;
+	}
+/*订单信息右边内容*/
+.cart_box_footer_right{
+	float: left;
+	height:80px;
+	width:40%;
+	}
+
+/*支付和购物按钮*/
+.button_to_pay, .button_to_buy{
+	display:block;
+	height:34px;
+	width:86px;
+
+	border:0;
+	padding:0;
+	margin-top:10px;
+}
+
+/*去支付按钮*/
+.button_to_pay{
+	margin-right:20px;
+	
+}
+
+/*去购物*/
+.button_to_buy{
+	margin-right:50px;
+	
+}
+
+
+
+
+
+
+
+
+/****************************************/
+
+/*删除商品*/
+.cover_show{
+	display: block;
+	}
+.cover_hidden{
+	display: none;
+	}
+.cover{
+	position: absolute;
+	background: #ffffff;
+	height:200px;
+	width: 420px;
+	box-shadow: 0 0 3px #ccc;
+	z-index: 99;
+	margin: 0px auto;
+	top: 200px;
+	}
+.cover_bg{
+	position: absolute;
+	width: 100%;
+	height:300px;
+	background: rgba(0, 0, 0, 0.66);
+	top: 0;
+	z-index: 50;
+	}
+.cover_title{
+	height:73%;
+	text-align: center;
+	line-height: 150px;
+
+	}
+.cover_title p{
+	font-size: 40px;
+	}
+.cover_button{
+
+	height:27%;
+	width: 420px;
+	padding-left: 70px;
+	}
+.yes_del, .no_del{
+	display: inline-block;
+	height:35px;
+	width: 100px;
+	text-align: center;
+	line-height: 35px;
+	font-size: 20px;
+	color: #fff;
+
+	}
+
+.yes_del{
+	background: rgba(255, 0, 0, 0.66);
+	margin-right: 70px;
+	}
+.no_del{
+	background: rgba(0, 133, 255, 0.66);
+
+	}
+
+
+

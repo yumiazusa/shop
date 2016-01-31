@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ribbon商品安装向导</title>
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/bootstrap.min.css">
+    <!-- 可选的Bootstrap主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="__ROOT__/Application/Install/Common/css/style.css" />
+    <script src="__PUBLIC__/Home/js/jquery.min.js"></script>
+</head>
+<body>
+    <div class="topbar">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                    <img src="__ROOT__/Application/Install/Common/images/logo.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main">
+        <div class="container">
+            <div class="row">
+                <div class="alert alert-warning alert-dismissible col-md-10 col-md-offset-1 warning-box" role="alert">
+                    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <strong>提示信息：</strong> 如果你在安装的过程中遇到任何问题，请发送邮件至 Email:tubu8@qq.com.
+                </div>
+                <div class="col-md-10 col-md-offset-1" style="background:#fff">
+                    <div class="row">
+                        <div class="main-in col-md-4 left">
+                            <ul class="nav nav-pills nav-stacked">
+                               <li role="presentation" class="active">
+                                    <a href="#"><h2 style="margin:10px;">安装向导</h2></a>
+                                </li>
+                               <li role="presentation"><a href="#">第一步：阅读许可协议</a></li>
+                               <li role="presentation" class="active"><a href="#">第二步：检查安装环境</a></li>
+                               <li role="presentation"><a href="#">第三步：参数设置</a></li>
+                               <li role="presentation"><a href="#">第四步：执行安装</a></li>
+                               <li role="presentation"><a href="#">第五步：安装完成</a></li>
+                            </ul>                 
+                        </div>
+                        <div class="main-in col-md-8 right">
+                            <!-- <div class="right-header">
+                                
+                            </div> -->
+                            <div class="right-body">
+                                <div class="checkenv">
+                                    <h3 class="check-title">
+                                        <span style="line-height:30px;" class="glyphicon glyphicon-tasks"></span> 当前运行环境
+                                    </h3>
+                                    <table class="table table-condensed">
+                                        <tr>
+                                            <th style="width:150px">服务名称</th>
+                                            <th>当前环境</th>
+                                        </tr>
+                                        <tr>
+                                            <td>操作系统：</td>
+                                            <td style="color:#428BCA;"><{$config.os}></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Web服务器：</td>
+                                            <td style="color:#428BCA;"><{$config.web_server}></td>
+                                        </tr>
+                                        <tr>
+                                            <td>上传附件最大值：</td>
+                                            <td style="color:#428BCA;"><{$config.max_upload}></td>
+                                        </tr>
+                                        <tr>
+                                            <td>服务器时间：</td>
+                                            <td style="color:#428BCA;"><{$config.now_time}></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="checkenv">
+                                    <h3 class="check-title">
+                                        <span style="line-height:30px;" class="glyphicon glyphicon-folder-open"></span> 目录执行权限
+                                    </h3>
+                                    <table class="table table-condensed">
+                                        <tr>
+                                            <th>目录名称</th>
+                                            <th class="text-center">读取权限</th>
+                                            <th class="text-center">写入权限</th>
+                                        </tr>
+                                        <foreach name="pathInfo" item="path">
+                                        <tr class="check-dir">
+                                            <td><{$path.fname}></td>
+                                            <td class="text-center" style="color:#428BCA;">
+                                                <notempty name="path.r">
+                                                    <span class="glyphicon glyphicon-ok" style="color:green;" is-read="1"></span>
+                                                <else/>
+                                                    <span class="glyphicon glyphicon-remove" is-read="0" style="color:red;"></span>
+                                                </notempty>
+                                            </td>
+                                            <td class="text-center">
+                                                <notempty name="path.w">
+                                                    <span class="glyphicon glyphicon-ok" is-write="1" style="color:green;"></span>
+                                                <else/>
+                                                    <span class="glyphicon glyphicon-remove" is-write="0" style="color:red;"></span>
+                                                </notempty>
+                                            </td>
+                                        </tr>
+                                        </foreach>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- <div class="right-footer"> -->
+                                <nav>
+                                      <ul class="pager">
+                                        <li class="agree"><a href="__CONTROLLER__/index">上一步</a></li>
+                                        <li><a href="javascript:void(0);" id="next-step2">下一步</a></li>
+                                      </ul>
+                                </nav>
+                            <!-- </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1 copyright" style="font-size:10px;">
+                   Copyright&copy; Imagery意象图文网络工作室所有
+                </div> 
+            </div>
+        </div>
+    </div>
+</body>
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script>
+    var url = "__CONTROLLER__/step_3/check/ok";
+</script>
+<script src="__PUBLIC__/Home/js/bootstrap.min.js"></script>
+<script src="__ROOT__/Application/Install/Common/js/install.js"></script>
+</html>

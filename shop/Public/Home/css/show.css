@@ -1,0 +1,35 @@
+.tk1{
+	position:relative;
+}
+.show1{
+    position: absolute;
+    top:0px;
+    left: -330px;
+    width: 358px;
+    z-index: 9999;
+    padding: 18px;
+    background-color: #fdfdfd;
+    box-shadow: 0 2px 7px rgba(0, 0, 0, 0.4);
+    display: none;
+}
+.show1 ul {
+    list-style:none;
+    padding:0;
+    margin:0;
+}
+.show1 ul li {
+    text-align:left;
+    padding-top:3px;
+    padding-bottom:3px;
+    border-bottom:1px dotted #cdcdcd;
+}
+.show1 ul li em {
+    color:#888;
+}
+.show1 ul li strong {
+    font-weight:normal;
+    color:#019C74;
+}
+/*.tk1:hover .show1{
+	display: block;
+}*/

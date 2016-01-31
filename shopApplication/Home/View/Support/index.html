@@ -1,0 +1,137 @@
+<extend name="Public:public" />
+
+<block name="cssFile">
+	<link rel="stylesheet" href="__PUBLIC__/Home/css/index.css">
+	<link rel="stylesheet" href="__PUBLIC__/Home/css/support-index.css">
+</block>
+
+<!-- 主体部分 开始 -->
+<block name="publicBody">
+	<!-- BANNER START -->
+	<div class="banner"></div>
+	<!-- BANNER END -->
+	<div class="container main">
+		<div class="row">
+			<div class="col-md-12">
+				<ol class="breadcrumb">
+				  	<li><a href="__APP__">首页</a></li>
+				  	<li>服务与支持</li>
+				</ol>
+			</div>
+	</div>
+	<div class="support-block">
+		<div class="s-download">
+			<a href="<{:U('Support/download')}>">
+				<img class="image1" src="__PUBLIC__/Home/images/dl-wall-funos1.jpg" alt="">
+				<img class="image2" src="__PUBLIC__/Home/images/dl-wall-funos2.jpg" alt="">
+				<h1>相关下载</h1>
+				<span>滇晟商城提供的相关下载资料</span>
+			</a>
+		</div>
+        <div class="s-faq">
+        	<a href="<{:U('Support/faq')}>">
+        		<b class="image-icon"><img src="__PUBLIC__/Home/images/dl-wall-quesition-ico.png" alt=""></b>
+        		<h2 class="block-title">常见问题<br/><small>滇晟网站使用过程中的常见问题</small></h2>
+			</a>
+        </div>
+        <div class="s-reg">
+        	<a href="<{:U('Page/policy')}>">
+        		<b class="image-icon"><img src="__PUBLIC__/Home/images/dl-wall-register-ico.png" alt=""></b>
+        		<h2 class="block-title">法律声明<br/><small>滇晟网站相关法律声明</small></h2>
+			</a>
+        </div>
+        <div class="s-local">
+        	<a href="<{:U('Support/supportMap')}>">
+        		<b class="image-icon"><img src="__PUBLIC__/Home/images/dl-wall-map-ico.png" alt=""></b>
+        		<h2 class="block-title">网点查询<br/><small>快速查询服务网点，获取电话、地址等信息，为您提供今后相关服务</small></h2>
+			</a>
+		</div>
+        <div class="s-policy">
+        	<a href="<{:U('Support/policy')}>">
+        		<b class="image-icon"><img src="__PUBLIC__/Home/images/dl-wall-policy-ico.png" alt=""></b>
+        		<h2 class="block-title">服务政策<br/><small>imagry产品的相关政策</small></h2>
+			</a>
+		</div>
+        <div class="s-accessorice">
+        	<a href="http://www.kuaidi100.com" target="_blank">
+        		<b class="image-icon"><img src="__PUBLIC__/Home/images/dl-wall-accessories-ico.png" alt=""></b>
+        		<h2 class="block-title">物流查询<br/><small>时刻跟进您的订单状态</small></h2>
+			</a>
+        </div>
+        <div class="s-mcenter">
+        	<a href="<{:U('Member/member')}>">
+        		<b class="image-icon"><img src="__PUBLIC__/Home/images/dl-wall-assistant-ico.png" alt=""></b>
+        		<h2 class="block-title">会员中心<br/><small>加入滇晟社区，享受会员特权，为您提供更全面的保障</small></h2>
+			</a>
+        </div>
+        <div class="s-video">
+			<a href="<{:U('Support/video')}>">
+				<img class="image1" src="__PUBLIC__/Home/images/dl-wall-video1.jpg" alt="">
+				<img class="image2" src="__PUBLIC__/Home/images/dl-wall-video11.jpg" alt="">
+				<h1>视频专区</h1>
+				<span>滇晟的视频广告及滇晟产品的相关教程</span>
+			</a>
+        </div>
+	</div>
+	<!-- 区块 结束 -->
+					<php>
+						$mail=C('sy_webemail');
+						$tel=C('sy_webtel');
+						$freetel=C('sy_freewebtel');
+						$work_time=C('work_time');
+						$QQ_KF=C('sy_qq');
+					</php>
+	<div class="chat-area">
+		<ul class="chat">
+			<li>
+				<h1><b class="service"></b>售后服务电话</h1>
+				<span>
+					<{$tel}><br/>
+					<{$freetel}><br/>
+					(每天<{$work_time}>)
+				</span>
+			</li>
+			<li>
+				<h1><b class="email"></b>售后服务邮箱</h1>
+				<span>
+					<a href="mailto:<{$mail}>"><{$mail}></a>
+				</span>
+			</li>
+			<li>
+				<h1><b class="qq"></b>QQ在线咨询</h1>
+				<span>
+					在线时间：<{$work_time}><br/>
+					（节假日除外）
+				</span>
+				<a target="_blank" type="button" href="http://wpa.qq.com/msgrd?v=3&uin=<{$QQ_KF}>&site=qq&menu=yes" class="chat-btn">立即咨询</a>
+			</li>
+			<li>
+				<h1><b class="msg"></b>投诉建议</h1>
+				<span>
+					您的心声是我们前进的动力
+				</span>
+				<a target="_blank" type="button" href="http://wpa.qq.com/msgrd?v=3&uin=<{$QQ_KF}>&site=qq&menu=yes" class="chat-btn">立即咨询</a>
+			</li>
+			<li class="wx">
+				<h1><b class="wx"></b>微信服务</h1>
+				<img class="img-wx" src="__PUBLIC__/Home/images/tmp/vivo-sf-wechat.jpg" alt="">
+			</li>
+		</ul>
+	</div>
+</div>
+</block>
+<!-- 主体部分结束 -->
+<block name="bottomJsFile">
+	<script src="__PUBLIC__/Home/js/support-index.js"></script>
+	<script src="__PUBLIC__/plugins/layer/layer.js"></script>
+	<script>
+	$('.wx').click(function(){
+		layer.alert('<img src="__PUBLIC__/Home/images/tmp/vivo-sf-wechat.jpg"/>', {
+    	title:'扫描二维码关注',
+        skin: 'layui-layer-lan',
+        closeBtn: 0
+        ,shift: 4 //动画类型
+    });
+	})
+	</script>
+</block>

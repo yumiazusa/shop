@@ -1,0 +1,50 @@
+<extend name="Public:member1"/>
+    <block name="cssFile">
+	<link href="__PUBLIC__/Home/css/member.css" rel="stylesheet" type="text/css">
+	<link href="__PUBLIC__/Home/css/order.css" rel="stylesheet" type="text/css">
+	<link href="__PUBLIC__/Home/css/pubmember.css" rel="stylesheet" type="text/css">
+	</block>
+	<block name="topJsFile">
+	 <script src="__PUBLIC__/Home/js/member.js"></script>
+	</block>
+     <block name="publicBody">
+			 	<div class="member-zt-right display-inline-block">
+
+				 	  <!--更换部分开始-->
+				     <div class="mod-main mod-comm">
+						<div class="mt">
+							<div class="member-address">
+				 			   <span>申请退货单</span>
+				 		     </div>
+
+						</div>
+
+						<div class="mc">
+							<div class="remind-box">
+								<div class="tip-box icon-box">
+									<span class="succ-icon m-icon" style="margin-left:349px;margin-top:-17px;"></span>
+									<div class="item-fore" style="text-align:center;">
+										<h3 class="ftx02">提交成功！</h3>
+										　　　　可在退换货申请中查看记录
+
+								     </div>
+							     </div>
+						     </div>
+					      </div>
+                      </div>
+		               <!--更换部分结束-->
+
+			    </div>
+			</block>
+			<block name="bottomJsFile">
+    <script>
+    window.onload = function(){
+　　setTimeout("lala();",1000);
+}
+
+function lala(){
+	var _url='<{:U("Custom/applyProduct")}>';
+    window.location.href=_url; 
+}
+    </script>
+</block>

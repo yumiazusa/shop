@@ -1,0 +1,182 @@
+<!-- 继承 公共模板 开始 -->
+<extend name="Public:blank" />
+<!-- 继承 公共模板 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部CSS文件 开始 -->
+<block name="cssFile">
+<link rel="stylesheet" href="__PUBLIC__/Admin/auth/bootstrap3/css/bootstrap.min.css" />
+<link rel="stylesheet" href="__PUBLIC__/Admin/auth/bootstrap3/css/bootstrap-theme.min.css" />
+<link rel="stylesheet" href="__PUBLIC__/Admin/css/fullcalendar.css" />
+<link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-style.css" />
+<link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-media.css" />
+<link rel="stylesheet" href="__PUBLIC__/auth/css/default.css" />
+<link href="__PUBLIC__/Admin/font-awesome/css/font-awesome.css" rel="stylesheet" />
+<link rel="stylesheet" href="__PUBLIC__/Admin/css/jquery.gritter.css" />
+<link rel="stylesheet" href="__PUBLIC__/Admin/css/uniform.css" />
+<link rel="stylesheet" href="__PUBLIC__/Admin/css/select2.css" />
+<style>
+th.list-title {
+            font-size:14px;
+        }
+td.align-center {
+            text-align:center;
+        }
+a {
+            color:#27A9E3;
+        }
+a:hover {
+            color:#f70;
+            text-decoration:underline;
+        }
+</style>
+</block>
+<!-- 顶部CSS文件 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部JS文件 开始 -->
+<block name="topJsFile">
+
+</block>
+<!-- 顶部JS文件 结束 -->
+
+<!-- ===================================================== -->
+<!-- 头部部分 开始 -->
+<block name="publicHead">
+    <div id="breadcrumb">
+        <a href="__APP__" title="返回系统首页" class="tip-bottom">
+            <i class="icon-home"></i>
+        管理首页</a>
+        <a href="#" class="current">系统设置</a>
+        <a href="#" class="current">角色设置</a>
+    </div>
+    <h1 style="margin-top:10px;">角色列表</h1>
+</block>
+<!-- 头部部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 公共Body部分 开始 -->
+<block name="publicBody">
+    <!-- 将主体包含在 .row-fluid 内部 -->
+<div class="container-fluid">
+    <hr style="margin:0;">
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="widget-box">
+                    <div class="widget-title">
+                        <ul class="nav nav-tabs">
+                            <li><a data-toggle="tab" href="#tab1">角色管理</a></li>
+                        </ul>
+                    </div>
+                    <div class="widget-content tab-content">
+                        <div id="tab1" class="tab-pane active">
+                            <div  class="" style="width:100%; height:30px; margin-bottom:10px;">
+                                <a href="<{:U('Index')}>" class="btn btn-info"><i class="icon-minus"></i>返回主页</a>
+                            </div>
+<div class="panel panel-default">                    
+<form class="form-inline" action="<{:U('Admin/Role/accessSelectHandle')}>" method="post">
+        <input type="hidden" name="groupID" id="groupID" value='<{$group["id"]}>'  data-rule="<{$ruleID[0]['rules']}>"/>
+        <div class="panel-body">
+        <div class="panel-group" id="accordionRule">
+            <volist name="result" id="vo">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                        <label class="checkbox-inline">
+                            <input type='checkbox' class="moduleName" index="<{$i}>" len="0" />
+                            <span data-toggle="collapse" data-toggle="collapse" data-parent="#accordionRule" href="#collapse<{$i}>"><{$key}></span></label>
+                        </h4>
+                    </div>
+                    <div id="collapse<{$i}>" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <foreach name="vo" item="v">
+                                    <label class="checkbox-inline">
+                                        <input type='checkbox' name="rule[]" label="group<{$i}>" value="<{$v['id']}>" /> <{$v['title']}>
+                                    </label>
+                                </foreach>
+                            </div>
+                    </div>
+                </div>
+            </volist>           
+        </div>
+    </div>
+
+    <div class="panel-footer">
+        <div class="form-group">        
+                <button type="submit" class="btn btn-success btn-add">更新</button>
+        </div>
+    </div>
+
+    </form>
+    </div>
+
+
+
+
+
+
+            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>
+<!-- 公共Body部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- js文件模块 开始 -->
+<block name="footJsFile">
+    <script src="__PUBLIC__/Admin/js/jquery.min.js"></script>
+    <script src="__PUBLIC__/Admin/auth/bootstrap3/js/jquery.min.js"></script>
+    <script src="__PUBLIC__/Admin/js/jquery.ui.custom.js"></script>
+    <script src="__PUBLIC__/Admin/auth/bootstrap3/js/bootstrap.min.js"></script>
+    <script src="__PUBLIC__/Admin/js/jquery.uniform.js"></script>
+    <script src="__PUBLIC__/Admin/js/select2.min.js"></script>
+    <script src="__PUBLIC__/Admin/js/jquery.dataTables.min.js"></script>
+    <script src="__PUBLIC__/Admin/js/matrix.js"></script>
+    <script src="__PUBLIC__/Admin/js/matrix.tables.js"></script>
+    <script src="__PUBLIC__/Admin/js/matrix.popover.js"></script>
+    <script src="__PUBLIC__/Admin/js/matrix.interface.js"></script>
+    <script src="__PUBLIC__/Admin/js/muneopen.js"></script>
+    <script src="__PUBLIC__/Admin/js/authcheck.js"></script>
+</block>
+<!-- js文件模块 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 底部JS执行区域 开始 -->
+<block name="footScript">
+    <script type="text/javascript">
+      // This function is called from the pop-up menus to transfer to
+      // a different page. Ignore if the value returned is a null string:
+      function goPage (newURL) {
+
+          // if url is empty, skip the menu dividers and reset the menu selection to default
+          if (newURL != "") {
+
+              // if url is "-", it is this page -- reset the menu:
+              if (newURL == "-" ) {
+                  resetMenu();
+              }
+              // else, send page to designated URL
+              else {
+                document.location.href = newURL;
+              }
+          }
+      }
+
+    // resets the menu selection upon entry to this page:
+    function resetMenu() {
+       document.gomenu.selector.selectedIndex = 2;
+    }
+
+
+        
+    </script>
+</block>
+<!-- 底部JS执行区域 结束 -->

@@ -1,0 +1,278 @@
+<!-- =====================================================
+    Author: Eden
+    Date:   2015-01-12
+    Function:   公共模板文件中定义的block区域，可以在子模板中继承和覆盖
+ ========================================================= -->
+<!-- 继承 公共模板 开始 -->
+<extend name="Public:blank" />
+<!-- 继承 公共模板 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部CSS文件 开始 -->
+<block name="cssFile">
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap-responsive.min.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/uniform.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/select2.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-style.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-media.css" />
+    <link href="__PUBLIC__/Admin/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <style>
+        td.text-center {
+            text-align:center;
+        }
+        a.title-link {
+            color:#0066ff;
+        }
+        .modal{
+          top:35%;
+        }
+    </style>
+</block>
+<!-- 顶部CSS文件 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部JS文件 开始 -->
+<block name="topJsFile">
+    
+</block>
+<!-- 顶部JS文件 结束 -->
+
+<!-- ===================================================== -->
+<!-- 头部部分 开始 -->
+<block name="publicHead">
+    <div id="breadcrumb">
+        <a href="index.html" title="返回系统主页" class="tip-bottom">
+            <i class="icon-home"></i>
+            管理首页
+            <a href="#" class="current">商品管理</a> 
+        </a>
+    </div>
+    <h1 style="margin-top:10px;">商品列表</h1>
+</block>
+<!-- 头部部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 公共Body部分 开始 -->
+<block name="publicBody">
+    <!-- 将主体包含在 .row-fluid 内部 -->
+    <div class="container-fluid">
+        <hr style="margin:0;">
+        <div class="row-fluid">
+            <div class="span12">
+                <div>
+                    <div class="control-group">
+                        <div class="controls">
+                            <form action="" method="get" class="span6">
+                                <select name="cat_id" style="width:120px;">
+                                    <option>查找全部</option>
+                                    <foreach name="productCats" item="cats">
+                                        <option value="<{$cats.id}>" <if condition="$Think.get.cat_id eq $cats['id']">selected</if>><{$cats.cat_name}></option>
+                                    </foreach>
+                                </select>
+     
+                                <select name="is_on_sale" style="width:70px;">
+                                    <option>全部</option>
+                                    <option value="1" <if condition="$Think.get.is_on_sale eq 1">selected</if>>上架</option>
+                                    <option value="0">下架</option>
+                                </select>
+                                <input type="text" name="pro_name" style="width:150px;" placeholder="关键字(多个以逗号分开)...">
+                                <input type="submit" id="sub" class="btn btn-primary" style="margin-top:-10px;" value="提交">
+                            </form>
+                            <a href="<{:U('Product/productAdd')}>" class="btn btn-info pull-right"><i class="icon-plus"></i> 添加商品</a> 
+                        </div>
+                    </div>
+                </div>
+                <div class="widget-box">
+          <div class="widget-title"> <span class="icon">
+            <input type="checkbox" id="title-checkbox" name="title-checkbox" />
+            </span>
+            <h5>商品列表</h5>
+          </div>
+          <div class="widget-content nopadding">
+          <form action="__CONTROLLER__/batchDo" method="post">
+            <table class="table table-bordered table-striped with-check">
+              <thead>
+                <tr>
+                  <th><i class="icon-resize-vertical"></i></th>
+                  <th style="">编号</th>
+                  <th>商品名称</th>
+                  <th style="">货号</th>
+                  <th style="">售价</th>
+                  <th style="">上架</th>
+                  <th style="">上架时间</th>
+                  <th style="">促销方案</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody>
+              <foreach name="productsList" item="pro">
+                <tr>
+                  <td><input type="checkbox" name="ids[]" value="<{$pro.id}>" /></td>
+                  <td class="text-center"><{$pro.id}></td>
+                  <td>
+                    <a href="__ROOT__/ProductDetail/detail/id/<{$pro.id}>" target="_blank" class="title-link"><{$pro.pro_name}></a>&nbsp;&nbsp;
+                    <eq name="pro.is_new" value="1">
+                        <span class="badge badge-important">新品</span>
+                    </eq>
+                    <eq name="pro.is_promote" value="1">
+                        <span class="badge badge-warning">促销</span>
+                    </eq>
+                    <eq name="pro.is_ship" value="1">
+                        <span class="badge badge-info">包邮</span>
+                    </eq>
+                    </td>
+                    <td class="text-center"><{$pro.pro_sn}></td>
+                    <td class="text-center"><{$pro.promote_price}></td>
+                    <td class="text-center">
+                        <eq name="pro.is_on_sale" value="1">
+                        <i class="icon-ok" style="color:green;"></i>
+                        <else />
+                            <i class="icon-remove" style="color:red;"></i>
+                        </eq>
+                    </td>
+                  <td class="text-center"><{$pro.add_time|date='Y-m-d H:i',###}></td>
+                  <td class="text-center">
+                    <if condition="$pro.is_promote eq 0">
+                    <a href="javascript:void(0);" data-toggle="modal" class="btn btn-mini" disabled style="cursor:not-allowed;">未促销</a>
+                    <else />
+                    <a href="#myModal<{$pro.id}>" data-toggle="modal" class="btn btn-mini btn-warning">
+                  <if condition="$pro.status eq 0">
+                  未促销
+                  <elseif condition="$pro.status eq 1" />
+                  折扣
+                  <elseif condition="$pro.status eq 2" />
+                  会员折扣
+                  <elseif condition="$pro.status eq 3" />
+                  买赠
+                  <elseif condition="$pro.status eq 4" />
+                  满赠
+                  <elseif condition="$pro.status eq 5" />
+                  团购
+                  <elseif condition="$pro.status eq 6" />
+                  套餐
+                  <else />
+                  未促销
+                  </if>
+                  </a>
+                </if>
+              <div id="myModal<{$pro.id}>" class="modal hide">
+              <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button">×</button>
+                <h3>
+                  <if condition="$pro.status eq 0">
+                  未促销
+                  <elseif condition="$pro.status eq 1" />
+                  折扣
+                  <elseif condition="$pro.status eq 2" />
+                  会员折扣
+                  <elseif condition="$pro.status eq 3" />
+                  买赠
+                  <elseif condition="$pro.status eq 4" />
+                  满赠
+                  <elseif condition="$pro.status eq 5" />
+                  团购
+                  <elseif condition="$pro.status eq 6" />
+                  套餐
+                  <else />
+                  未促销
+                  </if>
+                </h3>
+              </div>
+              <div class="modal-body">
+                <p>
+                <if condition="$pro.status eq 0">
+                  未促销
+                  <elseif condition="$pro.status eq 1" />
+                  折扣率：<{$pro.rate}>%</br>促销数量：<{$pro.promote_num}>
+                  <elseif condition="$pro.status eq 2" />
+                  会员折扣
+                  <elseif condition="$pro.status eq 3" />
+                  赠品商品ID：<{$pro.gifts}></br>赠品数量：<{$pro.promote_num}>
+                  <elseif condition="$pro.status eq 4" />
+                  赠品商品ID：<{$pro.gifts}></br>赠品数量：<{$pro.promote_num}></br>赠送条件：购买主商品<{$pro.condition}>件起送
+                  <elseif condition="$pro.status eq 5" />
+                  折扣率：<{$pro.rate}>%</br>促销数量：<{$pro.promote_num}></br>开始时间：<{$pro.start_time|date='Y-m-d H:i',###}></br>结束时间：<{$pro.end_time|date='Y-m-d H:i',###}>
+                  <elseif condition="$pro.status eq 6" />
+                  套餐商品ID：<{$pro.combs}></br>折扣率：<{$pro.rate}>%
+                  <else />
+                  未促销
+                  </if>
+                </p>
+              </div>
+            </div></td>
+                  <td class="text-center" style="width:150px;">
+                      <!-- <a href="__CONTROLLER__/productEdit/id/<{$pro.id}>" title="编辑" class="btn btn-success btn-mini"> <i class="icon-pencil"></i> </a> -->
+                      <div class="btn-group">
+                      <a data-toggle="dropdown" class="btn btn-success dropdown-toggle btn-mini" title="编辑"><i class="icon-pencil"></i></a>
+                      <ul class="dropdown-menu">
+                      <li style="text-align:left;"><a href="<{:U('productEdit',array('id'=>$pro['id']))}>"><i class=" icon-cog"></i>属性编辑</a></li>
+                      <li style="text-align:left;"><a href="<{:U('productParamAdd',array('id'=>$pro['id']))}>" title="参数" ><i class="icon-list-ul"></i>参数编辑</a></li>
+                      <li style="text-align:left;"><a href="<{:U('productNumAdd',array('id'=>$pro['id']))}>"><i class=" icon-signin"></i>库存</a></li>
+                      </ul>
+                      </div>
+                      <a href="<{:U('promoteAdd',array('id'=>$pro['id']))}>" title="促销" class="btn btn-warning btn-mini"><i class="icon-heart"></i></a>
+                      <a href="__CONTROLLER__/productAssess/id/<{$pro.id}>" title="评论" class="btn btn-info btn-mini"> <i class="icon-comments"></i> </a>
+                      <eq name="pro.is_on_sale" value="0">
+                      <a href="__CONTROLLER__/toggleOnSale/id/<{$pro.id}>/state/<{$pro.is_on_sale}>" title="上架" class="btn btn-primary btn-mini"> <i class="icon-circle-arrow-up"></i> </a>
+                      <else/>
+                      <a href="__CONTROLLER__/toggleOnSale/id/<{$pro.id}>/state/<{$pro.is_on_sale}>" title="下架" class="btn btn-primary btn-mini"> <i class="icon-circle-arrow-down"></i> </a>
+                      </eq>
+                      <a href="__CONTROLLER__/addProductToRecycle/id/<{$pro.id}>" title="回收站" class="btn btn-danger btn-mini"> <i class="icon-trash"></i> </a>
+                  </td>
+                </tr>
+                </foreach>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="9">
+                      <div class="btns" style="margin-top:5px">
+                          <select name="batch_option" class="span2" style="margin-right:10px">
+                              <option value="-1">请选择</option>
+                              <option value="1">批量回收</option>
+                              <option value="2">批量下架</option>
+                              <option value="3">批量上架</option>
+                          </select>
+                          <button type="submit" class="btn btn-primary" style="margin-left:10px;"><i class="icon-icon-align-justify"></i> 执行</button>
+                      </div>
+                      <div class="pagination alternate text-right span9 pull-right" style="margin-top:-20px">
+                          <{$page}>
+                      </div>
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+            </div>
+        </div>
+    </div>
+</block>
+<!-- 公共Body部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- js文件模块 开始 -->
+<block name="footJsFile">
+    <script src="__PUBLIC__/Admin/js/jquery.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.ui.custom.js"></script> 
+    <script src="__PUBLIC__/Admin/js/bootstrap.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.uniform.js"></script> 
+    <script src="__PUBLIC__/Admin/js/select2.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.dataTables.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.tables.js"></script>
+    <script src="__PUBLIC__/Admin/js/muneopen.js"></script>
+</block>
+<!-- js文件模块 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 底部JS执行区域 开始 -->
+<block name="footScript">
+
+</block>
+<!-- 底部JS执行区域 结束 -->

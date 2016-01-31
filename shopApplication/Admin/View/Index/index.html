@@ -1,0 +1,216 @@
+<!-- =====================================================
+    Author: Eden
+    Date:   2015-01-12
+    Function:   公共模板文件中定义的block区域，可以在子模板中继承和覆盖
+ ========================================================= -->
+<!-- 继承 公共模板 开始 -->
+<extend name="Public:blank" />
+<!-- 继承 公共模板 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部CSS文件 开始 -->
+<block name="cssFile">
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap-responsive.min.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/fullcalendar.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-style.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-media.css" />
+    <link href="__PUBLIC__/Admin/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/jquery.gritter.css" />
+    <style>
+        .quick-actions li {
+            margin-top:10px;
+            margin-bottom:20px;
+        }
+    </style>
+</block>
+<!-- 顶部CSS文件 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部JS文件 开始 -->
+<block name="topJsFile">
+    
+</block>
+<!-- 顶部JS文件 结束 -->
+
+<!-- ===================================================== -->
+<!-- 头部部分 开始 -->
+<block name="publicHead">
+    <div id="breadcrumb"> 
+        <a href="__APP__" title="返回系统首页" class="tip-bottom">
+            <i class="icon-home"></i> 
+        管理首页</a> 
+    </div>
+</block>
+<!-- 头部部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 公共Body部分 开始 -->
+<block name="publicBody">
+    <div class="container-fluid">
+        <hr />
+        <!-- 将主体包含在 .row-fluid 内部 -->
+        <!-- 头部系统信息 开始 -->
+        <div class="widget-box widget-plain">
+            <div class="center">
+                <ul class="stat-boxes2">
+                    <li>
+                        <div class="left peity_bar_neutral"><span><span style="display: none;">2,4,9,7,12,10,12</span>
+                        <canvas width="50" height="24"></canvas>
+                        </span>+<{$counts.visit_today}></div>
+                        <div class="right"> <strong><{$counts.visit_counts}></strong> 访问总量 </div>
+                    </li>
+                    <li>
+                        <div class="left peity_line_neutral">
+                            <span>
+                                <span style="display: none;">10,15,8,14,13,10,10,15</span>
+                                <canvas width="50" height="24"></canvas>
+                            </span>
+                            +<{$counts.users_today}>
+                        </div>
+                        <div class="right"> <strong><{$counts.users}></strong> 网站会员 </div>
+                    </li>
+                    <li>
+                        <div class="left peity_bar_bad"><span><span style="display: none;">3,5,6,16,8,10,6</span>
+                        <canvas width="50" height="24"></canvas>
+                        </span>+<{$counts.orders_today}></div>
+                        <div class="right"> <strong><{$counts.orders}></strong> 订单总量 </div>
+                    </li>
+                    <li>
+                        <div class="left peity_line_good"><span><span style="display: none;">12,6,9,23,14,10,17</span>
+                        <canvas width="50" height="24"></canvas>
+                        </span>+<{$counts.product_today}></div>
+                        <div class="right"> <strong><{$counts.product}></strong> 产品总量 </div>
+                    </li>
+                    <li>
+                        <div class="left peity_bar_good"><span>12,6,9,23,14,10,13</span>+<{$counts.feedback_today}></div>
+                        <div class="right"> <strong><{$counts.feedback}></strong> 最新留言</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- 头部系统信息 结束 -->
+        <div class="row-fluid">
+            <div class="span8">
+                <div class="widget-box">
+                    <div class="widget-title"> <span class="icon"> <i class="icon-list"></i> </span>
+                        <h5>快捷操作</h5>
+                    </div>
+                    <div class="widget-content" style="min-height:220px;">
+                        <ul class="quick-actions">
+                            <li class="bg_lb"> <a href="__ROOT__/index.php"> <i class="icon-home"></i> 前台首页 </a> </li>
+                            <li class="bg_ly"> <a href="<{:U('SystemConfig/webConfig')}>"> <i class="icon-cogs"></i> 基本设置 </a> </li>
+                            <li class="bg_lo"> <a href="<{:U('Product/productList')}>"> <i class="icon-list"></i> 产品列表</a> </li>
+                            <li class="bg_lg"> <a href="<{:U('Product/productAdd')}>"> <i class="icon-plus"></i> 添加商品</a> </li>
+                            <li class="bg_ls"> <a href="<{:U('User/index')}>"> <i class="icon-user"></i> 会员管理 </a> </li>
+                            <li class="bg_lo"> <a href="<{:U('OrderInfo/index')}>"> <i class="icon-search"></i> 查看订单 </a> </li>
+                            <li class="bg_ly"> <a href="<{:U('Feedback/index')}>"> <i class="icon-comments"></i> 用户留言 </a> </li>
+                            <li class="bg_lb"> <a href="<{:U('Administrator/profile')}>"> <i class="icon-file"></i> 修改资料 </a> </li>
+                            <li class="bg_ly"> <a href="<{:U('News/newsManager')}>"> <i class="icon-picture"></i> 新闻管理 </a> </li>
+                            <li class="bg_lo"> <a href="<{:U('Log/index')}>"> <i class="icon-reorder"></i> 系统日志 </a> </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="span4">
+                <div class="widget-box">
+                    <div class="widget-title"> <span class="icon"> <i class="icon-list"></i> </span>
+                        <h5>系统信息</h5>
+                    </div>
+                    <div class="widget-content" style="min-height:220px; overflow:hidden;"> 
+                        <div class="todo">
+                            <ul>
+                                <li class="clearfix">
+                                    <div class="txt"> 软件：  <span class="date badge badge-inverse">Apache/2.4.9 (Win32) PHP/5.5.12</span></div>
+                                </li>
+                                <li class="clearfix">
+                                    <div class="txt"> 可用空间： <span class="date badge badge-warning">67409.48 M</span> </div>
+                                </li>
+                                <li class="clearfix">
+                                    <div class="txt"> PHP版本： <span class="date badge badge-success">5.6.17</span></div>
+                                </li>
+                                <li class="clearfix">
+                                    <div class="txt"> 数据库信息： <span class="date badge badge-info">08.03.2013</span> </div>
+                                </li>
+                                <li class="clearfix">
+                                    <div class="txt"> 平台： <span class="date badge badge-important">SYSTEM - localhost</span> </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="widget-box">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</block>
+<!-- 公共Body部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- js文件模块 开始 -->
+<block name="footJsFile">
+    <script src="__PUBLIC__/Admin/js/excanvas.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.ui.custom.js"></script> 
+    <script src="__PUBLIC__/Admin/js/bootstrap.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.flot.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.flot.resize.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.peity.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/fullcalendar.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.dashboard.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.gritter.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.interface.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.chat.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.validate.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.form_validation.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.wizard.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.uniform.js"></script> 
+    <script src="__PUBLIC__/Admin/js/select2.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.popover.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.dataTables.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.tables.js"></script>
+    <script src="__PUBLIC__/Admin/js/muneopen.js"></script>
+</block>
+<!-- js文件模块 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 底部JS执行区域 开始 -->
+<block name="footScript">
+    <script type="text/javascript">
+      // This function is called from the pop-up menus to transfer to
+      // a different page. Ignore if the value returned is a null string:
+      function goPage (newURL) {
+
+          // if url is empty, skip the menu dividers and reset the menu selection to default
+          if (newURL != "") {
+          
+              // if url is "-", it is this page -- reset the menu:
+              if (newURL == "-" ) {
+                  resetMenu();            
+              } 
+              // else, send page to designated URL            
+              else {  
+                document.location.href = newURL;
+              }
+          }
+      }
+
+    // resets the menu selection upon entry to this page:
+    function resetMenu() {
+       document.gomenu.selector.selectedIndex = 2;
+    }
+    </script>
+</block>
+<!-- 底部JS执行区域 结束 -->

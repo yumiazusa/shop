@@ -1,0 +1,311 @@
+<!-- =====================================================
+    Author: Eden
+    Date:   2015-01-12
+    Function:   公共模板文件中定义的block区域，可以在子模板中继承和覆盖
+    ========================================================= -->
+    <!-- 继承 公共模板 开始 -->
+    <extend name="Public:blank" />
+    <!-- 继承 公共模板 结束 -->
+
+    <!-- ===================================================== -->
+
+    <!-- 顶部CSS文件 开始 -->
+    <block name="cssFile">
+        <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap-responsive.min.css" />
+        <link rel="stylesheet" href="__PUBLIC__/Admin/css/fullcalendar.css" />
+        <link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-style.css" />
+        <link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-media.css" />
+        <link href="__PUBLIC__/Admin/font-awesome/css/font-awesome.css" rel="stylesheet" />
+        <link rel="stylesheet" href="__PUBLIC__/Admin/css/jquery.gritter.css" />
+        <link rel="stylesheet" href="__PUBLIC__/Admin/css/uniform.css" />
+        <link rel="stylesheet" href="__PUBLIC__/Admin/css/select2.css" />
+        <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap-wysihtml5.css" />
+        <link rel="stylesheet" href="__PUBLIC__/editor/themes/default/default.css" />
+        <style>
+            div.fblocks {
+                margin:0 auto; 
+                width: 80%; 
+                height:100px; 
+                background:#fff;
+            }
+            .blocks {
+                width:150px; 
+                height:98px; 
+                border:1px dashed #ccc;
+                text-align:center;
+                line-height:98px;
+                font-size:50px;
+                cursor:pointer;
+                display:block;
+                float:left;
+                margin:0 5px;
+            }
+            .blocks h4 {
+                font-size:30px;
+                color:#555;
+                line-height:60px;
+                margin:0;
+                padding:0;
+            }
+            .blocks small {
+                font-size:25px;
+                line-height:40px;
+                color:red;
+                margin:0;
+                padding:0;
+            }
+            .upadv-show {
+                width:100px; 
+                height:100px;
+                margin:5px;
+            }
+        </style>
+    </block>
+    <!-- 顶部CSS文件 结束 -->
+
+    <!-- ===================================================== -->
+
+    <!-- 顶部JS文件 开始 -->
+    <block name="topJsFile">
+    </block>
+    <!-- 顶部JS文件 结束 -->
+
+    <!-- ===================================================== -->
+    <!-- 头部部分 开始 -->
+    <block name="publicHead">
+        <div id="breadcrumb"> 
+            <a href="__APP__" title="返回系统首页" class="tip-bottom">
+                <i class="icon-home"></i> 
+                管理首页</a> 
+                <a href="#" class="current">产品管理</a> 
+            </div>
+            <h1 style="margin-top:10px;">产品编辑</h1>
+        </block>
+        <!-- 头部部分 结束 -->
+
+        <!-- ===================================================== -->
+
+        <!-- 公共Body部分 开始 -->
+        <block name="publicBody">
+            <!-- 将主体包含在 .row-fluid 内部 -->
+            <div class="container-fluid">
+                <hr style="margin:0;">
+                <div class="row-fluid">
+                    <div class="span12">
+                        <form action="__CONTROLLER__/doEditGood" id="addPro" method="post">
+                            <input type="hidden" name="id" value="<{$good.id}>">
+                            <div class="widget-box">
+                                <div class="widget-title">
+                                    <ul class="nav nav-tabs">
+                                        <li class="active"><a data-toggle="tab" href="#tab1">商品信息</a></li>
+                                        <li><a data-toggle="tab" href="#tab4">商品图片</a></li>
+                                    </ul>
+                                </div>
+                                <div class="widget-content tab-content">
+                                    <div id="tab1" class="tab-pane active">
+                                        <div class="form-horizontal">
+                                            <div class="control-group">
+                                                <label class="control-label">产品标题：</label>
+                                                <div class="controls">
+                                                    <input type="text" class="span5 tip-right" data-original-title="请输入商品标题" name="pro_name"  placeholder="产品标题" value="<{$good.pro_name}>">
+                                                </div>
+                                            </div>
+                                            <div class="control-group">
+                                                <label class="control-label">产品副标题：</label>
+                                                <div class="controls">
+                                                    <input type="text" class="span5 tip-right" data-original-title="请输入商品副标题(广告标题)" name="pro_subname" placeholder="产品副标题" value="<{$good.pro_subname}>">
+                                                </div>
+                                            </div>
+                                            <div class="control-group">
+                                                <label class="control-label">关键字：</label>
+                                                <div class="controls">
+                                                    <input type="text" name="keywords" class="span5 tip-right" data-original-title="关键字(多个以逗号分开)" placeholder="关键字" value="<{$good.keywords}>">
+                                                </div>
+                                            </div>
+                                            <div class="control-group">
+                                                <label class="control-label">描述：</label>
+                                                <div class="controls">
+                                                    <textarea class="span5 tip-right" data-original-title="请输入商品的简单描述" name="description" placeholder="产品相关描述"><{$good.description}></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="control-group">
+                                                <label class="control-label">上传封面图(350X350)：</label>
+                                                <div class="controls">
+                                                    <input id="file_upload" type="file" multiple="true" name="file_upload" />
+                                                    <div id="imgs"><img width="200px" <eq name="good.list_image" value=""> src="__PUBLIC__/Plugins/1.png" <else />src="__PUBLIC__/Index/Goods/<{$good.list_image}>"</eq>></div>
+                                                </div>
+                                            </div>
+                                            <div class="control-group">
+                                                <label class="control-label">是否显示：</label>
+                                                <div class="controls">
+                                                    <label style="display:inline">
+                             <input type="radio" name="is_show" value="1" <if condition="$good['is_show'] eq 1">checked="checked"</if>/>
+                              是</label>
+                          <label style="display:inline">
+                             <input type="radio" name="is_show" value="0" <if condition="$good['is_show'] eq 0">checked="checked"</if>/>
+                              否</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- 选项卡一结束 -->
+
+                                    <div id="tab4" class="tab-pane">
+                                        <!-- 选项卡四 -->
+                                        <div class="form-horizontal">
+                                            <table class="table" id="show-uploaded-advs">
+                                                <tbody>
+                                            <tr>
+                                                <td style="width:180px; text-align:right;">
+                                                    <i class="icon-remove-sign deletepic"></i>
+                                                </td>
+                                                <td>
+                                                    <ul class="thumbnails">
+                                                        <foreach name="imgs" item="pic" key="k">
+                                                        <li class="span2"> 
+                                                            <a> <img src="<{$pic.images}>" alt=""> </a><div class="actions"><a class="lightbox_trigger" href="<{$pic.images}>" target="_blank;"><i class="icon-search"></i></a> </div>
+                                                        </li>
+                                                        </foreach>
+                                                        </pic>
+                                                    </ul>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                            </table>
+                                            <div class="control-group goodsimg">
+                                                <label class="control-label">上传产品图片(800X600)：</label>
+                                                <div class="controls">
+                                                    <input id="adv_upload" type="file" multiple="true" name="adv_upload" />
+                                                    <div id="imgsforcolor"><img width="200px" src="__PUBLIC__/Plugins/1.png"></div>
+                                                </div>
+                                            </div>
+                                            <div class="goodsimg">
+                                                <button type="button" style="margin-left:180px;" id="addcolor" class="btn btn-mini btn-info">确认添加</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- 选项卡四结束 -->
+
+                    <div style="padding-top:20px; padding-bottom:20px; text-align:center;">
+                        <button type="submit" class="btn btn-primary btn-large" style="margin-right:20px"> 保存商品信息 </button>
+                        <a type="submit" href="__CONTROLLER__/goodsList" class="btn btn-default btn-large"> 返回商品列表 </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</block>
+<!-- 公共Body部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- js文件模块 开始 -->
+<block name="footJsFile">
+    <script src="__PUBLIC__/Admin/js/jquery.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/excanvas.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.ui.custom.js"></script> 
+    <script src="__PUBLIC__/Admin/js/bootstrap.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.flot.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.flot.resize.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.peity.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/fullcalendar.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.dashboard.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.gritter.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.interface.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.chat.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.validate.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.form_validation.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.wizard.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.uniform.js"></script> 
+    <script src="__PUBLIC__/Admin/js/select2.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.popover.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.dataTables.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.tables.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.toggle.buttons.html"></script> 
+    <script src="__PUBLIC__/Admin/js/masked.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.form_common.js"></script> 
+    <script src="__PUBLIC__/Admin/js/wysihtml5-0.3.0.js"></script> 
+    <script src="__PUBLIC__/Admin/js/bootstrap-wysihtml5.js"></script> 
+    <script src="__PUBLIC__/Plugins/jquery.uploadify.js"></script> 
+
+    <script src="__PUBLIC__/Admin/js/muneopen.js"></script>
+</block>
+<!-- js文件模块 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 底部JS执行区域 开始 -->
+<block name="footScript">
+
+    <script type="text/javascript">
+        var m = '';
+        var p = '';
+        $('.textarea_editor').wysihtml5();
+        var img = '';
+        $('#file_upload').uploadify({
+            'swf'      : '__PUBLIC__/Plugins/uploadify.swf',
+            'uploader' : '__CONTROLLER__/uploadGoods',
+            'buttonText' : '商品封面图(一张)',
+                'uploadLimit'   : 1, //设置最大上传文件的数量
+                'fileSizeLimit':'3MB',
+                'onUploadSuccess' : function(file, data, response) {
+                 // data=data.substring(0,data.length-1);
+                 // data=data.substr(1);
+                 data=data.replace(/"/g,'');
+                 data=data.replace("\\",'');
+                 img = "<img width='200px' src='__PUBLIC__/Index/Goods/"+data+"'><input type='hidden' name='list_image' value='"+data+"'>";
+                 $('#imgs').html(img);
+                //$('#images').val(data);
+            }
+        });
+
+
+        // 处理多张小图上传
+        var imgS = '';
+        var imgC = '';
+        var status= 0;
+        $('#adv_upload').uploadify({
+            'swf'      : '__PUBLIC__/Plugins/uploadify.swf',
+            'uploader' : '<{:U("Indexs/goodsUpload")}>',
+            'buttonText' : '商品图片(多张)',
+            'fileSizeLimit':'6MB',
+            'onUploadSuccess' : function(file, data, response) {
+                // data=data.substring(0,data.length-1);
+                // data=data.substr(1);
+                data=data.replace(/"/g,'');
+                data=data.replace("\\",'');
+                data=data.replace("\\",'');
+                if(!data){
+                    status =0;
+                }else{
+                var dataV = '/Public/Index/Goods/' + data; 
+
+                imgS += '<li class="span2"> <a> <img src="__PUBLIC__/Index/Goods/'+data+'" alt=""> </a><input type="hidden" name="imgs[]" value="'+dataV+'"><div class="actions"><a class="lightbox_trigger" target="_blank;" href="__PUBLIC__/Index/Goods/'+data+'"><i class="icon-search"></i></a> </div></li>';
+                // 处理返回过来的值
+                imgC += "<img width='100' height='100' src='__PUBLIC__/Index/Goods/"+data+"'>";
+                $('#imgsforcolor').html(imgC);
+                status = 1;
+            }
+          }
+        });
+
+$('#addcolor').click(function (){
+            if(status ==1){
+            $('.deletepic').parent().parent().parent().remove();
+            $('<tbody><tr><td style="width:180px; text-align:right;">已选择</td><td><ul class="thumbnails">'+imgS+'</ul></td></tr></tbody>').appendTo('#show-uploaded-advs');
+            $('.goodsimg').hide();
+            }else if(status ==0){
+            alert('请添加图片');
+            return false;
+            }
+        });
+
+$('.deletepic').click(function(){
+            $(this).parent().parent().parent().remove();
+        });
+
+    </script>
+</block>
+<!-- 底部JS执行区域 结束 -->

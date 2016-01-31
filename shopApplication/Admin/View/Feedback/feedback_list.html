@@ -1,0 +1,158 @@
+<!-- =====================================================
+    Author: Eden
+    Date:   2015-01-12
+    Function:   公共模板文件中定义的block区域，可以在子模板中继承和覆盖
+ ========================================================= -->
+<!-- 继承 公共模板 开始 -->
+<extend name="Public:blank" />
+<!-- 继承 公共模板 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部CSS文件 开始 -->
+<block name="cssFile">
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap-responsive.min.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/uniform.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/select2.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-style.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-media.css" />
+    <link href="__PUBLIC__/Admin/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <style>
+        td.text-center {
+            text-align:center;
+        }
+        a.title-link {
+            color:#0066ff;
+        }
+    </style>
+</block>
+<!-- 顶部CSS文件 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部JS文件 开始 -->
+<block name="topJsFile">
+    
+</block>
+<!-- 顶部JS文件 结束 -->
+
+<!-- ===================================================== -->
+<!-- 头部部分 开始 -->
+<block name="publicHead">
+    <div id="breadcrumb">
+        <a href="index.html" title="返回系统主页" class="tip-bottom">
+            <i class="icon-home"></i>
+            管理首页
+            <a href="#" class="current">用户管理</a> 
+        </a>
+    </div>
+    <h1 style="margin-top:10px;">意见与反馈</h1>
+</block>
+<!-- 头部部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 公共Body部分 开始 -->
+<block name="publicBody">
+    <!-- 将主体包含在 .row-fluid 内部 -->
+    <div class="container-fluid">
+        <hr style="margin:0;">
+        <div class="row-fluid">
+            <div class="span12">
+                <div>
+                    <div class="control-group">
+                        <div class="controls">
+                            <form action="" method="get" class="span6">
+                                <input type="text" name="keyword" style="width:150px;" placeholder="请输入关键字...">
+                                <select name="cat_id" style="width:120px;">
+                                    <option>查找全部</option>
+                                        <option value="">按用户名</option>
+                                        <option value="">按留言内容</option>
+                                </select>
+                                <input type="submit" id="sub" class="btn btn-primary" style="margin-top:-10px;" value="查找">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="widget-box">
+          <div class="widget-title"> <span class="icon">
+            <input type="checkbox" id="title-checkbox" name="title-checkbox" />
+            </span>
+            <h5>用户意见与反馈</h5>
+          </div>
+          <div class="widget-content nopadding">
+            <form action="__CONTROLLER__/doBatchDelete" method="post">
+            <table class="table table-bordered table-striped with-check">
+              <thead>
+                <tr>
+                  <th><i class="icon-resize-vertical"></i></th>
+                  <th style="width:5%;">编号</th>
+                  <th style="width:15%;">用户名称</th>
+                  <th>留言内容</th>
+                  <th style="width:15%;">留言时间</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                  <foreach name="feedbackRes" item="res">
+                  <tr>
+                    <td><input type="checkbox" value="<{$res.id}>" name="fids[]"/></td>
+                    <td class="text-center"><{$res.id}></td>
+                    <td class="text-center"><{$res.uname}>
+                    </td>
+                    <td>
+                        <{$res.content|mb_substr=0, 20, utf8}>
+                        <notempty name="res.is_reply"><i class="icon-flag" style="color:red;" title="已回复"></i></notempty>
+                    </td>
+                    <td class="text-center"><{$res.add_time|date="Y-m-d H:i", ###}></td>
+                    <td class="text-center" style="width:80px;">
+                        <a href="__CONTROLLER__/view/id/<{$res.id}>" title="查看并回复" class="btn btn-success btn-mini"> <i class="icon-search"></i> </a>
+                        <a href="__CONTROLLER__/doDeleteFeedback/id/<{$res.id}>" title="删除" class="btn btn-danger btn-mini"> <i class="icon-trash"></i> </a>
+                    </td>
+                  </tr>
+                  </foreach>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="6">
+                      <input type="submit" class="btn btn-primary pull-left" style="margin-top:16px;" value="批量删除">
+                      <div class="pagination alternate text-right pull-right">
+                          <{$page}>
+                      </div>
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
+            </form>
+          </div>
+        </div>
+            </div>
+        </div>
+    </div>
+</block>
+<!-- 公共Body部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- js文件模块 开始 -->
+<block name="footJsFile">
+    <script src="__PUBLIC__/Admin/js/jquery.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.ui.custom.js"></script> 
+    <script src="__PUBLIC__/Admin/js/bootstrap.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.uniform.js"></script> 
+    <script src="__PUBLIC__/Admin/js/select2.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.dataTables.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.tables.js"></script>
+    <script src="__PUBLIC__/Admin/js/muneopen.js"></script>
+</block>
+<!-- js文件模块 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 底部JS执行区域 开始 -->
+<block name="footScript">
+
+</block>
+<!-- 底部JS执行区域 结束 -->

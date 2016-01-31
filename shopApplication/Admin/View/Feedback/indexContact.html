@@ -1,0 +1,147 @@
+<!-- =====================================================
+    Author: Eden
+    Date:   2015-01-12
+    Function:   公共模板文件中定义的block区域，可以在子模板中继承和覆盖
+ ========================================================= -->
+<!-- 继承 公共模板 开始 -->
+<extend name="Public:blank" />
+<!-- 继承 公共模板 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部CSS文件 开始 -->
+<block name="cssFile">
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap-responsive.min.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/uniform.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/select2.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-style.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-media.css" />
+    <link href="__PUBLIC__/Admin/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <style>
+        td.text-center {
+            text-align:center;
+        }
+        a.title-link {
+            color:#0066ff;
+        }
+    </style>
+</block>
+<!-- 顶部CSS文件 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部JS文件 开始 -->
+<block name="topJsFile">
+    
+</block>
+<!-- 顶部JS文件 结束 -->
+
+<!-- ===================================================== -->
+<!-- 头部部分 开始 -->
+<block name="publicHead">
+    <div id="breadcrumb">
+        <a href="index.html" title="返回系统主页" class="tip-bottom">
+            <i class="icon-home"></i>
+            管理首页
+            <a href="#" class="current">首页留言</a> 
+        </a>
+    </div>
+    <h1 style="margin-top:10px;">留言列表</h1>
+</block>
+<!-- 头部部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 公共Body部分 开始 -->
+<block name="publicBody">
+    <!-- 将主体包含在 .row-fluid 内部 -->
+    <div class="container-fluid">
+        <hr style="margin:0;">
+        <div class="row-fluid">
+            <div class="span12">
+                
+                <div class="widget-box">
+          <div class="widget-title"> 
+            <h5>首页留言</h5>
+          </div>
+          <div class="widget-content nopadding">
+            
+            <table class="table table-bordered table-striped with-check">
+              <thead>
+                <tr>
+                  <th style="width:5%;">编号</th>
+                  <th style="width:15%;">用户姓名</th>
+                  <th style="width:15%;">用户邮箱</th>
+                  <th style="width:15%;">用户电话</th>
+                  <th style="width:15%;">留言摘要</th>
+                  <th style="width:15%;">留言时间</th>
+                  <th style="width:5%;">状态</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                  <foreach name="list" item="res">
+                  <tr>
+                    <td class="text-center"><{$res.id}></td>
+                    <td class="text-center"><{$res.name}></td>
+                    <td class="text-center"><{$res.mail}></td>
+                    <td class="text-center"><{$res.phone}></td>
+                    <td class="text-center"><{$res.subject}></td>
+                    <td class="text-center"><{$res.contact_time|date="Y-m-d H:i", ###}></td>
+                    <td class="text-center">
+                      <if condition="$res['status'] eq 0">
+                        <span class="badge badge-important">未读</span>
+                        <elseif condition="$res['status'] eq 1" />
+                        <span class="badge badge-info">已读</span>
+                      </if>
+                    </td>
+                    <td class="text-center" style="width:80px;">
+                        <a href="__CONTROLLER__/viewContact/id/<{$res.id}>" title="查看留言内容" class="btn btn-success btn-mini"> <i class="icon-search"></i> </a>
+                        <a href="__CONTROLLER__/doDeleteContact/id/<{$res.id}>" title="删除" class="btn btn-danger btn-mini"> <i class="icon-trash"></i> </a>
+                    </td>
+                  </tr>
+                  </foreach>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="8">
+                      <div class="pagination alternate text-right pull-right">
+                          <{$page}>
+                      </div>
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
+
+          </div>
+        </div>
+            </div>
+        </div>
+    </div>
+</block>
+<!-- 公共Body部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- js文件模块 开始 -->
+<block name="footJsFile">
+    <script src="__PUBLIC__/Admin/js/jquery.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.ui.custom.js"></script> 
+    <script src="__PUBLIC__/Admin/js/bootstrap.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.uniform.js"></script> 
+    <script src="__PUBLIC__/Admin/js/select2.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.dataTables.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.tables.js"></script>
+    <script src="__PUBLIC__/Admin/js/muneopen.js"></script>
+</block>
+<!-- js文件模块 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 底部JS执行区域 开始 -->
+<block name="footScript">
+
+</block>
+<!-- 底部JS执行区域 结束 -->

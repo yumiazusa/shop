@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>法律声明</title>
+    <meta name="keywords" content="ribbon商城, ribbon公司, lamp兄弟连">
+    <meta name="kescription" content="ribbon商城是一家专业的电子商务平台">
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="/Public/Home/css/bootstrap.min.css">
+    <!-- 可选的Bootstrap主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="/Public/Home/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/Public/Home/css/public.css">
+    <link rel="stylesheet" href="/Public/Home/css/custom-service.css">
+    <!-- ===================================== =================== -->
+    <!-- ====================== 自定义CSS文件 部分 =============== -->
+    
+        
+    
+    <!-- ====================== 自定义CSS文件 结束 =============== -->
+    <!-- ====================================== ================== -->
+
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="/Public/Home/js/jquery.min.js"></script>
+    <!-- ============================================================ -->
+    <!-- ====================== 自定义顶部js文件 部分 =============== -->
+    
+        
+    
+    <!-- ====================== 自定义顶部js文件 结束 =============== -->
+    <!-- ============================================================ -->
+
+</head>
+<body>
+    <!-- ===================================== =================== -->
+    <!-- ====================== 顶部广告 开始 ==================== -->
+    
+        
+    
+    <!-- ====================== 顶部广告 结束 ==================== -->
+    <!-- ====================================== ================== -->
+    
+    <!-- TOP AND MENU START -->
+    <div class="top">
+        <div class="bar">
+            <div class="container">
+                <div class="top-bar-image"><img src="/Public/Home/images/top-bar-word.png" alt=""></div>
+                <div class="pull-right text-right welcome">
+                    <span class="top-bar-welcome">
+                        <a href="#login" data-toggle="modal">您好，请登录</a> | 
+                        <a href="/index.php/Login/regist">注册</a>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- 用户登录模态框 开始 -->
+        <div class="modal fade" style="margin-top:50px;" id="login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog" style="width:400px;">
+                <div class="modal-content">
+                    <form action="/admin.php/Login/indexLogin.html" method="post">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                            <h4 class="modal-title" id="myModalLabel">用户登录</h4>
+                        </div>
+                        <div class="modal-body">
+                            <br />
+                            <div class="input-group input-group-lg">
+                                <span class="input-group-addon modal-username">&nbsp;&nbsp;</span>
+                                <input type="text" name="username" class="form-control" placeholder="邮箱/手机号">
+                            </div>
+                            <br />
+                            <br />
+                            <div class="input-group input-group-lg">
+                                <span class="input-group-addon modal-username">&nbsp;&nbsp;</span>
+                                <input type="password" name="password" class="form-control" placeholder="密码">
+                            </div>
+                            <br />
+                            <div class="">
+                                <a href="###">忘记密码？</a>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <a type="button" href="/admin.php/Login/regist.html" class="btn btn-default">账号注册</a>
+                            <button type="submit" class="btn btn-primary">立即登录</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- 用户登录模态框 结束 -->
+        <!-- ============================================================== -->
+        <div class="container logo-and-menu">
+            <div class="row">
+                <div class="logo">
+                    <a href="/admin.php"><img src="/Public/Home/images/logo.png" alt="Ribbon"></a>
+                </div>
+                <ul class="list-unstyled menu">
+                    <li><a href="/index.php" class="active">首页</a></li>
+                    <li><a href="###" id="menu-product">产品</a></li>
+                    <li><a href="/index.php/Support/index">服务</a></li>
+                    <li><a href="###">应用</a></li>
+                    <li><a href="###">社区</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- 隐藏的向下滑动菜单 开始 -->
+        <div class="slide-menu">
+            <div class="container">
+                <div class="col-md-3">
+                    <a href="/admin.php/Product/productList/type/phone">
+                        <img class="img-responsive" src="/Public/Home/images/mobile.png" alt="">
+                    </a>
+                </div>
+                <div class="col-md-3 text-center">
+                    <a href="/admin.php/Product/productList/type/tablet">
+                        <img class="img-responsive" src="/Public/Home/images/tablet.png" alt="">
+                    </a>
+                </div>
+                <div class="col-md-3 text-center">
+                    <a href="/admin.php/Product/productList/type/wearable">
+                        <img class="img-responsive" src="/Public/Home/images/wearable.png" alt="">
+                    </a>
+                </div>
+                <div class="col-md-3 text-center">
+                    <a href="/admin.php/Product/productList/type/accessories">
+                        <img class="img-responsive" src="/Public/Home/images/accessorise.png" alt="">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- 隐藏的向下滑动菜单 结束 -->
+    </div>
+    <!-- TOP AND MENU END -->
+    <!-- 隐藏的菜单 开始 -->
+    <div class="search-box">
+        <form action="/admin.php/Search/index.html" method="get">
+            <input type="text" name="keyword" class="search-txt" placeholder="如：MX4 Pro">
+            <input type="submit" class="search-button" value="搜索">
+            <b id="close-search-box"></b>
+        </form>
+        <div class="keyword-side">
+            <strong>关键字：</strong>
+                    </div>
+    </div>
+    <div class="side">
+        <ul>
+            
+            <li style="margin-left:-39px;">
+                <a href="javascript:goTop();" class="sidetop" >
+                <img src="/Public/Home/images/side_icon05.png">
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!-- BANNER START -->
+    <div class="banner"></div>
+
+    <!-- BANNER START -->
+    <div class="banner"></div>
+    <!-- BANNER END -->
+    <div class="container archives" style="padding-bottom:40px; background:#FAFAFA;">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="page-header">
+                    <h3>法律声明</h3>
+                </div>
+                <div class="archive-body">
+                    <h4>
+	<span style="font-family:'Microsoft YaHei';font-size:14px;">1.	总则</span>
+</h4>
+<span style="font-family:'Microsoft YaHei';font-size:14px;">1.1本网站为珠海市魅族通讯设备有限公司（以下简称“魅族”）的官方网站，本网站内容仅供用户个人非商业用途使用，所有浏览本网站的用户应仔细阅读本网站的各项声明、条款等，并遵守互联网法律法规。一旦使用本网站，包括但不限于浏览网站信息、下载网站内容、使用网站提供的第三方网站链接等，即视为用户已了解并完全同意本法律声明中的所有条款，愿意承担浏览本网站的全部风险和法律责任。</span><br />
+<span style="font-family:'Microsoft YaHei';font-size:14px;">1.2本法律声明的内容可能会不时更改，用户应在使用本网站时及时关注，本网站不承担通知义务。</span><br />
+<br />
+<h4>
+	<span style="font-family:'Microsoft YaHei';font-size:14px;">2.	服务条款</span>
+</h4>
+<span style="font-family:'Microsoft YaHei';font-size:14px;">2.1本网站所有信息和软件均按现状提供，不带有任何明示或暗示的担保或条件，包括但不限于准确性、及时性和非侵权的默示担保或保证。</span><br />
+<span style="font-family:'Microsoft YaHei';font-size:14px;">2.2本网站仅提供相关的网络内容服务，对于可能产生的网络资费由电信运营商收取。</span><br />
+<span style="font-family:'Microsoft YaHei';font-size:14px;">2.3本网站引用或链接的信息均为用户提供方便服务而设，所链接网站、网站上的内容及其描述或提供的产品与服务均不受魅族的控制，因此魅族不对任何该等网站及其上的内容、产品或服务（包括对第三方网站的进一步链接）负责，如用户选择使用该第三方网站，需承担由此带来的全部后果和风险。</span><br />
+<br />
+<h4>
+	<span style="font-family:'Microsoft YaHei';font-size:14px;">3.	知识产权声明</span>
+</h4>
+<span style="font-family:'Microsoft YaHei';font-size:14px;">3.1本网站上所有信息，包括但不限于本网站使用的所有商标、标识、企业名称和标志、文字、图片、音频、视频、程序的全部内容，网站布局、网页设计、网站架构及资料编辑、使用软件或程序，及其知识产权均属于魅族独立拥有或与相关内容之合法权利人共同拥有。</span><br />
+<span style="font-family:'Microsoft YaHei';font-size:14px;">3.2除非法律另有规定，未经魅族书面授权，对魅族拥有的版权和其他知识产权的任何内容，任何人不得擅自以任何形式复制、编辑、传播、汇编、修改、下载、模仿、抄袭、重新发布、镜像、进行还原工程、解编或反向组译，否则魅族将依法追究法律责任。</span><br />
+<span style="font-family:'Microsoft YaHei';font-size:14px;">3.3任何第三方在合理使用限度内转载本网站网页内容的，必须标明转载内容的出处、原作者、链接，并不得删除魅族版权标志（如有），否则魅族将保留追究其法律责任的权利。</span><br />
+<br />
+<h4>
+	<span style="font-family:'Microsoft YaHei';font-size:14px;">4.	网站内容的使用</span>
+</h4>
+<span style="font-family:'Microsoft YaHei';font-size:14px;">4.1本网站对用户上传的音频、影像、文字、图片等文件并无严格审查义务，用户对其上传的的任何文件需保证不侵犯第三方的任何权利，除非用户或权利人特别说明，否则用户上传资料的行为视为授权许可，即魅族对上传至本网站的文件享有永久的免费使用的权利。</span><br />
+<span style="font-family:'Microsoft YaHei';font-size:14px;">4.2任何单位或个人认为本网站内容可能侵犯其合法权益的，应该及时向魅族提出书面权利通知，并提供身份证明、权属证明、具体链接（URL）及详细侵权情况证明。魅族在收到上述法律文件后，将会依法尽快移除相关涉嫌侵权的内容。</span><br />
+<br />
+<h4>
+	<span style="font-family:'Microsoft YaHei';font-size:14px;">5.	隐私保护</span>
+</h4>
+<span style="font-family:'Microsoft YaHei';font-size:14px;">5.1本网站严格遵守中华人民共和国法律法规关于隐私权的保护，仅收集由用户在自主意愿下所填写并授权魅族所使用的资料，包括但不限于姓名、电子邮件、通信地址、用户名及密码、电话号码、手机号码。以上收集的资料可能用于寄送魅族样品、产品、赠品及相关信息，或是邀请用户参加魅族举办的线上活动、线下活动或抽奖活动等。</span><br />
+<span style="font-family:'Microsoft YaHei';font-size:14px;">5.2本网站除将为用户提供安全、方便的网络体验外，还将尽最大努力完善网络管理，包括但不限于使用加密工具、软件等方面的安全保障措施，以保护用户的信息安全和隐私安全。</span><br />
+<span style="font-family:'Microsoft YaHei';font-size:14px;">5.3 除法律法规另有规定，在未征得用户事先许可的情况下，魅族不会披露用户信息或向第三方提供。</span><br />
+<br />
+<h4>
+	<span style="font-family:'Microsoft YaHei';font-size:14px;">6.	免责条款</span>
+</h4>
+<span style="font-family:'Microsoft YaHei';font-size:14px;">6.1本网站对任何用户或第三方任何损失，包括但不限于数据丢失、因拷贝或下载本网站信息或资料而造成的损失概不负责，不论其是否基于保证、合同、侵权行为、不法行为，或其它任何法律理论，也不论本网站是否已事先提示出现此类损失的可能性。</span><br />
+<span style="font-family:'Microsoft YaHei';font-size:14px;">6.2本网站有权依照国家法律法规、规章及论坛规则、软件中心规则对用户在本网站上传和发布的资料和言论进行管理和监督，但并不对此承担任何责任。</span><br />
+<span style="font-family:'Microsoft YaHei';font-size:14px;">6.3因政府有权机关机构根据法律、行政法规的规定要求披露用户个人资料的，本网站将根据法律规定或为公共安全目的向政府有权机关机构提供个人资料，且无须对此承担任何责任。</span><br />
+<br />
+<h4>
+	<span style="font-family:'Microsoft YaHei';font-size:14px;">7.	适用法律和管辖权</span>
+</h4>
+<span style="font-family:'Microsoft YaHei';font-size:14px;">7.1因本声明或使用本网站所发生的争议适用中华人民共和国法律。</span><br />
+<span style="font-family:'Microsoft YaHei';font-size:14px;">7.2因本声明或使用本网站所发生的争议，应当协商解决，协商不成的，各方一致同意由魅族所在地人民法院诉讼解决。</span><br />
+<span style="font-family:'Microsoft YaHei';font-size:14px;"></span><br />
+<h4>
+	<span style="font-family:'Microsoft YaHei';font-size:14px;">8.	其他</span>
+</h4>
+<span style="font-family:'Microsoft YaHei';font-size:14px;">8.1魅族虽已采取合理措施避免网页中出现计算机病毒，但信息网络上不存在绝对完善的安全措施，本网站无法对计算机病毒做绝对保证，因此请用户务必自行采取适当的安全防范措施。本网站对计算机病毒不承担任何责任。</span><br />
+<span style="font-family:'Microsoft YaHei';font-size:14px;">8.2在法律允许的范围内，本网站保留对本声明的解释和说明的权利。</span><br />                </div>
+            </div>
+        </div>
+    </div>
+<!-- 底部图标 开始 -->
+    <div class="footer-icons" style="position:relative;z-index:1000;">
+        <div class="container">
+            <div class="col-md-3 footer-btns">
+                <a href="###">
+                    <b></b>
+                    <span class="text-center">支持货到付款</span>
+                </a>
+            </div>
+            <div class="col-md-3 footer-btns">
+                <a href="###">
+                    <b></b>
+                    <span class="text-center">7天无理由退货</span>
+                </a>
+            </div>
+            <div class="col-md-3 footer-btns">
+                <a href="###">
+                    <b></b>
+                    <span class="text-center">售后上门服务</span>
+                </a>
+            </div>
+            <div class="col-md-3 footer-btns">
+                <a href="###">
+                    <b></b>
+                    <span class="text-center">满59元免费包邮</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- 底部图标 结束 -->
+    <!-- footer 开始 -->
+    <div class="footer" style="position:relative;z-index:1000;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-2">
+                    <dl>
+                        <dt><h4>关于我们</h4></dt>
+                        <dd><a href="./Html/index.html">关于ribbon</a></dd>
+                        <dd><a href="./Html/aboutus.html">新闻中心</a></dd>
+                        <dd><a href="/admin.php/Job/index.html">加入我们</a></dd>
+                        <dd><a href="./aboutus.html">公益</a></dd>
+                        <dd><a href="./Application/Html/aboutus.html">星空之约</a></dd>
+                        <dd><a href="###">联系我们</a></dd>
+                        <dd><a href="###">友情链接</a></dd>
+                    </dl>
+                </div>
+                <div class="col-md-2">
+                    <dl>
+                        <dt><h4>产品</h4></dt>
+                        <dd><a href="###">所有产品</a></dd>
+                        <dd><a href="###">平板系列</a></dd>
+                        <dd><a href="###">手机</a></dd>
+                        <dd><a href="###">穿戴产品</a></dd>
+                        <dd><a href="###">配件</a></dd>
+                    </dl>
+                </div>
+                <div class="col-md-2">
+                    <dl>
+                        <dt><h4>服务中心</h4></dt>
+                        <dd><a href="###">体验店</a></dd>
+                        <dd><a href="###">售后服务</a></dd>
+                        <dd><a href="###">官服中心</a></dd>
+                        <dd><a href="###">帮助中心</a></dd>
+                        <dd><a href="###">软件下载</a></dd>
+                        <dd><a href="###">固件升级</a></dd>
+                    </dl>
+                </div>
+                <div class="col-md-2">
+                    <dl>
+                        <dt><h4>关注我们</h4></dt>
+                        <dd><a href="###">社区</a></dd>
+                        <dd><a href="###">立即注册</a></dd>
+                        <dd><a href="###">新浪微博</a></dd>
+                        <dd><a href="###">QQ空间</a></dd>
+                        <dd><a href="###">微信</a></dd>
+                        <dd><a href="###">百度贴吧</a></dd>
+                        <dd><a href="http://m.ickd.cn" target="_blank">快递查询</a></dd>
+                    </dl>
+                </div>
+                <div class="col-md-4 text-right" style="border-right:none;">
+                    <h2>400-700-5858</h2>
+                    <p style="margin-bottom:50px;">周一到周日 8:30-20:30 (全年无休)</p>
+                    <a href="###" class="btn btn-primary">7*24小时在线客服</a>
+                    <div class="btn-group dropup" style="border:none;">
+                        <button type="button" class="btn btn-default">简体中文</button>
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                            <span class="caret"></span>
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">English</a></li>
+                            <li><a href="#">繁體中文</a></li>
+                            <li><a href="#">台灣繁體</a></li>
+                            <li><a href="#">Deutsch</a></li>
+                            <li><a href="#">Русский</a></li>
+                            <li><a href="#">עברית</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row foot-logo">
+                <!-- <img src="/Public/Home/images/foot-logo.png" alt=""> -->
+            </div>
+        </div>
+    </div>
+    <!-- footer 结束 -->
+    <div class="copyright">
+        <div class="container">
+            <div class="copyright-words">2012-2014 努比亚 版权所有 粤ICP备10006213号-2 ICP经营许可证编号：粤B2-20120688  深圳市中兴移动通信有限公司</div>
+            <div class="pull-right copyright-icon"></div>
+        </div>
+    </div>
+</body>
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="/Public/Home/js/bootstrap.min.js"></script>
+    <!-- <script src="/Public/Home/js/tooltips-popovers.min.js"></script> -->
+    <script src="/Public/Home/js/index.js"></script>
+    <script src="/Public/Home/js/custom-service.js"></script>
+    <!-- =========================================================== -->
+    <!-- ====================== js文件部分 开始 ==================== -->
+    
+    
+    
+    <!-- ====================== js文件部分 结束 ==================== -->
+    <!-- =========================================================== -->
+</html>

@@ -1,0 +1,77 @@
+<extend name="Public:public" />
+<block name="publicBody">
+    <div class="main">
+      <div class="container">
+        <ul class="breadcrumb">
+            <li><a href="__APP__">主页</a></li>
+            <li><a href="<{:U('newslist')}>">咨询中心</a></li>
+            <li class="active"><{$new.title}></li>
+        </ul>
+        <!-- BEGIN SIDEBAR & CONTENT -->
+        <div class="row margin-bottom-40">
+          <!-- BEGIN CONTENT -->
+          <div class="col-md-12 col-sm-12">
+            <div class="content-page">
+              <div class="row">
+                <!-- BEGIN LEFT SIDEBAR -->            
+                <div class="col-md-9 col-sm-9 blog-item">
+                  <h2><{$new.title}></h2>
+                  <ul class="blog-info">
+                    <li><i class="fa fa-user"></i><{$new.author}></li>
+                    <li><i class="fa fa-calendar"></i><{$new.create_time|date="Y-m-d H:i",###}></li>
+                    <li><i class="fa fa-comments"></i>点击量：<{$new.clicktimes}></li>
+                    <li><i class="fa fa-tags"></i>关键词：<{$new.keywords}></li>
+                  </ul>
+                  <{$new.content|htmlspecialchars_decode}>
+                </div>
+
+
+
+
+                <!-- END LEFT SIDEBAR -->
+
+                <!-- BEGIN RIGHT SIDEBAR -->            
+                <div class="col-md-3 col-sm-3 blog-sidebar">
+                  <!-- CATEGORIES START -->
+                 <h2 class="no-top-space">新闻分类</h2>
+                  <ul class="nav sidebar-categories margin-bottom-40">
+                    <volist name="newscat" id="cat">
+                    <li><a href="<{:U('newslist',array('cat'=>$cat['id']))}>"><{$cat.cat_name}> (<{$cat.amount}>)</a></li>
+                    </volist>
+                  </ul>
+                  <!-- CATEGORIES END -->
+
+                  <!-- BEGIN RECENT NEWS -->                            
+                  <h2>最热资讯</h2>
+                  <div class="recent-news margin-bottom-10">
+                    <volist name="newsrank" id="rank">
+                    <div class="row margin-bottom-10">
+                      <div class="col-md-3">
+                        <img class="img-responsive" alt="" src="__PUBLIC__/News/<{$rank.thumbnail}>">
+                      </div>
+                      <div class="col-md-9 recent-news-inner">
+                        <h3><a href="<{:U('newspage',array('id'=>$rank['id']))}>"><{$rank.title|msubstr=0,12,'utf-8',true}></a></h3>
+                        <p><{$rank.description|msubstr=0,15,'utf-8',true}></p>
+                      </div>
+                    </div>
+                  </volist>
+                  </div>
+                  <!-- END RECENT NEWS -->                            
+
+
+
+                  
+                </div>
+                <!-- END RIGHT SIDEBAR -->            
+              </div>
+            </div>
+          </div>
+          <!-- END CONTENT -->
+        </div>
+        <!-- END SIDEBAR & CONTENT -->
+      </div>
+    </div>
+  </block>
+</block name="bottomJsFile">
+
+</block>

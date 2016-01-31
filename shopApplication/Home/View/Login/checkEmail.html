@@ -1,0 +1,109 @@
+<extend name="Public:public" />
+<!-- ====================== 自定义CSS文件 部分 =============== -->
+<block name="cssFile">
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/regist.email.css">
+</block>
+<!-- ====================== 自定义CSS文件 结束 =============== -->
+
+<!-- ====================== 主体部分 开始 ==================== -->
+<block name="publicBody">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1 main-box">
+                <div class="media" style="margin:0 auto; width:60%; margin-top:50px;">
+                    <a class="media-left" href="#">
+                        <img src="__PUBLIC__/Home/images/email-box.png" />
+                    </a>
+                    <div class="media-body">
+                        <h4 class="media-heading">还差一步，请激活您的帐户</h4>
+                        <p style="font-size:13px; color;#888; margin-top:15px;">请访问您的邮箱：<strong style="font-size:14px;color:#00acff"><{$userEmail}></strong>，点击邮件中的链接便可激活您的帐户</p>
+                    </div>
+                </div>
+                <div class="media" style="margin:0 auto; width:60%; margin-top:20px;">
+                    <a class="media-left" href="#" style="width:64px; height;64px">
+                    </a>
+                    <div class="media-body">
+                        <a href="javascript:void(0)" style="margin-left:10px;" class="btn btn-primary" id="link-btn" userEmail="<{$userEmail}>">立即登录邮箱验证</a>
+                    </div>
+                </div>
+                <div class="some-desc-words">
+                    <h4>还没有收到验证邮件</h4>
+                    <p class="normal-font" style="margin-top:0px">1、也许邮件被您的邮箱误认为是垃圾邮件而放到垃圾箱中，请检查一下</p>
+                    <p class="normal-font" style="margin-top:0px">2、或者，您还可以在此点击<a href="javascript:void(0)" userEmail="<{$userEmail}>" id="re_send" style="font-size:13px;color:#09f;"><span>重新发送激活邮件</span></a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>
+<!-- ====================== 主体部分 结束 ==================== -->
+
+<!-- ====================== js文件部分 开始 ==================== -->
+<block name="bottomJsFile">
+<script>
+    var hash={
+    'qq.com': 'http://mail.qq.com',
+    'gmail.com': 'http://mail.google.com',
+    'sina.com': 'http://mail.sina.com.cn',
+    '163.com': 'http://mail.163.com',
+    '126.com': 'http://mail.126.com',
+    'yeah.net': 'http://www.yeah.net/',
+    'sohu.com': 'http://mail.sohu.com/',
+    'tom.com': 'http://mail.tom.com/',
+    'sogou.com': 'http://mail.sogou.com/',
+    '139.com': 'http://mail.10086.cn/',
+    'hotmail.com': 'http://www.hotmail.com',
+    'live.com': 'http://login.live.com/',
+    'live.cn': 'http://login.live.cn/',
+    'live.com.cn': 'http://login.live.com.cn',
+    '189.com': 'http://webmail16.189.cn/webmail/',
+    'yahoo.com.cn': 'http://mail.cn.yahoo.com/',
+    'yahoo.cn': 'http://mail.cn.yahoo.com/',
+    'eyou.com': 'http://www.eyou.com/',
+    '21cn.com': 'http://mail.21cn.com/',
+    '188.com': 'http://www.188.com/',
+    'foxmail.coom': 'http://www.foxmail.com'
+};
+
+    $(function (){
+        $('#link-btn').click(function (){
+            var eHost = $(this).attr('userEmail').split('@')[1];
+            for (var i in hash)
+            {
+                if (eHost == i)
+                {
+                    location.href=hash[i];
+                }
+            }
+        });
+    });
+
+    $('#re_send').click(function (){
+        var email = $(this).attr('userEmail');
+        $.get('__CONTROLLER__/reSend/email/' + email, function (d){
+            if (d == 1)
+            {
+                $('<span id="aflterR" style="color:#ccc;"> 邮件已发送<em id="reSend">120</em></span>').replaceAll('#re_send');
+
+                var timer = null;
+
+                timer = setInterval(function (){
+                    var newInner = parseInt($('#reSend').html()) - 1;
+                    $('#reSend').html(newInner);
+
+                    if (newInner == 0)
+                    {
+                        clearInterval(timer);
+                        $('<a href="javascript:void(0)" userEmail="<{$userEmail}>" id="re_send" style="font-size:13px;color:#09f;"><span>重新发送激活邮件</span></a>').replaceAll('#afterR');
+                    }
+                }, 1000);
+            }
+            else
+            {
+                $('<span id="aflterR" style="color:#ccc;"> 邮件发送失败 </span>').replaceAll('#re_send');
+            }
+        });
+    });
+</script>
+     
+</block>
+<!-- ====================== js文件部分 结束 ==================== -->

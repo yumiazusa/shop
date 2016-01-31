@@ -1,0 +1,205 @@
+<!-- =====================================================
+    Author: Eden
+    Date:   2015-01-12
+    Function:   公共模板文件中定义的block区域，可以在子模板中继承和覆盖
+ ========================================================= -->
+<!-- 继承 公共模板 开始 -->
+<extend name="Public:blank" />
+<!-- 继承 公共模板 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部CSS文件 开始 -->
+<block name="cssFile">
+    <link href="__PUBLIC__/Admin/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link rel="stylesheet"href="__PUBLIC__/Admin/css/bootstrap.min.css" />
+    <link rel="stylesheet"href="__PUBLIC__/Admin/css/bootstrap-responsive.min.css" />
+    <link rel="stylesheet"href="__PUBLIC__/Admin/css/colorpicker.css" />
+    <link rel="stylesheet"href="__PUBLIC__/Admin/css/datepicker.css" />
+    <link rel="stylesheet"href="__PUBLIC__/Admin/css/uniform.css" />
+    <link rel="stylesheet"href="__PUBLIC__/Admin/css/select2.css" />
+    <link rel="stylesheet"href="__PUBLIC__/Admin/css/matrix-style.css" />
+    <link rel="stylesheet"href="__PUBLIC__/Admin/css/matrix-media.css" />
+    <link rel="stylesheet"href="__PUBLIC__/Admin/css/bootstrap-wysihtml5.css" />
+    <style>
+        img.thumb {
+            width:150px;
+            height:150px;
+        }
+    </style>
+</block>
+<!-- 顶部CSS文件 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部JS文件 开始 -->
+<block name="topJsFile">
+</block>
+<!-- 顶部JS文件 结束 -->
+
+<!-- ===================================================== -->
+<!-- 头部部分 开始 -->
+<block name="publicHead">
+    <div id="breadcrumb"> 
+        <a href="__APP__" title="返回系统首页" class="tip-bottom">
+            <i class="icon-home"></i> 
+        管理首页</a> 
+        <a href="__CONTROLLER__" class="current">用户管理</a> 
+    </div>
+    <h1 style="margin-top:10px;">收货地址管理</h1>
+</block>
+<!-- 头部部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 公共Body部分 开始 -->
+<block name="publicBody">
+    <!-- 将主体包含在 .row-fluid 内部 -->
+    <div class="container-fluid">
+        <hr style="margin:0;">
+        <div class="row-fluid">
+            <div class="span12" style="padding-top:5px;">
+                <a href="__CONTROLLER__/index" class="btn btn-info">返回列表</a>
+            </div>
+            <div class="span12" style="margin:0;">
+                <div class="widget-box">
+                    <div class="widget-title"> <span class="icon"> <i class="icon-info-sign"></i> </span>
+                        <h5>用户收货地址列表</h5>
+                    </div>
+                    <div class="widget-content nopadding">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>默认</th>
+                                    <th>详细地址</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <foreach name="addr" item="addr">
+                                <tr>
+                                    <td style="width:100px; text-align:center; padding-top:25px;">
+                                        <notempty name="addr.is_default">
+                                            <span class="badge badge-important">默认地址</span>
+                                        </notempty>
+                                    </td>
+                                    <td>
+                                        收件人：<strong><{$addr.reciver_user}></strong><br/>
+                                        联系方式：<strong><{$addr.reciver_phone}></strong><br/>
+                                        详细地址：<{$addr.province}> <{$addr.city}> <{$addr.area}> <{$addr.street}>
+
+                                    </td>
+                                    <td style="width:100px;">
+                                        <a href="__CONTROLLER__/userAddressEdit/id/<{$addr.id}>" class="btn btn-mini btn-primary">编辑</a>
+                                        <br/>
+                                        <a href="__CONTROLLER__/doAddressDelete/id/<{$addr.id}>" onclick="return confirm('您确定删除吗？')" style="margin:2px 0;" class="btn btn-mini btn-warning">删除</a>
+                                        <empty name="addr.is_default">
+                                        <br/>
+                                        <a href="__CONTROLLER__/doToggleDefault/id/<{$addr.id}>/pre/<{$addr.is_default}>/user_id/<{$addr.user_id}>" class="btn btn-mini btn-success">设为默认</a>
+                                        <else/>
+                                        <br/>
+                                        <a href="__CONTROLLER__/doToggleDefault/id/<{$addr.id}>/pre/<{$addr.is_default}>/user_id/<{$addr.user_id}>" class="btn btn-mini btn-info">取消默认</a>
+                                        </empty>
+                                    </td>
+                                </tr>
+                                </foreach>
+                            </tbody>
+                        </table>    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>
+<!-- 公共Body部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- js文件模块 开始 -->
+<block name="footJsFile">
+    <script src="__PUBLIC__/Admin/js/jquery.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.ui.custom.js"></script> 
+    <script src="__PUBLIC__/Admin/js/bootstrap.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/bootstrap-colorpicker.js"></script> 
+    <script src="__PUBLIC__/Admin/js/bootstrap-datepicker.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.toggle.buttons.html"></script> 
+    <script src="__PUBLIC__/Admin/js/masked.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.uniform.js"></script> 
+    <script src="__PUBLIC__/Admin/js/select2.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.form_common.js"></script> 
+    <script src="__PUBLIC__/Admin/js/wysihtml5-0.3.0.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.peity.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/bootstrap-wysihtml5.js"></script> 
+    <script src="__PUBLIC__/Admin/js/muneopen.js"></script>
+
+</block>
+<!-- js文件模块 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 底部JS执行区域 开始 -->
+<block name="footScript">
+    <script>
+        // 判断邮箱是否可用
+        var orgEmail = $('#email').val();
+        $('#email').change(function (){
+            var emailValue = $('#email').val();
+            if ( ! emailValue.match(/^[1-9a-zA-Z]+\w+@\w+\.[\w]+$/))
+            {
+                $('#emailDesc').html('<i class="icon-remove"></i>邮箱不合法').css({'font-size':'12px', 'color':'red'});
+            }
+            else
+            {
+                var data = {
+                    'email': emailValue
+                };
+                $.post('__CONTROLLER__/checkValueExists', data, function (d){
+                    if (d == 1)
+                    {
+                        $('#emailDesc').html('<i class="icon-ok"></i>邮箱可用').css({'font-size':'12px', 'color':'green'});
+                    }
+                    else if (d == 0)
+                    {
+                        if (emailValue != orgEmail){
+                            $('#emailDesc').html('<i class="icon-remove"></i>邮箱不可用').css({'font-size':'12px', 'color':'red'});
+                            // $('#email').attr('id', 'inputError');
+                        }
+                    }
+                });
+            }
+        });
+
+        // 判断手机是否可用
+        var orgMobile = $('#mobile').val();
+        $('#mobile').change(function (){
+            var mobileValue = $('#mobile').val();
+            // 判断手机格式
+            if ( ! mobileValue.match(/^1[3578]{1}\d{9}$/))
+            {
+                $('#mobileDesc').html('<i class="icon-remove"></i>手机号码不合法').css({'font-size':'12px', 'color':'red'});
+                // $('#mobile').attr('id', 'inputError');
+            }
+            else
+            {
+                var data = {
+                    'mobile': mobileValue
+                };
+                $.post('__CONTROLLER__/checkValueExists', data, function (d){
+                    if (d == 1)
+                    {
+                        $('#mobileDesc').html('<i class="icon-ok"></i>手机号码可用').css({'font-size':'12px', 'color':'green'});
+                    }
+                    else if (d == 0)
+                    {
+                        if (mobileValue != orgMobile){
+                            $('#mobileDesc').html('<i class="icon-remove"></i>手机号码已被占用').css({'font-size':'12px', 'color':'red'});
+                            // $('#mobile').attr('id', 'inputError');
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+</block>
+<!-- 底部JS执行区域 结束 -->

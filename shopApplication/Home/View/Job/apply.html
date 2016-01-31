@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang = "en">
+<head>
+    <meta charset = "UTF-8">
+    <title>Document</title>
+    <link rel = "stylesheet" href = "__PUBLIC__/Home/css/Support/recruitment.css"/>
+
+    <script src="__PUBLIC__/Home/js/jquery.min.js"></script>
+</head>
+<body>
+    <header></header>
+    <main>
+
+
+        <!--<div class="recruitment_nav">-->
+            <!--<div class="recruitment_nav_img">添加基本信息</div>-->
+            <!--<div class="recruitment_nav_img">上传简历</div>-->
+            <!--<div class="recruitment_nav_img">完成</div>-->
+        <!--</div>-->
+
+        <div class="recruitment_main">
+            <div>
+                <input type="hidden" id="job_id" value="<{:I('get.id')}>"/>
+                <div class="head_img">
+                    <img src = "__PUBLIC__/Home/images/logo1.png" />
+                </div>
+
+                <div class="recruitment_main_input">
+                    <p><span>* </span>姓　　名:　　　　<input type = "text" id="name"/></p>
+                    <p><span>* </span>性　　别:　　　　<label><input type = "radio" name="sex" class="sex1" value="1"/>男</label>
+                                                    <label><input type = "radio" name="sex" calss="sex2" value="0"/>女</label></p>
+                    <p><span>* </span>年　　龄:　　　　<input type = "text" id="age" /></p>
+                    <p><span>* </span>毕业院校:　　　　<input type = "text" id="school"/></p>
+                    <p><span>* </span>学　　历:　　　　<input type = "text" id="education"/></p>
+                    <p><span>* </span>专　　业:　　　　<input type = "text" id="discipline"/></p>
+                    <p><span>* </span>毕业时间:　　　　<input type = "text" id="grad_date" placeholder="格式:2010-01-01"/></p>
+                    <p><span>* </span>工作时间:　　　　<input type = "text" id="experience"/></p>
+                    <p><span>* </span>邮　　箱:　　　　<input type = "text" id="email"/></p>
+                    <p><span>* </span>电　　话:　　　　<input type = "text" id="phone"/></p>
+                    <p><span>* </span>现居地　:　　　　<input type = "text" id="now_address"/></p>
+                </div>
+
+                <div style="text-align: center;margin: 0 auto">
+                    <button id="sub" class="btn btn-success btn-large">提交</button>
+                    <button id="close" class="btn btn-danger btn-large">返回</button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!--<div id="msg" class="form-horizontal  ">-->
+        <!--<span class="help-block">dddddd</span>-->
+    <!--</div>-->
+    <footer></footer>
+</body>
+
+<script>
+    //变量
+
+    var toTop = 0;
+    var toLift = 0;
+
+    $(function(){
+        toTop = $('input:first').offset().top;
+        $('.help-block').css({'top':toTop});
+    })
+
+
+    $('input').bind('click',function(){
+
+        toTop = ($(this).offset().top);
+
+        $('.help-block').css({'top':toTop});
+    })
+
+
+
+    //返回
+    $('#close').bind('click',function(){
+        history.go(-1);
+    })
+</script>
+
+<script>
+
+    var name = '';
+    var sex = '';
+    var age = '';
+    var school = '';
+    var education = '';
+    var discipline = '';
+    var grad_date = '';
+    var experience = '';
+    var email = '';
+    var phone = '';
+    var now_address = '';
+    var data;
+    var job_id;
+
+
+    //提交
+    $('#sub').bind('click',function(){
+
+
+        name = $('#name').val();
+        if($('.sex1').is(":checked")){
+            sex = 1;
+        }else{
+            sex = 0;
+        }
+
+        age = $('#age').val();
+        school = $('#school').val();
+        education = $('#education').val();
+        discipline = $('#discipline').val();
+        grad_date = $('#grad_date').val();
+        experience = $('#experience').val();
+        email = $('#email').val();
+        phone = $('#phone').val();
+        now_address = $('#now_address').val();
+        job_id = $('#job_id').val();
+
+                data={
+                    'job_name':job_id,
+                    'name':name,
+                    'sex':sex,
+                    'age':age,
+                    'school':school,
+                    'education':education,
+                    'discipline':discipline,
+                    'grad_date':grad_date,
+                    'experience':experience,
+                    'email':email,
+                    'phone':phone,
+                    'now_address':now_address
+                }
+        $.post('__CONTROLLER__/upApply',data,function(a){
+
+            if(a>0){
+                alert('提交成功!')
+            }else{
+                alert('提交失败!')
+            }
+        })
+    })
+</script>
+
+</html>

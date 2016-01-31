@@ -1,0 +1,240 @@
+<!-- =====================================================
+    Author: Eden
+    Date:   2015-01-12
+    Function:   公共模板文件中定义的block区域，可以在子模板中继承和覆盖
+ ========================================================= -->
+<!-- 继承 公共模板 开始 -->
+<extend name="Public:blank"/>
+<!-- 继承 公共模板 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部CSS文件 开始 -->
+<block name="cssFile">
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap-responsive.min.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/uniform.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/select2.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-style.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-media.css"/>
+    <link href="__PUBLIC__/Admin/font-awesome/css/font-awesome.css" rel="stylesheet"/>
+    <style>
+        td.text-center {
+            text-align: center;
+        }
+
+        a.title-link {
+            color: #0066ff;
+        }
+
+        .gritter-item {
+            background: none repeat scroll 0 0 #f74d4d;
+            box-shadow: 3px 3px 20px #000;
+            display: none;
+            color: #fff;
+            font-size: 14px;
+            padding: 7px 10px 10px;
+            width: 250px;
+            position: fixed;
+            z-index: 1999;
+            top: 150px;
+            right: 100px;
+        }
+
+        .addShippingInfoBox {
+            background: none repeat scroll 0 0 rgba(0, 0, 0, 0.42);
+            box-shadow: 3px 3px 20px #000;
+            display: none;
+            color: #fff;
+            font-size: 14px;
+            padding: 7px 10px 10px;
+            width: 250px;
+            position: fixed;
+            z-index: 1899;
+            top: 10px;
+        }
+    </style>
+</block>
+<!-- 顶部CSS文件 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部JS文件 开始 -->
+<block name="topJsFile">
+
+</block>
+<!-- 顶部JS文件 结束 -->
+
+<!-- ===================================================== -->
+<!-- 头部部分 开始 -->
+<block name="publicHead">
+    <div id="breadcrumb">
+        <a href="index.html" title="返回系统主页" class="tip-bottom">
+            <i class="icon-home"></i>
+            管理首页
+            <a href="#" class="current">人才招聘</a>
+        </a>
+    </div>
+    <h1 style="margin-top:10px;">职位类别列表</h1>
+</block>
+<!-- 头部部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 公共Body部分 开始 -->
+<block name="publicBody">
+<!-- 将主体包含在 .row-fluid 内部 -->
+<div class="container-fluid">
+    <hr style="margin:0;">
+    <div class="row-fluid">
+        <div class="span12">
+            <div>
+                <div class="control-group">
+                    <div class="controls">
+
+
+                        <!--<form action="__CONTROLLER__/index" method="get" class="span3">-->
+                            <!--<input type="text" name="order_num" placeholder="快递单号查询" style="width:150px;">-->
+                            <!--<input type="submit" name="num_sub" class="btn btn-primary" style="margin-top:-10px;"-->
+                                   <!--value="提交">-->
+                        <!--</form>-->
+
+                    </div>
+                </div>
+            </div>
+            <div class="widget-box">
+                <div class="widget-title"> <span class="icon">
+            <input type="checkbox" id="title-checkbox" name="title-checkbox"/>
+            </span>
+                    <h5>订单列表</h5>
+                </div>
+                <div class="widget-content nopadding">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <th style="width:40px;">编号</th>
+                            <th style="width:70px;">类别名</th>
+                            <th style="width:136px;">类别描述</th>
+                            <th style="width:30px;">拥有工作数量</th>
+                            <th style="width:30px;">是否使用</th>
+                            <th style="width:90px;">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <foreach name="data" item="fo">
+                            <tr>
+                                <td class="text-center"> <{$fo.id}> </td>
+                                <td class="text-center"> <{$fo.cat_name}> </td>
+                                <td class="text-center"> <{$fo.cat_desc}> </td>
+                                <td class="text-center"> <{$fo.count}> </td>
+                                <td class="text-center">
+                                <eq name="fo.is_show" value="0" class="order_trash">
+                                    <i class="icon-remove" style="color:#646464;"></i>
+                                </eq>
+                                <eq name="fo.is_show" value="1">
+                                    <i class="icon-ok" style="color:#eab34f;"></i>
+                                </eq>
+                                </td>
+                                <td class="text-center" >
+                                    <a href="__CONTROLLER__/editCat/id/<{$fo.id}>"
+                                       title="编辑"
+                                       class="btn btn-success btn-mini"> <i class="icon-pencil"></i> </a>
+                                    <a href="__CONTROLLER__/catShow/id/<{$fo.id}>" title="查看" class="btn btn-info btn-mini addShipping"
+                                       status="<{$fo.order_status}>" id="<{$fo.id}>"> <i class="icon-truck"></i> </a>
+
+                                    <a href="javascript:catDel(<{$fo.id}>)" title="删除"
+                                       class="btn btn-danger btn-mini"> <i class="icon-trash"></i> </a>
+                                </td>
+                            </tr>
+                        </foreach>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <td colspan="9">
+                                <div class="pagination alternate text-right">
+                                    <{$page}>
+                                </div>
+                            </td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</block>
+<!-- 公共Body部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- js文件模块 开始 -->
+<block name="footJsFile">
+    <script src="__PUBLIC__/Admin/js/jquery.min.js"></script>
+    <script src="__PUBLIC__/Admin/js/jquery.ui.custom.js"></script>
+    <script src="__PUBLIC__/Admin/js/bootstrap.min.js"></script>
+    <script src="__PUBLIC__/Admin/js/jquery.uniform.js"></script>
+    <script src="__PUBLIC__/Admin/js/select2.min.js"></script>
+    <script src="__PUBLIC__/Admin/js/jquery.dataTables.min.js"></script>
+    <script src="__PUBLIC__/Admin/js/matrix.js"></script>
+    <script src="__PUBLIC__/Admin/js/matrix.tables.js"></script>
+    <script src="__PUBLIC__/Admin/js/muneopen.js"></script>
+</block>
+<!-- js文件模块 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 底部JS执行区域 开始 -->
+<block name="footScript">
+
+    <script>
+
+
+        var shippingNum = '';
+        var company = '';
+
+
+
+
+        //数据初始化
+        function clear() {
+            status = 999;
+            num = '';
+            id = 0;
+            shippingNum = '';
+            company = '';
+            shipping_way = 0;
+        }
+
+        //取消订单
+        function catDel(id){
+            var oid = id;
+            if(oid==''){
+                alert('id 不存在!');
+                return false;
+            }
+            if(confirm("删除的时候会删除当前下所有的工作信息,确定?")){
+
+                data = {'id':oid};
+                $.post('__CONTROLLER__/catDel/',data,function(a){
+                   if(a>0){
+                       alert('删除成功!');
+                       window.location.reload();
+                   }else{
+                       alert('删除失败!')
+                   }
+                })
+            }
+
+        }
+
+
+    </script>
+</block>
+<!-- 底部JS执行区域 结束 -->

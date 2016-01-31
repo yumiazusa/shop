@@ -1,0 +1,12 @@
+ <span class="photo radius_5 f_l">
+       <empty name="thumb['thumb']">
+           <a href="<{:U('Member/member')}>"> <img src="__PUBLIC__/User/default.jpg"></a>
+        <else />
+             <a href="<{:U('Member/member')}>"><img src="<{$thumb['thumb']}>"></a>
+        </empty>
+ </span>
+ <div class="z sd_user_info ui_abs">
+     <p class="sd_name ui_mb5">
+         <span class="color_green1" style="text-align:center;width:120px;"><{$username}></span>
+      </p>  
+ </div> 

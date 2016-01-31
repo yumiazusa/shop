@@ -1,0 +1,163 @@
+<!-- 继承 公共模板 开始 -->
+<extend name="Public:blank"/>
+<!-- 继承 公共模板 结束 -->
+
+<!-- ===================================================== -->
+
+
+<!-- 顶部CSS文件 开始 -->
+<block name="cssFile">
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap-responsive.min.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/fullcalendar.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-style.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-media.css"/>
+    <link href="__PUBLIC__/Admin/font-awesome/css/font-awesome.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/jquery.gritter.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/colorpicker.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/uniform.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/select2.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap-wysihtml5.css"/>
+    <link rel="stylesheet" href="__ROOT__/uploadify/uploadify.css"/>
+
+</block>
+<!-- 顶部CSS文件 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部JS文件 开始 -->
+<block name="topJsFile">
+
+</block>
+
+<!-- 头部部分 开始 -->
+<block name="publicHead">
+    <div id="breadcrumb">
+        <a href="index.html" title="返回系统主页" class="tip-bottom">
+            <i class="icon-home"></i>
+            管理首页
+        </a>
+        <a href="#" class="current">网站配置</a>
+    </div>
+    <h1 style="margin-top:10px;">视频管理</h1>
+</block>
+<!-- 头部部分 结束 -->
+
+<!-- 公共Body部分 开始 -->
+<block name="publicBody">
+    <!-- 将主体包含在 .row-fluid 内部 -->
+    <div class="container-fluid">
+        <hr style="margin:0;">
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="widget-box">
+                    <form action="<{:U('Video/setVideo')}>" method="get">
+                        　搜索 : <input type="text" name="title" style="width:200px;height:26px;">
+
+                        <select name="pid" class="form-control">
+                            <foreach name="option" item="vo">
+                                <option value="<{$vo.id}>"><{$vo.title}></option>
+                            </foreach>
+                        </select>
+
+                        　<input type="submit" value="查询" class="btn btn-success">
+                    </form>
+                    <div class="widget-title"><span class="icon"> <i class="icon-th"></i> </span>
+                        <h5>视频列表</h5>
+                        <span class="label "><a href="<{:U('Video/addVideo')}>">添加视频</a></span>
+                        <span class="label"><a href="<{:U('Video/addType')}>">添加主题</a></span>
+                        <span class="label "><a href="<{:U('Video/modifyType')}>">修改主题</a></span>
+                    </div>
+                    <div class="widget-content nopadding">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+
+
+                            <tr>
+                                <th class="text-center">id</th>
+                                <th class="text-center">标题</th>
+                                <th class="text-center">小图</th>
+                               
+                                <th class="text-center" style="width: 20px; text-align: center">使用</th>
+                                <th class="text-center" style="width: 90px;">操作</th>
+                            </tr>
+
+                            </thead>
+                            <tbody>
+
+                            <foreach name="list" item="ls">
+                                <tr>
+                                    <td class="text-center"><{$ls.id}></td>
+                                    <td class="text-center"><{$ls.title}></td>
+                                    <td class="text-center"><img src="__PUBLIC__/Home/<{$ls.simg}>" width="20%"/></td>
+                                    
+                                    <eq name="ls.status" value="1"><td class="text-center"><i class="icon-ok" style="color: #8fff5f"></i></td></eq>
+                                    <eq name="ls.status" value="0"><td class="text-center"><i class="icon-remove" style="color: #ff5658"></i></td></eq>
+
+                                    <td class="text-center">
+
+                                        <a href="__CONTROLLER__/infoVideo/id/<{$ls.id}>" title="编辑"
+                                           class="btn btn-success btn-mini"> <i class="icon-pencil"></i> </a>
+
+                                        <a href="__CONTROLLER__/delVideo/id/<{$ls.id}>"
+                                           onclick="return confirm('您确定删除该视频？');" title="删除"
+                                           class="btn btn-danger btn-mini"> <i class="icon-trash"></i> </a>
+                                    </td>
+                                </tr>
+                            </foreach>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+            <div class="pagination alternate">
+                <ul style="float:right;">
+                    <{$page}>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+</block>
+
+<!-- js文件模块 开始 -->
+<block name="footJsFile">
+
+</block>
+<!-- js文件模块 结束 -->
+
+
+<!-- 底部JS执行区域 开始 -->
+<block name="footScript">
+    <script src="__PUBLIC__/Admin/js/jquery.min.js"></script>
+    <script src="__PUBLIC__/Admin/js/jquery.ui.custom.js"></script>
+    <script src="__PUBLIC__/Admin/js/bootstrap.min.js"></script>
+    <script src="__PUBLIC__/Admin/js/bootstrap-colorpicker.js"></script>
+    <script src="__PUBLIC__/Admin/js/bootstrap-datepicker.js"></script>
+    <!--<script src="__PUBLIC__/Admin/js/jquery.toggle.buttons.html"></script>-->
+    <script src="__PUBLIC__/Admin/js/masked.js"></script>
+    <script src="__PUBLIC__/Admin/js/jquery.uniform.js"></script>
+    <script src="__PUBLIC__/Admin/js/select2.min.js"></script>
+    <script src="__PUBLIC__/Admin/js/matrix.js"></script>
+    <!--<script src="__PUBLIC__/Admin/js/matrix.form_common.js"></script>-->
+    <script src="__PUBLIC__/Admin/js/wysihtml5-0.3.0.js"></script>
+    <script src="__PUBLIC__/Admin/js/jquery.peity.min.js"></script>
+    <script src="__PUBLIC__/Admin/js/bootstrap-wysihtml5.js"></script>
+    <script src="__PUBLIC__/Admin/js/muneopen.js"></script>
+    <script type="text/javascript">
+        $('.textarea_editor').wysihtml5();
+    </script>
+
+    <script>
+
+
+    </script>
+
+
+</block>
+<!-- 底部JS执行区域 结束 -->
+

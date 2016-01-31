@@ -1,0 +1,22 @@
+
+#outerbox {
+	width: 80%;
+	margin: 0 auto;
+	padding:0 auto;
+	border:1px solid #black;
+}
+
+#promotionlinks{
+  height: auto;
+  width:90%;
+  overflow: hidden;
+
+}
+
+#promotionlinks li {
+  padding-top:10px; 
+  width:150px; 
+  height:80px; 
+  float:left; 
+  list-style-type:none;
+  }

@@ -1,0 +1,36 @@
+<extend name="Public:public" />
+<!-- ====================== 自定义CSS文件 部分 =============== -->
+<block name="cssFile">
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/regist.email.css">
+</block>
+<!-- ====================== 自定义CSS文件 结束 =============== -->
+
+<!-- ====================== 主体部分 开始 ==================== -->
+<block name="publicBody">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1 main-box">
+                <div class="media" style="margin:0 auto; width:60%; margin-top:50px; margin-bottom:50px;">
+                    <a class="media-left" href="#">
+                        <img src="__PUBLIC__/Home/images/reg_warning.png" />
+                    </a>
+                    <div class="media-body">
+                        <h2 class="media-heading" style="margin-top:7px;"><{$tipMsg}>！</h2>
+                    </div>
+                    <p style="padding-left:75px; font-size:12px; color:#aaa; line-height:25px;">如果您的浏览器没有自动跳转，请<a href="<{$url}>">点击这里</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>
+<!-- ====================== 主体部分 结束 ==================== -->
+
+<!-- ====================== js文件部分 开始 ==================== -->
+<block name="bottomJsFile">
+    <script>
+        setTimeout(function (){
+            location.href="<{$url}>";
+        }, 3000);
+    </script>
+</block>
+<!-- ====================== js文件部分 结束 ==================== -->

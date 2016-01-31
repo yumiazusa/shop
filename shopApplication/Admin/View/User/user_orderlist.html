@@ -1,0 +1,466 @@
+<!-- =====================================================
+    Author: Eden
+    Date:   2015-01-12
+    Function:   公共模板文件中定义的block区域，可以在子模板中继承和覆盖
+ ========================================================= -->
+<!-- 继承 公共模板 开始 -->
+<extend name="Public:blank"/>
+<!-- 继承 公共模板 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部CSS文件 开始 -->
+<block name="cssFile">
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap-responsive.min.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/uniform.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/select2.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-style.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-media.css"/>
+    <link href="__PUBLIC__/Admin/font-awesome/css/font-awesome.css" rel="stylesheet"/>
+    <style>
+        td.text-center {
+            text-align: center;
+        }
+
+        a.title-link {
+            color: #0066ff;
+        }
+
+        .gritter-item {
+            background: none repeat scroll 0 0 #f74d4d;
+            box-shadow: 3px 3px 20px #000;
+            display: none;
+            color: #fff;
+            font-size: 14px;
+            padding: 7px 10px 10px;
+            width: 250px;
+            position: fixed;
+            z-index: 1999;
+            top: 150px;
+            right: 100px;
+        }
+
+        .addShippingInfoBox {
+            background: none repeat scroll 0 0 rgba(0, 0, 0, 0.42);
+            box-shadow: 3px 3px 20px #000;
+            display: none;
+            color: #fff;
+            font-size: 14px;
+            padding: 7px 10px 10px;
+            width: 250px;
+            position: fixed;
+            z-index: 1899;
+            top: 10px;
+        }
+    </style>
+</block>
+<!-- 顶部CSS文件 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部JS文件 开始 -->
+<block name="topJsFile">
+
+</block>
+<!-- 顶部JS文件 结束 -->
+
+<!-- ===================================================== -->
+<!-- 头部部分 开始 -->
+<block name="publicHead">
+    <div id="breadcrumb">
+        <a href="index.html" title="返回系统主页" class="tip-bottom">
+            <i class="icon-home"></i>
+            管理首页
+            <a href="#" class="current">订单详情</a>
+        </a>
+    </div>
+    <h1 style="margin-top:10px;">订单列表</h1>
+</block>
+<!-- 头部部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 公共Body部分 开始 -->
+<block name="publicBody">
+<!-- 将主体包含在 .row-fluid 内部 -->
+<div class="container-fluid">
+    <hr style="margin:0;">
+    <div class="row-fluid">
+        <div class="span12">
+                                <div class="control-group">
+                        <div class="controls">
+                            <a href="<{:U('User/index')}>" class="btn btn-info pull-right"><i class="icon-plus"></i>返回列表页</a> 
+                        </div>
+                    </div>
+            <div class="widget-box">
+                <div class="widget-title"> 
+                    <h5>订单列表</h5>
+                </div>
+                <div class="widget-content nopadding">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <th style="width:40px;">编号</th>
+                            <th style="width:70px;">用户名</th>
+                            <th style="width:136px;">订单号</th>
+                            <th style="width:115px;">下单时间</th>
+                            <th style="width:30px;">成交金额</th>
+                            <th style="width:80px;">订单状态</th>
+                            <th style="width:30px;">支付状态</th>
+                            <th style="width:100px;">支付方式</th>
+                            <th style="width:120px;">物流单号</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <foreach name="data" item="fo">
+                            <tr>
+
+                                <td class="text-center"><{$fo.id}></td>
+                                <td class="text-center">
+                                    <a href="__APP__/User/userEdit/id/<{$fo.user_id}>" class="title-link"><{$fo.uname}></a>
+                                </td>
+                                <td class="text-center">
+                                    <a href="__APP__/OrderInfo/OrderInfo/id/<{$fo.id}>/addid/<{$fo.shipping_addr_id}>/price/<{$fo.deail_price}>/order_status/<{$fo.order_status}>" class="title-link"><{$fo.order_sn}></a>
+                                </td>
+                                <td class="text-center"><{$fo['order_date'] | date='Y-m-d H:i',###}></td>
+                                <td class="text-center">￥<{$fo.real_price}></td>
+
+                                <td class="text-center order_status_now<{$fo.id}>">
+                                    <eq name="fo.order_status" value="0" class="order_trash">
+                                        <i class="icon-trash" style="color:#646464;">　已取消</i>
+                                    </eq>
+                                    <eq name="fo.order_status" value="1">
+                                        <i class="icon-tasks" style="color:#eab34f;">　待付款</i>
+                                    </eq>
+                                    <eq name="fo.order_status" value="2">
+                                        <i class="icon-time" style="color:#ff6cc8;">　待发货</i>
+                                    </eq>
+                                    <eq name="fo.order_status" value="3">
+                                        <i class="icon-truck" style="color:#313fd3;">　已发货</i>
+                                    </eq>
+                                    <eq name="fo.order_status" value="4">
+                                        <i class="icon-ok" style="color:#00cb00;">　已完成</i>
+                                    </eq>
+
+                                </td>
+                                <td class="text-center">
+
+                                    <eq name="fo.pay_status" value="0">
+                                        <i class="icon-remove" style="color:#be5d3f;"></i>
+                                    </eq>
+                                    <eq name="fo.pay_status" value="1">
+                                        <i class="icon-ok" style="color:#00cb00;"></i>
+                                    </eq>
+
+                                </td>
+                                <td class="text-center">
+
+                                    <eq name="fo.pay_type" value="0">
+                                        <i class="icon-credit-card" style="color:#dd7cb5;">　在线支付</i>
+                                    </eq>
+                                    <eq name="fo.pay_type" value="1">
+                                        <i class="icon-shopping-cart" style="color:#6b49cb;">　货到付款</i>
+                                    </eq>
+
+                                </td>
+
+
+                                <td class="text-center">
+                                    <a href="#" class="shipping_num_now<{$fo.id}>"><{$fo.shipping_num}></a>
+                                </td>
+                        </foreach>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <td colspan="10">
+                                <div class="pagination alternate text-right">
+                                    <{$page}>
+                                </div>
+                            </td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--浮动地址显示-->
+<div class="gritter-item">
+    <div class="gritter-close"></div>
+    <div class="gritter-with-image"><span class="gritter-title"></span>
+
+        <p class="gritter-msg"></p></div>
+    <div style="clear:both"></div>
+</div>
+
+
+<!--浮动填写物流信息-->
+<div class="addShippingInfoBox">
+
+    <div class="addShippingBody" style="width:300px;background:#fff
+        ;box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.35);">
+
+        <div class="widget-box">
+            <div class="widget-title"><span class="icon"> <i class="icon-align-justify"></i> </span>
+                <h5>添加物流</h5><h5 id="shipping_msg" style="color:red;"></h5>
+            </div>
+            <div class="widget-content nopadding">
+                <div class="form-actions">
+                    <div class="control-group">
+                        <div class="controls">
+                            <select class="campany form-control" >
+
+                                <foreach name="company" item="com">
+
+                                    <option value="<{$com.id}>"><{$com.cname}></option>
+
+                                </foreach>
+
+                            </select>
+
+                        </div>
+                        <span class="help-block">选择物流公司</span>
+                    </div>
+                    <div class="control-group">
+
+                        <div class="controls">
+                            <input type="text" value="" class="colorpicker input-big shipping_num">
+                            <span class="help-block">添加物流单号</span></div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-success btn_success">确定</button>
+                        <button type="submit" class="btn btn-info btn_modify">修改</button>
+                        <button type="submit" class="btn btn-danger btn_cancel">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</div>
+
+
+</block>
+<!-- 公共Body部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- js文件模块 开始 -->
+<block name="footJsFile">
+    <script src="__PUBLIC__/Admin/js/jquery.min.js"></script>
+    <script src="__PUBLIC__/Admin/js/jquery.ui.custom.js"></script>
+    <script src="__PUBLIC__/Admin/js/bootstrap.min.js"></script>
+    <script src="__PUBLIC__/Admin/js/jquery.uniform.js"></script>
+    <script src="__PUBLIC__/Admin/js/select2.min.js"></script>
+    <script src="__PUBLIC__/Admin/js/jquery.dataTables.min.js"></script>
+    <script src="__PUBLIC__/Admin/js/matrix.js"></script>
+    <script src="__PUBLIC__/Admin/js/matrix.tables.js"></script>
+    <script src="__PUBLIC__/Admin/js/muneopen.js"></script>
+</block>
+<!-- js文件模块 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 底部JS执行区域 开始 -->
+<block name="footScript">
+
+    <script>
+        $(function () {
+            boxSize();
+        });
+
+
+        function boxSize() {
+            var h = 0;
+            var w = 0;
+            h = $(window).height();
+            w = $(window).width();
+            $('.addShippingInfoBox').css({'height': h, 'width': w});
+        }
+
+
+        $(window).scroll(function () {
+            boxSize()
+        });
+
+        /*
+         $('.addShippingInfoBox').bind('click',function(){
+         alert()
+         $('.addShippingInfoBox').hide();
+         //return false;
+         })
+         */
+
+        //弹出买家地址
+        $('.user_address').bind('mouseover', function () {
+
+            $('.gritter-item').stop(true, true);
+            $('.gritter-item').delay(1).slideDown(300);
+            var aid = $(this).attr('id');
+            var data = {'id': aid};
+            $.post('__CONTROLLER__/getUserAddress', data, function (a) {
+                var s = a.reciver_user;
+                $('.gritter-title').html('收件人：' + s);
+                $('.gritter-msg').html('<br>联系方式：<strong> ' + a.reciver_phone + '</strong><br>详细地址：' + a.province + a.city + a.area + a.street + '</td>');
+            })
+        })
+
+        //隐藏买家地址
+        $('.user_address').bind('mouseout', function () {
+
+            $('.gritter-item').delay(3000).slideUp(300);
+
+        })
+
+        var status = 999;
+        var num = '';
+        var id = 0;
+        var shipping_way = 0;
+        //弹出物流信息
+        $('.addShipping').bind('click', function () {
+
+            status = $(this).attr('status');
+            num = $(this).attr('num');
+            id = $(this).attr('id');
+            ship_way = $(this).attr('shipping_way');
+
+            //$(".campany option[value= '166' ]").attr("selected", true);
+
+            var count = $(".campany option").length;
+
+            //$('.campany option').eq(3).css({'selected':'selected'});   //debug  无法设置option的选中状态
+
+
+            $('.addShippingInfoBox').show();
+            if (status == 2) {//待发货状态
+                $('#shipping_msg').html('');
+                $('.btn_modify').hide();
+                $('.btn_success').show();
+
+            } else if (status == 3) {//已发货状态
+                $('#shipping_msg').html('');
+                $('.btn_modify').show();
+                $('.btn_success').hide();
+
+
+
+            } else {//其他
+                $('.btn_modify').hide();
+                $('.btn_success').hide();
+                $('#shipping_msg').html('订单不满足发货要求');
+            }
+
+        });
+
+
+        //隐藏物流信息
+        //        $('.addShippingInfoBox').bind('click', function (event) {
+        //            $(this).hide();
+        //            return false;
+        //        })
+
+        $('.addShippingBody').bind('click', function (event) {
+            return false;
+        })
+
+
+        var shippingNum = '';
+        var company = '';
+
+        //点击确定按钮
+        $('.btn_success').bind('click', function () {
+            shippingNum = $('.shipping_num').val();
+            if (shippingNum == '') {
+                alert('订单号不能为空!');
+                return false;
+            } else {
+                company = $('.campany').find("option:selected").val();
+                data = {'id': id, 'shipping_num': shippingNum, 'shipping_way': company, 'order_status': '3'};
+                $.post('__CONTROLLER__/shippingAdd', data, function (a) {
+                    if (a > 0) {
+                        var o = '.order_status_now' + id;
+                        var s = '.shipping_num_now' + id;
+                        $(o).html('<i class="icon-truck" style="color:#313fd3;">已发货</i>');
+                        $(s).html(shippingNum);
+                        $('.addShippingInfoBox').hide();
+                        alert('发货成功!');
+                        clear();
+                    } else {
+                        $('.addShippingInfoBox').hide();
+                        alert('发货失败!');
+                        clear();
+                    }
+                })
+            }
+        });
+
+        //点击取消按钮
+        $('.btn_cancel').bind('click', function () {
+            $('.addShippingInfoBox').hide();
+            clear();
+        });
+
+        //点击修改按钮
+        $('.btn_modify').bind('click', function () {
+
+            shippingNum = $('.shipping_num').val();
+            if (shippingNum == '') {
+                alert('订单号不能为空!');
+                return false;
+            } else {
+                company = $('.campany').find("option:selected").val();
+                data = {'id': id, 'shipping_num': shippingNum, 'shipping_way': company, 'order_status': '3'};
+                $.post('__CONTROLLER__/shippingAdd', data, function (a) {
+                    if (a > 0) {
+                        var o = '.order_status_now' + id;
+                        var s = '.shipping_num_now' + id;
+                        $(o).html('<i class="icon-truck" style="color:#313fd3;">已发货</i>');
+                        $(s).html(shippingNum);
+                        $('.addShippingInfoBox').hide();
+                        alert('更新成功!');
+                        clear();
+                    } else {
+                        $('.addShippingInfoBox').hide();
+                        alert('更新失败!');
+                        clear();
+                    }
+                })
+            }
+        })
+
+        //数据初始化
+        function clear() {
+            status = 999;
+            num = '';
+            id = 0;
+            shippingNum = '';
+            company = '';
+            shipping_way = 0;
+        }
+
+        //取消订单
+        function orderCancel(id){
+            var oid = id;
+            if(oid==''){
+                alert('id 不存在!');
+                return false;
+            }
+            if(confirm("确定要取消订单?")){
+
+                data = {'id':oid};
+                $.post('__CONTROLLER__/OrderCancel/',data,function(a){
+                    alert(a);
+                })
+            }
+
+        }
+
+
+    </script>
+</block>
+<!-- 底部JS执行区域 结束 -->

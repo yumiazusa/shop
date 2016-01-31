@@ -1,0 +1,147 @@
+<!-- =====================================================
+    Author: Eden
+    Date:   2015-01-12
+    Function:   公共模板文件中定义的block区域，可以在子模板中继承和覆盖
+ ========================================================= -->
+<!-- 继承 公共模板 开始 -->
+<extend name="Public:blank" />
+<!-- 继承 公共模板 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部CSS文件 开始 -->
+<block name="cssFile">
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap-responsive.min.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/uniform.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/select2.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-style.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-media.css" />
+    <link href="__PUBLIC__/Admin/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <style>
+        td.text-center {
+            text-align:center;
+        }
+        a.title-link {
+            color:#0066ff;
+        }
+    </style>
+</block>
+<!-- 顶部CSS文件 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部JS文件 开始 -->
+<block name="topJsFile">
+    
+</block>
+<!-- 顶部JS文件 结束 -->
+
+<!-- ===================================================== -->
+<!-- 头部部分 开始 -->
+<block name="publicHead">
+    <div id="breadcrumb">
+        <a href="index.html" title="返回系统主页" class="tip-bottom">
+            <i class="icon-home"></i>
+            管理首页
+            <a href="#" class="current">系统工具</a> 
+        </a>
+    </div>
+    <h1 style="margin-top:10px;">数据库备份</h1>
+</block>
+<!-- 头部部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 公共Body部分 开始 -->
+<block name="publicBody">
+    <!-- 将主体包含在 .row-fluid 内部 -->
+    <div class="container-fluid">
+        <hr style="margin:0;">
+        <div class="row-fluid">
+            <div class="span12">
+                <div style="overflow:hidden;">
+                    <div class="controls">
+                        <a href="__CONTROLLER__/fileList" class="btn btn-info pull-right" style="margin-top:5px;">
+                          <i class="icon-undo"></i> 
+                          还原数据表
+                          </a> 
+                    </div>
+                </div>
+                <div class="widget-box">
+          <div class="widget-title"> 
+            <span class="icon">
+              <input type="checkbox" id="title-checkbox" name="title-checkbox" />
+            </span>
+            <h5>数据库名称：<{$dbname}> ,&nbsp;&nbsp;总表记录数：<{$counts}></h5>
+          </div>
+          <div class="widget-content nopadding">
+            <form action="__CONTROLLER__/backTables" method="post">
+            <table class="table table-bordered table-striped with-check">
+              <thead>
+                <tr>
+                  <th><i class="icon-resize-vertical"></i></th>
+                  <th style="width:5%;">编号</th>
+                  <th>表名</th>
+                  <th style="width:10%;">总记录数</th>
+                  <th style="width:15%;">创建时间</th>
+                  <th style="width:15%;">字符集</th>
+                  <th style="width:80px;">操作</th>
+                </tr>
+              </thead>
+              <tbody>
+              <foreach name="list" item="list" key="key">
+                <tr>
+                  <td><input type="checkbox" name="tab[]" value="<{$list.name}>" /></td>
+                  <td class="text-center"><{$key + 1}></td>
+                  <td><{$list.name}></td>
+                  <td class="text-center"><{$list.rows}>条</td>
+                  <td class="text-center"><{$list.create_time}></td>
+                  <td class="text-center"><{$list.collation}></td>
+                  <td class="text-center">
+                      <a href="__CONTROLLER__/backTables/tab/<{$list.name}>" title="编辑" class="btn btn-info btn-mini"> <i class="icon-copy"></i> 开始备份</a>
+                  </td>
+                </tr>
+                </foreach>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="7">
+                      <button type="submit" name="sele" class="btn btn-info"><i class="icon-ok-circle"></i> 备份已选数据表</button>
+                      <a type="submit" href="__CONTROLLER__/backAll/type/all" class="btn btn-primary"><i class=" icon-save"></i> 一键备份</a>
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
+            </form>
+          </div>
+        </div>
+            </div>
+        </div>
+    </div>
+</block>
+<!-- 公共Body部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- js文件模块 开始 -->
+<block name="footJsFile">
+    <script src="__PUBLIC__/Admin/js/jquery.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.ui.custom.js"></script> 
+    <script src="__PUBLIC__/Admin/js/bootstrap.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.uniform.js"></script> 
+    <script src="__PUBLIC__/Admin/js/select2.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.dataTables.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.tables.js"></script>
+    <script src="__PUBLIC__/Admin/js/muneopen.js"></script>
+</block>
+<!-- js文件模块 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 底部JS执行区域 开始 -->
+<block name="footScript">
+
+</block>
+<!-- 底部JS执行区域 结束 -->

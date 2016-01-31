@@ -1,0 +1,264 @@
+<!-- 继承 公共模板 开始 -->
+<extend name="Public:blank" />
+<!-- 继承 公共模板 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部CSS文件 开始 -->
+<block name="cssFile">
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap-responsive.min.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/uniform.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/select2.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-style.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-media.css" />
+    <link href="__PUBLIC__/Admin/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <style>
+        th.list-title {
+            font-size:14px;
+        }
+        td.align-center {
+            text-align:center;
+        }
+    </style>
+</block>
+<!-- 顶部CSS文件 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部JS文件 开始 -->
+<block name="topJsFile">
+    
+</block>
+<!-- 顶部JS文件 结束 -->
+
+<!-- ===================================================== -->
+<!-- 头部部分 开始 -->
+<block name="publicHead">
+    <div id="breadcrumb"> 
+        <a href="__APP__" title="返回系统首页" class="tip-bottom">
+            <i class="icon-home"></i> 
+        管理首页</a> 
+        <a href="#" class="current">系统设置</a>
+        <a href="#" class="current">管理员设置</a> 
+    </div>
+    <h1 style="margin-top:10px;">管理员修改</h1>
+</block>
+<!-- 头部部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 公共Body部分 开始 -->
+<block name="publicBody">
+    <!-- 将主体包含在 .row-fluid 内部 -->
+    <div class="container-fluid">
+        <hr style="margin:0;">
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="widget-box">
+                    <div class="widget-title"> <span class="icon"> <i class="icon-info-sign"></i> </span>
+                        <h5>修改管理员</h5>
+                    </div>
+                    <div class="widget-content nopadding">
+                        <form class="form-horizontal" method="post" action="<{:U('Administrator/doUserEdit')}>" name="useradd" id="useradd" novalidate="novalidate">
+                            <div class="control-group">
+                                <label class="control-label">用户名：</label>
+                                <div class="controls">
+                                    <input type="text" name="username" id="username" value="<{$userInfo.username}>" disabled />
+                                    <span id="checkU" available='0'></span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">重置密码：</label>
+                                <div class="controls">
+                                    <input type="hidden" name="org_pass" value="<{$userInfo.password}>">
+                                    <input type="hidden" name="user_id" value="<{$userInfo.id}>">
+                                    <input type="password" name="password" class="tip-right" data-original-title="密码由6到8位数组成，至少包含两种字符，留空不修改密码" id="password" />
+                                    <span></span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">重复密码：</label>
+                                <div class="controls">
+                                    <input type="password" name="repassword" id="repassword" class="tip-right" data-original-title="请两次输入保持一致" >
+                                    <span></span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">选择角色：</label>
+                                <div class="controls">
+                                    <select name="role_id" style="width:220px;">
+                                        <foreach name="roleLists" item="role">
+                                            <option <if condition="$role['id'] eq $userInfo['role_id']">selected="selected"</if> value="<{$role.id}>"><{$role.title}></option>
+                                        </foreach>
+                                    </select>
+                                    <a href="<{:U('Role/Roleadd')}>" class="btn btn-primary" onclick="if(confirm('如要添加角色将会跳到另外一个页面，确认这样操作？')==false)return false;">添加角色</a>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <div class="controls">
+                                    <label>
+                                        <input type="radio" name="status" value="1" <if condition="$userInfo['status'] eq 1"> checked </if> />
+                                        启用
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="status" value="0" <if condition="$userInfo['status'] eq 0">checked</if> />
+                                        禁用
+                                    </label>
+                                </div>
+                            </div>
+                          <div class="form-actions">
+                            <input type="submit" value=" 立即修改 " class="btn btn-primary" style="margin-left:179px; margin-right:30px;">
+                            <a href="__CONTROLLER__/index" class="btn btn-default">返回列表</a>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</block>
+<!-- 公共Body部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- js文件模块 开始 -->
+<block name="footJsFile">
+    <script src="__PUBLIC__/Admin/js/jquery.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.ui.custom.js"></script> 
+    <script src="__PUBLIC__/Admin/js/bootstrap.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.uniform.js"></script> 
+    <script src="__PUBLIC__/Admin/js/select2.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.validate.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.form_validation.js"></script>
+    <script src="__PUBLIC__/Admin/js/muneopen.js"></script> 
+</block>
+<!-- js文件模块 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 底部JS执行区域 开始 -->
+<block name="footScript">
+    <script>
+
+        // 验证用户
+        $(function (){
+
+            $('#password').blur(function (){
+                checkPassword(this);
+            });
+
+            $('#repassword').blur(function (){
+                checkRepassword(this);
+            });
+
+            $('#repassword').focus(function (){
+                var oPass = $('password')[0];
+                checkPassword(oPass);
+            });
+
+            $('form#useradd').submit(function () {
+
+                var objPassword = $('#password')[0];
+                var objrePassword = $('#repassword')[0];
+                
+                if (checkPassword(objPassword) && checkRepassword(objrePassword))
+                {
+                    return true;
+                }
+                return false;
+            });
+
+        });
+
+
+
+        function checkRepassword(obj)
+        {
+            var txtVal   = $(obj).val();
+            var pTxtVal  = $('#password').val();
+            var oSpan    = $(obj).next('span');
+            var bool     = true;
+
+            if (txt.Val > 0)
+            {
+                if (txtVal != pTxtVal)
+                {
+                    $(oSpan).html('两次输入不一致').css({'font-size':'12px', 'color':'red'});
+                    bool = false;
+                }
+                else
+                {
+                    $(oSpan).html('密码可用').css({'font-size':'12px', 'color':'green'});
+                }
+            }
+            else
+            {
+                $(oSpan).html('');
+            }
+
+            return bool;
+        }
+
+
+        // 验证密码
+        function checkPassword (obj)
+        {
+            var txtVal = $(obj).val();
+            var oSpan = $(obj).next('span');
+            var counts = 0;
+            var bool = true;
+
+            if (txtVal.length > 0)
+            {
+                if (txtVal.length < 6)
+                {
+                    $(oSpan).html('密码长度不够').css({'font-size':'12px', 'color':'red'});
+                    bool = false;
+                }
+                else
+                {
+                    if (txtVal.match(/\d+/))        // 包含数字
+                    {
+                        counts++;
+                    }
+                    if (txtVal.match(/[a-z]+/))     // 包含小写
+                    {
+                        counts++;
+                    }
+                    if (txtVal.match(/[A-Z]+/))     // 包含大写
+                    {
+                        counts++;
+                    }
+                    if (txtVal.match(/_/))          // 包含下划线
+                    {
+                        counts++;
+                    }
+                    if (txtVal.match(/[^\w]/))      // 包含其它字符
+                    {
+                        counts++;
+                    }
+                    
+                    if (counts < 2)
+                    {
+                        $(oSpan).html('密码过于简单').css({'font-size':'12px', 'color':'red'});
+                        bool = false;
+                    }
+                    else
+                    {
+                        $(oSpan).html('密码合法').css({'font-size':'12px', 'color':'green'});
+                    }
+                }
+            }
+            else
+            {
+                $(oSpan).html('');
+            }
+            return bool;
+        }
+        // 验证密码
+        
+    </script>
+</block>
+<!-- 底部JS执行区域 结束 -->

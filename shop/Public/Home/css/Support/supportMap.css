@@ -1,0 +1,110 @@
+/**{
+    padding:0;
+    margin:0;
+}*/
+html{
+    background:#fafafa;
+    margin: 0 auto;
+    min-width:1050px;
+}
+.title{
+    height:30px;
+    width:90%;
+    font-size:26px;
+    margin:0 auto;
+    margin-top:20px;
+    margin-bottom: 20px;
+    min-width:1050px;
+}
+
+.aline{
+    background: #fff;
+    color: #75ddff;
+    border-bottom: 1px dashed #75ddff;
+    margin:0 auto;
+    width:88%;
+    height: auto;
+    margin-top:-1px;
+
+}
+.color{
+    background: #75ddff;
+    color:#fff;
+}
+
+/*地址展示开始*/
+
+.address_list{
+
+    height:auto;
+    width:90%;
+    background: #fff
+    text-align: center;
+    margin:0 auto;
+    overflow: hidden;
+    zoom: 1;
+    min-width:1050px;
+}
+.list_box{
+    float:left;
+    display: inline-block;
+    height:190px;
+    width:450px;
+    margin-right: 15px;
+    margin-left: 15px;
+    margin-top:15px;
+    padding-left: 40px;
+    padding-top: 10px;
+    padding-right: 40px;
+
+}
+.list_box:nth-of-type(2n){
+    height:190px;
+    width:450px;
+    float: right;
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-top:15px;
+    padding-left:40px;
+    padding-right: 40px;
+    padding-top: 10px;
+}
+.list_box b{
+    color:#32a5e7;
+    padding-bottom:3px;
+    font-size: 18px;
+}
+.list_box p{
+    color:#515151;
+    font-size: 14px;
+
+    margin-bottom:4px;
+}
+
+
+
+
+/*地址展示结束*/
+
+
+/*地图遮罩*/
+
+.cover{
+    display:none;
+    background: rgba(255, 255, 255, 0.71);
+    width:100%;
+    height:100px;
+    top:0;
+    position:absolute;
+    z-index: 100;
+}
+
+.cover_box{
+    position:fixed;
+    top:60px;
+    height:450px;
+    width:800px;
+    background:#fff;
+    box-shadow:0 0 5px rgba(0, 0, 0, 0.62);
+    z-index:999;
+}

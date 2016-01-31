@@ -1,0 +1,167 @@
+<!-- =====================================================
+    Author: Reagan
+ ========================================================= -->
+<!-- 继承 公共模板 开始 -->
+<extend name="Public:blank" />
+<!-- 继承 公共模板 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部CSS文件 开始 -->
+<block name="cssFile">
+<link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap.min.css" />
+<link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap-responsive.min.css" />
+<link rel="stylesheet" href="__PUBLIC__/Admin/css/fullcalendar.css" />
+<link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-style.css" />
+<link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-media.css" />
+<link href="__PUBLIC__/Admin/font-awesome/css/font-awesome.css" rel="stylesheet" />
+<link rel="stylesheet" href="__PUBLIC__/Admin/css/jquery.gritter.css" />
+<link rel="stylesheet" href="__PUBLIC__/Admin/css/uniform.css" />
+<link rel="stylesheet" href="__PUBLIC__/Admin/css/select2.css" />
+<style>
+th.list-title {
+            font-size:14px;
+        }
+td.align-center {
+            text-align:center;
+        }
+a {
+            color:#27A9E3;
+        }
+a:hover {
+            color:#f70;
+            text-decoration:underline;
+        }
+</style>
+</block>
+<!-- 顶部CSS文件 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部JS文件 开始 -->
+<block name="topJsFile">
+
+</block>
+<!-- 顶部JS文件 结束 -->
+
+<!-- ===================================================== -->
+<!-- 头部部分 开始 -->
+<block name="publicHead">
+    <div id="breadcrumb">
+        <a href="__APP__" title="返回系统首页" class="tip-bottom">
+            <i class="icon-home"></i>
+        管理首页</a>
+        <a href="#" class="current">系统设置</a>
+        <a href="#" class="current">权限设置</a>
+    </div>
+    <h1 style="margin-top:10px;">权限模块</h1>
+</block>
+<!-- 头部部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 公共Body部分 开始 -->
+<block name="publicBody">
+    <!-- 将主体包含在 .row-fluid 内部 -->
+<div class="container-fluid">
+    <hr style="margin:0;">
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="widget-box">
+                    <div class="widget-title">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a data-toggle="tab" href="#tab1">权限模块列表</a></li>
+                        </ul>
+                    </div>
+                    <div class="widget-content tab-content">
+                        <div id="tab1" class="tab-pane active">
+                            <div class="" style="width:100%; height:30px; margin-bottom:10px;">
+                                <a href="<{:U('authmoduleAdd')}>" class="btn btn-info"><i class="icon-plus"></i>添加权限模块</a>
+                                <a href="<{:U('Index')}>" class="btn btn-info"><i class="icon"></i>权限列表</a>
+                            </div>
+                        <table class="table table-bordered table-striped with-check">
+                            <thead>
+                                <tr>
+                                    <th class="list-title">id</th>
+                                    <th class="list-title">权限模块</th>
+                                    <th class="list-title">操作</th>
+                                    </tr>
+                            </thead>
+                            <tbody>
+                                <volist name="modules" id="module">
+                                <tr>
+                                        <td class="align-center"><{$module.id}></td>
+                                        <td class="align-center"><{$module.modulename}></td>
+                                        </td>
+                                        <td class="align-center">
+                                            <a href="<{:U('moduleEdit',array('id'=>$module['id']))}>"><i class="icon-pencil"></i> 编辑</a> |
+                                            <a href="<{:U('moduleDelete',array('id'=>$module['id']))}>" onclick="return confirm('您确定删除该模块？');"><i class="icon-trash"></i> 删除
+                                            </td>
+                                        </tr>
+                                    </volist>
+                                </tbody>
+                            </table>
+                            <div class="span8 pull-right text-right">
+                                <div class="pagination alternate" style="margin:0">
+                                  <{$Show}>
+                                </div>
+                            </div>
+                        </div>
+            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>
+<!-- 公共Body部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- js文件模块 开始 -->
+<block name="footJsFile">
+    <script src="__PUBLIC__/Admin/js/jquery.min.js"></script>
+    <script src="__PUBLIC__/Admin/js/jquery.ui.custom.js"></script>
+    <script src="__PUBLIC__/Admin/js/bootstrap.min.js"></script>
+    <script src="__PUBLIC__/Admin/js/jquery.uniform.js"></script>
+    <script src="__PUBLIC__/Admin/js/select2.min.js"></script>
+    <script src="__PUBLIC__/Admin/js/jquery.dataTables.min.js"></script>
+    <script src="__PUBLIC__/Admin/js/matrix.js"></script>
+    <script src="__PUBLIC__/Admin/js/matrix.tables.js"></script>
+    <script src="__PUBLIC__/Admin/js/matrix.popover.js"></script>
+    <script src="__PUBLIC__/Admin/js/matrix.interface.js"></script>
+    <script src="__PUBLIC__/Admin/js/muneopen.js"></script> 
+</block>
+<!-- js文件模块 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 底部JS执行区域 开始 -->
+<block name="footScript">
+    <script type="text/javascript">
+      // This function is called from the pop-up menus to transfer to
+      // a different page. Ignore if the value returned is a null string:
+      function goPage (newURL) {
+
+          // if url is empty, skip the menu dividers and reset the menu selection to default
+          if (newURL != "") {
+
+              // if url is "-", it is this page -- reset the menu:
+              if (newURL == "-" ) {
+                  resetMenu();
+              }
+              // else, send page to designated URL
+              else {
+                document.location.href = newURL;
+              }
+          }
+      }
+
+    // resets the menu selection upon entry to this page:
+    function resetMenu() {
+       document.gomenu.selector.selectedIndex = 2;
+    }
+    </script>
+
+</block>
+<!-- 底部JS执行区域 结束 -->

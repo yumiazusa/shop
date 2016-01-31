@@ -1,0 +1,112 @@
+*{
+    padding:0;
+    margin:0;
+}
+body,html{
+    background:#fafafa;
+    position:relative;
+}
+main{
+    width: 100%;
+}
+a{
+    outline:none;
+    text-decoration:none;
+}
+
+.ad_video{
+    width:1102px;
+    /*height:200px;*/
+    margin:0 auto;
+}
+
+.ad_video_title{
+    color:#00a1d6;
+    width:1102px;
+    height:50px;
+    line-height:50px;
+    font-size:30px;
+    margin-top:40px;
+}
+.ad_video_main{
+    width:1101px;
+    background: #fff;
+    overflow:hidden;
+    zoom:1;
+    border-left:1px solid #ededed;
+    border-top:1px solid #ededed;
+    border-bottom:2px solid #ededed;
+}
+
+.ad_video_block{
+    float:left;
+    width:366px;
+    height:261px;
+    margin: 0 auto;
+    background:#fff;
+    list-style-type:none;
+    border-right:1px solid #ededed;
+    border-bottom:1px solid #ededed;
+}
+
+.ad_video_block a{
+    display:block;
+    width:366px;
+    height:215px;
+    margin-top:25px;
+    text-align:center;
+    position:relative;
+    color:#ccc;
+    transition:0.3s;
+}
+.ad_video_block a:hover{
+    color:#000;
+}
+.ad_video_block a img{
+    width:320px;
+    height:180px;
+    margin:0 auto;
+}
+/*播放器遮罩*/
+
+.video_cover{
+    display:none;
+    background: rgba(255, 255, 255, 0.71);
+    width:100%;
+    height:100px;
+    top:0;
+    position:absolute;
+}
+
+.cover_videoPlayer{
+    position:fixed;
+    top:60px;
+    height:450px;
+    width:800px;
+    background:#fff;
+    box-shadow:0 0 5px rgba(0, 0, 0, 0.62);
+    z-index:99;
+}
+
+/*图片遮罩*/
+.img_cover{
+    display:none;
+    position:absolute;
+    width:320px;
+    height:180px;
+    top:0;
+    z-index:99;
+    left:23px;
+}
+.img_cover_img{
+    height:76px;
+    width:76px;
+    margin:0 auto;
+    margin-top:50px;
+    background:url('../../../Home/images/Support/video-play-ico.png');
+    opacity: 0.9;
+}
+.img_cover_img:hover{
+    background:url('../../../Home/images/Support/video-play-ico.png')0px -76px;
+    opacity: 1;
+}

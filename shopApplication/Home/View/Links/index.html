@@ -1,0 +1,38 @@
+<extend name="Public:public" />
+
+<block name="cssFile">
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/link.css">
+</block>
+
+<block name="publicBody">
+
+<div id="outerbox">
+      <div class="content">
+        <div class="title">
+
+        <h1>友情链接</h1>
+        </div>
+
+        <ul id="promotionlinks">
+        <foreach name="list" item="v">  
+
+        <li><a href="http://<{$v.linkurl}>" target="_blank"><img src="__PUBLIC__/links/<{$v.picture}>" style="width:127px;height:85px;" title="<{$v.linktitle}>" alt="<{$v.linktitle}>"></a></li>
+
+        
+        <li><a href="http://www.zol.com.cn/" target="_blank"><img src="../../../../Public/Home/mages/Links/zol.jpg" title="中关村在线" alt="中关村在线"></a></li>
+        <li><a href="http://www.pcpop.com/" target="_blank"><img src="../static/imgs/pcpop.jpg" title="泡泡网" alt="泡泡网"></a></li>
+        <li><a href="http://www.yesky.com/" target="_blank"><img src="../static/imgs/yesky.jpg" title="天极网" alt="天极网"></a></li>
+        <li><a href="http://bbs.gfan.com/" target="_blank"><img src="../static/imgs/jifeng.jpg" title="机锋网" alt="机锋网"></a></li>
+        <li><a href="http://www.cnbeta.com/" target="_blank"><img src="../static/imgs/cnbeta.jpg" title="中文业界资讯站" alt="中文业界资讯站"></a></li>
+        <li><a href="http://www.pchome.net/" target="_blank"><img src="../static/imgs/pchome.jpg" title="电脑之家" alt="电脑之家"></a></li>
+        <li><a href="http://www.imobile.com.cn/" target="_blank"><img src="../static/imgs/imobile.jpg" title="手机之家" alt="手机之家"></a></li>
+        <li><a href="http://www.evolife.cn/" target="_blank"><img src="../static/imgs/evolife.jpg" title="爱活网" alt="爱活网"></a></li>
+        
+        !
+        </foreach>
+        </ul>
+      <div class="clear"></div>
+      </div>
+    </div>
+</block>
+

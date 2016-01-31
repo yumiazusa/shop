@@ -1,0 +1,204 @@
+<extend name="Public:member1"/>
+    <block name="cssFile">
+	<link href="__PUBLIC__/Home/css/member.css" rel="stylesheet" type="text/css">
+	<link href="__PUBLIC__/Home/css/order.css" rel="stylesheet" type="text/css">
+	<link href="__PUBLIC__/Home/css/pubmember.css" rel="stylesheet" type="text/css">
+	</block>
+	<block name="topJsFile">
+	 <script src="__PUBLIC__/Home/js/member.js"></script>
+	</block>
+     <block name="publicBody">
+			 	<div class="member-zt-right display-inline-block">
+				 		<div class="member-address">
+				 			<span>申请退换货</span>
+				 		</div>
+				 		<!--更换部分开始-->
+				 	     <div class="mc" style="margin-top: 30px;width:870px;margin-left:26px;">
+						        <div class="tb-void">
+						            <table width="100%" cellspacing="0" cellpadding="0" border="0">
+						                <thead>
+							                <tr>
+							                    <th width="260">商品名称</th>
+							                    <th width="280">商品描述</th>
+							                    <th width="170">赠送清单</th>
+							                    <th width="105">购买数量</th>
+							                </tr>
+						                </thead>
+						                <tbody>
+							                <tr>
+							                    <td>
+							      <ul id="removeTheSingleGife" class="list-proinfo">
+							      <li class="fore1">
+							      <a target="_blank" href="<{:U('ProductDetail/detail/id/'.$product['id'])}>">
+							       <img width="50" height="50" alt="" data-img="1" src="__PUBLIC__/Product/thumb/<{$product['list_image']}>" title="<{$product['pro_name']}>">
+							       </a>
+							        <div class="p-info">
+							         <a target="_blank" href="<{:U('ProductDetail/detail/id/'.$product['id'])}>" style="font-size:12px;"><{$product['pro_name']}></a>
+							                                </div>
+							                            </li>
+							                        </ul>
+							                    </td>
+							                    <td>
+							                        <div class="col2"><{$product['pro_subname']}></div>
+							                    </td>
+							                    <td>
+							                    	<if condition="zplist neq null">
+                                                         <foreach name="zplist" item="v">
+                                                             <span style="font-size:13px;"><{$v.pro_name}></span>
+                                                         </foreach>
+							                    	<else/>-
+							                    	</if>
+							                    </td>
+							                    <td><{$number['product_number']}>
+							                    </td>
+							                </tr>
+						                </tbody>
+						            </table>
+						            <div style="display:none" name="productInfo_zp-info"></div>
+						            <input type="hidden" id="afsCategoryId" value="32683">
+						        </div>
+
+						        <!--填写退换货表开始-->
+		<div id="air03" class="mod-main order-comm">
+		<div class="mt">
+		<h3>服务单明细</h3>
+		</div>
+		<form method="post" action="<{:U('Custom/applySuccess')}>" enctype="multipart/form-data">
+		<div class="mc">
+		<div name="inputForm" class="myorder">
+        <input type="hidden" name="pro_id" value="<{$product['id']}>">
+        <input type="hidden" name="order_id" value="<{$order_id}>">
+		<div class="item">
+		<span>服务类型：</span>
+		<div class="display-inline-block" >
+		<ul class="list-type" style="padding:0;">
+		<li class="display-inline-block">
+		<input type="radio" id="applyType_click_2" class="radio" value="2"  name="service_type" checked="checked">
+		<label for="applyType_click_2" value="2" name="applyTypeLabel" style="float:none;font-weight:normal;">退货</label>
+ 		</li>
+        <li class="display-inline-block">
+		<input type="radio" id="applyType_click_3" class="radio" value="3" name="service_type" >
+		<label for="applyType_click_3" value="3" name="applyTypeLabel" style="font-weight:normal;">换货</label>
+											                </li>
+
+								                        </ul>
+
+												     </div>
+									         </div>
+										     <div class="clr"></div>
+
+	                                    </div>
+
+										<div class="item">
+										    <span>提交数量：</span>
+										<input type="hidden" name="ordernumber" value="<{$number['product_number']}>">
+										    <div class="display-inline-block">
+										        <div class="quantity-form display-inline-block">
+										            <a href="javascript:applyNum(1);" class="decrement" name="applyNum_operate_minus" id="applyNum_operate_minus">-</a>
+										                  <input type="text" class="text01" value="1" name="applyNum" id="applyNum" readonly>
+										            <a href="javascript:applyNum(2);" class="increment" name="applyNum_operate_add" id="applyNum_operate_add">+</a>
+										        </div>
+										        <div class="clr"></div>
+										        <div style="display:none" name="applyNum-info"></div>
+										    </div>
+										    <div class="clr"></div>
+										</div>
+										<div name="apply_wareQuestionDesc" class="item">
+										    <span>
+										        问题描述：
+										    </span>
+										    <div>
+										        <textarea class="area" rows="" cols="" name="description"></textarea><br>
+
+											</div>
+										    <div class="clr"></div>
+										</div>
+										<div class="item">
+										    <span>图片信息：</span>
+										    <input type="file" name="image">
+
+										    <div class="clr"></div>
+										</div>
+
+	                                    <div name="pickType" class="item">
+	                                        <span>商品返回方式：</span>
+										    <div>
+										        <ul id="pickWareType_list" class="list-return">
+<!--
+										            <li id="pickWareTypeli_1" class="display-inline-block">
+														<div class="l-col">
+										                <input type="radio" class="radio" id="pickWareType_1" value="1" name="pickWareType">
+															<label style="font-weight:normal;">上门取件</label>
+														</div>
+
+										            </li> -->
+										            <li id="pickWareTypeli_1" class="display-inline-block">
+														<div class="l-col">
+										                <input type="radio" class="radio" id="pickWareType_1" value="2" name="return_way" checked>
+															<label style="font-weight:normal;">快递</label>
+														</div>
+
+										            </li>
+										           　
+										        </ul>
+
+										    </div>
+										    <div class="clr"></div>
+										</div>
+
+										<div name="receiptWareAddress" class="item">
+										    <span>收货地址：</span>
+										    <div class="fl">
+										       <{$city}>
+										       <input type="text" name="street" value="<{$address['street']}>" >
+										    </div>
+										    <div class="clr"></div>
+										</div>
+									    <div class="item">
+									       <span>联系人姓名：</span>
+											<div class="fl">
+												<input type="text" value="<{$address['reciver_user']}>" class="text" name="contact">
+											</div>
+											<div class="clr"></div>
+									    </div>
+										<div class="item">
+										        <span>手机号码：</span>
+												<div class="fl">
+														<input type="text" value="<{$address['reciver_phone']}>" class="text" name="phone">
+												</div>
+												<div class="clr"></div>
+										</div>
+										<div class="item">
+										    <span>&nbsp;</span>
+										    <div name="divSubmit" class="fl">
+										        <input id='formsubmit' class="btn-7" type="submit" value="提交"><s></s>
+										        <a class="btn-7" href="javascript:window.history.back();"><s></s>返回</a>
+										    </div>
+										    <div class="clr"></div>
+										</div>
+
+                                    </div>
+                                    </form>
+                                </div>
+                                <!--填写退换货表结束-->
+
+					</div>
+
+		              <!--更换部分结束-->
+
+			    </div>
+			  </block>
+			  <block name="bottomJsFile">
+    <script>
+$('#formsubmit').click(function(){
+	var num= parseInt(<{$number['product_number']}>);
+	var returnnum=parseInt($('#applyNum').val());
+	if(returnnum > num){
+		alert('提交数量错误，请检查！');
+		return false;
+	}
+})
+
+
+    </script>
+</block>

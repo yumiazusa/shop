@@ -1,0 +1,224 @@
+<!-- 继承 公共模板 开始 -->
+<extend name="Public:blank"/>
+<!-- 继承 公共模板 结束 -->
+
+<!-- ===================================================== -->
+
+
+<!-- 顶部CSS文件 开始 -->
+<block name="cssFile">
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap-responsive.min.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/fullcalendar.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-style.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-media.css"/>
+    <link href="__PUBLIC__/Admin/font-awesome/css/font-awesome.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/jquery.gritter.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/colorpicker.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/uniform.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/select2.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap-wysihtml5.css"/>
+    <link rel="stylesheet" href="__ROOT__/uploadify/uploadify.css"/>
+
+</block>
+<!-- 顶部CSS文件 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部JS文件 开始 -->
+<block name="topJsFile">
+
+</block>
+
+<!-- 头部部分 开始 -->
+<block name="publicHead">
+    <div id="breadcrumb">
+        <a href="index.html" title="返回系统主页" class="tip-bottom">
+            <i class="icon-home"></i>
+            管理首页
+        </a>
+        <a href="#" class="current">网站配置</a>
+    </div>
+    <h1 style="margin-top:10px;">服务地址列表</h1>
+</block>
+<!-- 头部部分 结束 -->
+
+<!-- 公共Body部分 开始 -->
+<block name="publicBody">
+    <!-- 将主体包含在 .row-fluid 内部 -->
+    <div class="container-fluid">
+        <hr style="margin:0;">
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="widget-box">
+                    <form action="<{:U('SupportMap/index')}>" method="get">
+                        　搜索 : <input type="text" name="name" style="width:200px;height:26px;">
+
+                        <select name="pid" class="form-control">
+                            <foreach name="option" item="vo">
+                                <option value="<{$vo.id}>"><{$vo.name}></option>
+                            </foreach>
+                        </select>
+
+                        　<input type="submit" value="查询" class="btn btn-success">
+                    </form>
+                    <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
+                        <h5>Collspan Table Example</h5>
+                        <span class="label label-info"><a href="<{:U('SupportMap/addAddress')}>">添加地址</a></span>
+                        <span class="label label-info"><a href="<{:U('SupportMap/addArea')}>">添加地区</a></span>
+                        <span class="label label-info"><a href="<{:U('SupportMap/modifyArea')}>">修改地区</a></span>
+                    </div>
+                    <div class="widget-content nopadding">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+
+
+                            <tr>
+                                <th>id</th>
+                                <th>市</th>
+                                <th>地址</th>
+                                <th>公司</th>
+                                <th>电话</th>
+                                <th>工作时间</th>
+                                <th>X</th>
+                                <th>Y</th>
+                                <th>状态</th>
+                                <th>操作</th>
+                            </tr>
+
+                            </thead>
+                            <tbody>
+
+                            <foreach name="list" item="ls">
+                                <tr>
+                                    <td><{$ls.id}></td>
+                                    <td><{$ls.name}></td>
+                                    <td><{$ls.address}></td>
+                                    <td><{$ls.cname}></td>
+                                    <td><{$ls.tel}></td>
+                                    <td><{$ls.wtime}></td>
+                                    <td><{$ls.map_x}></td>
+                                    <td><{$ls.map_y}></td>
+                                    <td>
+                                        <if condition="($ls.status eq 0)">隐藏</if>
+                                        <if condition="($ls.status eq 1)">显示</if>
+                                    </td>
+
+                                    <td>
+                                        <a class="mask" status="<{$ls.status}>" mask="<{$ls.id}>" href="javascript:;"><i class="icon-lock"></i>隐藏</a>
+                                        <a class="modify" href="__CONTROLLER__/modifyAddress/id/<{$ls.id}>"><i class="icon-edit"></i>修改</a>
+                                        <a class="del" href="__CONTROLLER__/delAddress/id/<{$ls.id}>" onclick="return confirm('您确定删除该视频？');"><i class="icon-trash"></i> 删除
+
+                                    </td>
+                                </tr>
+                            </foreach>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="pagination alternate">
+        <ul style="float:right;">
+            <{$page}>
+        </ul>
+    </div>
+
+</block>
+
+<!-- js文件模块 开始 -->
+<block name="footJsFile">
+
+</block>
+<!-- js文件模块 结束 -->
+
+
+<!-- 底部JS执行区域 开始 -->
+<block name="footScript">
+    <script src="__PUBLIC__/Admin/js/jquery.min.js"></script>
+    <script src="__PUBLIC__/Admin/js/jquery.ui.custom.js"></script>
+    <script src="__PUBLIC__/Admin/js/bootstrap.min.js"></script>
+    <script src="__PUBLIC__/Admin/js/bootstrap-colorpicker.js"></script>
+    <script src="__PUBLIC__/Admin/js/bootstrap-datepicker.js"></script>
+    <!--<script src="__PUBLIC__/Admin/js/jquery.toggle.buttons.html"></script>-->
+    <script src="__PUBLIC__/Admin/js/masked.js"></script>
+    <script src="__PUBLIC__/Admin/js/jquery.uniform.js"></script>
+    <script src="__PUBLIC__/Admin/js/select2.min.js"></script>
+    <script src="__PUBLIC__/Admin/js/matrix.js"></script>
+    <!--<script src="__PUBLIC__/Admin/js/matrix.form_common.js"></script>-->
+    <script src="__PUBLIC__/Admin/js/wysihtml5-0.3.0.js"></script>
+    <script src="__PUBLIC__/Admin/js/jquery.peity.min.js"></script>
+    <script src="__PUBLIC__/Admin/js/bootstrap-wysihtml5.js"></script>
+    <script src="__PUBLIC__/Admin/js/muneopen.js"></script>
+    <script type="text/javascript">
+        $('.textarea_editor').wysihtml5();
+    </script>
+    <script type="text/javascript">
+        // This function is called from the pop-up menus to transfer to
+        // a different page. Ignore if the value returned is a null string:
+        function goPage(newURL) {
+
+            // if url is empty, skip the menu dividers and reset the menu selection to default
+            if (newURL != "") {
+
+                // if url is "-", it is this page -- reset the menu:
+                if (newURL == "-") {
+                    resetMenu();
+                }
+                // else, send page to designated URL
+                else {
+                    document.location.href = newURL;
+                }
+            }
+        }
+    </script>
+    <script>
+        var id = -1;   //视频的id
+        var data = -1;  //json
+        var status = -1;    //视频是否可见
+        var del = -1;
+        var type;   //判断返回值状态
+        /*<{:U('Video/hiddenVideo')}>*/
+
+        //切换隐藏视频
+        $('.mask').bind('click',function(){
+
+            id = $(this).attr('mask');
+            status = $(this).attr('status');
+            data = {'id':id,'status':status};
+            $.post("<{:U('SupportMap/index')}>",data,function(a){
+                type = a;
+                if(a>0){
+                    alert('ok');
+                    a=0;
+                }
+            });
+
+            if(type>0){
+                if(status==1){
+                    $(this).attr('status','0');
+                }else{
+                    $(this).attr('status','1');
+                }
+
+            }
+
+        });
+
+        /*--------------------------------------------*/
+        $(function(){
+            /*debug  mask未添加颜色修改*/
+            $('.mask').attr('status')
+        })
+        /*--------------------------------------------*/
+    </script>
+
+
+</block>
+<!-- 底部JS执行区域 结束 -->
+

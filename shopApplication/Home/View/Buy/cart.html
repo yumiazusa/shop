@@ -1,0 +1,318 @@
+<extend name="Public:public"/>
+
+
+<block name="cssFile">
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/Buy/cart.css"/>
+</block>
+
+<block name="publicBody">
+    <!--购物车-->
+    <main>
+        <!--购物车流程显示-->
+        <div id="cart_title" class="cart_title">
+            <ul class="cart_progress_bar">
+                <li class="current">1　我的购物车</li>
+                <li>　　　　2　填写核对订单信息</li>
+                <li>　3　成功提交订单</li>
+                <div class="store_clear"></div>
+            </ul>
+        </div>
+        <!--购物车-->
+        <div id="" class="cart_box">
+            <!--购物车标题-->
+            <div class="cart_box_header">
+                <table class="cart_box_header_table">
+                    <tr>
+                        <th>产品</th>
+                        <th>描述</th>
+                        <th>单价</th>
+                        <th>数量</th>
+                        <th>小计</th>
+                        <th>操作</th>
+                    </tr>
+
+                </table>
+            </div>
+            <!--购物车块-->
+            <div>
+                <table class="cart_box_main">
+                    <!--    单个商品开始  -->
+                    <foreach name="goods" item="v">
+
+                        <tr class="cart_box_main_sell" price="<{$v.price}>" color="<{$v.colorId}>" version="<{$v.versionId}>">
+                            <input type="hidden" name="id" value="<{$v.id}>">
+                            <td><img class="cart_image" src="__PUBLIC__/Product/thumb/<{$v.img}>"/></td>
+                            <td><a href="<{:U('ProductDetail/detail',array('id'=>$v['id']))}>" style="font-size:14px;font-family:微软雅黑"><{$v.pro_name}>&nbsp;&nbsp;<{$v.color.prop_name}>&nbsp;&nbsp;<{$v.version.prop_name}></a>
+                            </td>
+                            <td>
+                                <div style="font-size:14px;font-family:微软雅黑">
+                                    <span>单价 ￥</span>
+                                    <b class="now_price">
+                                        <{$v.price}>
+                                    </b>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="num" style="font-size:14px;font-family:微软雅黑">
+                                    <span num="<{$v.num}>" price="<{$v.price}>" class="minus_num" id="<{$key}>"></span>
+                                    <span class="qty"><{$v.ordernum}></span>
+                                    <span num="<{$v.num}>" price="<{$v.price}>" class="add_num" id="<{$key}>"></span>
+                                </div>
+                            </td>
+                            <td id="num<{$v['id']}>">￥<{$v['ordernum'] * $v['price']}></td>
+                            <td><a href="javascript:;" class="cart_del" id="<{$key}>">删除</a></td>
+                        </tr>
+                        <!--    单个商品结束  -->
+
+                        <if condition="$v['promote']['status'] eq 3">
+                                <tr class="cart_box_main_gift">
+                                    <td class="gift_height">
+                                        <span style="font-family:微软雅黑;font-size:12px;">赠品:</span>
+                                        <img class="gift_image" src="__PUBLIC__/Product/thumb/<{$v['promote']['gift']['list_image']}>"/></td>
+                                    <td class="gift_height">
+                                        <a href="<{:U('ProductDetail/detail',array('id'=>$v['promote']['gift']['id']))}>" style="font-size:12px;font-family:微软雅黑" target="_blank"><{$v['promote']['gift']['pro_name']}></a>
+                                    </td>
+                                    <td class="gift_height">
+                                        <div style="font-size:12px;font-family:微软雅黑">￥<{$v['promote']['gift']['market_price']}></div>
+                                    </td>
+                                    <td class="gift_height">
+                                        <div class="num">
+
+                                            <span class="gift_qty">1</span>
+
+                                        </div>
+                                    </td>
+                                <td class="gift_height" style="font-size:12px;font-family:微软雅黑">￥0</td>
+                                    <td class="gift_height"></td>
+                                </tr>
+                        <elseif condition="$v['promote']['status'] eq 4" />
+                        <if condition="$v['ordernum'] egt $v['promote']['condition']">
+                        <tr class="cart_box_main_gift">
+                                    <td class="gift_height">
+                                        <span style="font-family:微软雅黑;font-size:12px;">赠品:</span>
+                                        <img class="gift_image" src="__PUBLIC__/Product/thumb/<{$v['promote']['gift']['list_image']}>"/></td>
+                                    <td class="gift_height">
+                                        <a href="<{:U('ProductDetail/detail',array('id'=>$v['promote']['gift']['id']))}>" style="font-size:12px;font-family:微软雅黑" target="_blank"><{$v['promote']['gift']['pro_name']}></a>
+                                    </td>
+                                    <td class="gift_height">
+                                        <div style="font-size:12px;font-family:微软雅黑">￥<{$v['promote']['gift']['market_price']}></div>
+                                    </td>
+                                    <td class="gift_height">
+                                        <div class="num">
+
+                                            <span class="gift_qty">1</span>
+
+                                        </div>
+                                    </td>
+                                <td class="gift_height" style="font-size:12px;font-family:微软雅黑">￥0</td>
+                                    <td class="gift_height"></td>
+                                </tr>
+                            </if>
+                        </if>
+
+                        <!--    赠品结束  -->
+
+                    </foreach>
+                </table>
+            </div>
+
+
+            <!--购物车统计-->
+            <div class="cart_box_footer">
+                <div class="cart_box_footer_left">
+                    <p>共 <b id="all_qty">1</b> 件商品</p>
+
+                    <p>金额总计： ￥<b id="all_price">0</b></p>
+                </div>
+
+                <div class="cart_box_footer_right">
+
+                    <button style="float: right" type="button" id="pay" class="button_to_pay btn btn-primary">
+                        <span id="button_pay">去付款</span>
+                    </button>
+
+                    <a href="__APP__/Product/productList/type/shop/cat/all">
+                         <button style="float: right" type="button" class="button_to_buy btn btn-success">
+                            <span id="button_buy">继续购物</span>
+                         </button>
+                    </a>
+
+                </div>
+
+            </div>
+        </div>
+
+
+        <!--隐藏块-->
+        <div id="cover" class="cover_bg cover_hidden" style="z-index:9999">
+            <div class="cover">
+                <div class="cover_title" >
+                    <p style="font-size:15px;font-family:微软雅黑;">确定删除这件商品吗?</p>
+                </div>
+                <div class="cover_button">
+                    <a href="javascript:;" class="yes_del" style="font-size:15px;font-family:微软雅黑;">删　除</a>
+                    <a href="javascript:;" class="no_del" style="font-size:15px;font-family:微软雅黑;">不删除</a>
+                </div>
+            </div>
+        </div>
+    </main>
+</block>
+
+
+<block name="bottomJsFile">
+
+
+    <script>
+        //    变量初始化
+        var qty;//商品数量
+        var now_price;//活动价格
+        var del_price;//原价
+        var b_height = 0; //document高度
+        var r_height = 0; //滚动条到顶部的高度
+        var user = "<{$users}>";
+        var ordernum="";
+
+        //页面加载时调用
+        $(function () {
+            all_price();
+            //去付款
+            $("#pay").click(function(){
+                //alert(url);
+                var sum = $("#all_price").html();
+                if(user ==""){
+                    window.location.href="__APP__/Login/login/type/cart";
+                }else{
+                    window.location.href="<{:U('collect')}>";
+                }
+            })
+        });
+        function all_price() {
+
+            var len = $(".cart_box_main_sell").size();  //获得所有商品节点
+
+            var q = 0;     //商品数量
+            var s = 0;     //商品单价
+            var all_qty = 0;    //商品总数
+            var all_price = 0;      //商品总价
+            for (var i = 0; i < len; i++) {
+
+                s = $(".cart_box_main_sell").eq(i).attr('price');
+
+                q = $('.qty').eq(i).html();
+
+                all_qty += parseInt(q);
+                all_price += q * s;
+            }
+
+            $("#all_qty").html(all_qty);
+            $("#all_price").html(all_price.toFixed(2));
+
+            //如果购物车内没商品
+            // if (all_qty == 0) {
+            //     //清空main内容
+            //     $('main').html('');
+
+            //     //添加新内容 提示跳转
+            //     setTimeout(window.location.href = 'empty.html', 0);
+            // }
+        }
+
+
+        //    减少商品数量
+        $(".cart_box_main_sell .num span:first-child").click(function () {
+            //当前商品数量
+            var _id = $(this).attr("id");
+            qty = parseInt($(this).next(".qty").html());
+            //当前商品单价
+            now_price = $(this).attr('price');
+            if (qty > 1) {   //如果当前数量大于1
+                $(this).next(".qty").html(--qty);   //数量自减1
+                //小计总价
+                $(this).parent().parent().parent().children("td:nth-last-child(2)").html('￥'+((qty * (now_price * 100)) / 100).toFixed(2));
+                $.ajax({
+                    url:"__CONTROLLER__/changeNum",
+                    type:"post",
+                    data:{"id":_id,"num":qty},
+                })
+                all_price();
+            }
+
+        });
+        //    数量商品增加
+        $(".cart_box_main_sell .num span:last-child").click(function () {
+            var _id = $(this).attr("id");
+            qty = parseInt($(this).prev(".qty").html());
+            now_price = $(this).attr('price');
+            total=parseInt($(this).attr('num'));
+            if(qty > total){
+                alert('库存不够！');
+                return false;
+            }
+            $(this).prev(".qty").html(++qty);
+            $(this).parent().parent().parent().children("td:nth-last-child(2)").html('￥'+((qty * (now_price * 100)) / 100).toFixed(2));
+             $.ajax({
+                    url:"__CONTROLLER__/changeNum",
+                    type:"post",
+                    data:{"id":_id,"num":qty},
+                })
+            all_price();
+        });
+        //删除商品
+        var yes_del = '0'; //判断标志  0不可删  1可删
+        $(".cart_del").click(function () {
+             var _id =$(this).attr("id");
+            b_height = $(document).height();//页面高度
+            r_height = $(document).scrollTop();//滚动条高度
+
+            $('#cover').addClass('cover_show');
+            $('#cover').removeClass('cover_hidden');
+            $("#cover").height(b_height);
+            $('.cover').css({'top': r_height + 200});
+            $('.cover').css({'left': ($(window).width() - 420) / 2});
+
+
+            //当前要删除元素的父节点
+            var cart_node = $(this).parent().parent();
+
+            //点击删除按钮时调用函数 yes_to_del
+            if ($('.yes_del').click(function () {
+
+                        yes_del = '1';
+                        yes_do_del(_id);
+                    }));
+            if ($('.no_del').click(function () {
+                        $('#cover').addClass('cover_hidden');
+                        $('#cover').removeClass('cover_show');
+                    }));
+
+            /**
+             * yes_do_del 删除商品节点和相邻的赠品节点
+             */
+            function yes_do_del(obj) {
+                 $.ajax({
+                    url :"__CONTROLLER__/del",
+                    type:"post",
+                    data:{'id':obj},
+                    success:function(d){
+                        if(d ==1){
+                            window.location.replace("__SELF__");
+                        }
+                    }
+
+                })
+                //
+                if ((yes_del == '1') && (cart_node.next().attr('class') == 'cart_box_main_gift')) {
+                    cart_node.nextUntil('.cart_box_main_sell').remove();
+                }
+                if ((yes_del == '1')) {
+                    cart_node.remove();
+                    $('#cover').addClass('cover_hidden');
+                    $('#cover').removeClass('cover_show');
+                }
+                yes_del = '0';
+                all_price();
+            }
+
+        });
+    </script>
+</block>

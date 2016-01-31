@@ -1,0 +1,166 @@
+<!-- 继承 公共模板 开始 -->
+<extend name="Public:blank" />
+<!-- 继承 公共模板 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部CSS文件 开始 -->
+<block name="cssFile">
+<link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap.min.css" />
+<link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap-responsive.min.css" />
+<link rel="stylesheet" href="__PUBLIC__/Admin/css/fullcalendar.css" />
+<link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-style.css" />
+<link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-media.css" />
+<link href="__PUBLIC__/Admin/font-awesome/css/font-awesome.css" rel="stylesheet" />
+<link rel="stylesheet" href="__PUBLIC__/Admin/css/jquery.gritter.css" />
+<link rel="stylesheet" href="__PUBLIC__/Admin/css/uniform.css" />
+<link rel="stylesheet" href="__PUBLIC__/Admin/css/select2.css" />
+<style>
+th.list-title {
+            font-size:14px;
+        }
+td.align-center {
+            text-align:center;
+        }
+a {
+            color:#27A9E3;
+        }
+a:hover {
+            color:#f70;
+            text-decoration:underline;
+        }
+</style>
+</block>
+<!-- 顶部CSS文件 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部JS文件 开始 -->
+<block name="topJsFile">
+
+</block>
+<!-- 顶部JS文件 结束 -->
+
+<!-- ===================================================== -->
+<!-- 头部部分 开始 -->
+<block name="publicHead">
+    <div id="breadcrumb">
+        <a href="__APP__" title="返回系统首页" class="tip-bottom">
+            <i class="icon-home"></i>
+        管理首页</a>
+        <a href="#" class="current">系统设置</a>
+        <a href="#" class="current">角色设置</a>
+    </div>
+    <h1 style="margin-top:10px;">角色成员管理</h1>
+</block>
+<!-- 头部部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 公共Body部分 开始 -->
+<block name="publicBody">
+    <!-- 将主体包含在 .row-fluid 内部 -->
+<div class="container-fluid">
+    <hr style="margin:0;">
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="widget-box">
+                    <div class="widget-title">
+                        <ul class="nav nav-tabs">
+                            <li><a data-toggle="tab" href="#tab1">(<{$group['groupName']}>)成员列表</a></li>
+                        </ul>
+                    </div>
+                    <div class="widget-content tab-content">
+                        <div id="tab1" class="tab-pane active">
+                            <div class="" style="width:100%; height:30px; margin-bottom:10px;">
+                                <a href="<{:U('index')}>" class="btn btn-info"><i class="icon-minus"></i> 返回</a>
+                            </div>
+                        <div class="panel-body">
+                    <table class="table table-hover table-bordered table-condensed">
+                        <tr>
+                            <td>序号</td>
+                            <td>登录名</td>
+                            <td>管理组权限</td>
+                            <td>上次登录时间</td>
+                            <td>操作</td>
+                        </tr>
+                        <volist name="result" id="vo">
+                            <tr>
+                                <td><{$i+$num}></td>
+                                <td><{$vo['username']}></td>
+                                <td><{$group['groupName']}></td>
+                                <td><{$vo.last_login_time|date='Y-m-d H:i', ###}></td>
+                                <td>
+                                <div class="btn-group btn-group-xs">
+                                     <a class="btn btn-warning" href="<{:U('Administrator/userEdit',array('id'=>$vo['mid']))}>">修改</a>
+                                     <if condition="$vo['mid'] eq 1">
+                                     <a class="btn btn-danger" href="javascript:void(0);" onclick="return confirm('不能删除超级管理员');">删除</a>
+                                     <else/>
+                                     <a class="btn btn-danger" href="<{:U('Administrator/userDelete',array('id'=>$vo['mid']))}>" onclick="if(confirm('确定删除?')==false)return false;">删除</a>
+                                     </if>
+                                    </div>
+                                </td>
+                            </tr>
+                        </volist>
+                            <tr>
+                                <td colspan="5" class="pagination alternate"style="text-align: right"><{$page}></td>
+                            </tr>
+                    </table>
+                </div>
+            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>
+<!-- 公共Body部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- js文件模块 开始 -->
+<block name="footJsFile">
+    <script src="__PUBLIC__/Admin/js/jquery.min.js"></script>
+    <script src="__PUBLIC__/Admin/js/jquery.ui.custom.js"></script>
+    <script src="__PUBLIC__/Admin/js/bootstrap.min.js"></script>
+    <script src="__PUBLIC__/Admin/js/jquery.uniform.js"></script>
+    <script src="__PUBLIC__/Admin/js/select2.min.js"></script>
+    <script src="__PUBLIC__/Admin/js/jquery.dataTables.min.js"></script>
+    <script src="__PUBLIC__/Admin/js/matrix.js"></script>
+    <script src="__PUBLIC__/Admin/js/matrix.tables.js"></script>
+    <script src="__PUBLIC__/Admin/js/matrix.popover.js"></script>
+    <script src="__PUBLIC__/Admin/js/matrix.interface.js"></script>
+    <script src="__PUBLIC__/Admin/js/muneopen.js"></script>
+</block>
+<!-- js文件模块 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 底部JS执行区域 开始 -->
+<block name="footScript">
+    <script type="text/javascript">
+      // This function is called from the pop-up menus to transfer to
+      // a different page. Ignore if the value returned is a null string:
+      function goPage (newURL) {
+
+          // if url is empty, skip the menu dividers and reset the menu selection to default
+          if (newURL != "") {
+
+              // if url is "-", it is this page -- reset the menu:
+              if (newURL == "-" ) {
+                  resetMenu();
+              }
+              // else, send page to designated URL
+              else {
+                document.location.href = newURL;
+              }
+          }
+      }
+
+    // resets the menu selection upon entry to this page:
+    function resetMenu() {
+       document.gomenu.selector.selectedIndex = 2;
+    }
+    </script>
+</block>
+<!-- 底部JS执行区域 结束 -->

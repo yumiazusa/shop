@@ -1,0 +1,197 @@
+<!-- =====================================================
+    Author: Eden
+    Date:   2015-01-12
+    Function:   公共模板文件中定义的block区域，可以在子模板中继承和覆盖
+ ========================================================= -->
+<!-- 继承 公共模板 开始 -->
+<extend name="Public:blank" />
+<!-- 继承 公共模板 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部CSS文件 开始 -->
+<block name="cssFile">
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap-responsive.min.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/uniform.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/select2.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-style.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-media.css" />
+    <link href="__PUBLIC__/Admin/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <style>
+        td.text-center {
+            text-align:center;
+        }
+        a.title-link {
+            color:#0066ff;
+        }
+    </style>
+</block>
+<!-- 顶部CSS文件 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部JS文件 开始 -->
+<block name="topJsFile">
+    
+</block>
+<!-- 顶部JS文件 结束 -->
+
+<!-- ===================================================== -->
+<!-- 头部部分 开始 -->
+<block name="publicHead">
+    <div id="breadcrumb">
+        <a href="index.html" title="返回系统主页" class="tip-bottom">
+            <i class="icon-home"></i>
+            管理首页
+            <a href="#" class="current">会员管理</a> 
+        </a>
+    </div>
+    <h1 style="margin-top:10px;">用户列表</h1>
+</block>
+<!-- 头部部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 公共Body部分 开始 -->
+<block name="publicBody">
+    <!-- 将主体包含在 .row-fluid 内部 -->
+    <div class="container-fluid">
+        <hr style="margin:0;">
+        <div class="row-fluid">
+            <div class="span12">
+                <div>
+                    <div class="control-group">
+                        <div class="controls">
+                            <form action="" method="get" class="span6">
+                                <input type="text" name="keyword" style="width:150px;" placeholder="请输入关键字...">
+                                <div class="btn-group" style="margin-top:-10px;">
+                                    <button class="btn"> 查找 </button>
+                                    <button data-toggle="dropdown" class="btn dropdown-toggle"><span class="caret"></span></button>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#">全部</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="#">按邮箱</a></li>
+                                        <li><a href="#">按手机</a></li>
+                                        <li><a href="#">用户名</a></li>
+                                    </ul>
+                                </div>
+                            </form>
+                            <a href="<{:U('User/userAdd')}>" class="btn btn-info pull-right"><i class="icon-plus"></i> 添加会员</a> 
+                        </div>
+                    </div>
+                </div>
+                <div class="widget-box">
+          <div class="widget-title"> <span class="icon">
+            <input type="checkbox" id="title-checkbox" name="title-checkbox" />
+            </span>
+            <h5>会员列表</h5>
+          </div>
+          <div class="widget-content nopadding">
+            <form action="__CONTROLLER__/batchDeleteUsers" method="post">
+            <table class="table table-bordered table-striped with-check">
+                <thead>
+                    <tr>
+                        <th><i class="icon-resize-vertical"></i></th>
+                        <th style="width:5%;">编号</th>
+                        <th style="width:10%;">用户名</th>
+                        <th>电子邮箱</th>
+                        <th>手机号</th>
+                        <th style="width:15%;">上次登录</th>
+                        <th style="width:8%;">上次IP</th>
+                        <th style="width:5%;">状态</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <foreach name="userRes" item="user">
+                        <tr>
+                            <td><input type="checkbox" name="uids[]" value="<{$user.id}>"/></td>
+                            <td class="text-center"><{$user.id}></td>
+                            <td class="text-center">
+                                <{$user.uname}>
+                            </td>
+                            <td>
+                                <empty name="user.email">
+                                    —未填写—
+                                <else />
+                                    <{$user.email}> <notempty name="user.email_state"> <span class="badge badge-success">证</notempty>
+                                </empty>
+                            </td>
+                            <td>
+                                <empty name="user.mobile">
+                                    —未填写—
+                                <else />
+                                    <{$user.mobile}>
+                                    <notempty name="user.mobile_state"> 
+                                        <span class="badge badge-warning">证</span>
+                                    </notempty>
+                                </empty>
+                            </td>
+                            <td class="text-center">
+                                <{$user.last_login_time|date="Y-m-d H:i", ###}>
+                            </td>
+                            <td class="text-center"><{$user.last_login_ip|long2ip}></td>
+                            <td class="text-center">
+                                <empty name="user.status">
+                                    <i class="icon-lock" style="color:red"></i>
+                                <else />
+                                    <i class="icon-unlock" style="color:green"></i>
+                                </empty>
+                            </td>
+                            <td class="text-center" style="width:150px;">
+                                <a href="__CONTROLLER__/userEdit/id/<{$user.id}>" title="编辑" class="btn btn-success btn-mini"> <i class="icon-pencil"></i> </a>
+                                <a href="__CONTROLLER__/userAddress/id/<{$user.id}>" title="收货地址" class="btn btn-info btn-mini"> <i class="icon-home"></i> </a>
+                                <a href="__CONTROLLER__/productParam/id/<{$user.id}>" title="查询订单" class="btn btn-primary btn-mini"> <i class="icon-list-alt"></i> </a>
+                                <if condition="$user['status'] eq 1">
+                                <a href="__CONTROLLER__/userRecycle/id/<{$user.id}>" title="禁用" class="btn btn-danger btn-mini"> <i class="icon-minus-sign"></i> </a>
+                                <elseif condition="$user['status'] eq 0" />
+                                <a href="__CONTROLLER__/userRecycled/id/<{$user.id}>" title="解除禁用" class="btn btn-warning btn-mini"> <i class="icon-zoom-in"></i> </a>
+                                </if>
+                            </td>
+                        </tr>
+                    </foreach>
+                </tbody>
+              <tfoot>
+                <tr>
+                    <td colspan="9">
+                      <div class="pagination alternate text-right">
+                      <input type="submit" class="btn btn-primary pull-left" onclick="return confirm('您确定执行删除操作吗？')" value="批量删除">
+                          <{$page}>
+                      </div>
+                    </td>
+                </tr>
+              </tfoot>
+            </table>
+            </form>
+          </div>
+        </div>
+            </div>
+        </div>
+    </div>
+</block>
+<!-- 公共Body部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- js文件模块 开始 -->
+<block name="footJsFile">
+    <script src="__PUBLIC__/Admin/js/jquery.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.ui.custom.js"></script> 
+    <script src="__PUBLIC__/Admin/js/bootstrap.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.uniform.js"></script> 
+    <script src="__PUBLIC__/Admin/js/select2.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.dataTables.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.tables.js"></script>
+    <script src="__PUBLIC__/Admin/js/muneopen.js"></script>
+</block>
+<!-- js文件模块 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 底部JS执行区域 开始 -->
+<block name="footScript">
+
+</block>
+<!-- 底部JS执行区域 结束 -->

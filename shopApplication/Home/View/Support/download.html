@@ -1,0 +1,98 @@
+<extend name="Public:public" />
+
+<block name="cssFile">
+	<link rel="stylesheet" href="__PUBLIC__/Home/css/index.css">
+	<link rel="stylesheet" href="__PUBLIC__/Home/css/support-download.css">
+</block>
+	
+<block name="publicBody">
+	<!-- BANNER START -->
+	<div class="banner"></div>
+	<!-- BANNER END -->
+	<div class="container main">
+		<div class="row">
+			<div class="col-md-12">
+				<ol class="breadcrumb">
+				  	<li><a href="__APP__">首页</a></li>
+				  	<li><a href="###">服务与支持</a></li>
+				  	<li>相关下载</li>
+				</ol>
+			</div>
+			<!-- 左侧菜单 开始 -->
+			<div class="col-md-3">
+				<div class="list-group list-menu">
+				  	<a href="#" class="list-group-item active">
+				    	<h1>相关下载</h1>
+				  	</a>
+				  	<foreach name="datalist" item="v">
+				  	<a href="<{:U('Support/download/id/'.$v['id'])}>" class="list-group-item">
+				  		<h4><{$v.cat_name}></h4>
+				  	</a>
+				    </foreach>
+				</div>
+			</div>
+			<!-- 左侧菜单 结束 -->
+			<!-- 右侧菜单 开始 -->
+			<div class="col-md-9">
+				<div class="row">
+					<div class="col-md-5 pull-right" style="width:29.667%;">
+						<div class="input-group" >
+						    <form action="<{:U('Support/download')}>" method="get">
+						    	<input type="text" class="form-control" placeholder="如：RX750" name="title">
+						    	<div class="input-group-btn">
+						        	<button type="submit" class="btn btn-default dropdown-toggle">搜索
+						        	</button>
+						        
+						      	</div><!-- /btn-group -->
+						    </form>
+					    </div><!-- /input-group -->
+					</div>
+				</div>
+				<div id="down">
+				<div class="row download-lists" id="pages">
+				    <foreach name="data" item="v">
+					<div class="col-sm-6 col-md-4">
+					    <div class="thumbnail">
+					    	<img src="__PUBLIC__/download/downImage/<{$v.thumbnail}>" style="width:210px;height:228px;">
+				    		<div class="caption">
+				        		<h3><{$v.title}></h3>
+				        		<p>
+				        			
+				        			<span>文件大小：<{$v.filesize}></span>
+				        			<span>更新时间：<{$v.ctime}></span>
+				        		</p>
+				        		<p>
+				        		   <if condition="$v.linkurl neq null">
+				        			<a href="<{$v[linkurl]}>" class="btn btn-primary" role="button">立即下载</a>
+                                   <else/>
+                                    <a href="<{:U('Support/fileDown/id/'.$v['id'])}>" class="btn btn-primary" role="button">立即下载</a>
+                                    </if>
+				        			<a href="<{:U('Support/downloaddetail/id/'.$v['id'])}>" class="btn btn-default" role="button">详细</a>
+				        		</p>
+				      		</div>
+					  	</div>
+					</div>
+					</foreach>
+				    
+				</div>
+				 <div class="row page-padding-right">
+					  <{$page}>
+			       </div>
+			 </div>
+				
+			</div>
+			<!-- 右侧菜单 结束 -->
+			
+		</div>
+	</div>
+ </block>	
+<block name="bottomJsFile">	
+
+<script>
+       function getPageByAjax(url){
+            $.get(url, function (d){
+                $('#down').html(d);
+            });
+        }
+</script>
+</block>

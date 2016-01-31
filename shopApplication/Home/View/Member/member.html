@@ -1,0 +1,112 @@
+<extend name="Public:member"/>
+<block name="cssFile">
+    <link href="__PUBLIC__/Home/css/pubmember.css" rel="stylesheet" type="text/css">
+</block>
+<block name="publicBody">
+    <div class="member-zt-right display-inline-block">
+        <div class="member-right-msg display-inline-block">
+            <div class="member-photo display-inline-block">
+               <empty name="uimg['thumb']">
+                <img src="__PUBLIC__/User/default.jpg">
+               <else/>
+                <img src="<{$uimg['thumb']}>">
+                </empty>
+            </div>
+            <div class="memeber-right-data display-inline-block">
+                <span class="member-wel"><{$ulist['uname']}>　欢迎您!</span>
+
+                <div class="member-right-safe">
+                    <span>账户安全:</span>
+
+                    <div class="display-inline-block">
+                        <if condition="$ulist['mobile_state'] neq 1">
+                        <a target="_blank" href="javascript:void(0)" class="icon-noVerified">未验证手机号码</a>
+                        <else/>
+                            已验证手机号码
+                        </if>
+                        <if condition="$ulist['email_state'] neq 1">
+                        <a target="_blank" href="javascript:void(0)" class="icon-noVerified">未验证邮箱</a>
+                        <else/>
+                            已验证邮箱
+                        </if>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="member-right-order">
+            <div class="member-rt">
+                <ul class="account-nav">
+                    <li><span>订单中心</span>
+                        <a href="<{:U('order/untreatedOrders')}>">待付款的订单(<span style="color:red">
+                        <{$order}></span>)</a>
+                        <a href="<{:U('order/processingOrder')}>">处理中的订单(<span style="color:red">
+                        	<{$orderlist}>
+                        </span>)</a>
+                    </li>
+                    <li>
+                        <span>站内消息</span>
+                        <a href="javascript:void(0);" id="feed">新消息(<span style="color:red"><{$feed}></span>)</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="pro-tab-area">
+            <div class="h clearfix">
+                <div class="h-tab">
+                    <ul class="account-nav">
+                        <li class="current" id="tab-pro-his"><a href="javascript:;" class="display-inline-block"><span>猜您喜欢</span></a>
+                        </li>
+                        <!--<li id="tab-pro-fav"><a href="javascript:;"><span>猜您还喜欢</span></a></li>-->
+                    </ul>
+                </div>
+            </div>
+            <div class="goods-list">
+                <!--商品列表  -->
+                <div class="pro-list">
+                    <ul class="account-nav">
+                        <foreach name="product" item="v">
+                        <li class="display-inline-block">
+                            <div>
+                                <p class="p-img">
+                                    <a title="<{$v['pro_name']}>" href="__APP__/ProductDetail/detail/id/<{$v['id']}>">
+                                        <img alt="<{$v['pro_name']}>"
+                                             src="__PUBLIC__/Product/thumb/<{$v['list_image']}>" style="width:70px;height:70px;">
+                                    </a>
+                                </p>
+
+                                <p class="p-name">
+                                    <a title="<{$v['pro_name']}>" href="__APP__/ProductDetail/detail/id/<{$vo['prolist']['id']}>">
+                                        <{$v['pro_name']}>
+                                    </a>
+                                </p>
+
+                                <p class="p-price"><b>¥<{$v['market_price']}></b></p>
+                            </div>
+                        </li>
+                        </foreach>
+                       
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>
+<block name="bottomJsFile">
+    <script>
+$('#feed').click(function(){
+    var feed =$(this).find('span').html();
+    var _url="<{:U('custom/suggest')}>";
+    if(feed ==0){
+        location.href = _url;
+    }else{
+    $.get("<{:U('member/modstatus')}>",
+    function(req) {
+        if(req ==1){
+            location.href = _url;
+        }
+    });
+    }
+});
+</script>
+</block>

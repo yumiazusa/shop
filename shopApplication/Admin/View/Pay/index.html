@@ -1,0 +1,195 @@
+<!-- =====================================================
+    Author: Eden
+    Date:   2015-01-12
+    Function:   公共模板文件中定义的block区域，可以在子模板中继承和覆盖
+ ========================================================= -->
+<!-- 继承 公共模板 开始 -->
+<extend name="Public:blank" />
+<!-- 继承 公共模板 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部CSS文件 开始 -->
+<block name="cssFile">
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap-responsive.min.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-style.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-media.css" />
+    <link href="__PUBLIC__/Admin/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/jquery.gritter.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/uniform.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/select2.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap-wysihtml5.css" />
+    <style>
+        th.list-title {
+            font-size:14px;
+        }
+        td.align-center {
+            text-align:center;
+        }
+        a {
+            color:#27A9E3;
+        }
+        a:hover {
+            color:#f70;
+            text-decoration:underline;
+        }
+    </style>
+</block>
+<!-- 顶部CSS文件 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部JS文件 开始 -->
+<block name="topJsFile">
+    
+</block>
+<!-- 顶部JS文件 结束 -->
+
+<!-- ===================================================== -->
+<!-- 头部部分 开始 -->
+<block name="publicHead">
+    <div id="breadcrumb"> 
+        <a href="__APP__" title="返回系统首页" class="tip-bottom">
+            <i class="icon-home"></i> 
+        管理首页</a> 
+        <a href="<{:U('Config/index')}>" class="current">系统配置</a> 
+        <a href="__CONTROLLER__/index" class="current">支付设置</a> 
+    </div>
+    <h1 style="margin-top:10px;">设置商家Paypal账号信息</h1>
+</block>
+<!-- 头部部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 公共Body部分 开始 -->
+<block name="publicBody">
+    <!-- 将主体包含在 .row-fluid 内部 -->
+    <div class="container-fluid">
+        <hr style="margin:0;">
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="widget-box">
+                    <div class="widget-title">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a data-toggle="tab" href="#tab1">Paypal设置</a></li>
+                        </ul>
+                    </div>
+                    <div class="widget-content tab-content">
+                        <div id="tab1" class="tab-pane active">
+                            <div class="widget-content nopadding">
+                                <form action="__CONTROLLER__/savePaypal" method="post" class="form-horizontal">
+                                    <div class="control-group">
+                                        <label class="control-label">收款账号 :</label>
+                                        <div class="controls">
+                                            <input type="text" class="span5 tip-right" name="paypal_email" value="<{$paypalRes.paypal_email}>" data-original-title="填写您的收款账号"/>
+                                            <span class="help-block span5 pull-right text-right">paypal_email</span>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">选择支付环境 :</label>
+                                        <div class="controls">
+                                            <select name="paypal_env" class="span2" id="">
+                                                <option <eq name="paypalRes.paypal_env" value="live">selected</eq> value="live">生产环境</option>
+                                                <option <eq name="paypalRes.paypal_env" value="sandbox">selected</eq> value="sandbox">测试环境</option>
+                                            </select>
+                                            <span class="help-block span5 pull-right text-right">paypal_env</span>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">API用户名 :</label>
+                                        <div class="controls">
+                                            <input type="text" class="span5 tip-right" name="paypal_api_uname" value="<{$paypalRes.paypal_api_uname}>" data-original-title="您申请的API用户名" />
+                                            <span class="help-block span5 pull-right text-right">paypal_api_uname</span>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">API密码 :</label>
+                                        <div class="controls">
+                                            <input type="password" class="span5 tip-right" name="paypal_api_pwd" value="<{$paypalRes.paypal_api_pwd}>" data-original-title="您的API验证密码"/>
+                                            <span class="help-block span5 pull-right text-right">paypal_api_pwd</span>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">API签名 :</label>
+                                        <div class="controls">
+                                            <input type="text" class="span5 tip-right" name="paypal_api_signature" value="<{$paypalRes.paypal_api_signature}>"  data-original-title="您的API签名信息" />
+                                            <span class="help-block span5 pull-right text-right">paypal_api_signature</span>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">币种 :</label>
+                                        <div class="controls">
+                                            <input type="text" class="span5 tip-right" name="paypal_currency" value="<{$paypalRes.paypal_currency}>"  data-original-title="你的默认币种支持，如：USD"/>
+                                            <span class="help-block span5 pull-right text-right">paypal_currency</span>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">接收API返回信息页 :</label>
+                                        <div class="controls">
+                                            <input type="text" class="span5 tip-right" name="paypal_api_receive" value="<{$paypalRes.paypal_api_receive}>"  data-original-title="接收API返回信息页面"/>
+                                            <span class="help-block span5 pull-right text-right">paypal_api_receive</span>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">付款完成跳转页 :</label>
+                                        <div class="controls">
+                                            <input type="text" class="span5 tip-right" name="paypal_pay_complete" value="<{$paypalRes.paypal_pay_complete}>"  data-original-title=""/>
+                                            <span class="help-block span5 pull-right text-right">paypal_pay_complete</span>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">取消付款跳转页 :</label>
+                                        <div class="controls">
+                                            <input type="text" class="span5 tip-right" name="paypal_cancel_pay" value="<{$paypalRes.paypal_cancel_pay}>"  data-original-title="完成付款时判断是支付结果的页面"/>
+                                            <span class="help-block span5 pull-right text-right">paypal_cancel_pay</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-actions">
+                                        <button type="submit" style="margin-left:180px;" class="btn btn-primary"> 立即保存 </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>
+<!-- 公共Body部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- js文件模块 开始 -->
+<block name="footJsFile">
+    <script src="__PUBLIC__/Admin/js/jquery.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.ui.custom.js"></script> 
+    <script src="__PUBLIC__/Admin/js/bootstrap.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.uniform.js"></script> 
+    <script src="__PUBLIC__/Admin/js/select2.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.dataTables.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.tables.js"></script>
+    <script src="__PUBLIC__/Admin/js/matrix.interface.js"></script>
+    <script src="__PUBLIC__/Admin/js/jquery.toggle.buttons.html"></script> 
+    <script src="__PUBLIC__/Admin/js/masked.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.form_common.js"></script> 
+    <script src="__PUBLIC__/Admin/js/wysihtml5-0.3.0.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.peity.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/bootstrap-wysihtml5.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.validate.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.popover.js"></script>
+    <script src="__PUBLIC__/Admin/js/muneopen.js"></script>
+</block>
+<!-- js文件模块 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 底部JS执行区域 开始 -->
+<block name="footScript">
+    <script type="text/javascript">
+        $('.textarea_editor').wysihtml5();
+    </script>
+</block>
+<!-- 底部JS执行区域 结束 -->

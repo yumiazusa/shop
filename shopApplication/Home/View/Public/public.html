@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title><{$title}></title>
+	<meta name="Keywords" content="<{$keywords}>">
+	<meta name="Description" content="<{$description}>">
+	<php>$logo5=C('logo5');</php>
+	<link rel='icon' href='<{$logo5}>' type='image/x-ico' /> 
+	<!-- 新 Bootstrap 核心 CSS 文件 -->
+	<link rel="stylesheet" href="__PUBLIC__/Home/css/bootstrap.min.css">
+	<!-- 可选的Bootstrap主题文件（一般不用引入） -->
+	<link rel="stylesheet" href="__PUBLIC__/Home/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="__PUBLIC__/Home/css/public.css">
+	<link rel="stylesheet" href="__PUBLIC__/Home/css/custom-service.css">
+	<!-- ===================================== =================== -->
+	<!-- ====================== 自定义CSS文件 部分 =============== -->
+	<block name="cssFile">
+		
+	</block>
+	<!-- ====================== 自定义CSS文件 结束 =============== -->
+	<!-- ====================================== ================== -->
+
+	<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+	<script src="__PUBLIC__/Home/js/jquery.min.js"></script>
+	<!-- ============================================================ -->
+	<!-- ====================== 自定义顶部js文件 部分 =============== -->
+	<block name="topJsFile">
+		
+	</block>
+	<!-- ====================== 自定义顶部js文件 结束 =============== -->
+	<!-- ============================================================ -->
+
+</head>
+<body>
+	<!-- ===================================== =================== -->
+	<!-- ====================== 顶部广告 开始 ==================== -->
+	<block name="topAdv">
+		
+	</block>
+	<!-- ====================== 顶部广告 结束 ==================== -->
+	<!-- ====================================== ================== -->
+
+	<!-- TOP AND MENU START -->
+	<div class="top">
+		<div class="bar">
+			<div class="container">
+				<div class="top-bar-image"><img src="__PUBLIC__/Home/images/top-bar-word.png" alt=""></div>
+				<div class="pull-right text-right welcome">
+					<{:W('Login/topLogin')}>
+				</div>
+			</div>
+		</div>
+		<!-- ============================================================== -->
+		<!-- 用户登录模态框 开始 -->
+		<div class="modal fade" style="margin-top:50px;" id="login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		  	<div class="modal-dialog" style="width:400px;">
+			    <div class="modal-content">
+				    <form action="<{:U('Login/indexLogin')}>" method="post">
+					    <div class="modal-header">
+					        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					        <h4 class="modal-title" id="myModalLabel">用户登录</h4>
+					    </div>
+					    <div class="modal-body">
+							<br />
+				        	<div class="input-group input-group-lg">
+							  	<span class="input-group-addon modal-username">&nbsp;&nbsp;</span>
+							  	<input type="text" name="username" class="form-control" placeholder="邮箱/手机号">
+							</div>
+							<br />
+							<br />
+				        	<div class="input-group input-group-lg">
+							  	<span class="input-group-addon modal-username">&nbsp;&nbsp;</span>
+							  	<input type="password" name="password" class="form-control" placeholder="密码">
+							</div>
+							<br />
+							<div class="">
+								<a href="###">忘记密码？</a>
+							</div>
+					    </div>
+					    <div class="modal-footer">
+					        <a type="button" href="<{:U('Login/regist')}>" class="btn btn-default">账号注册</a>
+					        <button type="submit" class="btn btn-primary">立即登录</button>
+					    </div>
+				    </form>
+				</div>
+		  	</div>
+		</div>
+		<!-- 用户登录模态框 结束 -->
+		<!-- ============================================================== -->
+		<php>
+             $logo=C('logo');
+             $logo2=C('logo2');
+        </php>
+		<div class="container logo-and-menu">
+			<div class="row">
+				<div class="logo">
+					<a href="__APP__"><img src="<{$logo}>" alt="Ribbon"></a>
+				</div>
+				<ul class="list-unstyled pull-right search-and-cart">
+					<li class="btn-cart">
+						<a href="javascript:void(0);"><span class="badge cart-num"></span></a>
+						<div class="cart-top">
+						   <{:W('Login/cart')}>
+						</div>
+					</li>
+					<li class="btn-search" id="btn-search">
+						<a href="javascript:void(0);"></a>
+					</li>
+				</ul>
+				<ul class="list-unstyled menu">
+					<li><a href="<{:U('Index/index')}>" class="<{$indexactive}>">首页</a></li>
+					<li><a href="#" id="menu-product" class="<{$productactive}>">商城</a></li>
+					<li><a href="<{:U('Support/index')}>" class="<{$active}>">服务</a></li>
+					<!-- <li><a href="###">应用</a></li>
+					<li><a href="###">社区</a></li> -->
+				</ul>
+			</div>
+		</div>
+		<!-- 隐藏的向下滑动菜单 开始 -->
+		<div class="slide-menu">
+			<div class="container">
+				<div class="col-md-3">
+					<a href="<{:U('Product/productList',array('type'=>shop,'cat'=>all))}>">
+						<img class="img-responsive" src="__PUBLIC__/Home/images/11.png" alt="">
+					</a>
+				</div>
+				<div class="col-md-3 text-center">
+					<a href="__APP__/Product/promoteList">
+						<img class="img-responsive" src="__PUBLIC__/Home/images/22.png" alt="">
+					</a>
+				</div>
+<!-- 				<div class="col-md-3 text-center">
+					<a href="__APP__/Product/productList/type/wearable">
+						<img class="img-responsive" src="__PUBLIC__/Home/images/wearable.png" alt="">
+					</a>
+				</div>
+				<div class="col-md-3 text-center">
+					<a href="__APP__/Product/productList/type/accessories">
+						<img class="img-responsive" src="__PUBLIC__/Home/images/accessorise.png" alt="">
+					</a>
+				</div> -->
+			</div>
+		</div>
+		<!-- 隐藏的向下滑动菜单 结束 -->
+	</div>
+	<!-- TOP AND MENU END -->
+	<!-- 隐藏的菜单 开始 -->
+	<div class="search-box">
+		<form action="<{:U('Search/index')}>" method="get">
+			<input type="text" name="keyword" class="search-txt" placeholder="如：MX4 Pro">
+			<input type="submit" class="search-button" value="搜索">
+			<b id="close-search-box"></b>
+		</form>
+		<div class="keyword-side">
+			<strong>热搜词：</strong>
+			<{:W('Keyword/keyword')}>
+		</div>
+	</div>
+	<div class="side">
+		<ul>
+			<li style="margin-left:-39px;" id="gotopli">
+			    <a href="javascript:goTop();" class="sidetop" >
+			    <img src="__PUBLIC__/Home/images/side_icon05.png">
+			    </a>
+			</li>
+		</ul>
+	</div>
+	<!-- 隐藏的菜单 结束 -->
+	
+	<!-- ========================================================= -->
+	<!-- ====================== 主体部分 开始 ==================== -->
+	<block name="publicBody">
+
+	</block>
+	<!-- ====================== 主体部分 结束 ==================== -->
+	<!-- ========================================================= -->
+	
+	<!-- 底部图标 开始 -->
+	<div class="footer-icons" style="position:relative;z-index:1000;">
+		<div class="container">
+			<div class="col-md-3 footer-btns">
+				<a href="###">
+					<b></b>
+					<span class="text-center">支持货到付款</span>
+				</a>
+			</div>
+			<div class="col-md-3 footer-btns">
+				<a href="###">
+					<b></b>
+					<span class="text-center">7天无理由退货</span>
+				</a>
+			</div>
+			<div class="col-md-3 footer-btns">
+				<a href="###">
+					<b></b>
+					<span class="text-center">售后上门服务</span>
+				</a>
+			</div>
+			<div class="col-md-3 footer-btns">
+				<a href="###">
+					<b></b>
+					<span class="text-center">满59元免费包邮</span>
+				</a>
+			</div>
+		</div>
+	</div>
+	<!-- 底部图标 结束 -->
+	<!-- footer 开始 -->
+	<div class="footer" style="position:relative;z-index:1000;">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3">
+					<dl>
+						<dt><h4>关于滇晟</h4></dt>
+						<dd><a href="<{:U('Page/aboutUs')}>">关于我们</a></dd>
+						<dd><a href="__ROOT__/index.php">滇晟首页</a></dd>
+						<dd><a href="__ROOT__/index.php/News/newslist">新闻中心</a></dd>
+						<dd><a href="__ROOT__/index.php/Blog/blogList">博文中心</a></dd>
+						<dd><a href="__ROOT__/index.php/#contactus">联系我们</a></dd>
+						<dd><a href="__ROOT__/index.php/#contact">友情链接</a></dd>
+						<dd><a href="<{:U('Page/policy')}>">法律声明</a></dd>
+					</dl>
+				</div>
+				<div class="col-md-2">
+					<dl>
+						<dt><h4>店铺</h4></dt>
+						<dd><a href="<{:U('Index/index')}>">首页</a></dd>
+						<dd><a href="<{:U('Product/productlist',array('type'=>'shop','cat'=>'all'))}>">直营店铺</a></dd>
+						<dd><a href="<{:U('Product/promoteList')}>">团购/促销</a></dd>
+						<!-- <dd><a href="__APP__/Product/productList/type/wearable">品牌街</a></dd> -->
+					</dl>
+				</div>
+				<div class="col-md-3">
+					<dl>
+						<dt><h4>服务中心</h4></dt>
+						<dd><a href="<{:U('Member/member')}>">会员中心</a></dd>
+						<dd><a href="<{:U('Support/download')}>">相关下载</a></dd>
+						<dd><a href="<{:U('Support/video')}>">视频专区</a></dd>
+						<dd><a href="<{:U('Page/policy')}>">法律声明</a></dd>
+						<dd><a href="<{:U('Support/policy')}>">服务政策</a></dd>
+						<dd><a href="http://www.kuaidi100.com" target="_blank">快递查询</a></dd>
+						<dd><a href="<{:U('Support/supportMap')}>">服务网点</a></dd>
+						<dd><a href="<{:U('Support/faq')}>">常见问题</a></dd>
+						<dd><a href="<{:U('Support/jobs')}>" target="_blank">职位招聘</a></dd>
+					</dl>
+				</div>
+				<php>
+						$mail=C('sy_webemail');
+						$tel=C('sy_webtel');
+						$freetel=C('sy_freewebtel');
+						$work_time=C('work_time');
+						$QQ_KF=C('sy_qq');
+					</php>
+				<div class="col-md-4 text-left" style="border-right:none;">
+					<h2><{$tel}></h2>
+					<p style="margin-bottom:50px;">周一到周日 <{$work_time}> (全年无休)</p>
+					<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=<{$QQ_KF}>&site=qq&menu=yes" class="btn btn-primary">在线客服</a>
+					<div class="btn-group dropup" style="border:none;">
+						<button type="button" class="btn btn-default">简体中文</button>
+						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+							<span class="caret"></span>
+					    	<span class="sr-only">Toggle Dropdown</span>
+					  	</button>
+					  	<!-- <ul class="dropdown-menu" role="menu">
+						    <li><a href="#">English</a></li>
+						    <li><a href="#">繁體中文</a></li>
+						    <li><a href="#">台灣繁體</a></li>
+						    <li><a href="#">Deutsch</a></li>
+						    <li><a href="#">Русский</a></li>
+						    <li><a href="#">עברית</a></li>
+					  	</ul> -->
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<img src="<{$logo2}>" alt="">
+			</div>
+		</div>
+	</div>
+	<!-- footer 结束 -->
+	<php>
+		$right=C('sy_webcopyright');
+		 $ICP=C('sy_webrecor');
+	</php>
+	<div class="copyright">
+		<div class="container">
+			<div class="copyright-words"><{$right}>&nbsp;&nbsp;&nbsp;&nbsp;ICP备案号：<{$ICP}></div>
+			<div class="pull-right copyright-icon"></div>
+		</div>
+	</div>
+</body>
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+	<script src="__PUBLIC__/Home/js/bootstrap.min.js"></script>
+	<!-- <script src="__PUBLIC__/Home/js/tooltips-popovers.min.js"></script> -->
+	<script src="__PUBLIC__/Home/js/index.js"></script>
+	<script src="__PUBLIC__/Home/js/custom-service.js"></script>
+	<!-- =========================================================== -->
+	<!-- ====================== js文件部分 开始 ==================== -->
+	<block name="bottomJsFile">
+	
+	</block>
+	<!-- ====================== js文件部分 结束 ==================== -->
+	<!-- =========================================================== -->
+</html>

@@ -1,0 +1,108 @@
+body {
+	background:url(../images/banner.jpg) no-repeat top center;
+	margin:0;
+	padding:0;
+}
+.logo {
+	margin-top:55px;
+}
+.main {
+	margin-top:50px;
+	min-width:600px;
+	/*background:#fff;*/
+	/*border:1px solid #ededed;*/
+	padding:35px 0 50px 230px;
+	position:relative;
+	background:url(../images/banner-left.png) no-repeat 0 -50px;
+	overflow:hidden;
+}
+.main form {
+	float:right;
+	padding:30px 10px 10px 10px;
+}
+.cloud {
+	position:absolute;
+	right:0px;
+	bottom:0px;
+	width:226px;
+	height:135px;
+	margin-right:250px;
+	margin-bottom:-30px;
+	background:url(../images/bg14.png) no-repeat 0 0;
+}
+.regist-way {
+	margin-bottom:20px;
+	overflow:hidden;
+	height:auto;
+}
+button.regist-btn {
+	width:150px;
+	height:40px;
+	background:#00acff;
+	margin-right:5px;
+	border:none;
+	color:#fff;
+	cursor:pointer;
+	font-size:16px;
+	border-radius:3px;
+}
+button.phone {
+	/*background:#00acff url(../images/phone.gif) no-repeat 8px center;*/
+	/*padding-left:18px;*/
+}
+button.email {
+	/*background:#ededed url(../images/email.png) no-repeat 12px 9px;*/
+	background:#ededed;
+	/*padding-left:18px;*/
+	color:#888;
+}
+input.txt-input {
+	width:310px;
+	height:40px;
+	padding:10px;
+	border:1px solid #ccc;
+	border-radius:0;
+}
+input#txt-verify {
+	/*width:240px;*/
+}
+/*input[type="button"] {
+	width:310px;
+	height:45px;
+	background:#00acff;
+	border:none;
+	cursor:pointer;
+	color:#fff;
+	font-size:16px;
+}*/
+input.btn-input {
+	width:310px;
+	height:40px;
+}
+div.phone-box {
+	width:310px;
+	margin-bottom:15px;
+}
+div.phone-box input.phone-txt{
+	border-radius:0;
+	height:40px;
+}
+div.phone-box span.phone-btn{
+	border-radius:0;
+	height:39px;
+}
+.regist-to-login a {
+	position:absolute;
+	top:-37px;
+	right:0;
+	width:150px;
+	line-height:34px;
+	background:#FF8925;
+	color:#fff;
+	text-align:center;
+	border-top:3px solid #FFC86E;
+	border-radius:3px 3px 0 0;
+}
+.regist-to-login a:hover {
+	background:#
+}

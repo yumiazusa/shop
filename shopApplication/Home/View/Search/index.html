@@ -1,0 +1,189 @@
+<extend name="Public:public" />
+
+<!-- ====================== 自定义CSS文件 部分 =============== -->
+<block name="cssFile">
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/search-index.css">
+</block>
+<!-- ====================== 自定义CSS文件 结束 =============== -->
+<!-- ====================================== ================== -->
+
+<!-- ====================== 自定义顶部js文件 部分 =============== -->
+<block name="topJsFile">
+	
+</block>
+<!-- ====================== 自定义顶部js文件 结束 =============== -->
+
+<!-- ===================================== =================== -->
+<!-- ====================== 顶部广告 开始 ==================== -->
+<block name="topAdv">
+	
+</block>
+<!-- ====================== 顶部广告 结束 ==================== -->
+<!-- ====================================== ================== -->
+
+	
+<!-- ========================================================= -->
+<!-- ====================== 主体部分 开始 ==================== -->
+<block name="publicBody">
+	<!-- 正文内容 开始 -->
+    <div class="container main">
+        <h3 class="head-title">搜索结果</h3>
+        <div class="row search-area">
+            <form action="" method="get">
+                <div class="input-group input-group-lg">
+                  <input type="text" name="keyword" class="form-control search-txt" placeholder="<{$keyword}>">
+                  <span class="input-group-btn">
+                    <button class="btn btn-primary" type="submit">&nbsp;&nbsp;&nbsp;点击搜索&nbsp;&nbsp;&nbsp;</button>
+                  </span>
+                </div><!-- /input-group -->
+            </form>
+        </div>
+        <div class="row search-result">
+            <div class="nav">
+                <a href="#product">产品（<{$proInfo['counts']}>）</a>
+                <a href="#news">新闻（<{$newsInfo['counts']}>）</a>
+                <a href="#video">视频（<{$videoInfo['counts']}>）</a>
+            </div>
+            <div class="space-bar"></div>
+            <a id="product"></a>
+            <h4>产品<small>（<a href="###">共有<{$proInfo['counts']}>个结果</a>）</small></h4>
+            <table class="table">
+                <tbody>
+                    <foreach name="proInfo['product']" item="pro">
+                    <tr>
+                        <td class="product-image-area">
+                            <a href="<{:U('ProductDetail/detail/id/' . $pro['id'])}>"><img src="__PUBLIC__/Product/thumb/<{$pro['list_image']}>" alt=""></a>
+                        </td>
+                        <td class="product-name-area">
+                            <h3><a href="<{:U('ProductDetail/detail/id/' . $pro['id'])}>"><{$pro['pro_name']}></a></h3>
+                            <span><{$pro['pro_subname']}></span>
+                        </td>
+                        <td class="product-price-area">
+                            <if condition="($pro['promote_price'] gt $pro['market_price']) OR ($pro['promote_price'] eq $pro['market_price'])">
+                                <strong>
+                                    ￥<{$pro.market_price}>
+                                </strong>
+                            <else />
+                                <span>
+                                    ￥<{$pro.promote_price}><br/><del>￥<{$por.market_price}></del>
+                                </span>
+                            </if>
+                        </td>
+                        <td class="product-link-area">
+                            <a href="<{:U('ProductDetail/detail/id/' . $pro['id'])}>" class="btn btn-info view-more pull-right">查看详情</a>
+                        </td>
+                    </tr>
+                    </foreach>
+                    <tr>
+                        <td colspan="4">
+                            <a class="check-more" href="###">查看更多关于“X”的产品</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="space-bar"></div>
+            <a id="news"></a>
+            <h4>新闻<small>（<a href="###">共有<{$newsInfo['counts']}>个结果</a>）</small></h4>
+            <table class="table">
+                <tbody>
+                    <foreach name="newsInfo['news']" item="news">
+                    <tr>
+                        <td class="search-news-title">
+                            <a href="__ROOT__/index.php/News/newspage/id/<{$news['id']}>.html"><{$news.title}><a>
+                        </td>
+                        <td></td>
+                        <td class="search-news-link">
+                            <a href="__ROOT__/index.php/News/newspage/id/<{$news['id']}>.html" class="btn btn-info pull-right">点击阅读</a>
+                        </td>
+                    </tr>
+                    </foreach>
+                    <tr>
+                        <td colspan="3">
+                            <a href="###" class="check-more">查看更多关于“X”的产品</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="space-bar"></div>
+            <a id="video"></a>
+            <h4>视频<small>（<a href="###">共有<{$videoInfo['counts']}>个结果</a>）</small></h4>
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <td>
+                            <foreach name="videoInfo['video']" item="video">
+                            <div class="col-sm-6 col-md-4 search-video-list">
+                                <div class="thumbnail">
+                                    <empty name="video.simg">
+                                        <img src="__PUBLIC__/Home/move/default.jpg">
+                                    <else/>
+                                        <img src="__PUBLIC__/Home/<{$video.simg}>" alt="...">
+                                    </empty>
+                                    <div class="caption">
+                                        <h3><{$video.title|mb_substr=0, 11, utf8}></h3>
+                                        <p>
+                                            <a href="javascript:showBg(<{$video.id}>);" class="btn btn-default">点击播放</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            </foreach>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a class="check-more" href="###">查看更多关于"x"的视频</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+<!-- =================== 视频开始 ========================== -->
+<foreach name="videoInfo['video']" item="video">
+    <div id="fullbg" class="haha<{$video.id}>"></div>
+    <div id="dialog" class="bobo<{$video.id}>">
+        <div class="box-header">
+            <h4>
+                <{$video.title}>
+                <span class="glyphicon glyphicon-remove pull-right" style="color:#555; cursor:pointer" onclick="closeBg(<{$video.id}>);"></span>
+            </h4>
+        </div>
+        <div>
+            <embed width="700" height="400" align="middle" type="application/x-shockwave-flash" allowscriptaccess="sameDomain" quality="high" src="<{$video.weburl}>"></embed>
+        </div>
+    </div>
+</foreach>
+<!-- =================== 视频结束 ========================== -->
+</block>
+<!-- ====================== 主体部分 结束 ==================== -->
+<!-- ========================================================= -->
+
+<!-- =========================================================== -->
+<!-- ====================== js文件部分 开始 ==================== -->
+<block name="bottomJsFile">
+    <script type="text/javascript"> 
+    //显示灰色 jQuery 遮罩层 
+    function showBg(num) { 
+        var bh = $("body").height(); 
+        var bw = $("body").width();
+        var c_h = '.haha'+num;
+        var c_b = '.bobo'+num;
+        $(c_h).css({ 
+            height:bh, 
+            width:bw, 
+            display:"block" 
+        }); 
+        $(c_b).show(); 
+    } 
+    //关闭灰色 jQuery 遮罩 
+    function closeBg(num) {
+        var c_h = '.haha'+num;
+        var c_b = '.bobo'+num;
+        $(c_h).hide(); 
+        $(c_b).hide(); 
+    } 
+    </script>
+</block>
+<!-- ====================== js文件部分 结束 ==================== -->
+

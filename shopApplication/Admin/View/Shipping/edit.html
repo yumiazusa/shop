@@ -1,0 +1,139 @@
+<!-- =====================================================
+    Author: Eden
+    Date:   2015-01-12
+    Function:   公共模板文件中定义的block区域，可以在子模板中继承和覆盖
+ ========================================================= -->
+<!-- 继承 公共模板 开始 -->
+<extend name="Public:blank" />
+<!-- 继承 公共模板 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部CSS文件 开始 -->
+<block name="cssFile">
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap-responsive.min.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/uniform.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/select2.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-style.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-media.css" />
+    <link href="__PUBLIC__/Admin/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link rel="stylesheet" href="__PUBLIC__/editor/themes/default/default.css" />
+    <style>
+        th.list-title {
+            font-size:14px;
+        }
+        td.align-center {
+            text-align:center;
+        }
+    </style>
+</block>
+<!-- 顶部CSS文件 结束 -->
+
+<block name="topJsFile">
+    
+
+</block>
+<!-- ===================================================== -->
+<!-- 头部部分 开始 -->
+<block name="publicHead">
+    <div id="breadcrumb"> 
+        <a href="__APP__" title="返回系统首页" class="tip-bottom">
+            <i class="icon-home"></i> 
+        管理首页</a> 
+        <a href="<{:U('Config/index')}>" class="current">系统配置</a> 
+        <a href="__CONTROLLER__/index" class="current">物流管理</a> 
+    </div>
+    <h1 style="margin-top:10px;">修改物流信息</h1>
+</block>
+<!-- 头部部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 公共Body部分 开始 -->
+<block name="publicBody">
+    <!-- 将主体包含在 .row-fluid 内部 -->
+    <div class="container-fluid">
+        <hr style="margin:0;">
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="widget-box">
+                    <div class="widget-title"> <span class="icon"> <i class="icon-info-sign"></i> </span>
+                        <h5>修改物流</h5>
+                    </div>
+                    <div class="widget-content nopadding">
+                        <form class="form-horizontal" method="post" action="__CONTROLLER__/doShippingEdit" name="tmpedit" id="tmpedit" novalidate="novalidate">
+                            <div class="control-group">
+                                <label class="control-label">物流库：</label>
+                                <div class="controls">
+                                    <select name="sid" class="span3" id="">
+                                        <foreach name="sRes" item="shp">
+                                            <option <if condition="$shp.id eq $defaultCId">selected</if> value="<{$shp.id}>"><{$shp.cname}></option>
+                                        </foreach>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">描述内容：</label>
+                                <div class="controls">
+                                    <textarea class="span11" name="shipping_desc" id="tmp_content" style="margin:0; overflow:hidden; width:80%; height:200px; resize:none;" ><{$sVal.shipping_desc}></textarea>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">设为默认：</label>
+                                <div class="controls">
+                                    <label><input type="checkbox" value="1" <notempty name="sVal.is_default">checked</notempty> name="is_default"> 设为默认</label>
+                                </div>
+                            </div>
+                          <div class="form-actions">
+                            <input type="hidden" name="id" value="<{$sVal.id}>">
+                            <input type="submit" value=" 保存模板 " class="btn btn-primary" style="margin-left:179px; margin-right:30px;">
+                            <a href="__CONTROLLER__/index" class="btn btn-default">返回</a>
+                          </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>
+<!-- 公共Body部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- js文件模块 开始 -->
+<block name="footJsFile">
+    <script src="__PUBLIC__/Admin/js/jquery.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.ui.custom.js"></script> 
+    <script src="__PUBLIC__/Admin/js/bootstrap.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.uniform.js"></script> 
+    <script src="__PUBLIC__/Admin/js/select2.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.validate.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.form_validation.js"></script>
+</block>
+<!-- js文件模块 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 底部JS执行区域 开始 -->
+<block name="footScript">
+    <script charset="utf-8" src="__PUBLIC__/editor/kindeditor.js"></script>
+    <script charset="utf-8" src="__PUBLIC__/editor/lang/zh_CN.js"></script>
+    <script src="__PUBLIC__/Admin/js/muneopen.js"></script>
+    <script>
+        var editor;
+        KindEditor.ready(function(K) {
+                editor = K.create('#tmp_content', {
+                    resizeType : 1,
+                    allowPreviewEmoticons : false,
+                    allowImageUpload : false,
+                    items : [
+                        'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+                        'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+                        'insertunorderedlist', '|', 'emoticons', 'image', 'link']
+                });
+        });
+    </script>
+</block>
+<!-- 底部JS执行区域 结束 -->

@@ -1,0 +1,15 @@
+div.main-box {
+    margin-top:30px;
+    margin-bottom:30px;
+    border:1px solid #ededed;
+    background:#fff;
+}
+.normal-font {
+    font-size:12px;
+    color:#999;
+}
+div.some-desc-words {
+    border-top:1px dotted #ededed;
+    margin-top:30px;
+    padding:20px 0;
+}

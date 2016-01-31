@@ -1,0 +1,20 @@
+.banner {
+    height:220px;
+    background:#168CD2 url(../images/sp-high-banner.jpg) no-repeat center -20px;
+}
+.main {
+    padding-top:30px;
+    padding-bottom:30px;
+    background:#fff;
+    border-left:1px solid #ededed;
+    border-right:1px solid #ededed;
+}
+div.warrantycont {
+    padding:0 20px;
+    font-family:"Hiragino Sans GB","helvetica","microsoft yahei";
+}
+div.warrantycont p {
+    padding-bottom:30px;
+    line-height:22px;
+    font-size:14px;
+}

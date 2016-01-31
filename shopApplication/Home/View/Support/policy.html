@@ -1,0 +1,48 @@
+<extend name="Public:public" />
+<block name="cssFile">
+	<link rel="stylesheet" href="__PUBLIC__/Home/css/index.css">
+	<link rel="stylesheet" href="__PUBLIC__/Home/css/support-policy.css">
+</block>
+<block name="publicBody">
+	<div class="banner"></div>
+	
+	<div class="container main">
+		<div class="row">
+			<div class="col-md-12">
+				<ol class="breadcrumb">
+				  	<li><a href="__APP__">首页</a></li>
+				  	<li><a href="<{:U('Support/index')}>">服务与支持</a></li>
+				  	<li>服务承诺</li>
+				</ol>
+			</div>
+			<!-- 左侧菜单 开始 -->
+			<div class="col-md-3">
+				<div class="list-group list-menu">
+				  	<a href="#" class="list-group-item active">
+				    	<h1>服务政策</h1>
+				  	</a>
+				  	<foreach name="list" item="v">
+				  	<a href="<{:U('Support/policy/cat_id/'.$v['id'])}>" class="list-group-item">
+				  		<h4><{$v.cat_name}></h4>
+				  	</a>
+				  	</foreach>
+				  	
+				</div>
+			</div>
+			<!-- 左侧菜单 结束 -->
+			<!-- 右侧菜单 开始 -->
+			<div class="col-md-9">
+				<div class="warrantycont">
+    	         <h1 class="text-center"><{$datalist.title}></h1>
+    	         <{$datalist.content}>
+    	         </div>
+
+			</div>
+			<!-- 右侧菜单 结束 -->
+			
+		</div>
+	</div>
+	</block>
+<block name="bottomJsFile">
+
+</block>

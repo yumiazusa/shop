@@ -1,0 +1,243 @@
+
+.bg {
+    background: #F0F0F0;
+}
+
+.display-inline-block {
+    display: inline-block;
+    vertical-align: top;
+
+}
+a{
+    text-decoration: none;
+
+}
+ul {
+    list-style-type: none;
+}
+.text-ellipse {
+    overflow: hidden;
+    /*超出的换成 ... */
+    text-overflow: ellipsis;
+    /*不允许换行*/
+    white-space: nowrap;
+}
+.member-top {
+    background: url("../images/top.jpg") no-repeat center center;
+    height: 103px;
+
+}
+.member-con-font{
+	height:30px;
+	line-height: 30px;
+	font-weight:bold;
+	font-size: 15px;
+	color:#666; 
+	margin-top: 4px;
+}
+.member-content {
+    clear: both;
+    margin: 0 auto;
+    padding: 20px 0 25px;
+    width: 1100px;
+     font-size:14px;
+    font-family:"微软雅黑";
+
+}
+.account-nav{
+    margin:0px;
+    padding:0px;
+    font-size:14px;
+}
+.member-con-zt{
+   
+    margin-top: 15px;
+}
+.member-zt-left{
+   min-height: 600px; 
+   width:150px;
+   background: #F7F7F7; 
+   border-radius: 4px;
+}
+
+.member-center:not(:first-child){
+	margin-top: 6px;
+}
+.member-center-title{
+	height: 40px;
+    line-height: 40px;
+    border-radius: 3px 3px 0 0;
+    overflow: hidden;
+    color: #6f6f6f;
+    font-size: 15px;
+    font-weight: bold;
+    margin-left: 15px;
+}
+.member-center-list {
+    line-height: 30px;
+    height:30px;
+    overflow: hidden;
+    text-align: center; 
+    width:150px;
+    font-size:14px;
+
+}
+.member-center-list:last-child {
+    border:none;
+}
+.member-center-list a{
+	text-decoration: none;
+	color:#999999;
+	font-size:13px;
+    
+
+
+}
+.member-center-list:hover {
+	background:#739fe1;
+    width:150px;
+
+}
+.member-center-list:hover a{
+	color:#fff;
+    text-decoration: none;
+}
+.member-center-list:last-child:hover {
+	background:#739fe1;
+	color:#fff;
+}
+.member-zt-right{  
+    min-height: 800px; 
+    margin-left:15px;
+    width:930px;
+    background:#FFFFFF;
+     border-radius: 7px;
+}
+.member-right-msg{
+    height:200px;
+    width:600px;
+    margin-top: 30px;
+
+}
+.member-photo{
+    margin-left:50px;
+    text-align: center;
+    width:121px;
+}
+.member-photo img{
+    border:1px solid #eee;
+    border-radius:50%;
+    width:110px;
+    height:110px;
+}
+.memeber-right-data{
+    margin-left: 20px;
+    width:370px;
+}
+.memeber-right-data .member-wel{
+    padding: 0 0 12px;
+    font-size: 24px;
+    
+}
+.member-right-safe{
+    margin-top:48px;
+}
+.member-right-safe span,.member-right-safe a{
+    font-size: 15px;
+}
+.member-right-safe div{
+    margin-left:8px;
+}
+.icon-noVerified{
+    text-decoration:none;
+    display:inline-block;
+    margin-right:9px;
+    height:15px;
+    line-height:15px;
+    padding: 3px 0 1px 23px;
+    background: url("../images/icon1.png") no-repeat;
+    background-position: -110px -174px;
+
+}
+.member-right-order{
+    background-color: #ffffe9;
+    border: 1px solid #ffc16b;
+    color: #595951;
+    padding: 15px 0 15px 21px;
+    margin-left:20px;
+    width:880px;
+
+}
+.member-rt ul{
+    margin-left:27px;
+}
+.member-rt ul li{
+    margin-top: 13px;
+}
+.member-rt ul li a{
+    text-decoration:none;
+}
+.member-rt ul li a:hover {
+    color:red;
+}
+.pro-tab-area{
+    margin-top:20px;
+    margin-left:20px;
+}
+.pro-tab-area .h-tab a { 
+    background:url("../images/sprites1.png") no-repeat -300px 0px;
+    text-decoration: none;
+    font-size: 12px;
+    width:70px;
+    border-radius:8px 8px 0px 0px;
+}
+.pro-tab-area .h-tab a, .pro-tab-area .h-tab span {
+    height: 32px;
+    line-height: 32px;
+    color: #fff;
+    padding-left:6px;
+}
+.pro-list ul{
+    overflow: hidden;
+    width: 880px;
+    border:1px solid #ccc;
+    font-size:0px;
+    margin-top:-1px;
+    min-height:250px;
+    background:#fff;
+}
+.pro-list ul li{
+    margin:20px 0px 0px 20px;
+    width:199px;
+    text-align: center;
+    border-right:1px dotted #ccc;
+}
+.pro-list ul li:nth-child(4){
+    border:none;
+}
+.pro-list ul li:nth-child(8){
+    border:none;
+}
+.p-name{
+    height: 52px;
+    line-height: 18px;
+    overflow: hidden;
+    word-wrap: break-word;
+    font-size: 13px; 
+
+}
+.p-name a{
+     text-decoration: none;
+     color:#666;
+}
+.p-name a:hover {
+    color:red;
+    left:1px;
+    top:1px;
+    position:relative;
+
+}
+.p-price b{
+    color:red;
+    font-size: 14px;
+}

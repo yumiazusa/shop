@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>关于imagry</title>
+    <meta name="keywords" content="关于imagry, imagry商城">
+    <meta name="kescription" content="imagry商城是一家专业的互联网公司">
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="/Public/Home/css/bootstrap.min.css">
+    <!-- 可选的Bootstrap主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="/Public/Home/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/Public/Home/css/public.css">
+    <link rel="stylesheet" href="/Public/Home/css/custom-service.css">
+    <!-- ===================================== =================== -->
+    <!-- ====================== 自定义CSS文件 部分 =============== -->
+    
+        
+    
+    <!-- ====================== 自定义CSS文件 结束 =============== -->
+    <!-- ====================================== ================== -->
+
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="/Public/Home/js/jquery.min.js"></script>
+    <!-- ============================================================ -->
+    <!-- ====================== 自定义顶部js文件 部分 =============== -->
+    
+        
+    
+    <!-- ====================== 自定义顶部js文件 结束 =============== -->
+    <!-- ============================================================ -->
+
+</head>
+<body>
+    <!-- ===================================== =================== -->
+    <!-- ====================== 顶部广告 开始 ==================== -->
+    
+        
+    
+    <!-- ====================== 顶部广告 结束 ==================== -->
+    <!-- ====================================== ================== -->
+    
+    <!-- TOP AND MENU START -->
+    <div class="top">
+        <div class="bar">
+            <div class="container">
+                <div class="top-bar-image"><img src="/Public/Home/images/top-bar-word.png" alt=""></div>
+                <div class="pull-right text-right welcome">
+                    <span class="top-bar-welcome">
+                        <a href="#login" data-toggle="modal">您好，请登录</a> | 
+                        <a href="/index.php/Login/regist">注册</a>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- 用户登录模态框 开始 -->
+        <div class="modal fade" style="margin-top:50px;" id="login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog" style="width:400px;">
+                <div class="modal-content">
+                    <form action="/admin.php/Login/indexLogin.html" method="post">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                            <h4 class="modal-title" id="myModalLabel">用户登录</h4>
+                        </div>
+                        <div class="modal-body">
+                            <br />
+                            <div class="input-group input-group-lg">
+                                <span class="input-group-addon modal-username">&nbsp;&nbsp;</span>
+                                <input type="text" name="username" class="form-control" placeholder="邮箱/手机号">
+                            </div>
+                            <br />
+                            <br />
+                            <div class="input-group input-group-lg">
+                                <span class="input-group-addon modal-username">&nbsp;&nbsp;</span>
+                                <input type="password" name="password" class="form-control" placeholder="密码">
+                            </div>
+                            <br />
+                            <div class="">
+                                <a href="###">忘记密码？</a>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <a type="button" href="/admin.php/Login/regist.html" class="btn btn-default">账号注册</a>
+                            <button type="submit" class="btn btn-primary">立即登录</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- 用户登录模态框 结束 -->
+        <!-- ============================================================== -->
+        <div class="container logo-and-menu">
+            <div class="row">
+                <div class="logo">
+                    <a href="/admin.php"><img src="/Public/Home/images/logo.png" alt="imagry"></a>
+                </div>
+                <ul class="list-unstyled menu">
+                    <li><a href="/index.php" class="active">首页</a></li>
+                    <li><a href="###" id="menu-product">产品</a></li>
+                    <li><a href="/index.php/Support/index">服务</a></li>
+                    <li><a href="###">应用</a></li>
+                    <li><a href="###">社区</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- 隐藏的向下滑动菜单 开始 -->
+        <div class="slide-menu">
+            <div class="container">
+                <div class="col-md-3">
+                    <a href="/admin.php/Product/productList/type/phone">
+                        <img class="img-responsive" src="/Public/Home/images/mobile.png" alt="">
+                    </a>
+                </div>
+                <div class="col-md-3 text-center">
+                    <a href="/admin.php/Product/productList/type/tablet">
+                        <img class="img-responsive" src="/Public/Home/images/tablet.png" alt="">
+                    </a>
+                </div>
+                <div class="col-md-3 text-center">
+                    <a href="/admin.php/Product/productList/type/wearable">
+                        <img class="img-responsive" src="/Public/Home/images/wearable.png" alt="">
+                    </a>
+                </div>
+                <div class="col-md-3 text-center">
+                    <a href="/admin.php/Product/productList/type/accessories">
+                        <img class="img-responsive" src="/Public/Home/images/accessorise.png" alt="">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- 隐藏的向下滑动菜单 结束 -->
+    </div>
+    <!-- TOP AND MENU END -->
+    <!-- 隐藏的菜单 开始 -->
+    <div class="search-box">
+        <form action="/admin.php/Search/index.html" method="get">
+            <input type="text" name="keyword" class="search-txt" placeholder="如：MX4 Pro">
+            <input type="submit" class="search-button" value="搜索">
+            <b id="close-search-box"></b>
+        </form>
+        <div class="keyword-side">
+            <strong>关键字：</strong>
+                    </div>
+    </div>
+    <div class="side">
+        <ul>
+            
+            <li style="margin-left:-39px;">
+                <a href="javascript:goTop();" class="sidetop" >
+                <img src="/Public/Home/images/side_icon05.png">
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!-- BANNER START -->
+    <div class="banner"></div>
+
+    <!-- BANNER START -->
+    <div class="banner"></div>
+    <!-- BANNER END -->
+    <div class="container archives" style="padding-bottom:40px; background:#FAFAFA;">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="page-header">
+                    <h3>关于imagry</h3>
+                </div>
+                <div class="archive-body">
+                    <div style="margin:0px;padding:0px 0px 25px;border:0px;color:#515151;font-family:微软雅黑, 'Microsoft Yahei', Arial, Helvetica, sans-serif, 宋体;font-size:14px;background-color:#FFFFFF;">
+	<img src="http://www2.res.meizu.com/zh_cn/images/about/about_1.jpg" /> 
+</div>
+<div style="margin:0px;padding:0px 0px 25px;border:0px;color:#515151;font-family:微软雅黑, 'Microsoft Yahei', Arial, Helvetica, sans-serif, 宋体;font-size:14px;background-color:#FFFFFF;">
+	<div style="margin:0px;padding:0px;border:0px;">
+		<div style="margin:0px;padding:0px;border:0px;">
+			<br />
+		</div>
+	</div>
+	<div class="about_content" style="margin:0px;padding:0px 0px 0px 44px;border:0px;">
+		<div style="margin:0px;padding:0px;border:0px;">
+			<span style="font-family:'Microsoft YaHei';">魅族公司成立于2003年。创始人从小沉迷电子热爱科技，魅族就是电子梦想和共赢理念的结晶。从创立以来的一次次飞跃不仅是魅族人热爱追求的结果，更是梦想力量的体现。</span> 
+		</div>
+		<div style="margin:0px;padding:24px 0px 0px;border:0px;">
+			<span style="font-family:'Microsoft YaHei';">人们就好像相近配置的计算机。同为满负荷运转，多任务且不断终止和新启进程的，远不如持续运行单任务的运算量。 而人只有不变的热爱才能排除复杂的干扰，始终如一的为追求不变的热爱而付出，创造更大价值带来更多的财富。那不变的热爱就是梦想。</span> 
+		</div>
+		<div style="margin:0px;padding:24px 0px 0px;border:0px;">
+			<span style="font-family:'Microsoft YaHei';">魅族因梦想而立。热爱而极致，专注和长久的追求，必将带来商业产品无与伦比的梦想之作。魅族的一切将超越常规，超乎想象。</span> 
+		</div>
+	</div>
+</div>
+<img src="http://www2.res.meizu.com/zh_cn/images/about/about_3.jpg" />                </div>
+            </div>
+        </div>
+    </div>
+<!-- 底部图标 开始 -->
+    <div class="footer-icons" style="position:relative;z-index:1000;">
+        <div class="container">
+            <div class="col-md-3 footer-btns">
+                <a href="###">
+                    <b></b>
+                    <span class="text-center">支持货到付款</span>
+                </a>
+            </div>
+            <div class="col-md-3 footer-btns">
+                <a href="###">
+                    <b></b>
+                    <span class="text-center">7天无理由退货</span>
+                </a>
+            </div>
+            <div class="col-md-3 footer-btns">
+                <a href="###">
+                    <b></b>
+                    <span class="text-center">售后上门服务</span>
+                </a>
+            </div>
+            <div class="col-md-3 footer-btns">
+                <a href="###">
+                    <b></b>
+                    <span class="text-center">满59元免费包邮</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- 底部图标 结束 -->
+    <!-- footer 开始 -->
+    <div class="footer" style="position:relative;z-index:1000;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-2">
+                    <dl>
+                        <dt><h4>关于我们</h4></dt>
+                        <dd><a href="./Html/index.html">关于imagry</a></dd>
+                        <dd><a href="./Html/aboutus.html">新闻中心</a></dd>
+                        <dd><a href="/admin.php/Job/index.html">加入我们</a></dd>
+                        <dd><a href="./aboutus.html">公益</a></dd>
+                        <dd><a href="./Application/Html/aboutus.html">星空之约</a></dd>
+                        <dd><a href="###">联系我们</a></dd>
+                        <dd><a href="###">友情链接</a></dd>
+                    </dl>
+                </div>
+                <div class="col-md-2">
+                    <dl>
+                        <dt><h4>产品</h4></dt>
+                        <dd><a href="###">所有产品</a></dd>
+                        <dd><a href="###">平板系列</a></dd>
+                        <dd><a href="###">手机</a></dd>
+                        <dd><a href="###">穿戴产品</a></dd>
+                        <dd><a href="###">配件</a></dd>
+                    </dl>
+                </div>
+                <div class="col-md-2">
+                    <dl>
+                        <dt><h4>服务中心</h4></dt>
+                        <dd><a href="###">体验店</a></dd>
+                        <dd><a href="###">售后服务</a></dd>
+                        <dd><a href="###">官服中心</a></dd>
+                        <dd><a href="###">帮助中心</a></dd>
+                        <dd><a href="###">软件下载</a></dd>
+                        <dd><a href="###">固件升级</a></dd>
+                    </dl>
+                </div>
+                <div class="col-md-2">
+                    <dl>
+                        <dt><h4>关注我们</h4></dt>
+                        <dd><a href="###">社区</a></dd>
+                        <dd><a href="###">立即注册</a></dd>
+                        <dd><a href="###">新浪微博</a></dd>
+                        <dd><a href="###">QQ空间</a></dd>
+                        <dd><a href="###">微信</a></dd>
+                        <dd><a href="###">百度贴吧</a></dd>
+                        <dd><a href="http://m.ickd.cn" target="_blank">快递查询</a></dd>
+                    </dl>
+                </div>
+                <div class="col-md-4 text-right" style="border-right:none;">
+                    <h2>400-700-5858</h2>
+                    <p style="margin-bottom:50px;">周一到周日 8:30-20:30 (全年无休)</p>
+                    <a href="###" class="btn btn-primary">7*24小时在线客服</a>
+                    <div class="btn-group dropup" style="border:none;">
+                        <button type="button" class="btn btn-default">简体中文</button>
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                            <span class="caret"></span>
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">English</a></li>
+                            <li><a href="#">繁體中文</a></li>
+                            <li><a href="#">台灣繁體</a></li>
+                            <li><a href="#">Deutsch</a></li>
+                            <li><a href="#">Русский</a></li>
+                            <li><a href="#">עברית</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row foot-logo">
+                <!-- <img src="/Public/Home/images/foot-logo.png" alt=""> -->
+            </div>
+        </div>
+    </div>
+    <!-- footer 结束 -->
+    <div class="copyright">
+        <div class="container">
+            <div class="copyright-words">2012-2014 努比亚 版权所有 粤ICP备10006213号-2 ICP经营许可证编号：粤B2-20120688  深圳市中兴移动通信有限公司</div>
+            <div class="pull-right copyright-icon"></div>
+        </div>
+    </div>
+</body>
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="/Public/Home/js/bootstrap.min.js"></script>
+    <!-- <script src="/Public/Home/js/tooltips-popovers.min.js"></script> -->
+    <script src="/Public/Home/js/index.js"></script>
+    <script src="/Public/Home/js/custom-service.js"></script>
+    <!-- =========================================================== -->
+    <!-- ====================== js文件部分 开始 ==================== -->
+    
+    
+    
+    <!-- ====================== js文件部分 结束 ==================== -->
+    <!-- =========================================================== -->
+</html>

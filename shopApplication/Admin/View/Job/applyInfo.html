@@ -1,0 +1,166 @@
+<!-- 继承 公共模板 开始 -->
+<extend name="Public:blank"/>
+<!-- 继承 公共模板 结束 -->
+
+<!-- ===================================================== -->
+
+
+<!-- 顶部CSS文件 开始 -->
+<block name="cssFile">
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap-responsive.min.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/fullcalendar.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-style.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-media.css"/>
+    <link href="__PUBLIC__/Admin/font-awesome/css/font-awesome.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/jquery.gritter.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/colorpicker.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/uniform.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/select2.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap-wysihtml5.css"/>
+
+</block>
+<!-- 顶部CSS文件 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部JS文件 开始 -->
+<block name="topJsFile">
+
+</block>
+<!-- 顶部JS文件 结束 -->
+
+<!-- ===================================================== -->
+<!-- 头部部分 开始 -->
+<block name="publicHead">
+    <div id="breadcrumb">
+        <a href="index.html" title="返回系统主页" class="tip-bottom">
+            <i class="icon-home"></i>
+            管理首页
+        </a>
+        <a href="#" class="current">人才招聘</a>
+    </div>
+    <h1 style="margin-top:10px;">简历信息</h1>
+</block>
+<!-- 头部部分 结束 -->
+
+<!-- 公共Body部分 开始 -->
+<block name="publicBody">
+
+    <!-- 将主体包含在 .row-fluid 内部 -->
+
+    <div class="container-fluid">
+        <hr>
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="widget-box ddd">
+                    <div class="widget-title"><span class="icon"> <i class="icon-ok-sign"></i> </span>
+                        <h5><{$data.job_name}></h5>
+                    </div>
+                    <div class="widget-content">
+                        <table class="table table-bordered table-striped">
+
+                            <tbody>
+                            <tr>
+                                <td>姓名:</td>
+                                <td><{$data.name}></td>
+                            </tr>
+                            <tr>
+                                <td>性别:</td>
+                                <td>
+                                    <eq name="data.sex" value="0">女</eq>
+                                    <eq name="data.sex" value="1">男</eq>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>年龄:</td>
+                                <td><{$data.age}></td>
+                            </tr>
+                            <tr>
+                                <td>邮箱:</td>
+                                <td><{$data.email}></td>
+                            </tr>
+                            <tr>
+                                <td>电话:</td>
+                                <td><{$data.phone}></td>
+                            </tr>
+                            <tr>
+                                <td>毕业院校:</td>
+                                <td><{$data.school}></td>
+                            </tr>
+
+                            <tr>
+                                <td>专业:</td>
+                                <td><{$data.discipline}></td>
+                            </tr>
+                            <tr>
+                                <td>学历:</td>
+                                <td><{$data.education}></td>
+                            </tr>
+
+                            <tr>
+                                <td>毕业日期:</td>
+                                <td><{$data.grad_date}></td>
+                            </tr>
+                            <tr>
+                                <td>工作时间:</td>
+                                <td><{$data.experience}> 年</td>
+                            </tr>
+                            <tr>
+                                <td>现居地:</td>
+                                <td><{$data.now_address}></td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+
+                <div style="padding-top:20px; padding-bottom:20px; text-align:center;">
+                    <a href="javascript:a();" class="btn btn-primary " style="margin-right:20px"> 打印 </a>
+                    <a type="submit" href="javascript:history.go(-1);" class="btn btn-default"> 返回列表 </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</block>
+<!-- js文件模块 开始 -->
+<block name="footJsFile">
+
+</block>
+<!-- js文件模块 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 底部JS执行区域 开始 -->
+<block name="footScript">
+    <script src="__PUBLIC__/Admin/js/jquery.min.js"></script>
+    <script src="__PUBLIC__/Admin/js/jquery.ui.custom.js"></script>
+    <script src="__PUBLIC__/Admin/js/bootstrap.min.js"></script>
+    <script src="__PUBLIC__/Admin/js/bootstrap-colorpicker.js"></script>
+    <script src="__PUBLIC__/Admin/js/bootstrap-datepicker.js"></script>
+    <!--<script src="__PUBLIC__/Admin/js/jquery.toggle.buttons.html"></script>-->
+    <script src="__PUBLIC__/Admin/js/masked.js"></script>
+    <script src="__PUBLIC__/Admin/js/jquery.uniform.js"></script>
+    <script src="__PUBLIC__/Admin/js/select2.min.js"></script>
+    <script src="__PUBLIC__/Admin/js/matrix.js"></script>
+    <!--<script src="__PUBLIC__/Admin/js/matrix.form_common.js"></script>-->
+    <script src="__PUBLIC__/Admin/js/jquery.peity.min.js"></script>
+    <script src="http://code.jquery.com/jquery-migrate-1.1.0.js"></script>
+    <script src="__PUBLIC__/Admin/js/jquery.jqprint-0.3.js"></script>
+    <script src="__PUBLIC__/Admin/js/muneopen.js"></script>
+
+
+
+<script>
+//打印输出
+function a() {
+$(".ddd").jqprint();
+}
+</script>
+
+</block>

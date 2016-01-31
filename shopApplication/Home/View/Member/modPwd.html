@@ -1,0 +1,173 @@
+<extend name="Public:member1"/>
+<block name="cssFile">
+    <link href="__PUBLIC__/Home/css/member.css" rel="stylesheet" type="text/css">
+    <link href="__PUBLIC__/Home/css/order.css" rel="stylesheet" type="text/css">
+    <link href="__PUBLIC__/Home/css/pubmember.css" rel="stylesheet" type="text/css">
+</block>
+<block name="topJsFile">
+    <script src="__PUBLIC__/Home/js/member.js"></script>
+</block>
+<block name="publicBody">
+
+    <!--更换部分开始-->
+    <div class="member-zt-right display-inline-block">
+        <div class="member-info">
+            <span>修改密码</span>
+        </div>
+        <div>
+            <div class="radio_quyu2">
+                <p>请重设您的帐户密码</p>
+
+                <div id="tabdiv2" name="formUser1">
+                    <table width="100%" cellspacing="3" cellpadding="5" border="0" align="left">
+                        <tbody>
+                        <tr>
+                            <td>
+                                <input id="oldpassword" class="inputBg input_kuang4" type="password"
+                                        maxlength="25" value="" placeholder="旧密码"
+                                       name="oldpassword">
+                                <span class="onError" style="display: none;"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+
+                                <input id="newpassword" class="inputBg input_kuang4" type="password"
+                                       maxlength="25" value="" placeholder="新密码"
+                                       name="newpassword">
+                                <span class="onError" style="display: none;"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+
+                                <input id="qrpassword" class="inputBg input_kuang4" type="password"
+                                       maxlength="25" value="" placeholder="确认新密码"
+                                       name="qrpassword">
+                                <span class="onError" style="display: none;"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="left" style="padding-top:5px;">
+                                <input type="submit" style="border:none;"
+                                       class=" pwd-primary pwd-btns portalmargin_top " value="提交" id="submit1"
+                                       name="submit">
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--更换部分结束-->
+</block>
+<block name="bottomJsFile">
+    <script>
+        var data;
+
+        //修改密码
+        $('#submit1').bind('click', function () {
+
+            if (dosubmit()) {
+                data = {'password': $("#oldpassword").val(), 'npwd': $("#qrpassword").val()}
+                $.post('__CONTROLLER__/modPwd', data, function (a) {
+                    alert(a);
+                })
+            }
+        })
+    </script>
+    <script>
+        //修改密码方法
+        $("#spwd1").focus(function () {
+            $(this).hide();
+            $("#oldpassword").css("display", "block");
+        });
+        $("#oldpassword").blur(function () {
+            checkPwd();
+        });
+        $("#spwd2").focus(function () {
+            $(this).hide();
+            $("#newpassword").css("display", "block");
+        });
+        $("#newpassword").blur(function () {
+            checkNewPwd();
+        });
+        $("#spwd3").focus(function () {
+            $(this).hide();
+            $("#qrpassword").css("display", "block");
+        });
+        $("#qrpassword").blur(function () {
+            checkQrPwd();
+        });
+        function checkPwd() {
+            var isPwd = false;
+            var _oldPwd = $("#oldpassword");
+
+            var msg = "";
+            if (_oldPwd.val() == "") {
+                msg = "请输入密码";
+                _oldPwd.next().show();
+            } else {
+                isPwd = true;
+                _oldPwd.next().css("display", "none");
+            }
+
+            _oldPwd.next().html(msg);
+            return isPwd;
+
+        }
+        function checkNewPwd() {
+            var isNewPwd = false;
+            var _newPwd = $("#newpassword");
+
+            var msg = "";
+            if (_newPwd.val() == "") {
+                msg = "请输入新密码";
+                _newPwd.next().show();
+            } else if (_newPwd.val().length < 6 || _newPwd.val().length > 18) {
+                msg = "密码长度在6~18位";
+                _newPwd.next().show();
+
+            } else {
+                isNewPwd = true;
+                _newPwd.next().css("display", "none");
+            }
+
+            _newPwd.next().html(msg);
+            return isNewPwd;
+
+        }
+        function checkQrPwd() {
+            var isQrPwd = false;
+            var newPwd = $("#newpassword").val();
+            var _qrPwd = $("#qrpassword");
+            var msg = "";
+            if (_qrPwd.val() == "") {
+                msg = "请输入确认密码";
+                _qrPwd.next().show();
+            } else if (_qrPwd.val() != newPwd) {
+                msg = "确认密码与新密码不一致";
+                _qrPwd.next().show();
+
+            } else {
+                isQrPwd = true;
+                _qrPwd.next().css("display", "none");
+            }
+
+            _qrPwd.next().html(msg);
+            return isQrPwd;
+
+        }
+        function dosubmit() {
+            var isPwd = checkPwd();
+            var isNewPwd = checkNewPwd();
+            var isQrPwd = checkQrPwd();
+            if (isPwd && isNewPwd && isQrPwd) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    </script>
+</block>

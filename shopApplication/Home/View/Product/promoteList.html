@@ -1,0 +1,259 @@
+<extend name="Public:public" />
+<!--css-->
+<block name="cssFile">
+    <link rel = "stylesheet" href = "__PUBLIC__/Home/css/Product/productList.css"/>
+    <link rel = "stylesheet" href = "__PUBLIC__/Home/css/Product/productListStyle.css"/>
+    <style>
+        .menu1:hover {
+            border-bottom:3px solid #00ACFF;
+            -webkit-transition: border .5s ease .15s;
+            -moz-transition: border .5s ease .15s;
+            -o-transition: border .5s ease .15s;
+            -ms-transition: border .5s ease .15s;
+            transition: border .5s ease .15s;
+        }
+
+        .menu1 {
+            border-bottom:3px solid #FAFAFA;
+            -webkit-transition: border .5s ease .1s;
+            -moz-transition: border .5s ease .1s;
+            -o-transition: border .5s ease .1s;
+            -ms-transition: border .5s ease .1s;
+            transition: border .5s ease .1s;
+        }
+        .menu1 ul {
+            position: absolute;
+            padding-top:10px;
+            top:-11px;
+            left: 140px;
+            opacity: 0;
+            z-index:2;
+            height:167px;
+            background: #FAFAFA;
+            border-bottom:3px solid #00ACFF;
+            border-right:3px solid #00ACFF;
+            -webkit-border-radius: 0 0 15px 0;
+            -moz-border-radius: 0 0 15px 0;
+            border-radius: 0 0 15px 0;
+            -webkit-transition: opacity .5s ease .1s;
+            -moz-transition: opacity .5s ease .1s;
+            -o-transition: opacity .5s ease .1s;
+            -ms-transition: opacity .5s ease .1s;
+            transition: opacity .5s ease .1s;
+        }
+
+        .menu1:hover > ul {
+            opacity: 0.9;
+        }
+        .menu1 ul li {
+            width: 58px;
+            margin-top:20%;
+            overflow: hidden;
+            outline: none;
+            padding: 0;
+            -webkit-transition: width .5s ease .1s;
+            -moz-transition: width .5s ease .1s;
+            -o-transition: width .5s ease .1s;
+            -ms-transition: width .5s ease .1s;
+            transition: width .5s ease .1s;
+        }
+        .menu1:hover > ul li {
+            width: 63px;
+            margin-right: 2px;
+            overflow: visible;
+        }
+        .menu1 ul li a {
+            text-align: left;
+            text-decoration: none;
+            border: none;
+        }
+
+        .menu1 ul li a:hover {
+            text-align: left;
+            text-decoration: none;
+            border-top: 2px solid #00ACFF;
+            border-bottom: 2px solid #00ACFF;
+            border-radius: 3px 3px 3px 3px;
+            /* border: none;*/
+        }
+        .time-item strong{background:#C71C60;color:#fff;font-size:15px;font-family:Arial;padding:0 6px;border-radius:5px;box-shadow:1px 1px 3px rgba(0,0,0,0.2);}
+        .day_show{color:#c71c60;font-size:25px;margin:0 5px;font-family:Arial, Helvetica, sans-serif;}
+    </style>
+</block>
+<!--js-->
+<block name="topJsFile"></block>
+<script src = "__PUBLIC__/Home/js/holder.js"></script>
+<script src = "__PUBLIC__/Home/js/jquery2.min.js"></script>
+</block>
+
+<!--main-->
+<block name="publicBody">
+  <div class="contains">
+    <div class="show-left">
+        <a href="<{:U('ProductDetail/detail/id/' . $leftAdv['product_id'])}>">
+            <img class="img-responsive" src="__PUBLIC__/Adv/<{$leftAdv['thumbnail']}>" alt="">
+        </a>
+    </div>
+    <div class="show-right">
+        <a href="<{:U('ProductDetail/detail/id/' . $rightAdv['product_id'])}>"><img class="img-responsive" src="__PUBLIC__/Adv/<{$rightAdv['thumbnail']}>" alt=""></a>
+    </div>
+    <div class="block-title">显示全部</div>
+</div>
+<main>
+    <div style="width: 100%; padding-top:60px; border-top:1px solid #ccc; background: #FFFFFF" class="list">
+        <div class="select-box">
+            <strong><a href="<{:U('promoteList',array('by'=>'all','scroll'=>1))}>">全部商品</a></strong>
+            <a href="<{:U('promoteList',array('cat'=>'all','scroll'=>1))}>">全部</a> |
+            <a href="<{:U('promoteList',array('by'=>'new','scroll'=>1))}>">最新</a> |
+            <a href="<{:U('promoteList',array('by'=>'pricedown','scroll'=>1))}>">价格从高到低</a> |
+            <a href="<{:U('promoteList',array('by'=>'priceup','scroll'=>1))}>">价格从低到高</a> |
+            <a href="<{:U('promoteList',array('by'=>'time','scroll'=>1))}>">发布时间</a>
+        </div>
+        <!--列表的外部设为白色-->
+        <div class="produnt_box">                <!--手机列表-->
+            <div class="list_box">
+                <!-- -------------------- 单个手机块开始 ------------------------ -->
+                <foreach name="productList" item="pro">
+                    <div class="dohover product_one">
+                        <!--商品链接-->
+                        <a target="_blank" href="<{:U('ProductDetail/detail/id/'.$pro['id'])}>">
+                            <!--商品图片-->
+                            <img class="product_img" src="__PUBLIC__/Product/thumb/<{$pro.list_image}>"/>
+                        </a>
+                        <!--左侧三角-->
+                        <if condition="$pro.is_new eq 1">
+                            <div class="icon" style="position:absolute; left:0px; top:120px;">
+                                <img src="__PUBLIC__/Home/images/Product/h2.png">
+                            </div>
+                        </if>
+                            <if condition="$pro.status eq 5">
+                            <div class="icon" style="position:absolute; left:0px; top:50px; z-index:2;">
+                                <img src="__PUBLIC__/Home/images/Product/h3.png">
+                            </div>
+                        </if>
+
+                        <!--商品简介-->
+                        <div class="ui_pname" style="margin-bottom: -15px;margin-top:50px">
+                            <!--型号-->
+                            <a href="#"><span class="model"><{$pro.pro_name}></span></a>
+                        </div>
+
+                        <!--价格-->
+                        <div class="price">
+                            <p class="ui_price">
+                            <empty name="pro.rate">
+                                <span class="ui_pprice">
+                                    <b>¥</b>
+                                    <!--现在价格-->
+                                    <span><{$pro.promote_price}></span>
+                                </span>
+                            <else />
+                                <span class="ui_pprice">
+                                    <b>抢购价 ¥</b>
+                                    <php>
+                                    $price=$pro['promote_price']*($pro['rate']/100);
+                                    </php>
+                                    <span><{$price}></span>
+                                </span>
+                            </empty>
+                                <span class="ui_pprice_m">
+                                    <b>¥</b>
+                                    <!--原价-->
+                                    <del><{$pro.market_price}></del>
+                                </span>
+                            </p>
+                        <php>
+                        $now=time();
+                        </php>
+                        <if condition="$pro['start_time'] egt $now">
+                        <p><font size='6' color="#c71c60">即将开始</font>
+                        </p>
+                        <else />
+                            <p>
+                        <div class="time-item">
+                        <span class="day_show" id="day_show<{$pro.id}>">0天</span>
+                        <strong id="hour_show<{$pro.id}>">0时</strong>
+                        <strong id="minute_show<{$pro.id}>">0分</strong>
+                        <strong id="second_show<{$pro.id}>">0秒</strong>
+                        </div>
+                            </p>
+                            </if>
+                        </div>
+                        <!--遮罩-->
+                        <div class="mask" style="display: block;">
+                            <!--说明-->
+                            <p class="charator"><{$pro.pro_subname}></p>
+                            <!--商品链接-->
+                            <a href="<{:U('ProductDetail/detail/id/'.$pro['id'])}>" target="_blank" class="view">查看详情</a>
+                        </div>
+                    </div>
+                </foreach>
+                <!-----------------------单个结束------------------------>
+            </div>
+        </div>
+
+        <!--分页-->
+        <div class="page" style="width:1170px; margin:22px auto; overflow:hidden; text-align: right; height: 80px;">
+            <{$page}>
+        </div>
+    </div>
+</main>
+
+</block>
+<!--js-->
+<block name="bottomJsFile">
+    <script>
+
+        window.onload=function(){
+            var scorllindex ="<{:I('get.scroll')}>";
+            if(scorllindex == "1"){
+                $("html, body").scrollTop(0).animate({scrollTop: $(".list").offset().top});
+            }else{
+                $("html, body").scrollTop(0).animate({scrollTop: $(".logo-and-menu").offset().top});
+            }
+        };
+
+        $('.dohover').hover(function (){
+            $(this).find('div.mask').animate({'bottom':'0'}, 200);
+        }, function (){
+            $(this).find('div.mask').animate({'bottom':'-111px'}, 100);
+        });
+
+var time =<{$time}>;
+
+
+$(function(){
+    $.each(time,function(n,value){
+        var intDiff = parseInt(value);
+        timer(intDiff,n);
+    });
+});
+
+
+
+
+function timer(intDiff,id){
+    window.setInterval(function(){
+    var day=0,
+        hour=0,
+        minute=0,
+        second=0;//时间默认值
+    if(intDiff > 0){
+        day = Math.floor(intDiff / (60 * 60 * 24));
+        hour = Math.floor(intDiff / (60 * 60)) - (day * 24);
+        minute = Math.floor(intDiff / 60) - (day * 24 * 60) - (hour * 60);
+        second = Math.floor(intDiff) - (day * 24 * 60 * 60) - (hour * 60 * 60) - (minute * 60);
+    }
+    if (minute <= 9) minute = '0' + minute;
+    if (second <= 9) second = '0' + second;
+    $('#day_show'+id).html(day+"天");
+    $('#hour_show'+id).html('<s id="h"></s>'+hour+'时');
+    $('#minute_show'+id).html('<s></s>'+minute+'分');
+    $('#second_show'+id).html('<s></s>'+second+'秒');
+    intDiff--;
+    }, 1000);
+}
+
+
+    </script>
+</block>

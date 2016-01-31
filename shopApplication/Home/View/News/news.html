@@ -1,0 +1,37 @@
+=====================================================
+   新闻列表管理
+ ========================================================= -->
+<!-- 继承 公共模板 开始 -->
+<extend name="Public:public" />
+<!-- 继承 公共模板 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部CSS文件 开始 -->
+<block name="cssFile">
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/adv.css" />
+</block>
+
+<!-- 顶部CSS文件 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- ===================================================== -->
+
+<!-- 公共Body部分 开始 -->
+<block name="publicBody">
+   <div class="container-fluid">
+        <div class="span12">
+            <div name="newsdisplay"  align="center">
+        <h1><{$list.title}></h1>
+        <{$list.create_time|date="Y-m-d H-i-s",###}>  
+        <{$list.content|htmlspecialchars_decode}>
+
+</div>        
+        </div>
+    </div>
+</block>
+
+<!-- 公共Body部分 结束 -->
+
+<!-- =====================================================

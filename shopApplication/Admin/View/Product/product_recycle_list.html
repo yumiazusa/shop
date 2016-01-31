@@ -1,0 +1,175 @@
+<!-- =====================================================
+    Author: Eden
+    Date:   2015-01-12
+    Function:   公共模板文件中定义的block区域，可以在子模板中继承和覆盖
+ ========================================================= -->
+<!-- 继承 公共模板 开始 -->
+<extend name="Public:blank" />
+<!-- 继承 公共模板 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部CSS文件 开始 -->
+<block name="cssFile">
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap-responsive.min.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/uniform.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/select2.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-style.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-media.css" />
+    <link href="__PUBLIC__/Admin/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <style>
+        td.text-center {
+            text-align:center;
+        }
+        a.title-link {
+            color:#0066ff;
+        }
+    </style>
+</block>
+<!-- 顶部CSS文件 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部JS文件 开始 -->
+<block name="topJsFile">
+    
+</block>
+<!-- 顶部JS文件 结束 -->
+
+<!-- ===================================================== -->
+<!-- 头部部分 开始 -->
+<block name="publicHead">
+    <div id="breadcrumb">
+        <a href="index.html" title="返回系统主页" class="tip-bottom">
+            <i class="icon-home"></i>
+            管理首页
+            <a href="#" class="current">商品管理</a> 
+        </a>
+    </div>
+    <h1 style="margin-top:10px;">商品回收站</h1>
+</block>
+<!-- 头部部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 公共Body部分 开始 -->
+<block name="publicBody">
+    <!-- 将主体包含在 .row-fluid 内部 -->
+    <div class="container-fluid">
+        <hr style="margin:0;">
+        <div class="row-fluid">
+            <div class="span12">
+                <div>
+                    <div class="control-group">
+                        <div class="controls">
+                          <form action="" method="get" class="span6">
+                                <select name="cat_id" style="width:120px;">
+                                    <option>查找全部</option>
+                                    <foreach name="productCats" item="cats">
+                                        <option value="<{$cats.id}>" <if condition="$Think.get.cat_id eq $cats['id']">selected</if>><{$cats.cat_name}></option>
+                                    </foreach>
+                                </select>
+     
+                                <select name="is_on_sale" style="width:70px;">
+                                    <option>全部</option>
+                                    <option value="1" <if condition="$Think.get.is_on_sale eq 1">selected</if>>上架</option>
+                                    <option value="0">下架</option>
+                                </select>
+                                <input type="text" name="pro_name" style="width:150px;" placeholder="关键字(多个以逗号分开)...">
+                                <input type="submit" id="sub" class="btn btn-primary" style="margin-top:-10px;" value="提交">
+                            </form>
+                            <a href="<{:U('Product/productAdd')}>" class="btn btn-info pull-right"><i class="icon-plus"></i> 添加商品</a> 
+                        </div>
+                    </div>
+                </div>
+                <div class="widget-box">
+          <div class="widget-title"> <span class="icon">
+            <input type="checkbox" id="title-checkbox" name="title-checkbox" />
+            </span>
+            <h5>回收站商品列表</h5>
+          </div>
+          <div class="widget-content nopadding">
+          <form action="__CONTROLLER__/batchRecycle" method="post">
+            <table class="table table-bordered table-striped with-check">
+              <thead>
+                <tr>
+                  <th><i class="icon-resize-vertical"></i></th>
+                  <th style="width:5%;">编号</th>
+                  <th>商品名称</th>
+                  <th style="width:10%;">货号</th>
+                  <th style="width:10%;">售价</th>
+                  <th style="width:15%;">上架时间</th>
+                  <th style="width:8%;">库存</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody>
+              <foreach name="productsList" item="pro">
+                <tr>
+                  <td><input type="checkbox" value="<{$pro.id}>" name="ids[]" /></td>
+                  <td class="text-center"><{$pro.id}></td>
+                  <td>
+                    <a href="###" class="title-link"><{$pro.pro_name}></a>
+                    </td>
+                    <td class="text-center"><{$pro.pro_sn}></td>
+                    <td class="text-center"><{$pro.promote_price}></td>
+                  <td class="text-center"><{$pro.add_time|date='Y-m-d H:i',###}></td>
+                  <td class="text-center"><{$pro.stock_num}></td>
+                  <td class="text-center">
+                      <a href="removeProductToRecycle/id/<{$pro.id}>" title="还原" class="btn btn-success btn-mini"> <i class="icon-trash"></i> </a>
+                      <a href="deleteProduct/id/<{$pro.id}>" title="删除" class="btn btn-warning btn-mini"> <i class="icon-remove"></i> </a>
+                  </td>
+                </tr>
+                </foreach>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="8" class="">
+                     <div class="btns" style="margin-top:5px">
+                          <select name="batch_option" class="span2" style="margin-right:10px">
+                              <option value="-1">请选择</option>
+                              <option value="1">批量还原</option>
+                              <option value="2">批量删除</option>
+                          </select>
+                          <button type="submit" class="btn btn-primary" style="margin-left:10px;"><i class="icon-icon-align-justify"></i> 执行</button>
+                      </div>
+                      <div class="pagination alternate text-right span9 pull-right" style="margin-top:-20px">
+                          <{$page}>
+                      </div>
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
+            <form>
+          </div>
+        </div>
+            </div>
+        </div>
+    </div>
+</block>
+<!-- 公共Body部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- js文件模块 开始 -->
+<block name="footJsFile">
+    <script src="__PUBLIC__/Admin/js/jquery.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.ui.custom.js"></script> 
+    <script src="__PUBLIC__/Admin/js/bootstrap.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.uniform.js"></script> 
+    <script src="__PUBLIC__/Admin/js/select2.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.dataTables.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.tables.js"></script>
+    <script src="__PUBLIC__/Admin/js/muneopen.js"></script>
+</block>
+<!-- js文件模块 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 底部JS执行区域 开始 -->
+<block name="footScript">
+
+</block>
+<!-- 底部JS执行区域 结束 -->

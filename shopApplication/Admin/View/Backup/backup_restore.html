@@ -1,0 +1,147 @@
+<!-- =====================================================
+    Author: Eden
+    Date:   2015-01-12
+    Function:   公共模板文件中定义的block区域，可以在子模板中继承和覆盖
+ ========================================================= -->
+<!-- 继承 公共模板 开始 -->
+<extend name="Public:blank" />
+<!-- 继承 公共模板 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部CSS文件 开始 -->
+<block name="cssFile">
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap-responsive.min.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/uniform.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/select2.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-style.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-media.css" />
+    <link href="__PUBLIC__/Admin/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <style>
+        td.text-center {
+            text-align:center;
+        }
+        a.title-link {
+            color:#0066ff;
+        }
+    </style>
+</block>
+<!-- 顶部CSS文件 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部JS文件 开始 -->
+<block name="topJsFile">
+    
+</block>
+<!-- 顶部JS文件 结束 -->
+
+<!-- ===================================================== -->
+<!-- 头部部分 开始 -->
+<block name="publicHead">
+    <div id="breadcrumb">
+        <a href="index.html" title="返回系统主页" class="tip-bottom">
+            <i class="icon-home"></i>
+            管理首页
+            <a href="#" class="current">系统工具</a> 
+        </a>
+    </div>
+    <h1 style="margin-top:10px;">数据库备份</h1>
+</block>
+<!-- 头部部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 公共Body部分 开始 -->
+<block name="publicBody">
+    <!-- 将主体包含在 .row-fluid 内部 -->
+    <div class="container-fluid">
+        <hr style="margin:0;">
+        <div class="row-fluid">
+            <div class="span12">
+                <div style="overflow:hidden;">
+                    <div class="controls">
+                        <a href="<{:U('Backup/index')}>" class="btn btn-inverse pull-right" style="margin-top:5px;">
+                          <i class="icon-copy"></i> 
+                          备份数据表
+                          </a> 
+                    </div>
+                </div>
+                <div class="widget-box">
+          <div class="widget-title"> 
+            <span class="icon">
+              <input type="checkbox" id="title-checkbox" name="title-checkbox" />
+            </span>
+            <h5>数据库名称：<{$dbname}> ,&nbsp;&nbsp;备份文件总数：<{$counts}></h5>
+          </div>
+          <div class="widget-content nopadding">
+            <form action="__CONTROLLER__/doBatch" method="post">
+            <table class="table table-bordered table-striped with-check">
+              <thead>
+                <tr>
+                  <th><i class="icon-resize-vertical"></i></th>
+                  <th style="width:5%;">编号</th>
+                  <th>备份文件</th>
+                  <th style="width:15%;">创建时间</th>
+                  <th style="width:15%;">尺寸大小</th>
+                  <th style="width:180px;">操作</th>
+                </tr>
+              </thead>
+              <tbody>
+              <foreach name="list" item="list" key="key">
+                <tr>
+                  <td><input type="checkbox" name="file[]" value="<{$list.name|rtrim='.sql'}>" /></td>
+                  <td class="text-center"><{$key + 1}></td>
+                  <td><{$list.name}></td>
+                  <td class="text-center"><{$list.time}></td>
+                  <td class="text-center"><{$list.size}></td>
+                  <td class="text-center">
+                      <a href="__CONTROLLER__/recover/file/<{$list.name|rtrim='.sql'}>" title="编辑" class="btn btn-warning btn-mini"> <i class="icon-undo"></i> 还原</a>
+                      <a href="__CONTROLLER__/deleteBak/file/<{$list.name|rtrim='.sql'}>" title="删除" class="btn btn-danger btn-mini"> <i class="icon-trash"></i> 删除</a>
+                      <a href="__CONTROLLER__/downloadBak/file/<{$list.name|rtrim='.sql'}>" title="下载" class="btn btn-info btn-mini"> <i class="icon-download"></i> 下载</a>
+                  </td>
+                </tr>
+                </foreach>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="6">
+                      <button type="submit" name="de" class="btn btn-danger"><i class="icon-ok-circle"></i> 删除所选</button>
+                      <button type="submit" name="re" class="btn btn-warning"><i class="icon-ok-circle"></i> 批量还原</button>
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
+            </form>
+          </div>
+        </div>
+            </div>
+        </div>
+    </div>
+</block>
+<!-- 公共Body部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- js文件模块 开始 -->
+<block name="footJsFile">
+    <script src="__PUBLIC__/Admin/js/jquery.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.ui.custom.js"></script> 
+    <script src="__PUBLIC__/Admin/js/bootstrap.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.uniform.js"></script> 
+    <script src="__PUBLIC__/Admin/js/select2.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.dataTables.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.tables.js"></script>
+    <script src="__PUBLIC__/Admin/js/muneopen.js"></script>
+</block>
+<!-- js文件模块 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 底部JS执行区域 开始 -->
+<block name="footScript">
+
+</block>
+<!-- 底部JS执行区域 结束 -->

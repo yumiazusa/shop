@@ -1,0 +1,87 @@
+<extend name="Public:public" />
+<block name="publicBody">
+    <div class="main">
+      <div class="container">
+        <ul class="breadcrumb">
+            <li><a href="<{:U('Index/index')}>">首页</a></li>
+            <li><a href="<{:U('newslist')}>">资讯中心</a></li>
+            <empty name="cat_name">
+            <li class="active">全部资讯</li>
+            <else />
+            <li class="active"><{$cat_name}></li>
+           </empty>
+        </ul>
+        <!-- BEGIN SIDEBAR & CONTENT -->
+        <div class="row margin-bottom-40">
+          <!-- BEGIN CONTENT -->
+          <div class="col-md-12 col-sm-12">
+            <empty name="cat_name">
+            <h1>全部资讯</h1>
+            <else />
+            <h1><{$cat_name}></h1>
+            </empty>
+            <div class="content-page">
+              <div class="row">
+                <!-- BEGIN LEFT SIDEBAR -->
+                <div class="col-md-9 col-sm-9 blog-posts">
+                  <volist name="news" id="new">
+                  <div class="row">
+                    <div class="col-md-4 col-sm-4">
+                      <img class="img-responsive" alt="" src="__PUBLIC__/News/<{$new.thumbnail}>">
+                    </div>
+                    <div class="col-md-8 col-sm-8">
+                      <h2><a href="<{:U('newspage',array('id'=>$new['id']))}>"><{$new.title}></a></h2>
+                      <ul class="blog-info">
+                        <li><i class="fa fa-calendar"></i> <{$new.create_time|date="Y-m-d H:i",###}></li>
+                        <li><i class="fa fa-comments"></i><{$new.clicktimes}></li>
+                        <li><i class="fa fa-tags"></i> <{$new.author}></li>
+                      </ul>
+                      <p><{$new.description}></p>
+                      <a href="<{:U('newspage',array('id'=>$new['id']))}>" class="more">阅读全文<i class="icon-angle-right"></i></a>
+                    </div>
+                  </div>
+                  <hr class="blog-post-sep">
+                  </volist>
+                  <{$page}>
+                </div>
+                <!-- END LEFT SIDEBAR -->
+
+                <!-- BEGIN RIGHT SIDEBAR -->
+                <div class="col-md-3 col-sm-3 blog-sidebar">
+                  <!-- CATEGORIES START -->
+                  <h2 class="no-top-space">资讯分类</h2>
+                  <ul class="nav sidebar-categories margin-bottom-40">
+                    <volist name="newscat" id="cat">
+                    <li><a href="<{:U('newslist',array('cat'=>$cat['id']))}>"><{$cat.cat_name}> (<{$cat.amount}>)</a></li>
+                    </volist>
+                  </ul>
+                  <!-- CATEGORIES END -->
+
+                  <!-- BEGIN RECENT NEWS -->
+                  <h2>最热资讯</h2>
+                  <div class="recent-news margin-bottom-10">
+                    <volist name="newsrank" id="rank">
+                    <div class="row margin-bottom-10">
+                      <div class="col-md-3">
+                        <img class="img-responsive" alt="" src="__PUBLIC__/News/<{$rank.thumbnail}>">
+                      </div>
+                      <div class="col-md-9 recent-news-inner">
+                        <h3><a href="<{:U('newspage',array('id'=>$rank['id']))}>"><{$rank.title|msubstr=0,12,'utf-8',true}></a></h3>
+                        <p><{$rank.description|msubstr=0,15,'utf-8',true}></p>
+                      </div>
+                    </div>
+                  </volist>
+                  </div>
+                  <!-- END RECENT NEWS -->
+
+                </div>
+                <!-- END RIGHT SIDEBAR -->
+              </div>
+            </div>
+          </div>
+          <!-- END CONTENT -->
+        </div>
+        <!-- END SIDEBAR & CONTENT -->
+      </div>
+    </div>
+ </block>

@@ -1,0 +1,105 @@
+.produnt_box{
+    background: #fff;
+    width:1169px;
+    border-top:1px solid #ccc;
+    border-left:1px solid #ccc;
+    margin: 0 auto;
+    overflow:hidden;
+}
+.list_box {
+    width:1169px;
+    overflow:hidden;
+}
+.product_one{
+    height:491px;
+    width:292px;
+    float:left;
+    background: #fff;
+    border-right:1px solid #ccc;
+    border-bottom:1px solid #ccc;
+    padding: 0;
+    position:relative;
+    overflow:hidden;
+}
+.product_img{
+    margin-top: 30px;
+    height:290px;
+    width:290px;
+    display:block;
+}
+.icon {
+    position: absolute;
+    left: 0;
+    top: 50px;
+}
+
+
+
+
+.ui_pname{
+    margin-top:70px;
+    height:50px;
+    text-align: center;
+
+}
+.model{
+    height:30px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #000;
+    font-family: "Microsoft YaHei";
+}
+.info{
+    height:20px;
+    line-height: 20px;
+    color: #aaaaaa;
+    margin-top: 5px;
+    font-size:13px;
+    font-family: "Microsoft YaHei";
+}
+.price{
+    margin:0 auto;
+    height:35px;
+    text-align: center;
+
+}
+.ui_pprice b{
+    color:#d4251d;
+    font-size: 16px;
+}
+.ui_pprice span{
+    font-size: 16px;
+    color:#d4251d;
+}
+.ui_pprice_m{
+    margin-left: 15px;
+    color:#aaaaaa;
+    font-size: 15px;
+}
+.mask{
+    width: 100%;
+    background: rgba(0,172,255,.9);
+    bottom: -111px;
+    height: 111px;
+    position: absolute;
+    overflow: hidden;
+}
+.charator {
+    font-size: 14px;
+    font-family: "Microsoft Yahei";
+    color: #fff;
+    line-height: 48px;
+    height: 48px;
+    text-align: center;
+}
+.view {
+    display: block;
+    width: 125px;
+    height: 37px;
+    overflow: hidden;
+    margin: 0 auto;
+    background: url('../../../Home/images/Product/spirite.png') no-repeat;
+    line-height: 37px;
+    padding-right: 20px;
+    text-indent: -9999px;
+}

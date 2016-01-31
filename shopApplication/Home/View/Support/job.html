@@ -1,0 +1,99 @@
+<extend name="Public:public" />
+
+
+<block name="cssFile">
+        <link rel = "stylesheet" href = "__PUBLIC__/home/css/Support/joinUs.css"/>
+<style>
+small {
+    color: #151212;
+}
+</style>
+</block>
+<block name="topJsFile">
+    <script src="__PUBLIC__/home/js/jquery.min.js"></script>
+</block>
+
+<block name="publicBody">
+    <!--banner image-->
+    <div id="header_img">
+        <img src = "__PUBLIC__/Home/images/Support/list-banner.jpg"/>
+    </div>
+<main>
+        <!--加入我们-->
+        <!-- <div class="title">
+            <span></span>加入我们<small>Join Us</small>
+        </div> -->
+
+        <!--工作地点-->
+        <!-- <div class="address">
+            <span>工作地点：</span>
+        </div> -->
+
+        <!--招聘职位-->
+        <div class="title">
+            <span></span>招聘职位<small>Position</small>
+        </div>
+
+        <!--职位列表-->
+        <div class="all_list">
+            <volist name="data" id="v" key="k">
+            <a class="list" href = "#<{$k}>"><{$v.job_name}></a>
+            </volist>
+        </div>
+                    <php>
+                        $mail=C('sy_webemail');
+                    </php>
+        <div class="all_list_info">
+        <volist name="data" id="v" key="k">
+            <div class="join_detail" id="j<{$k}>">
+            <a href="#banner" class="up_top">回到顶部</a>
+            <div class="join_detail_text">
+                <h2><{$v.job_name}></h2><br />
+                招聘类型：
+                <if condition="$v['type'] eq 0">
+                全职
+                <elseif condition="$v['type'] eq 1" />
+                兼职
+                <elseif condition="$v['type'] eq 2" />
+                实习
+                </if>
+                <br />
+                招聘人数：<{$v.number}><br />
+                工作地点：<{$v.address}><br />
+                学历要求：<{$v.edu}><br />
+                工作经验：<{$v.condition}><br />
+                职位要求：<br />
+                <php>
+                $contents=explode('/',$v['content']);
+                </php>
+                <volist name="contents" id="vo" key="key">
+                <p><{$key}>、<{$vo}></p>
+                </volist>
+                <br/>
+                <p>详细个人介绍与简历投递至:<span class="red"><{$mail}></span></p>
+                <p>（邮件标题格式为"真名-应聘职位名称"）</p>
+            </div>
+        </div>
+    </volist>
+        </div>
+    </main>
+    </block>
+<block name="bottomJsFile">
+	<script>
+	    var jump = '';
+    $('.list').click(function(){
+        jump = '#j' + $(this).attr('href').slice(1);
+
+
+        $("html,body").animate({
+            scrollTop: $(jump).offset().top
+        }, 0);
+    })
+
+    $('.up_top').click(function(){
+        $("html,body").animate({
+            scrollTop: $('.all_list').offset().top
+        }, 0);
+    })
+    </script>
+</block>

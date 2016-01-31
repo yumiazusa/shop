@@ -1,0 +1,1032 @@
+<extend name="Public:public" />
+
+<block name="cssFile">
+	<link rel="stylesheet" href="__PUBLIC__/Home/css/index.css">
+</block>
+<!-- 顶部广告 开始 -->
+<block name="topAdv">
+	<style>
+		.happy-new-year{
+			position: absolute;
+			top: 0;
+			left: 50%;
+			width: 354px;
+			margin-left: -162px;
+			z-index: 1989;
+		}
+		.happy-new-year .hello2015{
+			margin-top: -40px;
+		}
+	    @media screen and (max-width: 1120px){
+		.happy-new-year .hello2015{
+			margin-top: -40px;
+		}
+		}
+		.happy-new-year .hello2015 img{
+			-webkit-transform: translate3d(0,-100%,0);
+			-moz-transform: translate3d(0,-100%,0);
+			-o-transform: translate3d(0,-100%,0);
+			transform: translate3d(0,-100%,0);
+		}
+		.happy-new-year .down img{
+			-webkit-animation: falldown .6s ease-in-out forwards;
+			-moz-animation: falldown .6s ease-in-out forwards;
+			-o-animation: falldown .6s ease-in-out forwards;
+			animation: falldown .6s ease-in-out forwards;
+		}
+		.happy-new-year .hello2015 .o{
+			margin-right: 28px;
+		}
+		.happy-new-year .down img:nth-child(1),.happy-new-year .down img:nth-child(4),.happy-new-year .down img:nth-child(7){
+			-webkit-animation-delay: 0.6s;
+			-moz-animation-delay: 0.6s;
+			-o-animation-delay: 0.6s;
+			animation-delay: 0.6s;
+		}
+		.happy-new-year .down img:nth-child(2),.happy-new-year .down img:nth-child(5),.happy-new-year .down img:nth-child(8){
+			-webkit-animation-delay: .7s;
+			-moz-animation-delay: .7s;
+			-o-animation-delay: .7s;
+			animation-delay: .7s;
+		}
+		.happy-new-year .down img:nth-child(3),.happy-new-year .down img:nth-child(6),.happy-new-year .down img:nth-child(9){
+			-webkit-animation-delay: .8s;
+			-moz-animation-delay: .8s;
+			-o-animation-delay: .8s;
+			animation-delay: .8s;
+		}
+		.happy-new-year .raise img{
+			-webkit-transform: translate3d(0,0,0);
+			-moz-transform: translate3d(0,0,0);
+			-o-transform: translate3d(0,0,0);
+			transform: translate3d(0,0,0);
+
+			-webkit-animation: raiseUp .4s ease-in-out forwards;
+			-moz-animation: raiseUp .4s ease-in-out forwards;
+			-o-animation: raiseUp .4s ease-in-out forwards;
+			animation: raiseUp .4s ease-in-out forwards;
+		}
+		.happy-new-year .raise img:nth-child(1),.happy-new-year .raise img:nth-child(4),.happy-new-year .raise img:nth-child(7){
+		 	-webkit-animation-delay: 0s;
+		 	-moz-animation-delay: 0s;
+		 	-o-animation-delay: 0s;
+		 	animation-delay: 0s;
+		}
+		.happy-new-year .raise img:nth-child(2),.happy-new-year .raise img:nth-child(5),.happy-new-year .raise img:nth-child(8){
+			-webkit-animation-delay: 0.1s;
+			-moz-animation-delay: 0.1s;
+			-o-animation-delay: 0.1s;
+			animation-delay: 0.1s;
+		}
+		.happy-new-year .raise img:nth-child(3),.happy-new-year .raise img:nth-child(6),.happy-new-year .raise img:nth-child(9){
+			-webkit-animation-delay: 0.2s;
+			-moz-animation-delay: 0.2s;
+			-o-animation-delay: 0.2s;
+			animation-delay: 0.2s;
+		}
+		
+		.bells{
+			position: absolute;
+			top: -10px;
+			left: 10px;
+			width: 304px;
+			text-align: center;
+
+		}
+		.bells img{
+			vertical-align: top;
+			margin: 0;
+			padding: 0;
+		}
+		/*解决FF下perspective引起的锯齿问题*/
+		@-moz-document url-prefix(){
+			.bells img{
+				border:1px solid rgba(220,2,32,0.2); 
+			}
+		}
+		.bells i{
+			display: inline-block;
+			border-left: 1px solid #ff0301;
+			width: 1px;
+			margin: 0;
+			padding: 0;
+		}
+		.bells i{
+			box-shadow: -12px 0 8px 0px rgba(0,0,0,0.2);
+		}
+		.bells img{
+			box-shadow: -20px 30px 10px 0px rgba(0,0,0,0.2);
+		}
+		.bells div{
+			width: 150px;
+			line-height: 0;
+			position: absolute;
+			top: 0;
+			-webkit-transform: translate3d(0,-110%,0);
+			-moz-transform: translate3d(0,-110%,0);
+			-o-transform: translate3d(0,-110%,0);
+			transform: translate3d(0,-110%,0);
+		}
+		.bells .bell{
+			width: 66px;
+			left: 60px;
+		}
+		.bells .bell i{
+			height: 118px;
+			box-shadow: none;
+		}
+		.bells .bell img{
+			box-shadow: none;
+		}
+		.bells .year{
+			left: 0;
+		}
+		.bells .year i{
+			height: 210px;
+		}
+		.bells .happy{
+			left: 97px;
+		}
+		.bells .happy i{
+			height: 305px;
+			box-shadow: none
+		}
+		.bells .hello{
+			left: 133px;
+		}
+		.bells .hello i{
+			height: 142px;
+		}
+		.bells .bell img{
+			-webkit-animation: bell 2s 1s ease-in-out infinite alternate;
+			-moz-animation: bell 2s 1s ease-in-out infinite alternate;
+			-o-animation: bell 2s 1s ease-in-out infinite alternate;
+			transform: perspective(150px) rotateY(-3deg);
+		}
+		.bells .year img{
+			margin-top: -10px;
+			-webkit-animation: year 2.5s 1s ease-in-out infinite alternate;
+			-moz-animation: year 2.5s 1s ease-in-out infinite alternate;
+			-o-animation: year 2.5s 1s ease-in-out infinite alternate;
+			transform: perspective(200px) rotateY(9deg);
+		}
+		.bells .hello img{
+			margin-top: -10px;
+			-webkit-animation: hello 3s 1.4s ease-in-out infinite alternate;
+			-moz-animation: hello 3s 1.4s ease-in-out infinite alternate;
+			-o-animation: hello 3s 1.4s ease-in-out infinite alternate;
+			transform: perspective(150px) rotateY(-9deg);
+		}
+		.bells .happy img{
+			-webkit-transform: skew(0,-4deg);
+			-moz-transform: skew(0,-4deg);
+			-o-transform: skew(0,-4deg);
+			transform: skew(0,-4deg);
+			-webkit-animation: happy 3s 1.2s ease-in-out infinite alternate;
+			-moz-animation: happy 3s 1.2s ease-in-out infinite alternate;
+			-o-animation: happy 3s 1.2s ease-in-out infinite alternate;
+			animation: happy 3s 1.2s ease-in-out infinite alternate;
+		}
+		.bells-down div{
+			-webkit-animation: falldown .6s ease-in-out forwards;
+			-moz-animation: falldown .6s ease-in-out forwards;
+			-o-animation: falldown .6s ease-in-out forwards;
+			animation: falldown .6s ease-in-out forwards;
+		}
+		.bells-down .bell{
+			-webkit-animation-delay: .6s;
+			-moz-animation-delay: .6s;
+			-o-animation-delay: .6s;
+			animation-delay: .6s
+		}
+		.bells-down .happy{
+			-webkit-animation-delay: .8s;
+			-moz-animation-delay: .8s;
+			-o-animation-delay: .8s;
+			animation-delay: .8s;
+		}
+		.bells-down .year{
+			-webkit-animation-delay: 1s;
+			-moz-animation-delay: 1s;
+			-o-animation-delay: 1s;
+			animation-delay: 1s;
+		}
+		.bells-down .hello{
+			-webkit-animation-delay: 1.1s;
+			-moz-animation-delay: 1.1s;
+			-o-animation-delay: 1.1s;
+			animation-delay: 1.1s;
+		}
+		.bells-up div{
+			-webkit-transform: translate3d(0,0,0);
+			-moz-transform: translate3d(0,0,0);
+			-o-transform: translate3d(0,0,0);
+			transform: translate3d(0,0,0);
+
+			-webkit-animation: raiseUp .4s ease-in-out forwards;
+			-moz-animation: raiseUp .4s ease-in-out forwards;
+			-o-animation: raiseUp .4s ease-in-out forwards;
+			animation: raiseUp .4s ease-in-out forwards;
+		}
+		.bells-up .bell{
+			-webkit-animation-delay: .3s;
+			-moz-animation-delay: .3s;
+			-o-animation-delay: .3s;
+			animation-delay: .3s;
+		}
+		.bells-up .happy{
+			-webkit-animation-delay: .4s;
+			-moz-animation-delay: .4s;
+			-o-animation-delay: .4s;
+			animation-delay: .4s;
+		}
+		.bells-up .year{
+			-webkit-animation-delay: 0s;
+			-moz-animation-delay: 0s;
+			-o-animation-delay: 0s;
+			animation-delay: 0s;
+		}
+		.bells-up .hello{
+			-webkit-animation-delay: .2s;
+			-moz-animation-delay: .2s;
+			-o-animation-delay: .2s;
+			animation-delay: .2s;
+		}
+		@keyframes falldown{
+			0%{
+				-webkit-transform: translate3d(0,-100%,0);
+				-moz-transform: translate3d(0,-100%,0);
+				-o-transform: translate3d(0,-100%,0);
+				transform: translate3d(0,-100%,0);
+			}
+			50%{
+				-webkit-transform: translate3d(0,10px,0);
+				-moz-transform: translate3d(0,10px,0);
+				-o-transform: translate3d(0,10px,0);
+				transform: translate3d(0,10px,0);
+			}
+			70%{
+				-webkit-transform: translate3d(0,-10px,0);
+				-moz-transform: translate3d(0,-10px,0);
+				-o-transform: translate3d(0,-10px,0);
+				transform: translate3d(0,-10px,0);
+			}
+			100%{
+				-webkit-transform: translate3d(0,0,0);
+				-moz-transform: translate3d(0,0,0);
+				-o-transform: translate3d(0,0,0);
+				transform: translate3d(0,0,0);
+			}
+		}
+		@-webkit-keyframes falldown{
+			0%{
+				-webkit-transform: translate3d(0,-100%,0);
+				-moz-transform: translate3d(0,-100%,0);
+				-o-transform: translate3d(0,-100%,0);
+				transform: translate3d(0,-100%,0);
+			}
+			50%{
+				-webkit-transform: translate3d(0,10px,0);
+				-moz-transform: translate3d(0,10px,0);
+				-o-transform: translate3d(0,10px,0);
+				transform: translate3d(0,10px,0);
+			}
+			70%{
+				-webkit-transform: translate3d(0,-10px,0);
+				-moz-transform: translate3d(0,-10px,0);
+				-o-transform: translate3d(0,-10px,0);
+				transform: translate3d(0,-10px,0);
+			}
+			100%{
+				-webkit-transform: translate3d(0,0,0);
+				-moz-transform: translate3d(0,0,0);
+				-o-transform: translate3d(0,0,0);
+				transform: translate3d(0,0,0);
+			}
+		}
+		@-moz-keyframes falldown{
+			0%{
+				-webkit-transform: translate3d(0,-100%,0);
+				-moz-transform: translate3d(0,-100%,0);
+				-o-transform: translate3d(0,-100%,0);
+				transform: translate3d(0,-100%,0);
+			}
+			50%{
+				-webkit-transform: translate3d(0,10px,0);
+				-moz-transform: translate3d(0,10px,0);
+				-o-transform: translate3d(0,10px,0);
+				transform: translate3d(0,10px,0);
+			}
+			70%{
+				-webkit-transform: translate3d(0,-10px,0);
+				-moz-transform: translate3d(0,-10px,0);
+				-o-transform: translate3d(0,-10px,0);
+				transform: translate3d(0,-10px,0);
+			}
+			100%{
+				-webkit-transform: translate3d(0,0,0);
+				-moz-transform: translate3d(0,0,0);
+				-o-transform: translate3d(0,0,0);
+				transform: translate3d(0,0,0);
+			}
+		}
+		@-o-keyframes falldown{
+			0%{
+				-webkit-transform: translate3d(0,-100%,0);
+				-moz-transform: translate3d(0,-100%,0);
+				-o-transform: translate3d(0,-100%,0);
+				transform: translate3d(0,-100%,0);
+			}
+			50%{
+				-webkit-transform: translate3d(0,10px,0);
+				-moz-transform: translate3d(0,10px,0);
+				-o-transform: translate3d(0,10px,0);
+				transform: translate3d(0,10px,0);
+			}
+			70%{
+				-webkit-transform: translate3d(0,-10px,0);
+				-moz-transform: translate3d(0,-10px,0);
+				-o-transform: translate3d(0,-10px,0);
+				transform: translate3d(0,-10px,0);
+			}
+			100%{
+				-webkit-transform: translate3d(0,0,0);
+				-moz-transform: translate3d(0,0,0);
+				-o-transform: translate3d(0,0,0);
+				transform: translate3d(0,0,0);
+			}
+		}
+		@keyframes raiseUp{
+			0%{
+				-webkit-transform: translate3d(0,0,0);
+				-moz-transform: translate3d(0,0,0);
+				-o-transform: translate3d(0,0,0);
+				transform: translate3d(0,0,0);
+			}
+			20%{
+				-webkit-transform: translate3d(0,10px,0);
+				-moz-transform: translate3d(0,10px,0);
+				-o-transform: translate3d(0,10px,0);
+				transform: translate3d(0,10px,0);
+			}
+			100%{
+				-webkit-transform: translate3d(0,-500px,0);/*百分比不可以，太纠结了*/
+				-moz-transform: translate3d(0,-500px,0);
+				-o-transform: translate3d(0,-500px,0);
+				transform: translate3d(0,-500px,0);
+			}
+		}
+		@-webkit-keyframes raiseUp{
+			0%{
+				-webkit-transform: translate3d(0,0,0);
+				-moz-transform: translate3d(0,0,0);
+				-o-transform: translate3d(0,0,0);
+				transform: translate3d(0,0,0);
+			}
+			20%{
+				-webkit-transform: translate3d(0,10px,0);
+				-moz-transform: translate3d(0,10px,0);
+				-o-transform: translate3d(0,10px,0);
+				transform: translate3d(0,10px,0);
+			}
+			100%{
+				-webkit-transform: translate3d(0,-120%,0);
+				-moz-transform: translate3d(0,-120%,0);
+				-o-transform: translate3d(0,-120%,0);
+				transform: translate3d(0,-120%,0);
+			}
+		}
+		@-moz-keyframes raiseUp{
+			0%{
+				-webkit-transform: translate3d(0,0,0);
+				-moz-transform: translate3d(0,0,0);
+				-o-transform: translate3d(0,0,0);
+				transform: translate3d(0,0,0);
+			}
+			20%{
+				-webkit-transform: translate3d(0,10px,0);
+				-moz-transform: translate3d(0,10px,0);
+				-o-transform: translate3d(0,10px,0);
+				transform: translate3d(0,10px,0);
+			}
+			100%{
+				-webkit-transform: translate3d(0,-120%,0);
+				-moz-transform: translate3d(0,-120%,0);
+				-o-transform: translate3d(0,-120%,0);
+				transform: translate3d(0,-120%,0);
+			}
+		}
+		@-o-keyframes raiseUp{
+			0%{
+				-webkit-transform: translate3d(0,0,0);
+				-moz-transform: translate3d(0,0,0);
+				-o-transform: translate3d(0,0,0);
+				transform: translate3d(0,0,0);
+			}
+			20%{
+				-webkit-transform: translate3d(0,10px,0);
+				-moz-transform: translate3d(0,10px,0);
+				-o-transform: translate3d(0,10px,0);
+				transform: translate3d(0,10px,0);
+			}
+			100%{
+				-webkit-transform: translate3d(0,-120%,0);
+				-moz-transform: translate3d(0,-120%,0);
+				-o-transform: translate3d(0,-120%,0);
+				transform: translate3d(0,-120%,0);
+			}
+		}
+		@keyframes year{
+			to {
+				-webkit-transform: perspective(200px) rotateY(-9deg);
+				-moz-transform: perspective(200px) rotateY(-9deg);
+				-o-transform: perspective(200px) rotateY(-9deg);
+				transform: perspective(200px) rotateY(-9deg);
+			}
+		}
+		@-webkit-keyframes year{
+			to {
+				-webkit-transform: perspective(200px) rotateY(-9deg);
+				-moz-transform: perspective(200px) rotateY(-9deg);
+				-o-transform: perspective(200px) rotateY(-9deg);
+				transform: perspective(200px) rotateY(-9deg);
+			}
+		}
+		@-moz-keyframes year{
+			to {
+				-webkit-transform: perspective(200px) rotateY(-9deg);
+				-moz-transform: perspective(200px) rotateY(-9deg);
+				-o-transform: perspective(200px) rotateY(-9deg);
+				transform: perspective(200px) rotateY(-9deg);
+			}
+		}
+		@-o-keyframes year{
+			to {
+				-webkit-transform: perspective(200px) rotateY(-9deg);
+				-moz-transform: perspective(200px) rotateY(-9deg);
+				-o-transform: perspective(200px) rotateY(-9deg);
+				transform: perspective(200px) rotateY(-9deg);
+			}
+		}
+		@keyframes hello{
+			to {
+				-webkit-transform: perspective(150px) rotateY(2deg);
+				-moz-transform: perspective(150px) rotateY(2deg);
+				-o-transform: perspective(150px) rotateY(2deg);
+				transform: perspective(150px) rotateY(2deg);
+			}
+		}
+		@-webkit-keyframes hello{
+			to {
+				-webkit-transform: perspective(150px) rotateY(2deg);
+				-moz-transform: perspective(150px) rotateY(2deg);
+				-o-transform: perspective(150px) rotateY(2deg);
+				transform: perspective(150px) rotateY(2deg);
+			}
+		}
+		@-moz-keyframes hello{
+			to {
+				-webkit-transform: perspective(150px) rotateY(2deg);
+				-moz-transform: perspective(150px) rotateY(2deg);
+				-o-transform: perspective(150px) rotateY(2deg);
+				transform: perspective(150px) rotateY(2deg);
+			}
+		}
+		@-o-keyframes hello{
+			to {
+				-webkit-transform: perspective(150px) rotateY(2deg);
+				-moz-transform: perspective(150px) rotateY(2deg);
+				-o-transform: perspective(150px) rotateY(2deg);
+				transform: perspective(150px) rotateY(2deg);
+			}
+		}
+		@keyframes happy{
+			to {
+				-webkit-transform: skew(0,0deg) scaleX(.95);
+				-moz-transform: skew(0,0deg) scaleX(.95);
+				-o-transform: skew(0,0deg) scaleX(.95);
+				transform: skew(0,0deg) scaleX(.95);
+			}
+		}
+		@-webkit-keyframes happy{
+			to {
+				-webkit-transform: skew(0,0deg) scaleX(.95);
+				-moz-transform: skew(0,0deg) scaleX(.95);
+				-o-transform: skew(0,0deg) scaleX(.95);
+				transform: skew(0,0deg) scaleX(.95);
+			}
+		}
+		@-moz-keyframes happy{
+			to {
+				-webkit-transform: skew(0,0deg) scaleX(.95);
+				-moz-transform: skew(0,0deg) scaleX(.95);
+				-o-transform: skew(0,0deg) scaleX(.95);
+				transform: skew(0,0deg) scaleX(.95);
+			}
+		}
+		@-o-keyframes happy{
+			to {
+				-webkit-transform: skew(0,0deg) scaleX(.95);
+				-moz-transform: skew(0,0deg) scaleX(.95);
+				-o-transform: skew(0,0deg) scaleX(.95);
+				transform: skew(0,0deg) scaleX(.95);
+			}
+		}
+		@keyframes bell{
+			to {
+				-webkit-transform: perspective(150px) rotateY(15deg);
+				-moz-transform: perspective(150px) rotateY(15deg);
+				-o-transform: perspective(150px) rotateY(15deg);
+				transform: perspective(150px) rotateY(15deg);
+			}
+		}
+		@-webkit-keyframes bell{
+			to {
+				-webkit-transform: perspective(150px) rotateY(15deg);
+				-moz-transform: perspective(150px) rotateY(15deg);
+				-o-transform: perspective(150px) rotateY(15deg);
+				transform: perspective(150px) rotateY(15deg);
+			}
+		}
+		@-moz-keyframes bell{
+			to {
+				-webkit-transform: perspective(150px) rotateY(15deg);
+				-moz-transform: perspective(150px) rotateY(15deg);
+				-o-transform: perspective(150px) rotateY(15deg);
+				transform: perspective(150px) rotateY(15deg);
+			}
+		}
+		@-o-keyframes bell{
+			to {
+				-webkit-transform: perspective(150px) rotateY(15deg);
+				-moz-transform: perspective(150px) rotateY(15deg);
+				-o-transform: perspective(150px) rotateY(15deg);
+				transform: perspective(150px) rotateY(15deg);
+			}
+		}
+	</style>
+	<div class="happy-new-year">
+		<div class="hello2015 down">
+			<img src="__PUBLIC__/Home/images/h.png" height="82" width="28" alt="" class="h">
+			<img src="__PUBLIC__/Home/images/e.png" height="82" width="28" alt="" class="e">
+			<img src="__PUBLIC__/Home/images/l.png" height="82" width="28" alt="" class="l">
+			<img src="__PUBLIC__/Home/images/l-2.png" height="82" width="28" alt="" class="l-2">
+			<img src="__PUBLIC__/Home/images/o.png" height="82" width="28" alt="" class="o">
+
+
+			<img src="__PUBLIC__/Home/images/02.png" height="82" width="28" alt="" class="new-2">
+			<img src="__PUBLIC__/Home/images/00.png" height="82" width="28" alt="" class="new-0">
+			<img src="__PUBLIC__/Home/images/01.png" height="82" width="28" alt="" class="new-1">
+			<img src="__PUBLIC__/Home/images/05.png" height="82" width="28" alt="" class="new-5">
+		</div>
+		<!--[if lte IE 9]>
+			<div class="bells" style="display:none">
+		<![endif]-->
+		<!--[if gt IE 9]>
+			<div class="bells">
+		<![endif]-->
+		<!--[if !IE]>--> <div class="bells bells-up"> <!--<![endif]-->
+			<div class="bell">
+				<i class="line"></i>
+				<img src="__PUBLIC__/Home/images/bells.png" height="66" width="66" alt="">
+			</div>
+			<div class="year">
+				<i class="line"></i>
+				<img src="__PUBLIC__/Home/images/2015.png" height="150" width="150" alt="">
+			</div>
+			<div class="happy">
+				<i class="line"></i>
+				<img src="__PUBLIC__/Home/images/happynewyear.png" height="150" width="150" alt="">
+			</div>
+			<div class="hello">
+				<i class="line"></i>
+				<img src="__PUBLIC__/Home/images/hello.png" height="150" width="150" alt="">
+			</div>
+		</div>
+	</div>
+	<script>
+		(function($){
+		    $.fn.hoverDelay = function(options){
+		        var defaults = {
+		            hoverDuring: 200,
+		            outDuring: 200,
+		            hoverEvent: function(){
+		                $.noop();
+		            },
+		            outEvent: function(){
+		                $.noop();    
+		            }
+		        };
+		        var sets = $.extend(defaults,options || {});
+		        var hoverTimer, outTimer;
+		        return $(this).each(function(){
+		            $(this).hover(function(){
+		                clearTimeout(outTimer);
+		                hoverTimer = setTimeout(sets.hoverEvent, sets.hoverDuring);
+		            },function(){
+		                clearTimeout(hoverTimer);
+		                outTimer = setTimeout(sets.outEvent, sets.outDuring);
+		            });    
+		        });
+		    }      
+		})(jQuery);
+
+		$(function(){
+			var inTime = 0;	//hover in时停留的时间
+		    $('.bells').addClass('bells-down');
+		    setTimeout(function(){
+		    	$('.bells').addClass('bells-up');
+		    },4000);
+		    setTimeout(function(){
+		    	$('.hello2015').addClass('down');
+		    	$('.happy-new-year').hoverDelay({
+		    		hoverDuring: 200,
+		    		outDuring: 200,
+		    		hoverEvent: function(){
+		    			inTime = 0;
+		    			setInterval(function(){
+		    				inTime += 500;
+		    			},500)
+						$('.hello2015').removeClass('down').addClass('raise');
+						$('.bells').removeClass('bells-up').addClass('bells-down');
+		    		},
+		    		outEvent: function(){
+		    			if(inTime > 3000){
+							$('.hello2015').addClass('down').removeClass('raise');
+							$('.bells').removeClass('bells-down').addClass('bells-up');
+						}else{
+							setTimeout(function(){
+								$('.hello2015').addClass('down').removeClass('raise');
+								$('.bells').removeClass('bells-down').addClass('bells-up');	
+							},3000 - inTime)
+						}
+		    		}
+		    	})
+		    },4500)
+		})
+	</script>
+</block>
+<!-- 顶部广告 结束 -->
+	
+<!-- 主体部分 开始 -->
+<block name="publicBody">
+	<php>
+		$ad2=C('ad2');
+		$ad3=C('ad3');
+		$ad4=C('ad4');
+	</php>
+	<!-- BIG BANNER START -->
+	<div class="index-banner">
+		<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+		  <!-- Indicators -->
+			<ol class="carousel-indicators">
+		    	<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+		    	<li data-target="#carousel-example-generic" data-slide-to="1"></li>
+		    	<li data-target="#carousel-example-generic" data-slide-to="2"></li>
+		  	</ol>
+
+		  	<!-- Wrapper for slides -->
+		  	<div class="carousel-inner" role="listbox">
+		  		<foreach name="bannerRes" item="banners">
+		    	<div class="item <if condition="$key eq 0">active</if>">
+		    		<if condition="$banners['is_connect'] eq 1">
+		    			<a href="<{:U('ProductDetail/detail',array('id'=>$banners['product_id']))}>" target="_blank">
+		    			</if>
+		      		<img src="__PUBLIC__/Adv/<{$banners.thumbnail}>" alt="..." width="100%">
+		      		<div class="carousel-caption">
+		        		<H1></H1>
+		      		</div>
+		      		<if condition="$banners['is_connect'] eq 1">
+		    			</a>
+		    			</if>
+		    	</div>
+		    	</foreach>
+		  	</div>
+		  	<!-- Controls -->
+		  	<a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+		    	<span class="glyphicon glyphicon-chevron-left"></span>
+		    	<span class="sr-only">Previous</span>
+		  	</a>
+		  	<a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+		    	<span class="glyphicon glyphicon-chevron-right"></span>
+		    	<span class="sr-only">Next</span>
+		  	</a>
+		</div>
+	</div>
+	<!-- BIG BANNER END -->
+
+	<div class="container main">
+		<!-- 手机精选 开始 -->
+		<notempty name="ad2">
+		<div class="row mobile">
+			<h1 class="text-center title-index-pro">首页广告第二组 /<small>SECOND GROUP</small>/</h1>
+			<table class="table table-bordered">
+				<tbody>
+					<tr>
+						<td rowspan="2" class="mobile-image-td">
+							<a <eq name="mobileLeft['is_connect']" value="1">href="<{:U('ProductDetail/detail',array('id'=>$mobileLeft['product_id']))}>"<else />href="#"</eq>
+							><img src="__PUBLIC__/Adv/<{$mobileLeft.thumbnail}>" alt="" /></a>
+							<div class="mobile-desc mobile-desc-01" flag-shot="0">
+								<h3><a <eq name="mobileLeft['is_connect']" value="1">href="<{:U('ProductDetail/detail',array('id'=>$mobileLeft['product_id']))}>"<else />href="#"</eq>><{$mobileLeft.adv_name}></a></h3>
+								<p class="mobile-recom-desc"><{$mobileLeft.adv_desc}></p>
+								<p class="mobile-recom-price">
+									<if condition="$mobileLeft['market_price'] gt $mobileLeft['promote_price']">
+										<strong>￥<{$mobileLeft.promote_price}></strong>&nbsp;
+										<del>￥<{$mobileLeft.market_price}></del>
+									<else/>
+										<strong>￥<{$mobileLeft.market_price}></strong>
+									</if>
+								</p>
+								<ul class="list-unstyled">
+									<foreach name="mobileLeft.album" item="album">
+										<li><img src="<{$album}>" alt="<{$mobileLeft.adv_name}>"></li>
+									</foreach>
+								</ul>
+							</div>
+						</td>
+						<foreach name="mobileRightTop2" item="mT2">
+							<td class="mobile-image-td">
+								<a <eq name="mT2['is_connect']" value="1">href="<{:U('ProductDetail/detail',array('id'=>$mT2['product_id']))}>"<else />href="#"</eq>><img src="__PUBLIC__/Adv/<{$mT2.thumbnail}>" alt=""></a>
+								<div class="mobile-desc mobile-desc-02" flag-shot="1">
+									<h3><a <eq name="mT2['is_connect']" value="1">href="<{:U('ProductDetail/detail',array('id'=>$mT2['product_id']))}>"<else />href="#"</eq>><{$mT2.adv_name}></a></h3>
+									<p class="mobile-recom-desc"><{$mT2.adv_desc}></p>
+									<p class="mobile-recom-price">
+										<if condition="$mT2['market_price'] gt $mT2['promote_price']">
+											<strong>￥<{$mT2.promote_price}></strong>&nbsp;
+											<del>￥<{$mT2.market_price}></del>
+										<else/>
+											<strong>￥<{$mT2.market_price}></strong>
+										</if>
+									</p>
+									<ul class="list-unstyled">
+										<foreach name="mT2.album" item="album">
+											<li><img src="<{$album}>" alt="<{$mT2.adv_name}>"></li>
+										</foreach>
+									</ul>
+								</div>
+							</td>
+						</foreach>
+					</tr>
+					<tr>
+						<td class="mobile-image-td" colspan="2">
+							<a <eq name="mobileRightBtm['is_connect']" value="1">href="<{:U('ProductDetail/detail',array('id'=>$mobileRightBtm['product_id']))}>"<else />href="#"</eq>><img src="__PUBLIC__/Adv/<{$mobileRightBtm['thumbnail']}>" alt=""></a>
+							<div class="mobile-desc mobile-desc-03" flag-shot="1">
+								<h3><a <eq name="mobileRightBtm['is_connect']" value="1">href="<{:U('ProductDetail/detail',array('id'=>$mobileRightBtm['product_id']))}>"<else />href="#"</eq>><{$mobileRightBtm['adv_name']}></a></h3>
+								<p class="mobile-recom-desc"><{$mobileRightBtm['adv_desc']}></p>
+								<p class="mobile-recom-price">
+									<if condition="$mobileRightBtm['market_price'] gt $mobileRightBtm['promote_price']">
+										<strong>￥<{$mobileRightBtm.promote_price}></strong>&nbsp;
+										<del>￥<{$mobileRightBtm.market_price}></del>
+									<else/>
+										<strong>￥<{$mobileRightBtm.market_price}></strong>
+									</if>
+								</p>
+								<ul class="list-unstyled">
+									<foreach name="mobileRightBtm.album" item="album">
+										<li><img src="<{$album}>" alt=""></li>
+									</foreach>
+								</ul>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</notempty>
+		<!-- 手机精选 结束 -->
+		<!-- 穿戴产品 开始 -->
+		<notempty name="ad3">
+		<div class="row wearable">
+			<h1 class="text-center title-index-pro">首页广告第三组 /<small>THIRD GROUP</small>/</h1>
+			<div class="col-md-5 wearable-image wearable-image-big">
+				<a <eq name="tabletLeft['is_connect']" value="1">href="<{:U('ProductDetail/detail',array('id'=>$tabletLeft['product_id']))}>"<else />href="#"</eq>><img src="__PUBLIC__/Adv/<{$tabletLeft.thumbnail}>" alt=""></a>
+			</div>
+			<div class="col-md-7">
+				<div class="row">
+					<foreach name="tabletRight" item="tR">
+					<div class="col-md-6 wearable-image wearable-image-small">
+						<div><a <eq name="tR['is_connect']" value="1">href="<{:U('ProductDetail/detail',array('id'=>$tR['product_id']))}>"<else />href="#"</eq>><img src="__PUBLIC__/Adv/<{$tR.thumbnail}>" alt=""></a></div>
+					</div>	
+					</foreach>
+				</div>
+			</div>
+		</div>
+	    </notempty>
+		<!-- 穿戴产品 结束 -->
+		<!-- 平板电脑 开始 -->
+		<notempty name="ad4">
+		<div class="row tablet">
+			<h1 class="text-center title-index-pro">首页广告第四组 /<small>FOURTH GROUP</small>/</h1>
+			<table class="table table-bordered">
+				<tbody>
+					<tr>
+						<td>
+							<div class="tablet-product tablet-product-shot">
+								<a <eq name="wS[0]['is_connect']" value="1">href="<{:U('ProductDetail/detail',array('id'=>$wS[0]['product_id']))}>"<else />href="#"</eq>><img src="__PUBLIC__/Adv/<{$wS[0]['thumbnail']}>" alt=""></a>
+								<div class="tablet-line-nav"><span></span></div>
+								<div class="tablet-desc">
+									<div class="tablet-info-left text-left">
+										<h3><{$wS[0]['pro_name']}></h3>
+										<if condition="$wS[0]['market_price'] gt $wS[0]['promote_price']">
+											<strong>￥<{$wS[0]['promote_price']}></strong>&nbsp;
+											<del>￥<{$wS[0]['market_price']}></del>
+										<else/>
+											<strong>￥<{$wS[0]['market_price']}></strong>
+										</if>
+									</div>
+									<div class="tablet-info-right"></div>
+								</div>
+							</div>
+						</td>
+						<td colspan="2">
+							<div class="tablet-product tablet-product-long">
+								<a <eq name="wW[1]['is_connect']" value="1">href="<{:U('ProductDetail/detail',array('id'=>$wW[1]['product_id']))}>"<else />href="#"</eq>><img src="__PUBLIC__/Adv/<{$wW[1]['thumbnail']}>" alt=""></a>
+								<div class="tablet-line-nav"><span></span></div>
+								<div class="tablet-desc">
+									<div class="tablet-info-left text-left">
+										<h3><{$wW[1]['pro_name']}></h3>
+										<if condition="$wW[1]['market_price'] gt $wW[1]['promote_price']">
+											<strong>￥<{$wW[1]['promote_price']}></strong>&nbsp;
+											<del>￥<{$wW[1]['market_price']}></del>
+										<else/>
+											<strong>￥<{$wW[1]['market_price']}></strong>
+										</if>
+									</div>
+									<div class="tablet-info-right"></div>
+								</div>
+							</div>
+						</td>
+						<td rowspan="2">
+							<div class="tablet-product tablet-product-shot">
+								<a <eq name="wH[0]['is_connect']" value="1">href="<{:U('ProductDetail/detail',array('id'=>$wH[0]['product_id']))}>"<else />href="#"</eq>><img src="__PUBLIC__/Adv/<{$wH[0]['thumbnail']}>" alt=""></a>
+								<div class="tablet-line-nav"><span></span></div>
+								<div class="tablet-desc">
+									<div class="tablet-info-left text-left">
+										<h3><{$wH[0]['pro_name']}></h3>
+										<if condition="$wH[0]['market_price'] gt $wH[0]['promote_price']">
+											<strong>￥<{$wH[0]['promote_price']}></strong>&nbsp;
+											<del>￥<{$wH[0]['market_price']}></del>
+										<else/>
+											<strong>￥<{$wH[0]['market_price']}></strong>
+										</if>
+									</div>
+									<div class="tablet-info-right"></div>
+								</div>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td rowspan="2">
+							<div class="tablet-product tablet-product-shot">
+								<a <eq name="wH[1]['is_connect']" value="1">href="<{:U('ProductDetail/detail',array('id'=>$wH[1]['product_id']))}>"<else />href="#"</eq>><img src="__PUBLIC__/Adv/<{$wH[1]['thumbnail']}>" alt=""></a>
+								<div class="tablet-line-nav"><span></span></div>
+								<div class="tablet-desc">
+									<div class="tablet-info-left text-left">
+										<h3><{$wH[1]['pro_name']}></h3>
+										<if condition="$wH[1]['market_price'] gt $wH[1]['promote_price']">
+											<strong>￥<{$wH[1]['promote_price']}></strong>&nbsp;
+											<del>￥<{$wH[1]['market_price']}></del>
+										<else/>
+											<strong>￥<{$wH[1]['market_price']}></strong>
+										</if>
+									</div>
+									<div class="tablet-info-right"></div>
+								</div>
+							</div>
+						</td>
+						<td>
+							<div class="tablet-product tablet-product-shot">
+								<a <eq name="wS[1]['is_connect']" value="1">href="<{:U('ProductDetail/detail',array('id'=>$wS[1]['product_id']))}>"<else />href="#"</eq>><img src="__PUBLIC__/Adv/<{$wS[1]['thumbnail']}>" alt=""></a>
+								<div class="tablet-line-nav"><span></span></div>
+								<div class="tablet-desc">
+									<div class="tablet-info-left text-left">
+										<h3><{$wS[1]['pro_name']}></h3>
+										<if condition="$wS[1]['market_price'] gt $wS[1]['promote_price']">
+											<strong>￥<{$wS[1]['promote_price']}></strong>&nbsp;
+											<del>￥<{$wS[1]['market_price']}></del>
+										<else/>
+											<strong>￥<{$wS[1]['market_price']}></strong>
+										</if>
+									</div>
+									<div class="tablet-info-right"></div>
+								</div>
+							</div>
+						</td>
+						<td>
+							<div class="tablet-product tablet-product-shot">
+								<a <eq name="wS[2]['is_connect']" value="1">href="<{:U('ProductDetail/detail',array('id'=>$wS[2]['product_id']))}>"<else />href="#"</eq>><img src="__PUBLIC__/Adv/<{$wS[2]['thumbnail']}>" alt=""></a>
+								<div class="tablet-line-nav"><span></span></div>
+								<div class="tablet-desc">
+									<div class="tablet-info-left text-left">
+										<h3><{$wS[2]['pro_name']}></h3>
+										<if condition="$wS[2]['market_price'] gt $wS[2]['promote_price']">
+											<strong>￥<{$wS[2]['promote_price']}></strong>&nbsp;
+											<del>￥<{$wS[2]['market_price']}></del>
+										<else/>
+											<strong>￥<{$wS[2]['market_price']}></strong>
+										</if>
+									</div>
+									<div class="tablet-info-right"></div>
+								</div>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<div class="tablet-product tablet-product-long">
+								<a <eq name="wW[0]['is_connect']" value="1">href="<{:U('ProductDetail/detail',array('id'=>$wW[0]['product_id']))}>"<else />href="#"</eq>><img src="__PUBLIC__/Adv/<{$wW[0]['thumbnail']}>" alt=""></a>
+								<div class="tablet-line-nav"><span></span></div>
+								<div class="tablet-desc">
+									<div class="tablet-info-left text-left">
+										<h3><{$wW[0]['pro_name']}></h3>
+										<if condition="$wW[0]['market_price'] gt $wW[0]['promote_price']">
+											<strong>￥<{$wW[0]['promote_price']}></strong>&nbsp;
+											<del>￥<{$wW[0]['market_price']}></del>
+										<else/>
+											<strong>￥<{$wW[0]['market_price']}></strong>
+										</if>
+									</div>
+									<div class="tablet-info-right"></div>
+								</div>
+							</div>
+						</td>
+						<td>
+							<div class="tablet-product tablet-product-shot">
+								<a <eq name="wS[3]['is_connect']" value="1">href="<{:U('ProductDetail/detail',array('id'=>$wS[3]['product_id']))}>"<else />href="#"</eq>><img src="__PUBLIC__/Adv/<{$wS[3]['thumbnail']}>" alt=""></a>
+								<div class="tablet-line-nav"><span></span></div>
+								<div class="tablet-desc">
+									<div class="tablet-info-left text-left">
+										<h3><{$wS[3]['pro_name']}></h3>
+										<if condition="$wS[3]['market_price'] gt $wS[3]['promote_price']">
+											<strong>￥<{$wS[3]['promote_price']}></strong>&nbsp;
+											<del>￥<{$wS[3]['market_price']}></del>
+										<else/>
+											<strong>￥<{$wS[3]['market_price']}></strong>
+										</if>
+									</div>
+									<div class="tablet-info-right"></div>
+								</div>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	    </notempty>
+		<!-- 平板电脑 结束 -->
+		<!-- 配件 开始 -->
+<!-- 		<div class="row accessories">
+			<h1 class="text-center title-index-pro">配件 /<small>ACCESSORIES</small>/</h1>
+			<table class="table table-bordered">
+				<tbody>
+					<tr>
+						<td colspan="2" style="padding:0;">
+							<a href="<{:U('ProductDetail/detail/id/' . $aB['product_id'])}>">
+								<img class="access-image-big" src="__PUBLIC__/Adv/<{$aB.thumbnail}>" alt="">
+							</a>
+						</td>
+						<td class="access-td" style="padding:0">
+							<a href="<{:U('ProductDetail/detail/id/' . $aD[0]['product_id'])}>">
+								<img class="access-image-middle" src="__PUBLIC__/Adv/<{$aD[0]['thumbnail']}>" alt="">
+							</a>
+						</td>
+						<td class="access-td band" rowspan="2" style="width:290px; padding:0">
+							<img class="access-image-middle" src="__PUBLIC__/Home/images/ico-03.gif" alt="">
+							<ul class="access-list">
+								<foreach name="aS" item="aS">
+								<li>
+									<a href="<{:U('ProductDetail/detail/id/' . $aS['id'])}>" class="access-hot" key="key">
+										<img src="__PUBLIC__/Product/thumb/<{$aS.list_image}>" alt="">
+										<b class="color-f50"><{$key + 1}></b>
+										<span><{$aS.pro_name|mb_substr=0, 12, utf8}>..</span>
+										<em>￥<{$aS['market_price']}>元</em>
+									</a>
+								</li>
+								</foreach>
+							</ul>
+						</td>
+					</tr>
+					<tr>
+						<td class="access-td">
+							<a href="<{:U('ProductDetail/detail/id/' . $aD[1]['product_id'])}>">
+								<img class="access-image-middle" src="__PUBLIC__/Adv/<{$aD[1]['thumbnail']}>" alt="">
+							</a>
+						</td>
+						<td class="access-td">
+							<a href="<{:U('ProductDetail/detail/id/' . $aD[2]['product_id'])}>">
+								<img class="access-image-middle" src="__PUBLIC__/Adv/<{$aD[2]['thumbnail']}>" alt="">
+							</a>
+						</td>
+						<td class="access-td">
+							<a href="<{:U('ProductDetail/detail/id/' . $aD[3]['product_id'])}>">
+								<img class="access-image-middle" src="__PUBLIC__/Adv/<{$aD[3]['thumbnail']}>" alt="">
+							</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div> -->
+		<!-- 配件 结束 -->
+	</div>
+</block>
+<!-- 主体部分结束 -->

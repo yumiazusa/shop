@@ -1,0 +1,187 @@
+<extend name="Public:member1"/>
+<block name="cssFile">
+	<link href="__PUBLIC__/Home/css/member.css" rel="stylesheet" type="text/css">
+	<link href="__PUBLIC__/Home/css/order.css" rel="stylesheet" type="text/css">
+	<link href="__PUBLIC__/Home/css/pubmember.css" rel="stylesheet" type="text/css">
+</block>
+<block name="topJsFile">
+	 <script src="__PUBLIC__/Home/js/member.js"></script>
+</block>
+<block name="publicBody"> 
+ 	<div class="member-zt-right display-inline-block">
+	 		<!--更换部分开始-->
+	 		<div id="hasOrderCon" class="radius_5 content_box" style="display: block;margin-top:20px;">
+
+                 <div id="orderCon" style="width:800px;margin-left:31px;"> 
+                    <dl class="order_dl bor_b"> 
+                       <dd>
+                          <span class="color_gray2">订单状态：</span>
+                          <span class="color_red"><{$orderlist['order_status']}></span>
+                       </dd>
+                    </dl>
+                    <dl class="order_dl bor_b">  
+                       <dd>
+                          <span class="color_gray2">订单编号：</span>
+                          <span class="color_black"><{$orderlist['order_sn']}></span>
+                       </dd>
+                       <dd> 
+                          <span class="color_gray2">下单时间：</span>
+                          <span class="color_black"><{$orderlist['order_date']|date="Y-m-d H:i:s",###}></span>
+                       </dd>
+                       <dd>
+                          <span class="color_gray2">订单金额：</span>
+                          <span class="color_black">¥<{$orderlist['deail_price']}></span>
+                       </dd>
+                    </dl>
+                    <dl class="order_dl bor_b"> 
+                       <dd>
+                          <span class="color_gray2">收货地址：</span>
+                          <span class="color_black"><{$orderlist['address']}></span>
+                       </dd>
+                       <dd>
+                          <span class="color_gray2">支付方式：</span>
+                          <span class="color_black"><{$orderlist['pay_type']}></span>
+                       </dd>  
+                       <dd>
+                          <span class="color_gray2">配送方式：</span>
+                          <span class="color_black">物流配送 </span>
+                       </dd>
+                      
+                    </dl>
+                    <h2 class="commoditylist_t">商品清单</h2>        
+                    <div class="radius_5 order_table overf">           
+                       <table style="font-size:12px;">   
+                             <thead>
+                                 <tr class="order_title view-order"> 
+                                     <th width="275">商品名称</th>
+                                     <th width="120">价格</th> 
+                                     <th width="120">数量</th> 
+                                     <th>小计</th>
+                                 </tr>
+                              </thead>
+                              <tbody> 
+                                <tr style="padding-bottom:3px;">
+                                   <td width="246" class="phone_td" style="height:100px;">
+                                       <foreach name="list" item="v">
+                                       <div class="main_goods cl" style="margin-top:3px;">
+                                          <a title="查看详情" target="_blank" href="<{:U('ProductDetail/detail',array('id'=>$v['prolist']['id']))}>">
+                                              <img width="80" height="80" src="__PUBLIC__/Product/thumb/<{$v['prolist']['list_image']}>">
+                                          </a> 
+                                          <h2>
+                                             <a title="查看详情" target="_blank" href="<{:U('ProductDetail/detail',array('id'=>$v['prolist']['id']))}>" style="font-size:12px;">
+                                                        <{$v['prolist']['pro_name']}>
+                                             </a>
+                                          </h2>
+                                          <p style="font-size:12px;"><{$v.product_color}></p> 
+                                        </div>
+                                        <if condition="$v['prolist']['zp'] neq null">
+                                         <dl class="gifs_goods cl" style="margin:0;">
+                                            <dt class="color_red" style="margin-left:10px;">【赠品】</dt> 
+                                             <foreach name="v['prolist']['zp']" item="zp">
+                                            <dd style="margin-left:56px;">
+                                              <img width="38" height="38" src="__PUBLIC__/Product/thumb/<{$zp['list_image']}>">
+                                              <h2 style="font-size:13px;" class="display-inline-block"><{$zp['pro_name']}> X 1</h2>
+                                            </dd>
+                                            </foreach> 
+                                        </dl>
+                                        </if>
+                                        </foreach>
+                                    </td>
+                                    <td width="75" class="color_red color-font">
+                                           <foreach name="list" item="v">
+			                                    <div style="150px;line-height:150px;">¥<{$v.product_price}></div>
+			                                </foreach>
+
+                                    </td>
+                                    <td width="65" class="color-font">
+                                           <foreach name="list" item="vo">
+			                                    <div style="150px;line-height:150px;"><{$vo.product_number}></div>
+			                                </foreach>
+
+                                    </td>
+                                    <td width="85" class="color_red color-font" rowspan="2"> ¥<{$orderlist.deail_price}>&nbsp;</td> 
+                                   
+                                </tr>
+                              
+                             </tbody>
+                       </table>
+                     </div>
+                    
+                    <div class="cf bor_b">  
+                       <div class="order_end_result fr">  
+                           <dl status="500" class="order_dl cf">
+                               <dd class="cf"> 
+                                  <span class="dt">商品总价：</span> 
+                                  <span class="dd">¥<{$orderlist.deail_price}></span>
+                               </dd>
+                               <php>
+                                $ship_fee=$orderlist['real_price'] - $orderlist['deail_price'];
+                               </php>
+                              <dd class="cf"> 
+                                   <span class="dt">运费：</span>  
+                                   <span class="dd">¥<{$ship_fee}></span>
+                               </dd> 
+                               <dd class="cf"> 
+                                   <span class="dt">总计：</span>  
+                                   <span class="color_red dd">¥<{$orderlist.real_price}></span>
+                               </dd> 
+                               <dd class="mart15 cf ui_tar">
+                                  <if condition="$orderlist['order_status'] eq 已取消">
+                                  <a class="payment2 radius_5" onclick="reBuy(<{$list[0]['prolist']['id']}>)" href="javascript:void(0)" style="color: #fff;" data-status="1" data-id="<{$list[0]['prolist']['id']}>">重新购买</a>
+                                  <elseif condition="$orderlist['order_status'] eq 等待付款"/>
+                                  <a class="payment2 radius_5" onclick="reBuy()" href="javascript:void(0)" style="color: #fff;" data-status="2">付款</a>
+                                  <else/>
+                                  <a class="payment2 radius_5" onclick="reBuy()" href="javascript:void(0)" style="color: #fff;" data-status="3">返回</a>
+                                  </if>
+                               </dd>
+                            </dl> 
+                        </div>
+                      </div>
+                </div>
+           </div>
+	 		<!--更换部分结束-->
+    </div>
+</block>
+<block name="bottomJsFile">
+    <script>
+$('.payment2').click(function(){
+  var status =$(this).attr('data-status');
+  var _url;
+  if(status == 1){
+    var id =$(this).attr('data-id');
+    _url='<{:U("ProductDetail/detail",array("id"=>$list[0]["prolist"]["id"]))}>';
+    window.open(_url);
+  }if(status == 3){
+    history.go(-1);
+  }
+})
+
+
+
+
+// function reBuy(obj){
+//             var status =$(this).attr('data-status');
+//             alert(status);
+
+//             // if(confirm("确认要收货吗?")){
+//             //     var sid = "#s"+obj;
+//             //     var qrid ="#qr"+obj;
+//             //     $.ajax({
+//             //         url:"__CONTROLLER__/change",
+//             //         data:{'id':obj},
+//             //         type:"post",
+//             //         success:function(d){
+//             //            if(d ==1){
+//             //             $(sid).html("已完成");
+//             //             $(qrid).remove();
+//             //            }else if(d ==2){
+//             //              alert("确认失败");
+//             //            }
+//             //         }
+//             //     })
+//             // }
+//         }
+
+
+     </script>
+</block>

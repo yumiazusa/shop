@@ -1,0 +1,80 @@
+<extend name="Public:member1"/>
+    <block name="cssFile">
+	<link href="__PUBLIC__/Home/css/member.css" rel="stylesheet" type="text/css">
+	<link href="__PUBLIC__/Home/css/order.css" rel="stylesheet" type="text/css">
+	<link href="__PUBLIC__/Home/css/pubmember.css" rel="stylesheet" type="text/css">
+	</block>
+	<block name="topJsFile">
+	 <script src="__PUBLIC__/Home/js/member.js"></script>
+	</block>
+     <block name="publicBody">  	
+			 	<div class="member-zt-right display-inline-block">
+				 		<div class="member-address">
+				 			<span>维修单</span>
+				 		</div>
+				 		<!--更换部分开始-->
+				 	    <div class="mc" style="margin-top: 30px;width:870px;margin-left:26px;">
+					      <table class="tb-void tb-top table table-hover">
+								 <colgroup>
+									<col width="110">
+									<col width="150">
+									<col width="260">
+									<col width="100">
+									<col width="100">
+									<col width="220">
+								 </colgroup>
+								  <thead>
+									<tr>
+									    <th>退货单编号</th>
+										<th>订单编号</th>
+										<th>商品名称</th>
+										<th>收货人</th>
+										<th>
+											申请时间
+										</th>
+										
+										<th>
+											状态
+										</th>
+									</tr>
+								  </thead>
+								  <tbody>
+								      <if condition="$list eq null">
+								      <tr>
+									     <td height="100" colspan="6">
+										    <span style="font-weight:normal;color: #999;line-height:100px;">暂无维修费明细</span>
+									     </td>
+								       </tr>
+								       <else/>
+                                       <foreach name="list" item="v">
+									      <tr>
+									        <td><a href="javascript:void(0)" target="_blank"><{$v['service_sn']}></a></td>
+											<td><a href="<{:U('Order/viewOrder/id/'.$v['order_id'])}>" target="_blank"><{$v['order_sn'].order_sn}></a></td>
+											<td>
+					                           <a href="<{:U('ProductDetail/detail/id/'.$v['pro_id'])}>"><{$v['pro_name'].pro_name}></a>
+				                            </td>
+				                            <td><a href="javascript:void(0)" target="_blank"><{$v['contact']}></a></td>
+				                            <td><div class="ftx03"> <{$v['apply_time']|date="Y-m-d H:i:s",###}></div></td>
+				                            <td>
+				                            	<if condition="($v['service_status'] eq 1) OR ($v['service_status'] eq 2)">
+				                            	  处理中
+				                            	<elseif condition="$v['service_status'] eq 4"/>
+				                            	已取消
+				                            	<elseif condition="$v['service_status'] eq 3"/>
+				                            	已完成
+				                            	</if>
+				                            </td>
+			                             </tr>
+		                             </foreach>
+		                             </if>
+		                           </tbody>
+		                  </table>
+		                   <div class="pagination alternate" style="float:right;">
+                                   <{$page}>
+                            </div
+		                </div>		        
+		               <!--更换部分结束-->
+		          </div>
+		        </block>
+			    
+			

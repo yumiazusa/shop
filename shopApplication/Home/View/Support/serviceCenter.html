@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head lang = "en">
+    <meta charset = "UTF-8">
+    <title>服务中心</title>
+    <link rel = "stylesheet" href = "__PUBLIC__/Home/css/Support/serviceCenter.css"/>
+    <script src="__PUBLIC__/Home/js/jquery.min.js"></script>
+    <script charset="utf-8" src="http://map.qq.com/api/js?v=2.exp&key=K32BZ-GRXRO-RNAWA-SCSAE-IRQ63-WQBUW&libraries=geometry,autocomplete,convertor"></script>
+</head>
+<body>
+    <header></header>
+    <main>
+        <div class="title">RIBBON服务网点查询</div>
+        <div>
+            <!--省列表-->
+            <div class="service-list-box">
+                <ul class="province-list">
+                    <foreach name="data" item="vo">
+                    <li><a style="font-size: 14px;" href = "javascript:;" id="<{$vo.id}>" ><{$vo.name}></a></li>
+                    </foreach>
+                </ul>
+            </div>
+            <!--分割的下划线-->
+            <div class="aline"></div>
+            <!--市列表-->
+            <div class="service-list-box">
+                <ul class="city-list">
+                    <li><a style="font-size: 14px;" href = "javascript:;" cid="1" class="color">北京</a></li>
+
+                </ul>
+            </div>
+        </div>
+
+        <!--地图和地址详情-->
+        <div class="address_info">
+            <!--地图-->
+            <div id="map">
+                <div id="container"></div>
+                <!--<div id="PanoCtn"></div>-->
+            </div>
+
+
+            <!--地址-->
+            <div class="address">
+
+                <div class="address_one">
+                    <div class="address_one_ul" x="39.909010" y="116.410100">
+                        <p><span style="color: lightskyblue;font-size: 20px;height: 13px">北京饭店</span></p>
+                        <p><span>北京市东城区东长安街33号</span></p>
+                        <p><span>010-65137766</span></p>
+                        <p><span>工作时间：09：00-17：30（全年无休）</span></p>
+                        <p><span></span></p>
+                    </div>
+                </div>
+
+
+                <div class="address_one">
+                    <div class="address_one_ul" x="39.977680" y="116.316310">
+                        <p><span style="color: lightskyblue;font-size: 20px;height: 13px">中关村大厦</span></p>
+                        <p><span>北京市海淀区中关村大街27号</span></p>
+                        <p><span>010-82856666</span></p>
+                        <p><span>工作时间：09：00-17：30（全年无休）</span></p>
+                        <p><span></span></p>
+                    </div>
+                </div>
+
+
+
+                <div class="address_one">
+                    <div class="address_one_ul" x="39.993000" y="116.390510">
+                        <p><span style="color: lightskyblue;font-size: 20px;height: 13px">水立方</span></p>
+                        <p><span>北京市朝阳区天辰东路11号</span></p>
+                        <p><span>010-84370112;010-84370116</span></p>
+                        <p><span>工作时间：09：00-17：30（全年无休）</span></p>
+                        <p><span></span></p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+    <footer></footer>
+</body>
+<script>
+
+    /*变量*/
+    var x = 39.984970;    //x坐标
+    var y = 116.400870;     //y坐标
+    var myLatlng = new qq.maps.LatLng(x,y);  //坐标初始化
+
+    var x1;
+    var y1;
+    var x2;
+    var y2;
+    /**
+     * 加载地图方法
+     */
+    function init() {
+
+        //地图配置
+        var myOptions = {
+
+            center: myLatlng,      //地图中心
+            mapTypeId: qq.maps.MapTypeId.ROADMAP,
+            minZoom:6,
+            maxZoom:18,
+            zoom:17               //缩放等级
+
+        };
+
+        //初始化地图
+        var map = new qq.maps.Map(document.getElementById("container"), myOptions);
+
+        //设置比例尺
+        var scaleControl = new qq.maps.ScaleControl({
+            align: qq.maps.ALIGN.BOTTOM_LEFT,
+            margin: qq.maps.Size(10, 15),
+            map: map
+        });
+
+        //标记
+        var marker = new qq.maps.Marker({
+            position: myLatlng,
+            map: map
+        });
+
+        //街景
+/*
+        var pano = new qq.maps.Panorama(document.getElementById('PanoCtn'));
+        var pano_service = new qq.maps.PanoramaService();
+        pano_service.getPano(myLatlng, 200, function(result){
+            pano.setPano(result.svid);
+
+            x1 = result.latlng.lng;
+            y1 = result.latlng.lat;
+            x2 = y;
+            y2 = x;
+
+            var alpha = Math.acos((y2 - y1) / Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2)));
+            if (x2 - x1 < 0) {
+                alpha = Math.PI * 2 - alpha;
+            }
+
+            pano.setPov({heading : alpha/Math.PI*180, pitch : 0});
+        });
+*/
+    }
+
+    //页面加载时
+    $(function(){
+        $('.province-list li a').eq(0).addClass('color');
+        init();
+    });
+
+
+
+
+    //点击地址时跳转地图
+    $('.address_one_ul').on('click',function(){
+        alert('ul')
+        x = $(this).attr('x');
+        y = $(this).attr('y');
+        myLatlng = new qq.maps.LatLng(x,y);
+        init();
+
+    });
+
+    $('.address_one_ul').on('click',function(){
+        alert('one')
+        x = $(this).attr('x');
+        y = $(this).attr('y');
+        myLatlng = new qq.maps.LatLng(x,y);
+        init();
+
+    });
+
+
+    var id =0;
+    //点击城市时候切换颜色
+    $('.province-list li a').bind('click',function(){
+        //移除全部颜色
+        $('.province-list li a').removeClass('color');
+
+        //对单击的位置添加颜色
+        $(this).addClass('color');
+
+        //获取单击位置的id
+        id = $(this).attr('id');
+
+
+        //通过id获取所有的子元素(市一级单位)
+               data = {'id':id};
+        var str = '';//市一级显示
+        var add = '';//地址
+        $.post('__CONTROLLER__/serviceCenter',data,function(a){
+
+
+                for(var i=0;i< a.length;i++){
+                    var city = a[i]['name'];
+                    var cid = a[i]['id'];
+                    var address = a[i]['address'];
+                    var x = a[i]['map_x'];
+                    var y = a[i]['map_y'];
+
+                    add+='<div class="address_one"><div class="address_one_ul" x="'+x+'" y="'+y+'">'+"<p><span style='color: lightskyblue;font-size: 20px;height: 13px'>"+a[i]['cname']+'</span></p> <p><span>'+a[i]['address']+'</span></p> <p><span>'+a[i]['tel']+'</span></p> <p><span>'+a[i]['wtime']+'</span></p> <p><span></span></p> </div> </div>'
+                    str+="<li><a style='font-size: 14px;' href = 'javascript:;' cid="+cid+" class='color'>"+city+'</a></li>';
+                }
+            $('.address').html(add);
+            $('.city-list').html(str);
+
+        })
+
+    })
+
+
+</script>
+</html>
+

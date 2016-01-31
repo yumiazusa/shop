@@ -1,0 +1,285 @@
+<!-- 继承 公共模板 开始 -->
+<extend name="Public:blank" />
+<!-- 继承 公共模板 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部CSS文件 开始 -->
+<block name="cssFile">
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap-responsive.min.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/uniform.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/select2.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-style.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-media.css" />
+    <link href="__PUBLIC__/Admin/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <style>
+        th.list-title {
+            font-size:14px;
+        }
+        td.align-center {
+            text-align:center;
+        }
+    </style>
+</block>
+<!-- 顶部CSS文件 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部JS文件 开始 -->
+<block name="topJsFile">
+    
+</block>
+<!-- 顶部JS文件 结束 -->
+
+<!-- ===================================================== -->
+<!-- 头部部分 开始 -->
+<block name="publicHead">
+    <div id="breadcrumb"> 
+        <a href="__APP__" title="返回系统首页" class="tip-bottom">
+            <i class="icon-home"></i> 
+        管理首页</a> 
+        <a href="#" class="current">系统设置</a>
+        <a href="#" class="current">管理员设置</a>
+    </div>
+    <h1 style="margin-top:10px;">添加管理员</h1>
+</block>
+<!-- 头部部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 公共Body部分 开始 -->
+<block name="publicBody">
+    <!-- 将主体包含在 .row-fluid 内部 -->
+    <div class="container-fluid">
+        <hr style="margin:0;">
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="widget-box">
+                    <div class="widget-title"> <span class="icon"> <i class="icon-info-sign"></i> </span>
+                        <h5>添加管理员</h5>
+                    </div>
+                    <div class="widget-content nopadding">
+                        <form class="form-horizontal" method="post" action="<{:U('Administrator/doUserAdd')}>" name="useradd" id="useradd" novalidate="novalidate">
+                            <div class="control-group">
+                                <label class="control-label">用户名：</label>
+                                <div class="controls">
+                                    <input type="text" name="username" class="tip-right" data-original-title="用户名用字母，数字和下划线组成，可以为中文" id="username" />
+                                    <span id="checkU" available='0'></span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">设置密码：</label>
+                                <div class="controls">
+                                    <input type="password" name="password" class="tip-right" data-original-title="密码由6到8位数组成，至少包含两种字符" id="password" />
+                                    <span id="span"></span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">重复密码：</label>
+                                <div class="controls">
+                                    <input type="password" name="repassword" id="repassword" class="tip-right" data-original-title="请两次输入保持一致" >
+                                    <span></span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">选择角色：</label>
+                                <div class="controls">
+                                    <select name="role_id" style="width:220px;">
+                                         <foreach name="roleLists" item="role">
+                                            <option value="<{$role.id}>"><{$role.title}></option>
+                                        </foreach>
+                                    </select>
+                                    <a href="<{:U('Role/Roleadd')}>" class="btn btn-primary btn-mini" onclick="if(confirm('如要添加角色将会跳到另外一个页面，确认这样操作？')==false)return false;">添加角色</a>
+                                </div>
+                            </div>
+                          <div class="form-actions">
+                            <input type="submit" value=" 添加 " class="btn btn-primary" style="margin-left:179px; margin-right:30px;">
+                            <a href="__CONTROLLER__/index" class="btn btn-default">返回列表</a>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</block>
+<!-- 公共Body部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- js文件模块 开始 -->
+<block name="footJsFile">
+    <script src="__PUBLIC__/Admin/js/jquery.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.ui.custom.js"></script> 
+    <script src="__PUBLIC__/Admin/js/bootstrap.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.uniform.js"></script> 
+    <script src="__PUBLIC__/Admin/js/select2.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.validate.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.form_validation.js"></script>
+    <script src="__PUBLIC__/Admin/js/muneopen.js"></script> 
+</block>
+<!-- js文件模块 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 底部JS执行区域 开始 -->
+<block name="footScript">
+    <script>
+
+        // 验证用户名
+        $(function (){
+            $('#username').blur(function (){
+                checkUsername(this);
+            });
+
+            $('#password').blur(function (){
+                checkPassword(this);
+            });
+
+            $('#repassword').blur(function (){
+                checkRepassword(this);
+            });
+
+            $('form#useradd').submit(function () {
+                var objUsername = $('#username')[0];
+                var isUserTure = false;
+                checkUsername(objUsername);
+
+                if ($('#checkU').attr('available') != 1)
+                {
+                    $('#checkU').html('请填写合法用户名').css({'font-size':'12px', 'color':'red'});
+                    return false;
+                }
+                else
+                {
+                    isUserTure = true;
+                }
+
+                var objPassword =$.trim($('#password').val());
+                var objrePassword =$.trim( $('#repassword').val());
+                if (objUsername && objPassword && objrePassword)
+                {
+                    return true;
+                }else{
+                return false;
+                }
+            });
+
+        });
+
+        function checkRepassword(obj)
+        {
+            var txtVal = $.trim($(obj).val());
+            var pTxtVal = $.trim($('#password').val());
+            var oSpan = $(obj).next('span');
+            var bool =false;
+
+            if (txtVal.length == 0)
+            {
+                $(oSpan).html('密码不能为空').css({'font-size':'12px', 'color':'red'});
+            }
+            else if (txtVal != pTxtVal)
+            {
+                $(oSpan).html('两次输入不一致').css({'font-size':'12px', 'color':'red'});
+            }
+            else
+            {
+                $(oSpan).html('密码可用').css({'font-size':'12px', 'color':'green'});
+                bool = true;
+            }
+            return bool;
+        }
+
+        // 验证密码
+        function checkPassword (obj)
+        {
+            var txtVal =$.trim($(obj).val());
+            var oSpan = $(obj).next('span');
+            var counts = 0;
+            var bool = false;
+            if (txtVal.length == 0)
+            {
+                $(oSpan).html('密码不能为空').css({'font-size':'12px', 'color':'red'});
+            }
+            else if (txtVal.length < 6)
+            {
+                $(oSpan).html('密码长度不够').css({'font-size':'12px', 'color':'red'});
+            }
+            else {
+                if (txtVal.match(/\d+/))
+                {
+                    counts++;
+                }
+                if (txtVal.match(/[a-z]+/))
+                {
+                    counts++;
+                }
+                if (txtVal.match(/[A-Z]+/))
+                {
+                    counts++;
+                }
+                if (txtVal.match(/_/))
+                {
+                    counts++;
+                }
+                if (txtVal.match(/[^\w]/))
+                {
+                    counts++;
+                }
+                
+                if (counts < 2)
+                {
+                    $(oSpan).html('密码过于简单').css({'font-size':'12px', 'color':'red'});
+                }
+                else
+                {
+                    $(oSpan).html('密码合法').css({'font-size':'12px', 'color':'green'});
+                    bool = true;
+                }
+            }
+            return bool;
+        }
+
+        // 用户名验证方法
+        function checkUsername (obj) 
+        {
+            var txtVal = $.trim($(obj).val());
+            var oTips = $(obj).next('span');
+            var pre=/^[a-z][a-z_0-9]*$/i;
+            var bool = false;
+            if (txtVal.length == 0)
+            {
+                oTips.html('用户名不能为空').css({'font-size':'12px', 'color':'red'});
+                oTips.attr('available', '0');
+                return false;
+            }
+            else if (!pre.test(txtVal)){
+                oTips.html('用户名不能使用中文或_-之外的符号').css({'font-size':'12px', 'color':'red'});
+                oTips.attr('available', '0');
+                return false;
+            }else if(txtVal.length < 6){
+                oTips.html('用户名不能少于6位').css({'font-size':'12px', 'color':'red'});
+                oTips.attr('available', '0');
+                return false;
+            }else
+            {
+                // Ajax请求数据库验证
+                $.get('__CONTROLLER__/checkUserExists', {'username': txtVal}, function (d) {
+                    if (d !=0)
+                    {
+                        oTips.html('用户名可用').css({'font-size':'12px', 'color':'green'});
+                        oTips.attr('available', '1');
+                    }
+                    else
+                    {
+                        oTips.html('用户名被占用').css({'font-size':'12px', 'color':'red'});
+                        oTips.attr('available', '0');
+                    }
+                });
+            }
+        }
+    </script>
+</block>
+<!-- 底部JS执行区域 结束 -->

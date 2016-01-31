@@ -1,0 +1,523 @@
+<!-- =====================================================
+    Author: Eden
+    Date:   2015-01-12
+    Function:   公共模板文件中定义的block区域，可以在子模板中继承和覆盖
+ ========================================================= -->
+<!-- 继承 公共模板 开始 -->
+<extend name="Public:blank" />
+<!-- 继承 公共模板 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部CSS文件 开始 -->
+<block name="cssFile">
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap-responsive.min.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/fullcalendar.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-style.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-media.css" />
+    <link href="__PUBLIC__/Admin/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/jquery.gritter.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/colorpicker.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/datepicker.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/uniform.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/select2.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap-wysihtml5.css" />
+    <link rel="stylesheet" href="__PUBLIC__/editor/themes/default/default.css" />
+    <style>
+        div.fblocks {
+            margin:0 auto; 
+            width: 80%; 
+            height:100px; 
+            background:#fff;
+        }
+        .blocks {
+            width:150px; 
+            height:98px; 
+            border:1px dashed #ccc;
+            text-align:center;
+            line-height:98px;
+            font-size:50px;
+            cursor:pointer;
+            display:block;
+            float:left;
+            margin:0 5px;
+        }
+        .blocks h4 {
+            font-size:30px;
+            color:#555;
+            line-height:60px;
+            margin:0;
+            padding:0;
+        }
+        .blocks small {
+            font-size:25px;
+            line-height:40px;
+            color:red;
+            margin:0;
+            padding:0;
+        }
+        .upadv-show {
+            width:100px; 
+            height:100px;
+            margin:5px;
+        }
+    </style>
+</block>
+<!-- 顶部CSS文件 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部JS文件 开始 -->
+<block name="topJsFile">
+</block>
+<!-- 顶部JS文件 结束 -->
+
+<!-- ===================================================== -->
+<!-- 头部部分 开始 -->
+<block name="publicHead">
+    <div id="breadcrumb"> 
+        <a href="__APP__" title="返回系统首页" class="tip-bottom">
+            <i class="icon-home"></i> 
+        管理首页</a> 
+        <a href="#" class="current">商品管理</a> 
+    </div>
+    <h1 style="margin-top:10px;">促销管理 (商品库存：<{$product_number}>)</h1>
+</block>
+<!-- 头部部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 公共Body部分 开始 -->
+<block name="publicBody">
+    <!-- 将主体包含在 .row-fluid 内部 -->
+<div class="container-fluid">
+    <hr style="margin:0;">
+    <div class="row-fluid">
+        <div class="span12">
+            <form action="__CONTROLLER__/doPromoteAdd" id="addPro" method="post">
+            <input type="hidden" value="<{$product_id}>" name="product_id">
+                <div class="widget-box">
+                    <div class="widget-title">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a data-toggle="tab" href="#tab1">特价/折扣</a></li>
+                            <li><a data-toggle="tab" href="#tab2">买赠/满赠</a></li>
+                            <li><a data-toggle="tab" href="#tab3">团购/抢购</a></li>
+                            <li><a data-toggle="tab" href="#tab4">组合套餐</a></li>
+                        </ul>
+                    </div>
+                    <div class="widget-content tab-content">
+                        <div id="tab1" class="tab-pane active">
+                            <div class="form-horizontal">
+                                <div class="item">
+                                <div class="control-group">
+                                <label class="control-label">促销模式：</label>
+                                <div class="controls">
+                                    <label>
+                                        <input type="radio" name="status" id="status" value="1" checked/>
+                                        折扣
+                                    </label>
+                                </div>
+                            </div>
+                                <div class="control-group">
+                                    <label class="control-label">折扣：</label>
+                                    <div class="controls">
+                                        <input type="text" class="span5 tip-right" data-original-title="请输入折扣率" name="rate1"  placeholder="折扣率(例:8折->80)">%
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">促销数量：</label>
+                                    <div class="controls">
+                                        <input type="text" class="span5 tip-right" data-original-title="请输入促销的数量" name="promotenum1"  placeholder="预备促销的数量(不能大于库存)">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="control-group">
+                                <label class="control-label">促销模式：</label>
+                                <div class="controls">
+                                    <label>
+                                        <input type="radio" name="status" id="status" value="2"/>
+                                        会员折扣
+                                    </label>
+                                </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">一级会员折扣：</label>
+                                    <div class="controls">
+                                        <input type="text" class="span5 tip-right" data-original-title="请输入折扣率" name="memberrate[]"  placeholder="折扣率(例:8折->80)">%
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">二级会员折扣：</label>
+                                    <div class="controls">
+                                        <input type="text" class="span5 tip-right" data-original-title="请输入折扣率" name="memberrate[]"  placeholder="折扣率(例:8折->80)">%
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">三级会员折扣：</label>
+                                    <div class="controls">
+                                        <input type="text" class="span5 tip-right" data-original-title="请输入折扣率" name="memberrate[]"  placeholder="折扣率(例:8折->80)">%
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        <!-- 选项卡一结束 -->
+
+                        <div id="tab2" class="tab-pane">
+                            <!-- 选项卡二 -->
+                              <div class="item">
+                                <div class="control-group">
+                                <label class="control-label" style="float:left; margin-right:10px;">促销模式：</label>
+                                <div class="controls" style="float:left; margin-right:10px;">
+                                    <label>
+                                        <input type="radio" name="status" id="status" value="3"/>
+                                        买赠
+                                    </label>
+                                </div>
+                                <div class="controls">
+                                    <label>
+                                        <input type="radio" name="status" id="status" value="4"/>
+                                        满赠
+                                    </label>
+                                </div>
+                                <div class="control-group span12" id="conditiondiv" style="display: none;">
+                                    <label class="control-label" style="float:left;">满赠条件：</label>
+                                    <div class="controls">
+                                        <input type="text" class="span5 tip-right" data-original-title="请输入赠送起始条件" name="condition"  placeholder="累计起送件数(例:买三件起送->3)">
+                                    </div>
+                                </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">促销数量：</label>
+                                    <div class="controls">
+                                        <input type="text" class="span5 tip-right" data-original-title="请输入促销的数量" name="promotenum3"  placeholder="预备促销的数量(不能大于库存)">
+                                    </div>
+                                </div>
+                              <div class="span12" style="height:50px; voerflow:hidden;">
+                                <select id="searchCat" style="width:220px;">
+                                    <foreach name="cats" item="cats">
+                                        <option value="<{$cats.id}>"><{$cats.cat_name}></option>
+                                    </foreach>
+                                </select>
+                                <input type="text" id="searchKW" value="" placeholder="请输入关键字...">
+                                <input type="button" id="searchAll" class="btn btn-priamry" style="margin-top:-10px;" value="搜索">
+                            </div>
+                            <div class="span5" style="margin:0;">
+                                <h6 style="text-align:center;">可选商品</h6>
+                                <select id="sLeft" multiple size="15" style="width:100%;">
+
+                                </select>
+                            </div>
+                            <div class="span2" style="text-align:center;padding-top:150px;">
+                                <button class="btn btn-default" id="addToRight" type="button">>></button>
+                                <br/>
+                                <br/>
+                                <br/>
+                                <button class="btn btn-default" id="removeFromRight" type="button"><<</button>
+                            </div>
+                            <div class="span5" style="margin:0;">
+                                <h6 style="text-align:center;">可选商品</h6>
+                                <select name="gifts[]" id="sRight" multiple size="15" style="width:100%;">
+                                </select>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- 选项卡二结束 -->
+
+                        <div id="tab3" class="tab-pane">
+                            <div class="form-horizontal">
+                                <div class="item">
+                                <div class="control-group">
+                                <label class="control-label">促销模式：</label>
+                                <div class="controls">
+                                    <label>
+                                        <input type="radio" name="status" id="status" value="5"/>
+                                        团购/抢购
+                                    </label>
+                                </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">折扣：</label>
+                                    <div class="controls">
+                                        <input type="text" class="span5 tip-right" data-original-title="请输入折扣率" name="rate2"  placeholder="折扣率(例:8折->80)">%
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">促销数量：</label>
+                                    <div class="controls">
+                                        <input type="text" class="span5 tip-right" data-original-title="请输入促销的数量" name="promotenum4"  placeholder="预备促销的数量(不能大于库存)">
+                                    </div>
+                                </div>
+            <div class="control-group">
+              <label class="control-label">开始时间</label>
+              <div class="controls">
+                <input type="text" value="" class="tip-right" data-original-title="请输入开始时间,不填视为从现在开始" placeholder="XXXX-XX-XX" name="start_time">
+                <span class="help-block">时间格式：2015-01-01 00:00:00</span></div>
+              </div>
+            <div class="control-group">
+              <label class="control-label">结束时间</label>
+              <div class="controls">
+                <input type="text" value="" class="tip-right" data-original-title="请输入结束时间" placeholder="XXXX-XX-XX" name="end_time">
+                <span class="help-block">时间格式：2015-01-01 00:00:00</span> </div>
+              </div>
+            </div>
+        </div>
+        </div>
+                        <!-- 选项卡三结束 -->
+
+                        <div id="tab4" class="tab-pane">
+                            <!-- 选项卡四 -->
+                            <div class="item">
+                                <div class="control-group">
+                                <label class="control-label" style="float:left; margin-right:10px;">促销模式：</label>
+                                <div class="controls" style="float:left; margin-right:10px;">
+                                    <label>
+                                        <input type="radio" name="status" id="status" value="6"/>
+                                        组合套餐
+                                    </label>
+                                </div>
+                                </div>
+                              <div class="span12" style="height:50px; voerflow:hidden;">
+                                <select id="searchCat2" style="width:220px;">
+                                    <foreach name="cats2" item="cats2">
+                                        <option value="<{$cats2.id}>"><{$cats2.cat_name}></option>
+                                    </foreach>
+                                </select>
+                                <input type="text" id="searchKW2" value="" placeholder="请输入关键字...">
+                                <input type="button" id="searchAll2" class="btn btn-priamry" style="margin-top:-10px;" value="搜索">
+                            </div>
+                            <div class="span5" style="margin:0;">
+                                <h6 style="text-align:center;">可选商品</h6>
+                                <select id="sLeft2" multiple size="15" style="width:100%;">
+
+                                </select>
+                            </div>
+                            <div class="span2" style="text-align:center;padding-top:150px;">
+                                <button class="btn btn-default" id="addToRight2" type="button">>></button>
+                                <br/>
+                                <br/>
+                                <br/>
+                                <button class="btn btn-default" id="removeFromRight2" type="button"><<</button>
+                            </div>
+                            <div class="span5" style="margin:0;">
+                                <h6 style="text-align:center;">可选商品</h6>
+                                <select name="comb[]" id="sRight2" multiple size="15" style="width:100%;">
+                                </select>
+                            </div>
+                              <div class="control-group">
+                                    <div class="controls">
+                                        <input type="text" class="span5 tip-right" data-original-title="请输入套餐折扣率" name="rate"  placeholder="折扣率(例:8折->80)">%
+                                    </div>
+                                </div>
+                        </div>
+                        <!-- 选项卡四结束 -->
+
+                        <div id="tab5" class="tab-pane">
+                            <!-- 选项卡五 -->
+                          
+                        </div>
+                        <!-- 选项卡五结束 -->
+                    </div>
+                </div>
+                <div style="padding-top:20px; padding-bottom:20px; text-align:center;">
+                    <button type="submit" class="btn btn-primary btn-large" style="margin-right:20px"> 保存商品信息 </button>
+                    <a type="submit" href="__CONTROLLER__/productList" class="btn btn-default btn-large"> 返回商品列表 </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- </form> -->
+
+</block>
+<!-- 公共Body部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- js文件模块 开始 -->
+<block name="footJsFile">
+    <script src="__PUBLIC__/Admin/js/jquery.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/excanvas.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.ui.custom.js"></script> 
+    <script src="__PUBLIC__/Admin/js/bootstrap.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.flot.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.flot.resize.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.peity.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/fullcalendar.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.dashboard.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.gritter.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.interface.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.chat.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.validate.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.form_validation.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.wizard.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.uniform.js"></script> 
+    <script src="__PUBLIC__/Admin/js/select2.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.popover.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.dataTables.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.tables.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.toggle.buttons.html"></script> 
+    <script src="__PUBLIC__/Admin/js/masked.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.form_common.js"></script> 
+    <script src="__PUBLIC__/Admin/js/wysihtml5-0.3.0.js"></script> 
+    <script src="__PUBLIC__/Admin/js/bootstrap-wysihtml5.js"></script> 
+    <script src="__PUBLIC__/Plugins/jquery.uploadify.js"></script> 
+    <script src="__PUBLIC__/Admin/js/bootstrap-colorpicker.js"></script> 
+    <script src="__PUBLIC__/Admin/js/bootstrap-datepicker.js"></script> 
+    <script charset="utf-8" src="__PUBLIC__/editor/kindeditor.js"></script>
+    <script charset="utf-8" src="__PUBLIC__/editor/lang/zh_CN.js"></script>
+    <script src="__PUBLIC__/Admin/js/muneopen.js"></script>
+</block>
+<!-- js文件模块 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 底部JS执行区域 开始 -->
+<block name="footScript">
+
+    <script type="text/javascript">
+        $('#searchAll').click(function (){
+            var c = $('#searchCat').val();
+            var k = $('#searchKW').val();
+
+            var searchData = {
+                'cat_id': c,
+                'pro_name': k
+            };
+
+            $.post('__CONTROLLER__/searchCatByAjax', searchData, function (d){
+                if (d != null)
+                {
+                    // alert(d[0].total);
+                    var html = null;
+                    for (var i in d)
+                    {
+                        html += '<option value="'+d[i].id+'">'+d[i].pro_name+'(库存'+d[i].total+')</option>';
+                    }
+                    $('#sLeft').html(html);
+                }
+            });
+        });
+
+        $('#addToRight').click(function (){
+            var sLeft = $('#sLeft option:selected');
+            var sRight = $('#sRight option');
+
+            // 与已选有没有重复
+            for (var i= 0; i<sLeft.length; i++)
+            {
+                for (var j = 0; j < sRight.length; j++)
+                {
+                    if ($(sLeft[i]).attr('value') == $(sRight[j]).attr('value'))
+                    {
+                        sLeft[i] = null;
+                    }
+                }
+            }
+            // alert(sLeft.length);
+            sLeft.clone().appendTo('#sRight');
+        });
+
+        $('#removeFromRight').click(function (){
+            // var sRight = $('#sRight option:selected');
+
+            $('#sRight option:selected').remove();
+            // alert($('#sRight option:selected'));
+
+        });
+
+
+        // 使用JS手动将所选赠品提交
+        $('form#addPro').submit(function (){
+            var objOption = $('#sRight option');
+            for (var i = 0; i < objOption.length; i++)
+            {
+                objOption[i].selected = true;
+            }
+            return true;
+        });
+
+        $('#searchAll2').click(function (){
+            var c = $('#searchCat2').val();
+            var k = $('#searchKW2').val();
+
+            var searchData = {
+                'cat_id': c,
+                'pro_name': k
+            };
+
+            $.post('__CONTROLLER__/searchCatByAjax', searchData, function (d){
+                if (d != null)
+                {
+                    var html = null;
+                    for (var i in d)
+                    {
+                        html += '<option value="'+d[i].id+'">'+d[i].pro_name+'(库存'+d[i].total+')</option>';
+                    }
+                    $('#sLeft2').html(html);
+                }
+            });
+        });
+
+        $('#addToRight2').click(function (){
+            var sLeft = $('#sLeft2 option:selected');
+            var sRight = $('#sRight2 option');
+
+            // 与已选有没有重复
+            for (var i= 0; i<sLeft.length; i++)
+            {
+                for (var j = 0; j < sRight.length; j++)
+                {
+                    if ($(sLeft[i]).attr('value') == $(sRight[j]).attr('value'))
+                    {
+                        sLeft[i] = null;
+                    }
+                }
+            }
+            // alert(sLeft.length);
+            sLeft.clone().appendTo('#sRight2');
+        });
+
+        $('#removeFromRight2').click(function (){
+            // var sRight = $('#sRight option:selected');
+
+            $('#sRight2 option:selected').remove();
+            // alert($('#sRight option:selected'));
+
+        });
+
+
+        // 使用JS手动将所选赠品提交
+        $('form#addPro').submit(function (){
+            var objOption = $('#sRight option');
+            for (var i = 0; i < objOption.length; i++)
+            {
+                objOption[i].selected = true;
+            }
+            var objOption2 = $('#sRight2 option');
+            for (var ii = 0; ii < objOption2.length; ii++)
+            {
+                objOption2[ii].selected = true;
+            }
+            return true;
+        });
+
+    $('input:radio[name="status"]').change(function(){
+        var status =$(this).val();
+        if(status==4){
+            $('#conditiondiv').find('input').attr('value','');
+            $('#conditiondiv').css('display','block');
+        }else if(status==3){
+            $('#conditiondiv').find('input').attr('value','');
+            $('#conditiondiv').css('display','none');
+        }
+     $('.item').find('input:text').attr('value','');
+     $('#sRight option').remove();
+     $('#sRight2 option').remove();
+    })
+    </script>
+</block>
+<!-- 底部JS执行区域 结束 -->

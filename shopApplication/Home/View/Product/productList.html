@@ -1,0 +1,219 @@
+<extend name="Public:public" />
+<!--css-->
+<block name="cssFile">
+    <link rel = "stylesheet" href = "__PUBLIC__/Home/css/Product/productList.css"/>
+    <link rel = "stylesheet" href = "__PUBLIC__/Home/css/Product/productListStyle.css"/>
+    <style>
+        .menu1:hover {
+            border-bottom:3px solid #00ACFF;
+            -webkit-transition: border .5s ease .15s;
+            -moz-transition: border .5s ease .15s;
+            -o-transition: border .5s ease .15s;
+            -ms-transition: border .5s ease .15s;
+            transition: border .5s ease .15s;
+        }
+
+        .menu1 {
+            border-bottom:3px solid #FAFAFA;
+            -webkit-transition: border .5s ease .1s;
+            -moz-transition: border .5s ease .1s;
+            -o-transition: border .5s ease .1s;
+            -ms-transition: border .5s ease .1s;
+            transition: border .5s ease .1s;
+        }
+        .menu1 ul {
+            position: absolute;
+            padding-top:10px;
+            top:-11px;
+            left: 140px;
+            opacity: 0;
+            z-index:2;
+            height:167px;
+            background: #FAFAFA;
+            border-bottom:3px solid #00ACFF;
+            border-right:3px solid #00ACFF;
+            -webkit-border-radius: 0 0 15px 0;
+            -moz-border-radius: 0 0 15px 0;
+            border-radius: 0 0 15px 0;
+            -webkit-transition: opacity .5s ease .1s;
+            -moz-transition: opacity .5s ease .1s;
+            -o-transition: opacity .5s ease .1s;
+            -ms-transition: opacity .5s ease .1s;
+            transition: opacity .5s ease .1s;
+        }
+
+        .menu1:hover > ul {
+            opacity: 0.9;
+        }
+        .menu1 ul li {
+            width: 58px;
+            margin-top:20%;
+            overflow: hidden;
+            outline: none;
+            padding: 0;
+            -webkit-transition: width .5s ease .1s;
+            -moz-transition: width .5s ease .1s;
+            -o-transition: width .5s ease .1s;
+            -ms-transition: width .5s ease .1s;
+            transition: width .5s ease .1s;
+        }
+        .menu1:hover > ul li {
+            width: 63px;
+            margin-right: 2px;
+            overflow: visible;
+        }
+        .menu1 ul li a {
+            text-align: left;
+            text-decoration: none;
+            border: none;
+        }
+
+        .menu1 ul li a:hover {
+            text-align: left;
+            text-decoration: none;
+            border-top: 2px solid #00ACFF;
+            border-bottom: 2px solid #00ACFF;
+            border-radius: 3px 3px 3px 3px;
+            /* border: none;*/
+        }
+    </style>
+</block>
+<!--js-->
+<block name="topJsFile"></block>
+<script src = "__PUBLIC__/Home/js/holder.js"></script>
+</block>
+
+<!--main-->
+<block name="publicBody">
+    <div class="container yi-recomm-pro">
+        <div class="row Cats">
+            <volist name="Cats" id="Cat">
+                <div class="col-md-2 menu1" style="border-left:1px solid #f2f2f2; border-right:1px solid #f2f2f2;"><a href="<{:U('Product/productList',array('type'=>'shop','cat'=>$Cat['cat_name'],'scroll'=>1))}>"  title="<{$Cat.cat_name}>"><img src="__PUBLIC__/Product/nav/<{$Cat.nav_pic}>" alt="<{$Cat.cat_name}>"><h6 style="padding:0; margin-top:0;"><{$Cat.cat_name}></h6></a>
+                    <notempty name="Cat['children']">
+                        <ul>
+                          <volist name="Cat['children']" id="subcat">
+                              <li><a href="<{:U('Product/productList',array('type'=>'shop','cat'=>$subcat['cat_name'],'scroll'=>1))}>" class="documents"><{$subcat.cat_name}></a></li>
+                          </volist>
+                      </ul>
+                  </notempty>
+              </div>
+          </volist>
+      </div>
+  </div>
+  <php>
+        $ad5=C('ad5');
+    </php>
+<notempty name="ad5">
+  <div class="contains">
+    <div class="show-left">
+        <a <eq name="leftAdv['is_connect']" value="1">href="<{:U('ProductDetail/detail',array('id'=>$leftAdv['product_id']))}>"<else />href="#"</eq>>
+            <img class="img-responsive" src="__PUBLIC__/Adv/<{$leftAdv['thumbnail']}>" alt="">
+        </a>
+    </div>
+    <div class="show-right">
+        <a <eq name="rightAdv['is_connect']" value="1">href="<{:U('ProductDetail/detail',array('id'=>$rightAdv['product_id']))}>"<else />href="#"</eq>><img class="img-responsive" src="__PUBLIC__/Adv/<{$rightAdv['thumbnail']}>" alt=""></a>
+    </div>
+    <div class="block-title">显示全部</div>
+</div>
+</notempty>
+<main>
+    <div style="width: 100%; padding-top:60px; border-top:1px solid #ccc; background: #FFFFFF" class="list">
+        <div class="select-box">
+            <php>
+                $cat=I('get.cat');
+            </php>
+            <strong><a href="<{:U('productList',array('type'=>'shop','cat'=>'all','scroll'=>1))}>">全部商品</a></strong>
+            <a href="<{:U('productList',array('type'=>'shop','cat'=>$cat,'scroll'=>1))}>">全部<if condition="$cat eq 'all'"><else /><{$cat}></if></a> |
+            <a href="<{:U('productList',array('type'=>'shop','cat'=>$cat,'by'=>'new','scroll'=>1))}>">最新</a> |
+            <a href="<{:U('productList',array('type'=>'shop','cat'=>$cat,'by'=>'promote','scroll'=>1))}>">活动</a> |
+            <a href="<{:U('productList',array('type'=>'shop','cat'=>$cat,'by'=>'pricedown','scroll'=>1))}>">价格从高到低</a> |
+            <a href="<{:U('productList',array('type'=>'shop','cat'=>$cat,'by'=>'priceup','scroll'=>1))}>">价格从低到高</a> |
+            <a href="<{:U('productList',array('type'=>'shop','cat'=>$cat,'by'=>'time','scroll'=>1))}>">发布时间</a>
+        </div>
+        <!--列表的外部设为白色-->
+        <div class="produnt_box">                <!--手机列表-->
+            <div class="list_box">
+                <!-- -------------------- 单个手机块开始 ------------------------ -->
+                <foreach name="productList" item="pro">
+                    <div class="dohover product_one">
+                        <!--商品链接-->
+                        <a target="_blank" href="<{:U('ProductDetail/detail/id/'.$pro['id'])}>">
+                            <!--商品图片-->
+                            <img class="product_img" src="__PUBLIC__/Product/thumb/<{$pro.list_image}>"/>
+                        </a>
+                        <!--左侧三角-->
+                        <if condition="$pro.is_new eq 1">
+                            <div class="icon" style="position:absolute; left:0px; top:50px; z-index:2;">
+                                <img src="__PUBLIC__/Home/images/Product/h2.png">
+                            </div>
+                        </if>
+                            <if condition="$pro.is_promote eq 1">
+                            <div class="icon" style="position:absolute; left:0px; top:120px;">
+                                <img src="__PUBLIC__/Home/images/Product/h1.png">
+                            </div>
+                        </if>
+
+                        <!--商品简介-->
+                        <div class="ui_pname">
+                            <!--型号-->
+                            <a href="#"><span class="model"><{$pro.pro_name}></span></a>
+                            <!--说明-->
+                            <p class="info"><{$pro.pro_subname|mb_substr=0, 10, utf8}></p>
+                        </div>
+
+                        <!--价格-->
+                        <div class="price">
+                            <p class="ui_price">
+                                <span class="ui_pprice">
+                                    <b>¥</b>
+                                    <!--现在价格-->
+                                    <span><{$pro.promote_price}></span>
+                                </span>
+                                <span class="ui_pprice_m">
+                                    <b>¥</b>
+                                    <!--原价-->
+                                    <del><{$pro.market_price}></del>
+                                </span>
+                            </p>
+                        </div>
+                        <!--遮罩-->
+                        <div class="mask" style="display: block;">
+                            <!--说明-->
+                            <p class="charator"><{$pro.pro_subname}></p>
+                            <!--商品链接-->
+                            <a href="<{:U('ProductDetail/detail/id/'.$pro['id'])}>" target="_blank" class="view">查看详情</a>
+                        </div>
+                    </div>
+                </foreach>
+                <!-----------------------单个结束------------------------>
+            </div>
+        </div>
+
+        <!--分页-->
+        <div class="page" style="width:1170px; margin:22px auto; overflow:hidden; text-align: right; height: 80px;">
+            <{$page}>
+        </div>
+    </div>
+</main>
+
+</block>
+<!--js-->
+<block name="bottomJsFile">
+    <script>
+
+        window.onload=function(){
+            var scorllindex ="<{:I('get.scroll')}>";
+            if(scorllindex == "1"){
+                $("html, body").scrollTop(0).animate({scrollTop: $(".list").offset().top});
+            }else{
+                $("html, body").scrollTop(0).animate({scrollTop: $(".logo-and-menu").offset().top});
+            }
+        };
+
+        $('.dohover').hover(function (){
+            $(this).find('div.mask').animate({'bottom':'0'}, 200);
+        }, function (){
+            $(this).find('div.mask').animate({'bottom':'-111px'}, 100);
+        });
+    </script>
+</block>

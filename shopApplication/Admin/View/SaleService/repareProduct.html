@@ -1,0 +1,224 @@
+<!-- =====================================================
+    Author: Eden
+    Date:   2015-01-12
+    Function:   公共模板文件中定义的block区域，可以在子模板中继承和覆盖
+ ========================================================= -->
+<!-- 继承 公共模板 开始 -->
+<extend name="Public:blank" />
+<!-- 继承 公共模板 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部CSS文件 开始 -->
+<block name="cssFile">
+  <meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap.min.css" />
+<link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap-responsive.min.css" />
+<link rel="stylesheet" href="__PUBLIC__/Admin/css/uniform.css" />
+<link rel="stylesheet" href="__PUBLIC__/Admin/css/select2.css" />
+<link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-style.css" />
+<link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-media.css" />
+<link href="__PUBLIC__/Admin/font-awesome/css/font-awesome.css" rel="stylesheet" />
+
+
+
+
+</block>
+<!-- 顶部CSS文件 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部JS文件 开始 -->
+<block name="topJsFile">
+    
+</block>
+<!-- 顶部JS文件 结束 -->
+
+<!-- ===================================================== -->
+<!-- 头部部分 开始 -->
+<block name="publicHead">
+    <div id="breadcrumb">
+        <a href="index.html" title="返回系统主页" class="tip-bottom">
+            <i class="icon-home"></i>
+            管理首页
+            <a href="#" class="current">系统设置</a> 
+        </a>
+    </div>
+    <h1 style="margin-top:10px;">退货商品</h1>
+</block>
+<!-- 头部部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 公共Body部分 开始 -->
+<block name="publicBody">
+    <!-- 将主体包含在 .row-fluid 内部 -->
+    <div class="container-fluid">
+       
+        <div class="row-fluid">
+            <div class="span12">
+           <div class="widget-box">
+            <div class="widget-title"> 
+              <span class="icon"> <i class="icon-th"></i> </span>
+              <div style="padding:5px;">
+                 <form action="__CONTROLLER__/returnProduct" method="get">
+                  <span>服务单号:<input type="text" name="service_sn" style="height:20px;"></span>
+                  <select name="service_status" style="float:right;width:100px;">
+                    <option></option>
+                    <option value="0">同意申请</option>
+                     <option value="4">已取消</option>
+                     <option value="1">待受理</option>
+                     <option value="3">已完成</option>
+                  </select>
+                  <button class="btn btn-info" style="margin-top:-17px;">查询</button>
+                  </form>
+              </div>
+           </div>
+           <div class="widget-content nopadding">
+            <table class="table table-bordered table-striped" >
+              <thead>
+                <tr>
+                  <th style="width:180px;font-size:14px;">服务单号</th>
+                  <th style="width:200px;font-size:14px;">订单单号</th>
+                  <th style="width:150px;font-size:14px;">商品</th>
+                  <th style="width:200px;font-size:14px;">申请时间</th>
+                  <th style="font-size:14px;">操作</th>
+                 
+                </tr>
+              </thead>
+              <tbody >
+               <foreach name="list" item="v">
+                <tr class="odd gradeX">
+                  <td style="text-align:center;font-size:14px;line-height:47px;"><{$v.service_sn}></td>
+                  <td style="text-align:center;font-size:14px;line-height:47px;">
+                  <a href="__ROOT__ /index.php/Order/viewOrder/id/<{$v['order_id']}>"><{$v['orders']['order_sn']}></td>
+                  <td style="text-align:center;"> 
+                    <img width="50" height="50" src="__PUBLIC__/Product/thumb/<{$v['products']['list_image']}>" title="<{$v['products']['pro_name']}>">
+                    </td>
+                  <td class="center" style="text-align:center;font-size:14px;line-height:47px;"> <{$v['apply_time']|date="Y-m-d H:i:s",###}></td>
+                  <td class="center" style="text-align:center;font-size:14px;line-height:47px;" id="app<{$v['id']}>">
+                     <if condition="$v['service_status'] eq 0" >
+                         <button class="btn btn-info btn-mini" style="font-size:12px;" onclick="apply(<{$v['id']}>)" >同意申请</button>
+
+                      <elseif condition="$v['service_status'] eq 1" />
+                          <button class="btn btn-info btn-mini" style="font-size:12px;" onclick="accept(<{$v['id']}>)">受理</button>
+                      <elseif condition="$v['service_status'] eq 2" />
+                          <button class="btn btn-info btn-mini" style="font-size:12px;" onclick="finish(<{$v['id']}>)">点击完成</button>
+                      <elseif condition="$v['service_status'] eq 3" />
+                          <button class="btn btn-info btn-mini" style="font-size:12px;">已完成</button>
+                      <elseif condition="$v['service_status'] eq 4" />
+                          <button class="btn btn-info btn-mini" style="font-size:12px;">客户已取消</button>
+                      </if>
+                      <a class="btn btn-info btn-mini" style="font-size:12px;" href="<{:U('SaleService/lookService/id/'.$v['id'])}>">查看</a>
+                  </td>
+               
+                </tr>
+               </foreach>
+                    <tr>
+                          <td colspan="5">
+                            <div class="pagination alternate">
+                              <ul style="float:right;">
+                                   <{$page}>
+                             </ul>
+                             </div>
+                          </td>
+                    </tr>
+              </tbody>
+                     
+              </table>
+          </div>
+        </div>
+            </div>
+        </div>
+    </div>
+</block>
+<!-- 公共Body部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- js文件模块 开始 -->
+<block name="footJsFile">
+    <script>
+         function apply(obj){
+           var id = obj;
+           var appid ="#app"+obj;
+           if(confirm("确定同意申请吗?")){
+                 $.ajax({
+                    url:"__CONTROLLER__/apply",
+                    data:{'id':id},
+                    type:"post",
+                    success:function(d){
+                       if(d ==1){
+                        //alert(111);
+                        var str ='<button class="btn btn-info btn-mini" style="font-size:12px;" onclick="accept('+<{$v['id']}>+')">受理</button>';
+                            str +='&nbsp;&nbsp;&nbsp;';
+                            str +='<a class="btn btn-info btn-mini" style="font-size:12px;" href="__CONTROLLER__/lookService/id/'+obj+'">查看</a>';
+                            $(appid).html(str);
+                       }else if(d ==3){
+                          alert("系统写入失败");
+                       }
+
+                    }
+               });
+           }
+         }
+          function accept(obj){
+           var id = obj;
+           var appid ="#app"+obj;
+           if(confirm("确定受理吗?")){
+                 $.ajax({
+                    url:"__CONTROLLER__/accept",
+                    data:{'id':id},
+                    type:"post",
+                    success:function(d){
+                       if(d ==1){
+                        //alert(111);
+                        var str ='<button class="btn btn-info btn-mini" style="font-size:12px;" onclick="finish('+obj+')">点击完成</button>';
+                            str +='&nbsp;&nbsp;&nbsp;';
+                            str +='<a class="btn btn-info btn-mini" style="font-size:12px;" href="__CONTROLLER__/lookService/id/'+obj+'">查看</a>';
+                            $(appid).html(str);
+                       }
+
+                    }
+               })
+           }
+         }
+         function finish(obj){
+           var id = obj;
+           var appid ="#app"+obj;
+            $.ajax({
+                    url:"__CONTROLLER__/finish",
+                    data:{'id':id},
+                    type:"post",
+                    success:function(d){
+                       if(d ==1){
+                        //alert(111);
+                        var str ='<button class="btn btn-info btn-mini" style="font-size:12px;">已完成</button>';
+                            str +='&nbsp;&nbsp;&nbsp;';
+                            str +='<a class="btn btn-info btn-mini" style="font-size:12px;" href="__CONTROLLER__/lookService/id/'+obj+'">查看</a>';
+                            $(appid).html(str);
+                       }
+
+                    }
+               })
+         }
+    </script>
+</block>
+<!-- js文件模块 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 底部JS执行区域 开始 -->
+<block name="footScript">
+<script src="__PUBLIC__/Admin/js/jquery.min.js"></script> 
+<script src="__PUBLIC__/Admin/js/jquery.ui.custom.js"></script> 
+<script src="__PUBLIC__/Admin/js/bootstrap.min.js"></script> 
+<script src="__PUBLIC__/Admin/js/jquery.uniform.js"></script> 
+<script src="__PUBLIC__/Admin/js/select2.min.js"></script> 
+<script src="__PUBLIC__/Admin/js/jquery.dataTables.min.js"></script> 
+<script src="__PUBLIC__/Admin/js/matrix.js"></script> 
+<script src="__PUBLIC__/Admin/js/matrix.tables.js"></script>
+<script src="__PUBLIC__/Admin/js/muneopen.js"></script>
+</block>
+<!-- 底部JS执行区域 结束 -->

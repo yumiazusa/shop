@@ -1,0 +1,50 @@
+<extend name="Public:public" />
+<block name="cssFile">
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/index.css">
+</block>
+<block name="publicBody">
+    <div class="banner"></div>
+    <!-- BANNER END -->
+    <div class="container archives">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="page-header">
+                    <h3><{$list.title}></h3>
+                </div>
+                <div>
+                    <div>
+	<img src="/Public/About/<{$list.image}>" width="100%"/> 
+</div>
+			<br />
+<notempty name="album">
+         <div class="col-md-12" style="padding: 0;margin-bottom: 15px;">
+      <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" style="width:100%">
+       企业资质
+      </button>
+    <div class="collapse" id="collapseExample">
+      <div class="well">
+       <div class="row">
+        <volist name="album" id="v">
+        <div>
+           <img src="<{$v['images']}>" width="100%" />
+        </div>
+      </volist>
+       </div>
+      </div>
+    </div>
+  </div>
+</notempty>
+	<div>
+		<div class="col-md-6" style="padding: 0;">
+			<img src="http://api.map.baidu.com/staticimage/v2?ak=UVLq77yrISccQbi4gEXZw4kR&center=<{$list.coordinate}>&labels=<{$list.maplabel}>|<{$list.coordinate}>&zoom=15&labelStyles=<{$list.maplabel}>,1,14,0xffffff,0x000fff,1" width="100%" 
+            />
+		</div>
+        <div class="col-md-6" style="padding: 1;">
+            <span><{$list.contents|htmlspecialchars_decode}></span> 
+        </div>
+	</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>

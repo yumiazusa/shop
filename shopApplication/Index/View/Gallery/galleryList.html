@@ -1,0 +1,45 @@
+<extend name="Public:public" />
+<block name="cssFile">
+	<link href="__Index__/frontend/pages/css/gallery.css" rel="stylesheet">
+</block>
+<block name="publicBody">
+	<div class="main">
+      <div class="container">
+        <ul class="breadcrumb">
+            <li><a href="__APP__">主页</a></li>
+            <li><a href="<{:U('gallery')}>">产品中心</a></li>
+            <li class="active"><{$good.pro_name}></li>
+        </ul>
+        <!-- BEGIN SIDEBAR & CONTENT -->
+        <div class="row margin-bottom-40">
+          <!-- BEGIN CONTENT -->
+          <div class="col-md-4" style="margin-top:5%">
+            <div class="heading-left">
+            <h1>
+                <strong><{$good.pro_name}></strong>
+                <br>
+                <{$good.pro_subname}>
+            </h1>
+            <p><{$good.description}></p><br>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="content-page">
+              <div class="row" style="margin-top:3%">
+              <volist name="img" id="v">
+                <div class="col-md-4 col-sm-4 gallery-item">
+                  <a style="border:3px solid #313030;" data-rel="fancybox-button" title="<{$good.pro_name}>" href="<{$v.images}>" class="fancybox-button">
+                    <img alt="" src="<{$v.images}>" class="img-responsive">
+                    <div class="zoomix"><i class="fa fa-search"></i></div>
+                  </a> 
+                </div>
+              </volist>
+
+              </div>
+            </div>
+          </div>
+          <!-- END CONTENT -->
+        </div>
+      </div>
+    </div>
+</block>

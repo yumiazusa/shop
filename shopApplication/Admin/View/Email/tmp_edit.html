@@ -1,0 +1,161 @@
+<!-- =====================================================
+    Author: Eden
+    Date:   2015-01-12
+    Function:   公共模板文件中定义的block区域，可以在子模板中继承和覆盖
+ ========================================================= -->
+<!-- 继承 公共模板 开始 -->
+<extend name="Public:blank" />
+<!-- 继承 公共模板 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部CSS文件 开始 -->
+<block name="cssFile">
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap-responsive.min.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/uniform.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/select2.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-style.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-media.css" />
+    <link href="__PUBLIC__/Admin/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link rel="stylesheet" href="__PUBLIC__/editor/themes/default/default.css" />
+    <style>
+        th.list-title {
+            font-size:14px;
+        }
+        td.align-center {
+            text-align:center;
+        }
+    </style>
+</block>
+<!-- 顶部CSS文件 结束 -->
+
+<block name="topJsFile">
+    
+
+</block>
+<!-- ===================================================== -->
+<!-- 头部部分 开始 -->
+<block name="publicHead">
+    <div id="breadcrumb"> 
+        <a href="__APP__" title="返回系统首页" class="tip-bottom">
+            <i class="icon-home"></i> 
+        管理首页</a> 
+        <a href="<{:U('Config/index')}>" class="current">系统配置</a> 
+        <a href="__CONTROLLER__/index" class="current">邮件设置</a> 
+    </div>
+    <h1 style="margin-top:10px;">邮件模板编辑</h1>
+</block>
+<!-- 头部部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 公共Body部分 开始 -->
+<block name="publicBody">
+    <!-- 将主体包含在 .row-fluid 内部 -->
+    <div class="container-fluid">
+        <hr style="margin:0;">
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="widget-box">
+                    <div class="widget-title"> <span class="icon"> <i class="icon-info-sign"></i> </span>
+                        <h5>编辑邮件模板</h5>
+                    </div>
+                    <div class="widget-content nopadding">
+                        <form class="form-horizontal" method="post" action="__CONTROLLER__/doTmpEdit" name="tmpedit" id="tmpedit" novalidate="novalidate">
+                            <div class="control-group">
+                                <label class="control-label">模板名称：</label>
+                                <div class="controls">
+                                    <input type="text" class="span8" value="<{$tName}>" disabled/>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">模板标识：</label>
+                                <div class="controls">
+                                    <input type="text" name="ename" class="span8" value="<{$tmpInfo.ename}>" readonly/>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">邮件主题：</label>
+                                <div class="controls">
+                                    <input type="text" name="subject" class="span8" value="<{$tmpInfo.subject}>" id="subject" />
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">模板内容：</label>
+                                <div class="controls">
+                                    <textarea class="span11" name="tmp_content" id="tmp_content" style="margin:0; overflow:hidden; width:80%; height:200px; resize:none;" ><{$tmpInfo.content}></textarea>
+                                </div>
+                            </div>
+                          <div class="form-actions">
+                            <input type="submit" value=" 保存模板 " class="btn btn-primary" style="margin-left:179px; margin-right:30px;">
+                            <a href="__CONTROLLER__/index" class="btn btn-default">返回</a>
+                          </div>
+                          <div class="form-actions">
+                                <h4>通用标识：</h4>
+                                <table class="table">
+                                    <tr>
+                                        <td>网站名称</td>
+                                        <td>{sy_webname}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>用户名称</td>
+                                        <td>{username}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>连接地址</td>
+                                        <td>{url}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>版权信息</td>
+                                        <td>{sy_webcopyright}</td>
+                                    </tr>
+                                </table>
+                          </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>
+<!-- 公共Body部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- js文件模块 开始 -->
+<block name="footJsFile">
+    <script src="__PUBLIC__/Admin/js/jquery.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.ui.custom.js"></script> 
+    <script src="__PUBLIC__/Admin/js/bootstrap.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.uniform.js"></script> 
+    <script src="__PUBLIC__/Admin/js/select2.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.validate.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.form_validation.js"></script>
+    <script src="__PUBLIC__/Admin/js/muneopen.js"></script>
+</block>
+<!-- js文件模块 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 底部JS执行区域 开始 -->
+<block name="footScript">
+    <script charset="utf-8" src="__PUBLIC__/editor/kindeditor.js"></script>
+    <script charset="utf-8" src="__PUBLIC__/editor/lang/zh_CN.js"></script>
+    <script>
+        var editor;
+        KindEditor.ready(function(K) {
+                editor = K.create('#tmp_content', {
+                    resizeType : 1,
+                    allowPreviewEmoticons : false,
+                    allowImageUpload : false,
+                    items : [
+                        'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+                        'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+                        'insertunorderedlist', '|', 'emoticons', 'image', 'link']
+                });
+        });
+    </script>
+</block>
+<!-- 底部JS执行区域 结束 -->

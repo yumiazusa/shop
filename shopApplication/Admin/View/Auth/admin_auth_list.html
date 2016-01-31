@@ -1,0 +1,173 @@
+<!-- 继承 公共模板 开始 -->
+<extend name="Public:blank" />
+<!-- 继承 公共模板 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部CSS文件 开始 -->
+<block name="cssFile">
+<link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap.min.css" />
+<link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap-responsive.min.css" />
+<link rel="stylesheet" href="__PUBLIC__/Admin/css/fullcalendar.css" />
+<link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-style.css" />
+<link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-media.css" />
+<link href="__PUBLIC__/Admin/font-awesome/css/font-awesome.css" rel="stylesheet" />
+<link rel="stylesheet" href="__PUBLIC__/Admin/css/jquery.gritter.css" />
+<link rel="stylesheet" href="__PUBLIC__/Admin/css/uniform.css" />
+<link rel="stylesheet" href="__PUBLIC__/Admin/css/select2.css" />
+<style>
+th.list-title {
+            font-size:14px;
+        }
+td.align-center {
+            text-align:center;
+        }
+a {
+            color:#27A9E3;
+        }
+a:hover {
+            color:#f70;
+            text-decoration:underline;
+        }
+</style>
+</block>
+<!-- 顶部CSS文件 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部JS文件 开始 -->
+<block name="topJsFile">
+
+</block>
+<!-- 顶部JS文件 结束 -->
+
+<!-- ===================================================== -->
+<!-- 头部部分 开始 -->
+<block name="publicHead">
+    <div id="breadcrumb">
+        <a href="__APP__" title="返回系统首页" class="tip-bottom">
+            <i class="icon-home"></i>
+        管理首页</a>
+        <a href="#" class="current">系统设置</a>
+        <a href="#" class="current">权限设置</a>
+    </div>
+    <h1 style="margin-top:10px;">权限管理</h1>
+</block>
+<!-- 头部部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 公共Body部分 开始 -->
+<block name="publicBody">
+    <!-- 将主体包含在 .row-fluid 内部 -->
+<div class="container-fluid">
+    <hr style="margin:0;">
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="widget-box">
+                    <div class="widget-title">
+                        <ul class="nav nav-tabs">
+                            <li><a data-toggle="tab" href="#tab1">权限列表</a></li>
+                        </ul>
+                    </div>
+                    <div class="widget-content tab-content">
+                        <div id="tab1" class="tab-pane active">
+                            <div class="" style="width:100%; height:30px; margin-bottom:10px;">
+                                <a href="<{:U('AuthAdd')}>" class="btn btn-info"><i class="icon-plus"></i> 添加权限</a>                            
+                                <a href="<{:U('AuthModuleList')}>" class="btn btn-info"><i class="icon"></i> 模块设置</a>
+                            </div>
+                        <div class="tab-pane fade in active" id="groupList">
+                        <table class="table table-hover table-bordered table-condensed">
+                    <tr>
+                        <td>序号</td>
+                        <td>权限规则标识</td>
+                        <td>规则描述</td>
+                        <td>附加条件</td>
+                        <td>所属模块</td>
+                        <td>状态</td>
+                        <td>操作</td>
+                    </tr>
+                    <volist name="auths" id="vo">
+                        <tr>
+                            <td><{$i+$num}></td>
+                            <td><{$vo['name']}></td>
+                            <td><{$vo['title']}></td>
+                            <td><{$vo['term']}></td>
+                            <td><{$vo['modulename']}></td>
+                            <td><if condition="$vo['status'] eq 1">
+                                  <a href="<{:U('toggleStatus',array('id'=>$vo['id'],'prev'=>1))}>">
+                                                    <span class="lable label-important" style="color:#fff;">&nbsp;启用&nbsp;</span></a>
+                                <else />
+                                    <a href="<{:U('toggleStatus',array('id'=>$vo['id'],'prev'=>0))}>">
+                                                    <span class="lable label-inverse" style="color:#ccc;">&nbsp;禁用&nbsp;</span></a>
+                                </if>
+                                </td>
+                                <td>
+                                    <div class="btn-group btn-group-xs">
+                                     <a class="btn btn-warning" href="<{:U('authEdit',array('id'=>$vo['id']))}>">修改</a> <a class="btn btn-danger" href="<{:U('authDelete',array('id'=>$vo['id']))}>" onclick="if(confirm('确定删除?')==false)return false;">删除</a>
+                                    </div>
+                                </td>
+                        </tr>
+                    </volist>
+                    <tr>
+                        <td colspan="7" class="pagination alternate"style="text-align: right"><{$Show}></td>
+                    </tr>
+                </table>
+              </div>
+            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>
+<!-- 公共Body部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- js文件模块 开始 -->
+<block name="footJsFile">
+    <script src="__PUBLIC__/Admin/js/jquery.min.js"></script>
+    <script src="__PUBLIC__/Admin/js/jquery.ui.custom.js"></script>
+    <script src="__PUBLIC__/Admin/js/bootstrap.min.js"></script>
+    <script src="__PUBLIC__/Admin/js/jquery.uniform.js"></script>
+    <script src="__PUBLIC__/Admin/js/select2.min.js"></script>
+    <script src="__PUBLIC__/Admin/js/jquery.dataTables.min.js"></script>
+    <script src="__PUBLIC__/Admin/js/matrix.js"></script>
+    <script src="__PUBLIC__/Admin/js/matrix.tables.js"></script>
+    <script src="__PUBLIC__/Admin/js/matrix.popover.js"></script>
+    <script src="__PUBLIC__/Admin/js/matrix.interface.js"></script>
+    <script src="__PUBLIC__/Admin/js/muneopen.js"></script>
+</block>
+<!-- js文件模块 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 底部JS执行区域 开始 -->
+<block name="footScript">
+    <script type="text/javascript">
+      // This function is called from the pop-up menus to transfer to
+      // a different page. Ignore if the value returned is a null string:
+      function goPage (newURL) {
+
+          // if url is empty, skip the menu dividers and reset the menu selection to default
+          if (newURL != "") {
+
+              // if url is "-", it is this page -- reset the menu:
+              if (newURL == "-" ) {
+                  resetMenu();
+              }
+              // else, send page to designated URL
+              else {
+                document.location.href = newURL;
+              }
+          }
+      }
+
+    // resets the menu selection upon entry to this page:
+    function resetMenu() {
+       document.gomenu.selector.selectedIndex = 2;
+    }
+    </script>
+</block>
+<!-- 底部JS执行区域 结束 -->

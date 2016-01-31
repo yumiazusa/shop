@@ -1,0 +1,50 @@
+<extend name="Public:member1"/>
+    <block name="cssFile">
+	<link href="__PUBLIC__/Home/css/member.css" rel="stylesheet" type="text/css">
+	<link href="__PUBLIC__/Home/css/order.css" rel="stylesheet" type="text/css">
+	<link href="__PUBLIC__/Home/css/pubmember.css" rel="stylesheet" type="text/css">
+	</block>
+	<block name="topJsFile">
+	 <script src="__PUBLIC__/Home/js/member.js"></script>
+	</block>
+     <block name="publicBody">  
+
+
+			 	<!--更换部分开始-->
+			 	<div class="member-zt-right display-inline-block">
+				 		<div class="member-info">
+				 			<span>修改邮箱</span>
+				 		</div>
+				 		<div class="email">
+				 		  <form class="email-yz">
+					 			<div class="item">
+					 				<ul>
+					 					<li class="display-inline-block lable">
+					 						新的邮箱：
+					 					</li>
+					 					<li class="display-inline-block">
+					 					    <input type="text" name="email" id="email" class="itext">
+					 					    <span style="color:red;font-size:14px;"></span>
+					 					</li>
+					 				</ul>
+					 			</div>
+					 			<div class="item">
+					 				<ul>
+					 					<li class="display-inline-block lable">
+					 						验 证 码：
+					 					</li>
+					 					<li class="display-inline-block">
+					 					     <input type="text" name="code" class="itext">
+					 					     <img src="1.jpg">
+					 					</li>
+					 				</ul>
+					 			</div>
+					 			<div class="item" style="width:80px;margin-left:20px;">
+					 				<input type="button" value="发送邮件验证" class="payment radius_5 send-email">
+					 			</div>
+				 			</form>
+				 		</div>
+				 		
+			    </div>
+			    <!--更换部分结束-->
+			</block>

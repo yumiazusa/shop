@@ -1,0 +1,618 @@
+<!-- =====================================================
+    Author: Eden
+    Date:   2015-01-12
+    Function:   公共模板文件中定义的block区域，可以在子模板中继承和覆盖
+ ========================================================= -->
+<!-- 继承 公共模板 开始 -->
+<extend name="Public:blank" />
+<!-- 继承 公共模板 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部CSS文件 开始 -->
+<block name="cssFile">
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap-responsive.min.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/fullcalendar.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-style.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-media.css" />
+    <link href="__PUBLIC__/Admin/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/jquery.gritter.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/colorpicker.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/datepicker.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/uniform.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/select2.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap-wysihtml5.css" />
+    <link rel="stylesheet" href="__PUBLIC__/editor/themes/default/default.css" />
+    <style>
+        div.fblocks {
+            margin:0 auto; 
+            width: 80%; 
+            height:100px; 
+            background:#fff;
+        }
+        .blocks {
+            width:150px; 
+            height:98px; 
+            border:1px dashed #ccc;
+            text-align:center;
+            line-height:98px;
+            font-size:50px;
+            cursor:pointer;
+            display:block;
+            float:left;
+            margin:0 5px;
+        }
+        .blocks h4 {
+            font-size:30px;
+            color:#555;
+            line-height:60px;
+            margin:0;
+            padding:0;
+        }
+        .blocks small {
+            font-size:25px;
+            line-height:40px;
+            color:red;
+            margin:0;
+            padding:0;
+        }
+        .upadv-show {
+            width:100px; 
+            height:100px;
+            margin:5px;
+        }
+    </style>
+</block>
+<!-- 顶部CSS文件 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部JS文件 开始 -->
+<block name="topJsFile">
+    
+</block>
+<!-- 顶部JS文件 结束 -->
+
+<!-- ===================================================== -->
+<!-- 头部部分 开始 -->
+<block name="publicHead">
+    <div id="breadcrumb"> 
+        <a href="__APP__" title="返回系统首页" class="tip-bottom">
+            <i class="icon-home"></i> 
+        管理首页</a> 
+        <a href="#" class="current">商品管理</a> 
+    </div>
+    <h1 style="margin-top:10px;">商品编辑</h1>
+</block>
+<!-- 头部部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 公共Body部分 开始 -->
+<block name="publicBody">
+    <!-- 将主体包含在 .row-fluid 内部 -->
+<div class="container-fluid">
+    <hr style="margin:0;">
+    <div class="row-fluid">
+        <div class="span12">
+            <form action="__CONTROLLER__/doProductEdit" method="post">
+                <input type="hidden" name="id" value="<{$Think.get.id}>">
+                <input type="hidden" name="shop_id" value="<{$pro.shop_id}>">
+                <div class="widget-box">
+                    <div class="widget-title">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a data-toggle="tab" href="#tab1">通用属性</a></li>
+                           <li><a data-toggle="tab" href="#tab4">包装特性</a></li>
+                            <li><a data-toggle="tab" href="#tab3">规格特性</a></li>
+                            <!-- <li><a data-toggle="tab" href="#tab5">添加赠品</a></li> -->
+                            <li><a data-toggle="tab" href="#tab2">产品特性</a></li>
+                        </ul>
+                    </div>
+                    <div class="widget-content tab-content">
+                        <div id="tab1" class="tab-pane active">
+                            <div class="form-horizontal">
+                                <div class="control-group">
+                                    <label class="control-label">产品名称：</label>
+                                    <div class="controls">
+                                        <input type="text" class="span5" value="<{$pro.pro_name}>" name="pro_name" placeholder="产品名称">
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">产品类别：</label>
+                                    <div class="controls">
+                                        <select name="cat_id" style="width:220px;">
+                                            <foreach name="productCats" item="cats">
+
+                                                <option value="<{$cats.id}>" 
+                                                <if condition="$cats['id'] eq $pro['cat_id']">selected</if> 
+                                                >
+                                                <{$cats.cat_name}></option>
+                                            </foreach>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">产品货号：</label>
+                                    <div class="controls">
+                                        <input type="text" class="span5" value="<{$pro.pro_sn}>" name="pro_sn" placeholder="产品货号">
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">产品副标题：</label>
+                                    <div class="controls">
+                                        <input type="text" class="span5" name="pro_subname" value="<{$pro.pro_subname}>" placeholder="产品副标题">
+                                        <span class="help-block">显示的部分描述信息</span> 
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">市场售价：</label>
+                                    <div class="controls">
+                                        <input type="text" name="market_price" value="<{$pro.market_price}>" class="span2" placeholder="0.00">
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">本店价格：</label>
+                                    <div class="controls">
+                                        <input type="text" name="promote_price" value="<{$pro.promote_price}>" class="span2" placeholder="0.00">
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">商品单位：</label>
+                                    <div class="controls">
+                                        <input type="text" name="unit" class="span2 tip-right" data-original-title="请输入商品的单位规格" placeholder="件/盒" value="<{$pro.unit}>">
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">每单位的重量：</label>
+                                    <div class="controls">
+                                        <input type="text" name="unit_weight" class="span2 tip-right" data-original-title="请输入每单位商品的重量" placeholder="请输入整数重量" value="<{$pro.unit_weight}>">
+                                        <select name="weight_unit" style="width:70px;">
+                                                <option value="克" <if condition="$pro['weight_unit'] eq '克'">selected</if>>克</option>
+                                                <option value="千克" <if condition="$pro['weight_unit'] eq '千克'">selected</if>>千克</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">关键字：</label>
+                                    <div class="controls">
+                                        <input type="text" name="keywords" value="<{$pro.keywords}>" class="span5" placeholder="关键字">
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">描述：</label>
+                                    <div class="controls">
+                                        <textarea class="span5" name="description" placeholder="产品相关描述"><{$pro.description}></textarea>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">logo图：</label>
+                                    <div class="controls">
+                                        <input id="file_upload" type="file" multiple="true" name="file_upload" />
+                                    <div id="imgs"><img width="200px" <eq name="pro.list_image" value=""> src="__PUBLIC__/Plugins/1.png" <else />src="__PUBLIC__/Product/thumb/<{$pro.list_image}>"</eq>></div>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">属性：</label>
+                                    <div class="controls">
+                                        <label><input type="checkbox" value="1" <eq name="pro.is_new" value="1">checked</eq> name="is_new" /> 新品</label>
+                                        <label><input type="checkbox" value="1" <eq name="pro.is_promote" value="1">checked</eq> name="is_promote" /> 促销</label>
+                                        <if condition="$pro['is_on_sale'] eq 0" >
+                                            <label><input type="checkbox" value="1" name="is_on_sale" /> 上架</label>
+                                        <else/>
+                                            <label><input type="checkbox" value="0" name="is_on_sale" /> 下架</label>
+                                        </if>
+                                        <label><input type="checkbox" value="1" <eq name="pro.is_ship" value="1">checked</eq> name="is_ship" /> 包邮</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 选项卡一结束 -->
+
+                        <div id="tab2" class="tab-pane">
+                            <!-- 选项卡二 -->
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <textarea name="feacher" id="feacher" style="width:100%; height:350px;"><{$pro.feacher}></textarea>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- 选项卡二结束 -->
+
+                        <div id="tab3" class="tab-pane">
+                            <h5>点击添加</h5>
+                            <div class="control-group">
+                                <div class="fblocks">
+                                    <foreach name="method" item="mem">
+                                        <div class="add-block blocks" data-toggle="modal" class="btn btn-warning">
+                                            <input type="hidden" value="<{$mem.prop_name}>" name="style_name[]">
+                                            <input type="hidden" value="<{$mem.prop_price}>" name="style_price[]">
+                                            <input type="hidden" value="<{$mem.prop_weight}>" name="style_weight[]">
+                                            <div style="font-size:25px; line-height:25px;padding-top:5px;"><{$mem.prop_name}></div>
+                                            <div style="font-size:15px; line-height:25px;">上浮<{$mem.prop_price}>元</div>
+                                            <div style="font-size:15px; line-height:20px;">重量增加<{$mem.prop_weight}></div>
+                                             <div style="padding-top:6px; font-size:5px; line-height:10px;"><i class="icon-remove-sign deletemem"></i></div>
+                                        </div>
+                                    </foreach>
+                                    <a class="add-block blocks" href="#myAlert" data-toggle="modal" class="btn btn-warning">
+                                        <i class="icon-plus"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 选项卡三结束 -->
+
+                        <div id="tab4" class="tab-pane">
+                            <!-- 选项卡四 -->
+                            <script>
+                                var iFlag = 0;
+                            </script>
+                            <div class="form-horizontal">
+                                <table class="table" id="show-uploaded-advs">
+                                    <foreach name="album" item="album" key="key">
+                                        <tbody id="<{$key}>">
+                                            <tr>
+                                                <td style="width:180px; text-align:right;">
+                                                    <i class="icon-remove-sign deletepic"></i>
+                                                    <input type="hidden" name="prop_name[<{$key}>]" value="<{$album.prop_name}>">
+                                                    <input type="hidden" name="prop_value[<{$key}>]" value="<{$album.prop_value}>" />
+                                                    <input type="hidden" name="prop_price[<{$key}>]" value="<{$album.prop_price}>" />
+                                                    <input type="hidden" name="prop_weight[<{$key}>]" value="<{$album.prop_weight}>" />
+                                                </td>
+                                                <td><{$album.prop_name}>（色值：<{$album.prop_value}>） [上浮<{$album.prop_price}>元]   [重量增加<{$album.prop_weight}>]</td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td>
+                                                    <ul class="thumbnails">
+                                                        <foreach name="album['album']" item="pic" key="k">
+                                                        <li class="span2"> 
+                                                            <a> <img src="<{$pic}>" alt=""> </a><input type="hidden" name="advs[<{$key}>][]" value="<{$pic}>"><div class="actions"><a class="lightbox_trigger" href="<{$pic}>" target="_blank;"><i class="icon-search"></i></a> </div>
+                                                        </li>
+                                                        </foreach>
+                                                        </pic>
+                                                    </ul>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                        <script>
+                                            iFlag += 1;
+                                        </script>
+                                    </foreach>
+                                </table>
+                                <div class="control-group">
+                                    <label class="control-label">设置包装特性名称</label>
+                                    <div class="controls">
+                                        <input type="text" value="" id="set-color-name" placeholder="如：大包装(黑色)" class="span11" >
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">设置商品颜色(默认白色)</label>
+                                    <div class="controls">
+
+                                        <div data-color-format="hex" class="input-append color colorpicker">
+                                            <input type="text" id="set-color-value" value="#ffffff" class="span11"></br>
+                                            <span class="add-on"><i style="background-color:#ffffff" data-color="#ffffff"></i></span>
+                                            <span class="add-on"><i style="background-color:#000000" data-color="#000000"></i></span>
+                                            <span class="add-on"><i style="background-color:#F70000" data-color="#F70000"></i></span>
+                                            <span class="add-on"><i style="background-color:#F79535" data-color="#F79535"></i></span>
+                                            <span class="add-on"><i style="background-color:#FBFB00" data-color="#FBFB00"></i></span>
+                                            <span class="add-on"><i style="background-color:#03C600" data-color="#03C600"></i></span>
+                                            <span class="add-on"><i style="background-color:#940094" data-color="#940094"></i></span>
+                                            <span class="add-on"><i style="background-color:#0000F6" data-color="#0000F6"></i></span>
+                                            <span class="add-on"><i style="background-color:#929292" data-color="#929292"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">设置上浮价格</label>
+                                    <div class="controls">
+                                        <input type="text" value="" id="set-up-price" placeholder="保留两位小数" class="span3" >
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">设置上浮重量</label>
+                                    <div class="controls">
+                                        <input type="text" value="" id="set-up-weight" placeholder="与基本属性重量单位保持一致" class="span3" >
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">上传相应图片：</label>
+                                    <div class="controls">
+                                        <input id="adv_upload" type="file"  multiple="true" name="adv_upload" />
+                                        <div id="imgsforcolor"><img width="200px" src="__PUBLIC__/Plugins/1.png"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <button type="button" style="margin-left:200px;" id="addcolor" class="btn btn-mini btn-info">确认添加</button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 选项卡四结束 -->
+
+                        <!-- <div id="tab5" class="tab-pane"> -->
+                            <!-- 选项卡五 -->
+                            <!-- <div class="span12" style="height:50px; voerflow:hidden;">
+                                <select id="searchCat" style="width:220px;">
+                                    <foreach name="cats2" item="cats">
+                                        <option value="<{$cats.id}>"><{$cats.cat_name}></option>
+                                    </foreach>
+                                </select>
+                                <input type="text" id="searchKW" value="" placeholder="请输入关键字...">
+                                <input type="button" id="searchAll" class="btn btn-priamry" style="margin-top:-10px;" value="搜索">
+                            </div>
+                            <div class="span5" style="margin:0;">
+                                <h6 style="text-align:center;">可选商品</h6>
+                                <select id="sLeft" multiple size="15" style="width:100%;">
+
+                                </select>
+                            </div>
+                            <div class="span2" style="text-align:center;padding-top:150px;">
+                                <button class="btn btn-default" id="addToRight" type="button">>></button>
+                                <br/>
+                                <br/>
+                                <br/>
+                                <button class="btn btn-default" id="removeFromRight" type="button"><<</button>
+                            </div>
+                            <div class="span5" style="margin:0;">
+                                <h6 style="text-align:center;">可选商品</h6>
+                                <select name="gifts[]" id="sRight" multiple size="15" style="width:100%;">
+                                    <foreach name="gifts" item="gift">
+                                        <option value="<{$gift.id}>"><{$gift.pro_name}></option>
+                                    </foreach>
+                                </select>
+                            </div>
+                        </div> -->
+                        <!-- 选项卡五结束 -->
+                    </div>
+                </div>
+                <div style="padding-top:20px; padding-bottom:20px; text-align:center;">
+                    <button type="submit" class="btn btn-primary btn-large" style="margin-right:20px"> 保存商品信息 </button>
+                    <a type="submit" href="__CONTROLLER__/productList" class="btn btn-default btn-large"> 返回商品列表 </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- </form> -->
+<div id="myAlert" class="modal hide">
+    <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>自定义规格特性</h3>
+    </div>
+    <div class="modal-body">
+        <div><label>自定义规格名称：</label><input type="text" id="p-m" class="span5" placeholder="例如：粉状/块状"></div>
+        <div><label>上浮价格(保留小数点后两位)：</label><input type="text" id="p-p" class="span5" placeholder="(在基本价格上上浮的价格，不上浮不填)"></div>
+        <div><label>上浮重量(与基本属性中的单位保持一致)：</label><input type="text" id="p-w" class="span5" placeholder="(在基本价格上上浮的价格，不上浮不填)"></div>
+    </div>
+    <div class="modal-footer"> 
+        <a class="btn btn-primary" id="conf" onclick="conf();">确认添加</a> 
+        <a data-dismiss="modal" class="btn" id="cancle-modal" href="#">取消</a> 
+    </div>
+</div>
+</block>
+<!-- 公共Body部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- js文件模块 开始 -->
+<block name="footJsFile">
+    <script src="__PUBLIC__/Admin/js/jquery.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/excanvas.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.ui.custom.js"></script> 
+    <script src="__PUBLIC__/Admin/js/bootstrap.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.flot.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.flot.resize.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.peity.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/fullcalendar.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.dashboard.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.gritter.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.interface.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.chat.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.validate.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.form_validation.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.wizard.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.uniform.js"></script> 
+    <script src="__PUBLIC__/Admin/js/select2.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.popover.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.dataTables.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.tables.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.toggle.buttons.html"></script> 
+    <script src="__PUBLIC__/Admin/js/masked.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.form_common.js"></script> 
+    <script src="__PUBLIC__/Admin/js/wysihtml5-0.3.0.js"></script> 
+    <script src="__PUBLIC__/Admin/js/bootstrap-wysihtml5.js"></script> 
+    <script src="__PUBLIC__/Plugins/jquery.uploadify.js"></script> 
+    <script src="__PUBLIC__/Admin/js/bootstrap-colorpicker.js"></script> 
+    <script charset="utf-8" src="__PUBLIC__/editor/kindeditor.js"></script>
+    <script charset="utf-8" src="__PUBLIC__/editor/lang/zh_CN.js"></script>
+    <script src="__PUBLIC__/Admin/js/muneopen.js"></script>
+</block>
+<!-- js文件模块 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 底部JS执行区域 开始 -->
+<block name="footScript">
+
+    <script type="text/javascript">
+        var m = '';
+        var p = '';
+        $('.textarea_editor').wysihtml5();
+        var img = '';
+        $('#file_upload').uploadify({
+                'swf'      : '__PUBLIC__/Plugins/uploadify.swf',
+                'uploader' : '<{:U("Product/upload")}>',
+                'buttonText' : '商品封面图(一张)',
+                'uploadLimit'   : 1, //设置最大上传文件的数量
+                'fileSizeLimit':'3MB',
+                'onUploadSuccess' : function(file, data, response) {
+                data=data.replace(/"/g,'');
+                data=data.replace("\\",'');
+                img = "<img width='200px' src='__PUBLIC__/Product/thumb/"+data+"'><input type='hidden' name='list_image' value='"+data+"'>";
+                $('#imgs').html(img);
+                //$('#images').val(data);
+            }
+        });
+
+
+        // 处理多张小图上传
+        var imgS = '';
+        var imgC = '';
+        var flag = iFlag;
+        var cname = '';
+        var cvalue = '';
+        $('#adv_upload').uploadify({
+                'swf'      : '__PUBLIC__/Plugins/uploadify.swf',
+                'uploader' : '<{:U("Product/advUpload")}>',
+                'buttonText' : '商品图片(多张)',
+                'fileSizeLimit':'3MB',
+                'onUploadSuccess' : function(file, data, response) {
+                data=data.replace(/"/g,'');
+                data=data.replace("\\",'');
+                data=data.replace("\\",'');
+                var dataV = '/Public/Product/adv/' + data;
+                imgS += '<li class="span2"> <a> <img src="__PUBLIC__/Product/adv/'+data+'" alt=""> </a><input type="hidden" name="advs['+flag+'][]" value="'+dataV+'"><div class="actions"><a class="lightbox_trigger" href="__PUBLIC__/Product/adv/'+data+'" target="_blank;"><i class="icon-search"></i></a> </div></li>';
+                // 处理返回过来的值
+                imgC += "<img width='100' height='100' src='__PUBLIC__/Product/adv/"+data+"'>";
+                $('#imgsforcolor').html(imgC);
+                // alert(imgS);
+
+                // imgS = '';
+            }
+        });
+
+        $('#addcolor').click(function (){
+            cname = $('#set-color-name').val();
+            cvalue = $('#set-color-value').val();
+            cupprice= $('#set-up-price').val() ? $('#set-up-price').val() : 0;
+            cupweight=$('#set-up-weight').val() ? $('#set-up-weight').val() : 0;
+            // alert(imgS);
+           $('<tbody><tr><td style="width:180px; text-align:right;"><i class="icon-remove-sign deletepic1"></i><input type="hidden" name="prop_name['+flag+']" value="'+cname+'"><input type="hidden" name="prop_value['+flag+']" value="'+cvalue+'" /><input type="hidden" name="prop_price['+flag+']" value="'+cupprice+'" /><input type="hidden" name="prop_weight['+flag+']" value="'+cupweight+'" /></td><td>['+cname+']&nbsp;&nbsp;&nbsp;&nbsp;[色值:'+cvalue+']&nbsp;&nbsp;&nbsp;&nbsp;[上浮'+cupprice+'元]&nbsp;&nbsp;&nbsp;&nbsp;[重量增加'+cupweight+']</td></tr><tr><td></td><td><ul class="thumbnails">'+imgS+'</ul></td></tr></tbody>').appendTo('#show-uploaded-advs');
+            flag++;
+            imgS = '';
+            $('#imgsforcolor').html('<img width="200px" src="__PUBLIC__/Plugins/1.png">');
+            imgC = '';
+            $('#set-color-name').attr("value","");
+            $('#set-color-value').attr("value","");
+            $('#set-up-price').attr("value","");
+            $('#set-up-weight').attr("value","");
+        });
+
+        // 编辑器
+        var editor;
+        KindEditor.ready(function(K) {
+                editor = K.create('#feacher', {
+                    resizeType : 1,
+                    uploadJson : '__PUBLIC__/editor/php/upload_feacher_json.php'
+                });
+        });
+
+        // 编辑规格的函数
+        function conf()
+        {
+            m = $('#p-m').val();
+            p = $('#p-p').val() ? $('#p-p').val() : 0;
+            w = $('#p-w').val() ? $('#p-w').val() : 0;
+
+            if (!m)
+            {
+                alert('请填写完整');
+                return false;
+            }
+            $('<div class="add-block blocks" data-toggle="modal" class="btn btn-warning"><input type="hidden" value="'+m+'" name="style_name[]"><input type="hidden" value="'+p+'" name="style_price[]"><input type="hidden" value="'+w+'" name="style_weight[]"><div style="font-size:25px; line-height:25px;padding-top:5px;">'+m+'</div><div style="font-size:15px; line-height:25px;">上浮'+p+'元</div><div style="font-size:15px; line-height:20px;">重量增加'+w+'</div><div style="padding-top:6px; font-size:5px; line-height:10px;"><i class="icon-remove-sign deletemem2"></i></div></div>').prependTo('.fblocks');
+            $('#cancle-modal').trigger('click');
+            $('#p-p').attr("value","");
+            $('#p-m').attr("value","");
+            $('#p-w').attr("value","");
+        }
+
+        $('#searchAll').click(function (){
+            var c = $('#searchCat').val();
+            var k = $('#searchKW').val();
+
+            var searchData = {
+                'cat_id': c,
+                'pro_name': k
+            };
+
+            $.post('__CONTROLLER__/searchCatByAjax', searchData, function (d){
+                if (d != null)
+                {
+                    var html = null;
+                    for (var i in d)
+                    {
+                        html += '<option value="'+d[i].id+'">'+d[i].pro_name+'</option>';
+                    }
+                    $('#sLeft').html(html);
+                }
+            });
+        });
+
+        $('#addToRight').click(function (){
+            var sLeft = $('#sLeft option:selected');
+            var sRight = $('#sRight option');
+
+            // 与已选有没有重复
+            for (var i= 0; i<sLeft.length; i++)
+            {
+                for (var j = 0; j < sRight.length; j++)
+                {
+                    if ($(sLeft[i]).attr('value') == $(sRight[j]).attr('value'))
+                    {
+                        sLeft[i] = null;
+                    }
+                }
+            }
+            // alert(sLeft.length);
+            sLeft.clone().appendTo('#sRight');
+        });
+
+        $('#removeFromRight').click(function (){
+            // var sRight = $('#sRight option:selected');
+
+            $('#sRight option:selected').remove();
+            // alert($('#sRight option:selected'));
+
+        });
+
+
+        // 使用JS手动将所选赠品提交
+        $('form#addPro').submit(function (){
+            var objOption = $('#sRight option');
+            for (var i = 0; i < objOption.length; i++)
+            {
+                objOption[i].selected = true;
+            }
+            return true;
+        });
+
+        $('.deletepic').click(function(){
+              iFlag-=1;
+            $(this).parent().parent().parent().remove();
+        });
+
+        $('.deletemem').click(function(){
+            $(this).parent().parent().remove();
+        });
+
+        $('.add-on').click(function(){
+           var value=$(this).find('i').data('color');
+           $('#set-color-value').attr('value',value);
+        });
+
+        $(".deletepic1").live("click",function(){
+             alert('因为数据库逻辑问题，如想修改，直接刷新重新编辑即可');
+        });
+
+        $(".deletemem2").live("click",function(){
+             $(this).parent().parent().remove();
+        });
+    </script>
+</block>
+<!-- 底部JS执行区域 结束 -->

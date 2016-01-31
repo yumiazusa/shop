@@ -1,0 +1,235 @@
+* {
+    padding: 0;
+    margin: 0;
+
+}
+
+body html {
+    position: relative;
+    background: #fff !important;
+}
+
+/*购物车流程显示*/
+.cart_title{
+    padding: 59px;
+    background: #ffffff;
+    width:100%;
+
+}
+
+.cart_progress_bar {
+    background: url("../../../Home/images/Buy/store_bg.png") no-repeat scroll 0 -38px rgba(0, 0, 0, 0);
+    height: 34px;
+    margin: 0 auto;
+    overflow: hidden;
+    width: 584px;
+
+
+}
+.cart_progress_bar li.current {
+    color: #ffffff;
+}
+.cart_progress_bar li {
+    color: #999999;
+    display: inline-block;
+    float: left;
+    font-size: 14px;
+    height: 33px;
+    line-height: 33px;
+    padding-left: 15px;
+
+    text-align: center;
+}
+
+
+/*订单主体*/
+main {
+    width: 100%;
+    height: auto;
+    background: #fff;
+}
+
+/*订单功能块*/
+.collect_address, .collect_address, .collect_pay, .collect_way, .collect_list,
+.collect_invoice, .collect_time, .collect_discount {
+    width: 80%;
+    height: auto;
+    margin: 0 auto;
+    margin-top: 15px;
+}
+
+/*title*/
+.collect_title {
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    font-size: 20px;
+    color: #000000;
+    /*text-align: center;*/
+    /*background: rgba(236, 231, 255, 0.46);*/
+    border-bottom: 2px solid rgba(236, 231, 255, 0.46);
+    margin: 0px auto;
+    padding-left: 10px;
+    text-shadow: 1px 1px 2px #000000;
+}
+
+/*p标签右移动3px*/
+.mr3 {
+    margin-right: 3px;
+}
+
+/*订单体*/
+.collect_address_box, .collect_pay_box, .collect_way_box, .collect_time_box,
+.collect_invoice_box {
+    padding: 15px;
+}
+
+/*分块名称*/
+.collect_address_box_name {
+    display: inline;
+    width: 100px;
+}
+
+/*发票按钮*/
+.invoice_button {
+    width: 80px !important;
+    margin-right: 30px;
+}
+
+/*商品图片*/
+.cart_image {
+    width: 100px;
+    margin: 0 auto;
+}
+
+/*数量*/
+.qty, .gift_qty {
+    display: inline-block;
+    height: 22px;
+    line-height: 22px;
+    overflow: hidden;
+    vertical-align: top;
+    width: 24px;
+}
+
+.num {
+    height: 22px;
+    width: auto;
+}
+
+/*提交订单*/
+.collect_sub {
+    position: relative;
+    margin: 0px auto;
+    height: 200px;
+    width: 80%;
+}
+
+.collect_sub_left {
+    float: left;
+    height: 200px;
+    width: 75%;
+}
+
+.collect_sub_right {
+    float: left;
+    height: 200px;
+    width: 25%;
+    padding: 20px;
+}
+
+.collect_sub p {
+    height: 10px;
+}
+
+/*价格显示*/
+.price {
+    position: absolute;
+    top: 90px;
+    right: 15px;
+}
+
+/*提交按钮*/
+.collect_sub_right_button {
+    margin-top: 40px;
+    text-align: right;
+}
+
+/*修改地址遮罩层 大背景层*/
+.address_change {
+    position: fixed;
+    background: rgba(0, 0, 0, 0.45);
+    height: 250px;
+    width: 100%;
+    z-index: 19999;
+    top: 0;
+}
+/*填写地址区域 小背景层*/
+.address_change_cover {
+    height: 300px;
+    width: 600px;
+    background: #ffffff;
+    margin: 50px auto;
+}
+/*标题部分*/
+.address_change_title {
+    width: 100%;
+    /*height: 50px;*/
+    line-height: 50px;
+    border-bottom: 1px solid #cccccc;
+    overflow: auto;
+}
+/*标题文字*/
+.address_change_title_text {
+    float: left;
+    width: 95%;
+    font-size: large;
+    padding-left: 20px;
+}
+/*关闭按钮*/
+.address_change_close {
+    float: left;
+    width: 5%;
+
+}
+/*主要填写区域*/
+.address_change_main {
+    height: 250px;
+    padding-left: 40px;
+    padding-top: 20px;
+
+}
+
+.address_change_main b {
+    margin-right: 5px;
+    color: red;
+}
+
+.address_change_main span {
+    display: inline-block;
+    width: 80px;
+}
+
+.address {
+    width: 360px;
+}
+
+.address_change_checkbox {
+    padding-left: 90px;
+
+}
+
+.address_change_checkbox span {
+    padding-left: 10px;
+}
+
+.address_change_btn {
+    width: 300px;
+    margin-left: 90px;
+    margin-top: -10px;
+}
+
+.address_change_btn button {
+    margin-right: 20px;
+
+}

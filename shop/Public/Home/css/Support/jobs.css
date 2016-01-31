@@ -1,0 +1,281 @@
+*{
+    padding:0px;
+    margin:0px;
+}
+p{
+    margin:0;
+}
+/*html,body{*/
+    /*width:100%;*/
+    /*background:#fafafa;*/
+    /*margin:0 auto;*/
+    /*position:relative;*/
+    /*overflow:hidden;*/
+    /*zoom:1;*/
+/*}*/
+/*banner image*/
+#header_img{
+    width:100%;
+    height:auto;
+
+}
+#header_img img{
+    width:100%;
+    /*display:inline-block;*/
+    /*position:absolute;*/
+}
+
+/*主体部分*/
+
+main{
+    width:1160px;
+    margin: 0 auto;
+    overflow:hidden;
+    zoom:1;
+    margin-top:40px;
+    box-sizing:content-box !important;
+}
+/*左侧部分*/
+#main_left{
+    /*height:auto;*/
+    height:auto;
+    width:860px;
+    border:1px solid rgba(204, 204, 204, 0.42);
+    float:left;
+    background:#fff;
+
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.1);
+    -moz-box-shadow: 0 1px 1px rgba(0,0,0,.1);
+    -ms-box-shadow: 0 1px 1px rgba(0,0,0,.1);
+    box-shadow: 0 1px 1px rgba(0,0,0,.1);
+
+    padding-top:40px;
+    padding-left:30px;
+    padding-right:30px;
+    padding-bottom:80px;
+    position:relative;
+}
+/*职位类别*/
+.category {
+    height:45px;
+
+
+}
+/*每一个a类别*/
+.category a{
+    table-layout : fixed;
+    display:inline-block;
+    height:35px;
+    text-align:center;
+    color:#000;
+    font-size:16px;
+    margin: 0 auto;
+    font-weight:600;
+    text-decoration:none;
+    outline:none;
+    /*暂时固定值 后期js计算*/
+    margin-left:20px; /*debug*/
+}
+    /*点击时的样式 后js计算*/
+.category_click{/*debug*/
+    height:32px;
+    border-bottom:3px solid red;
+    color:red;
+}
+
+/**/
+.job_list{
+    table-layout : fixed; /*单元格等宽*/
+    width:100%;
+    border-collapse:collapse;/*合并单元格的边*/
+}
+
+.job_list tr:nth-of-type(2n-1){
+    background: rgba(226, 226, 226, 0.32);
+}
+.job_list tr:hover{
+    background: rgba(40, 141, 243, 0.35);
+    cursor: pointer;
+}
+.job_list tr:first-of-type{
+    cursor:default;
+}
+.job_list th{
+    height:35px;
+    line-height:35px;
+    text-align:center;
+    background: #288df3;
+    color:#fff;
+}
+.job_list tr td{
+    height:35px;
+    text-align:center;
+    color: #000000;
+
+}
+/*翻页预留部分*/
+.main_left_footer{
+    position:absolute;
+    height:50px;
+    width:800px;
+    bottom:15px;
+    background: #39cc71;
+    margin:0 auto;
+    text-align:center;
+    line-height:50px;
+}
+
+
+
+
+
+
+
+
+/*右侧部分*/
+#main_right{
+    /*height:auto;*/
+    height:auto;
+    width:280px;
+    border:1px solid rgba(204, 204, 204, 0.42);
+    float:right;
+    background:#fff;
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.1);
+    -moz-box-shadow: 0 1px 1px rgba(0,0,0,.1);
+    -ms-box-shadow: 0 1px 1px rgba(0,0,0,.1);
+    box-shadow: 0 1px 1px rgba(0,0,0,.1);
+ }
+.main_right_p{
+    height:50px;
+    background: rgba(40, 141, 243, 0.53);
+    color:#fff;
+    text-align:center;
+    line-height:50px;
+}
+.main_right_news{
+    padding-left:10px;
+    padding-right:10px;
+    margin-bottom:-1px;
+    height:auto;
+}
+.main_right_news p{
+    height:50px;
+    width:100%;
+
+    border-bottom:1px solid #ccc;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    line-height:50px;
+
+}
+.main_right_ad{
+    width:100%;
+    height:120px;
+    background: #7bff6d;
+}
+.main_right-ad img{
+
+}
+
+
+/*隐藏的job详情*/
+
+/*背景遮罩*/
+.job_info{
+    display:none;
+    position:absolute;
+    top:0;
+    background: rgba(0, 0, 0, 0.29);
+    z-index: 1998;
+    width:100%;
+    height: auto;
+}
+/*显示的表单*/
+.job_info_box{
+    /*height:auto;*/
+    height:480px;
+    width:970px;
+    background: rgba(255, 255, 255, 1);
+    margin:0 auto;
+    margin-top:30px;
+    position:fixed;
+    border:1px solid rgba(0, 0, 0, 0.54);
+    box-shadow:0 1px 3px rgba(0, 0, 0, 0.54);
+    z-index: 1999;
+    overflow: hidden;
+    zoom:1;
+}
+.job_info_box_left{
+    float:left;
+    height:400px;
+    width:350px;
+
+    padding: 40px 50px 40px 50px; /*syxz*/
+    /*border-right:3px solid rgba(0, 0, 0, 0.54);*/
+    /*box-shadow:0 0 3px #000;*/
+
+}
+.job_info_box_right{
+    float:left;
+    height:480px;
+    width:618px;
+    padding: 40px 40px 40px 40px;
+    background: #288df3;
+    color:#fff;
+}
+
+/*职位*/
+.job_position{
+    background: #288df3;
+    color:#fff;
+    height:30px;
+    line-height:30px;
+    text-align:center;
+    margin-bottom:3px;
+}
+.job_info_box_left div p{
+    height:25px;
+    line-height:25px;
+    padding-left:10px;
+}
+.job_info_box_left div p:nth-of-type(2n){
+    background: rgba(204, 204, 204, 0.44);
+}
+
+
+.job_info_box_right_top{
+    font-size:14px;
+}
+.job_info_box_right_bottom{
+    font-size:14px;
+    margin-top:10px;
+}
+
+/*返回按钮*/
+.return_button,.write_button{
+    display:inline-block;
+    height:35px;
+    line-height:35px;
+    text-align:center;
+    width:100px;
+    background: #288df3;
+    color:#fff;
+    box-shadow:0 1px 2px #000;
+    margin-top:3px;
+    text-decoration:none;
+    outline:none;
+}
+.return_button{
+    margin-left:10px;
+    margin-right:28px;
+}
+
+.return_button:hover,.write_button:hover{
+    box-shadow:1px 2px 2px #000;
+}
+
+/*提交按钮*/
+
+
+

@@ -1,0 +1,146 @@
+<extend name="Public:member1"/>
+    <block name="cssFile">
+	<link href="__PUBLIC__/Home/css/member.css" rel="stylesheet" type="text/css">
+	<link href="__PUBLIC__/Home/css/order.css" rel="stylesheet" type="text/css">
+	<link href="__PUBLIC__/Home/css/pubmember.css" rel="stylesheet" type="text/css">
+	</block>
+	<block name="topJsFile">
+	<script src="__PUBLIC__/Home/js/member.js"></script>
+  <script src="__PUBLIC__/Home/js/order.js"></script>
+  <script>
+        var _url = "__CONTROLLER__";
+  </script>
+	</block>
+    <block name="publicBody">
+	<div class="member-zt-right display-inline-block">
+     		<div class="member-address">
+                  <span>我的订单</span>
+        </div>
+ 		<!--更换部分开始-->
+ 		<div id="hasOrderCon" class="radius_5 content_box" style="display: block;margin-top:20px;">
+            <ul class="ordernav cf ">
+                    <li class="na1 display-inline-block">商品名称</li>
+                    <li class="na2 display-inline-block">价格</li>
+                    <li class="na3 display-inline-block">数量</li>
+                    <li class="na4 display-inline-block">应付金额</li>
+                    <li class="na5 display-inline-block">订单状态</li>
+                    <li class="na6 display-inline-block">操作</li>
+             </ul>
+             <if condition="$orderlist neq null">
+             <div id="orderCon" style="width:800px;margin-left:60px;">
+
+                 <!--一个订单开始-->
+                 <foreach name="orderlist" item="v">
+                 <div class="radius_5 order_table overf">
+                   <table style="font-size:12px;">
+                         <thead>
+                            <tr>
+                              <th class="order_title" colspan="6">
+                                  <span style="font-size:13px;color:#9F9999;font-weight:normal;">订单号：</span>
+                                    <a class="color_green1 pad_r_10" style="font-size:13px;font-weight:normal;" href="<{:U('Order/viewOrder',array('id'=>$v['id']))}>" title="查看订单"><{$v.order_sn}></a>
+                                  <span style="font-size:13px;color:#9F9999;font-weight:normal;">下单时间：</span>
+                                  <span class="color_gray1" style="font-size:13px;color:#9F9999;font-weight:normal;">
+                                  <{$v['order_date']|date="Y-m-d H:i:s",###}></span>
+                               </th>
+                            </tr>
+                          </thead>
+                          <tbody>
+
+                            <tr style="padding-bottom:3px;">
+                               <td width="246" class="phone_td" style="height:80px;">
+                                <foreach name="v['list']" item="vo">
+                                   <div class="main_goods cl" style="margin-top:3px;">
+                                      <a title="查看详情" target="_blank" href="<{:U('ProductDetail/detail',array('id'=>$vo['prolist']['id']))}>">
+                                          <img width="80" height="80" src="__PUBLIC__/Product/thumb/<{$vo['prolist']['list_image']}>">
+                                      </a>
+                                      <h2>
+                                         <a title="查看详情" target="_blank" href="<{:U('ProductDetail/detail',array('id'=>$vo['prolist']['id']))}>" style="font-size:12px;">
+                                                    <{$vo['prolist']['pro_name']}>
+                                         </a>
+                                      </h2>
+                                      <p style="font-size:12px;"><{$vo.product_color}></p>
+                                    </div>
+                                    <if condition="$vo['prolist']['gift'] neq null">
+                                     <dl class="gifs_goods cl" style="margin:0;">
+                                        <dt class="color_red" style="margin-left:10px;">【赠品】</dt>
+                                        <dd style="margin-left:56px;">
+                                          <img width="38" height="38" src="__PUBLIC__/Product/thumb/<{$vo['prolist']['gift']['list_image']}>">
+                                          <h2 style="font-size:13px;font-family:微软雅黑;" class="display-inline-block"><{$vo['prolist']['gift']['pro_name']}> X 1</h2>
+                                        </dd>
+                                    </dl>
+                                    </if>
+                                    </foreach>
+                                </td>
+                                <td width="75" class="color_red color-font">
+                                <foreach name="v['list']" item="vo">
+                                    <div style="line-height:150px;">¥<{$vo.product_price}></div>
+                                </foreach>
+                                </td>
+                                <td width="65" class="color-font">
+                                <foreach name="v['list']" item="vo">
+                                    <div style="150px;line-height:150px;"><{$vo.product_number}></div>
+                                </foreach>
+
+                                </td>
+                                <td width="85" class="color_red color-font" rowspan="2"> ¥<{$v.real_price}>&nbsp;(含邮费)</td>
+                                <td width="75" rowspan="2" class="color-font" style="font-size:12px;" id="st<{$v.id}>">
+                                   <if condition="$v['pay_type'] eq 0">
+                                       <if condition="$v['order_status'] eq 1">
+                                         待付款
+                                        <else/>
+                                        已取消
+                                        </if>
+                                   <elseif condition="$v['pay_type'] eq 1"/>
+                                         待发货
+                                   </if>
+                                </td>
+                                <td width="89" rowspan="2" id="status<{$v.id}>">
+                                    <if condition="$v['order_status'] eq 0">
+                                       <div style="margin-bottom:10px; text-align:center;">
+                                          <a class="pad_r_10" href="<{:U('Order/viewOrder',array('id'=>$v['id']))}>" style="font-size:12px;">
+                                             查看
+                                          </a>
+
+                                       </div>
+                                     <else/>
+                                        <div style="margin-bottom:10px;">
+                                            <a class="pad_r_10" href="<{:U('Order/viewOrder/id/'.$v['id'])}>" style="font-size:12px;">
+                                               查看
+                                            </a>
+                                             <a class="pad_r_10" href="javascript:void(0)" style="font-size:12px;" onclick="cancel(<{$v.id}>)">|　取消订单</a>
+                                        </div>
+
+                                        <div style="text-align:center;"><a class="payment radius_5" onclick="reBuy(0)" href="javascript:;" style="color:#fff;">去付款</a></div><br>
+                                     </if>
+                                </td>
+                            </tr>
+
+
+                         </tbody>
+                   </table>
+                 </div>
+                 </foreach>
+
+                   <div class="pagination alternate" style="float:right;">
+                                   <{$page}>
+                   </div>
+
+                <!--一个订单结束-->
+
+            </div>
+            <else/>
+            <!--没有订单时的样式开始-->
+            <div id="noOrderCon" class="radius_5 cf ui_hide" style="display:block;">
+                <div class="norder">
+                    <span></span>
+                    <h3 class="">您还没有订单</h3>
+                    <a href="<{:U('Product/productList',array('type'=>'shop','cat'=>'all'))}>"></a>
+                </div>
+            </div>
+             <!--没有订单时的样式结束-->
+             </if>
+       </div>
+ 		<!--更换部分结束-->
+</div>
+</block>
+

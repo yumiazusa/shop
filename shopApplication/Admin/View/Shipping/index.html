@@ -1,0 +1,231 @@
+<!-- =====================================================
+    Author: Eden
+    Date:   2015-01-12
+    Function:   公共模板文件中定义的block区域，可以在子模板中继承和覆盖
+ ========================================================= -->
+<!-- 继承 公共模板 开始 -->
+<extend name="Public:blank" />
+<!-- 继承 公共模板 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部CSS文件 开始 -->
+<block name="cssFile">
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap-responsive.min.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-style.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-media.css" />
+    <link href="__PUBLIC__/Admin/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/jquery.gritter.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/uniform.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/select2.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap-wysihtml5.css" />
+    <style>
+        th.list-title {
+            font-size:14px;
+        }
+        td.align-center {
+            text-align:center;
+        }
+        a {
+            color:#27A9E3;
+        }
+        a:hover {
+            color:#f70;
+            text-decoration:underline;
+        }
+    </style>
+</block>
+<!-- 顶部CSS文件 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部JS文件 开始 -->
+<block name="topJsFile">
+    
+</block>
+<!-- 顶部JS文件 结束 -->
+
+<!-- ===================================================== -->
+<!-- 头部部分 开始 -->
+<block name="publicHead">
+    <div id="breadcrumb"> 
+        <a href="__APP__" title="返回系统首页" class="tip-bottom">
+            <i class="icon-home"></i> 
+        管理首页</a> 
+        <a href="<{:U('Config/index')}>" class="current">系统配置</a> 
+        <a href="__CONTROLLER__/index" class="current">物流设置</a> 
+    </div>
+    <h1 style="margin-top:10px;">设置商家物流接口信息(爱查快递)</h1>
+</block>
+<!-- 头部部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 公共Body部分 开始 -->
+<block name="publicBody">
+    <!-- 将主体包含在 .row-fluid 内部 -->
+    <div class="container-fluid">
+        <hr style="margin:0;">
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="widget-box">
+                    <div class="widget-title">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a data-toggle="tab" href="#tab1">物流支持</a></li>
+                            <li><a data-toggle="tab" href="#tab2">API设置</a></li>
+                        </ul>
+                    </div>
+                    <div class="widget-content tab-content">
+                        <div id="tab1" class="tab-pane active">
+                            <div style="margin-bottom:10px; overflow:hidden;">
+                                <a href="<{:U('shippingAdd')}>" class="pull-right btn btn-primary"><i class="icon-plus"></i> 添加物流</a>
+                            </div>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th style="width:50px;">编号</th>
+                                        <th>物流名称</th>
+                                        <th>企业码</th>
+                                        <th>描述信息</th>
+                                        <th>默认</th>
+                                        <th style="width:80px;">操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <foreach name="sRes" item="sRes">
+                                    <tr>
+                                        <td style="text-align:center;"><{$sRes.id}></td>
+                                        <td style="text-align:center;"><{$sRes.cname}></td>
+                                        <td style="text-align:center;"><{$sRes.com}></td>
+                                        <td><{$sRes.shipping_desc}></td>
+                                        <td style="text-align:center;">
+                                            <notempty name="sRes.is_default">
+                                                <i class="icon-flag" style="color:red" title="默认"></i>
+                                            </notempty>
+                                        </td>
+                                        <td style="text-align:center;">
+                                            <a href="<{:U('shippingEdit',array('id'=>$sRes['id']))}>" class="btn btn-info btn-mini" title="编辑"><i class="icon-pencil"></i></a>
+                                            <a href="__CONTROLLER__/doShippingDelete/id/<{$sRes.id}>" class="btn btn-warning btn-mini" onclick="return confirm('您确定删除该记录吗？');" title="删除"><i class="icon-trash"></i></a>
+                                        </td>
+                                    </tr>
+                                    </foreach>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="6">
+                                            <div class="pagination alternate" style="padding-bottom:0; text-align:right">
+                                                <{$page}>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <div id="tab2" class="tab-pane">
+                            <div class="widget-content nopadding">
+                                <form action="__CONTROLLER__/saveShippingAPI" method="post" class="form-horizontal">
+                                    <div class="control-group">
+                                        <label class="control-label">Key（ID）:</label>
+                                        <div class="controls">
+                                            <input type="text" class="span5 tip-right" name="shipping_id" value="<{$sConfig.shipping_id}>" data-original-title="授权KEY"/>
+                                            <span class="help-block span5 pull-right text-right">shipping_id</span>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">密钥（Secret）:</label>
+                                        <div class="controls">
+                                            <input type="text" class="span5 tip-right" name="shipping_secret" value="<{$sConfig.shipping_secret}>" data-original-title="http://api.ickd.cn/users/查看对应secret值"/>
+                                            <span class="help-block span5 pull-right text-right">shipping_secret</span>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">返回格式（type） :</label>
+                                        <div class="controls">
+                                            <select name="shipping_type" class="span2" id="">
+                                                <option <eq name="sConfig.shipping_type" value="html">selected</eq> value="html">html</option>
+                                                <option <eq name="sConfig.shipping_type" value="json">selected</eq> value="json" selected>json</option>
+                                                <option <eq name="sConfig.shipping_type" value="text">selected</eq> value="text">text</option>
+                                                <option <eq name="sConfig.shipping_type" value="xml">selected</eq> value="xml">xml</option>
+                                            </select>
+                                            <span class="help-block span5 pull-right text-right">shipping_type</span>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">排序（ord） :</label>
+                                        <div class="controls">
+                                           <select name="shipping_ord" class="span2" id="">
+                                                <option <eq name="sConfig.shipping_ord" value="asc">selected</eq> value="asc" selected>升序</option>
+                                                <option <eq name="sConfig.shipping_ord" value="desc">selected</eq> value="desc">降序</option>
+                                            </select>
+                                            <span class="help-block span5 pull-right text-right">shipping_ord</span>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">编码（encode） :</label>
+                                        <div class="controls">
+                                            <select name="shipping_encode" class="span2" id="">
+                                                <option <eq name="sConfig.shipping_encode" value="gbk">selected</eq> value="gbk">gbk</option>
+                                                <option <eq name="sConfig.shipping_encode" value="utf8">selected</eq> value="utf8" selected>utf8</option>
+                                            </select>
+                                            <span class="help-block span5 pull-right text-right">shipping_encode</span>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">版本（ver） :</label>
+                                        <div class="controls">
+                                            <select name="shipping_ver" class="span2" id="">
+                                                <option <eq name="sConfig.shipping_ver" value="1">selected</eq> value="1">版本1</option>
+                                                <option <eq name="sConfig.shipping_ver" value="2">selected</eq> value="2" selected>版本2</option>
+                                            </select>
+                                            <span class="help-block span5 pull-right text-right">shipping_ver</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-actions">
+                                        <button type="submit" style="margin-left:180px;" class="btn btn-primary"> 立即保存 </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>
+<!-- 公共Body部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- js文件模块 开始 -->
+<block name="footJsFile">
+    <script src="__PUBLIC__/Admin/js/jquery.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.ui.custom.js"></script> 
+    <script src="__PUBLIC__/Admin/js/bootstrap.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.uniform.js"></script> 
+    <script src="__PUBLIC__/Admin/js/select2.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.dataTables.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.tables.js"></script>
+    <script src="__PUBLIC__/Admin/js/matrix.interface.js"></script>
+    <script src="__PUBLIC__/Admin/js/jquery.toggle.buttons.html"></script> 
+    <script src="__PUBLIC__/Admin/js/masked.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.form_common.js"></script> 
+    <script src="__PUBLIC__/Admin/js/wysihtml5-0.3.0.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.peity.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/bootstrap-wysihtml5.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.validate.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.popover.js"></script>
+    <script src="__PUBLIC__/Admin/js/muneopen.js"></script>
+</block>
+<!-- js文件模块 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 底部JS执行区域 开始 -->
+<block name="footScript">
+    <script type="text/javascript">
+        $('.textarea_editor').wysihtml5();
+    </script>
+</block>
+<!-- 底部JS执行区域 结束 -->

@@ -1,0 +1,221 @@
+<!-- 继承 公共模板 开始 -->
+<extend name="Public:blank"/>
+<!-- 继承 公共模板 结束 -->
+
+<!-- ===================================================== -->
+
+
+<!-- 顶部CSS文件 开始 -->
+<block name="cssFile">
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap-responsive.min.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/fullcalendar.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-style.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-media.css"/>
+    <link href="__PUBLIC__/Admin/font-awesome/css/font-awesome.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/jquery.gritter.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/colorpicker.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/uniform.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/select2.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap-wysihtml5.css"/>
+
+</block>
+<!-- 顶部CSS文件 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部JS文件 开始 -->
+<block name="topJsFile">
+
+</block>
+<!-- 顶部JS文件 结束 -->
+
+<!-- ===================================================== -->
+<!-- 头部部分 开始 -->
+<block name="publicHead">
+    <div id="breadcrumb">
+        <a href="index.html" title="返回系统主页" class="tip-bottom">
+            <i class="icon-home"></i>
+            管理首页
+        </a>
+        <a href="#" class="current">人才招聘</a>
+    </div>
+    <h1 style="margin-top:10px;">添加职位</h1>
+</block>
+<!-- 头部部分 结束 -->
+
+<!-- 公共Body部分 开始 -->
+<block name="publicBody">
+
+<!-- 将主体包含在 .row-fluid 内部 -->
+<div class="container-fluid">
+<hr style="margin:0;">
+    <div class="row-fluid">
+
+<div class="span12">
+<div class="widget-box">
+<div class="add-adv" style="float:right;" > 
+              <a href="<{:U('Job/addJob')}>" class="btn btn-info"><b>添加职位</b></a>
+              <a href="<{:U('Job/index')}>" class="btn btn-info"><b>职位列表</b></a>
+            </div>
+<div class="widget-content tab-content">
+
+    <form class="form-horizontal" method="post" action="__CONTROLLER__/addJob">
+    <div class="span6">
+        <!--这里是半宽的区域-->
+        <div class="widget-box">
+        
+            <div class="widget-content nopadding">
+
+                    <div class="control-group">
+                        <label class="control-label">职位名称　:</label>
+
+                        <div class="controls">
+                            <input type="text"  class="span11" name="job_name" id="job_name"
+                                   value="">
+                        </div>
+                    </div>
+                    <!-- <div class="control-group">
+                        <label class="control-label">职位类别　:</label>
+                        <div class="controls"><select  style="width:220px;">
+                            <foreach name="cat_list" item="vo">
+                                <option  value="<{$vo.cat_id}>">
+                                    <{$vo.cat_name}>
+                                </option>
+                            </foreach>
+                        </select></div>
+                    </div> -->
+                    <div class="control-group">
+                        <label class="control-label">所属部门　:</label>
+                        <div class="controls">
+                            <input type="text" class="span11" id="department" name=department value="">
+                        </div>
+
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">工作类型　:</label>
+                        <div class="controls" >
+
+                            <label class="radio-inline">
+                                <input type="radio" name="type" checked value="0"> 全职
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="type" value="1"> 兼职
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="type" value="2"> 实习
+                            </label>
+
+                        </div>
+
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">工作地址　:</label>
+
+                        <div class="controls">
+                            <input type="text" class="span11" id="address" value="" name="address">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">招聘人数　:</label>
+
+                        <div class="controls">
+                            <input type="text" class="span11" id="number" name="number" value="">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">学历　:</label>
+
+                        <div class="controls">
+                            <input type="text" class="span11" name="edu" id="edu" value="">
+                        </div>
+                    </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="span6">
+        <div class="widget-box">
+
+            <div class="widget-content nopadding">
+                <div class="form-horizontal" >
+                    <div class="control-group">
+                        <label class="control-label">工作经历　:</label>
+
+                        <div class="controls">
+                            <textarea class="span11" name="condition" id="condition"></textarea>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">工作内容　:</label>
+
+                        <div class="controls">
+                            <textarea class="span11" name="contents" id="contents"></textarea>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">显示　:</label>
+
+                        <label class="radio-inline">
+                            <input type="radio" name="is_show" checked value="1"> 是
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="is_show" value="0"> 否
+                        </label>
+                    </div>
+
+                    <div class="form-actions">
+                        <button class="btn btn-success" id="sub"  name="sub" type="submit">确认</button>
+                        <a class="btn btn-danger" href="<{:U('Job/index')}>" type="submit">返回</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    </form>
+</div>
+
+
+</div>
+</div>
+        </div>
+    </div>
+</block>
+<!-- js文件模块 开始 -->
+<block name="footJsFile">
+
+</block>
+<!-- js文件模块 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 底部JS执行区域 开始 -->
+<block name="footScript">
+<script src="__PUBLIC__/Admin/js/jquery.min.js"></script>
+<script src="__PUBLIC__/Admin/js/jquery.ui.custom.js"></script>
+<script src="__PUBLIC__/Admin/js/bootstrap.min.js"></script>
+<script src="__PUBLIC__/Admin/js/bootstrap-colorpicker.js"></script>
+<script src="__PUBLIC__/Admin/js/bootstrap-datepicker.js"></script>
+<!--<script src="__PUBLIC__/Admin/js/jquery.toggle.buttons.html"></script>-->
+<script src="__PUBLIC__/Admin/js/masked.js"></script>
+<script src="__PUBLIC__/Admin/js/jquery.uniform.js"></script>
+<script src="__PUBLIC__/Admin/js/select2.min.js"></script>
+<script src="__PUBLIC__/Admin/js/matrix.js"></script>
+<!--<script src="__PUBLIC__/Admin/js/matrix.form_common.js"></script>-->
+<script src="__PUBLIC__/Admin/js/wysihtml5-0.3.0.js"></script>
+<script src="__PUBLIC__/Admin/js/jquery.peity.min.js"></script>
+<script src="__PUBLIC__/Admin/js/muneopen.js"></script>
+    <script>
+        $('#sub').bind('click',function(){
+            if($('#job_name').val() == ''){
+                alert('请填写完整!');
+                return false;
+            }
+        })
+    </script>
+
+</block>

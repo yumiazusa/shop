@@ -1,0 +1,142 @@
+<extend name="Public:member1"/>
+    <block name="cssFile">
+	<link href="__PUBLIC__/Home/css/member.css" rel="stylesheet" type="text/css">
+	<link href="__PUBLIC__/Home/css/order.css" rel="stylesheet" type="text/css">
+	<link href="__PUBLIC__/Home/css/pubmember.css" rel="stylesheet" type="text/css">
+	</block>
+	<block name="topJsFile">
+	 <script src="__PUBLIC__/Home/js/member.js"></script>
+	 <script src="__PUBLIC__/Home/js/order.js"></script>
+	 <script>
+          var url ="__APP__";
+	 </script>
+	</block>
+     <block name="publicBody"> 
+			 	<div class="member-zt-right display-inline-block">
+				 		<div class="member-address">
+				 			<span>售后服务详情</span>
+				 		</div>
+				 		<!--更换部分开始-->
+				 	     <div class="mod-main mod-comm" style="font-size:normal;">
+							<!--  <div class="mt">
+								<h3>售后服务详情</h3>
+								
+							 </div> -->
+							 <div class="mc">
+								<div class="remind-box1">
+									<div class="smt">
+										<ul class="fl info-list">
+											<li>
+												<strong class="mr20">
+													<{$sale.service_sn}>
+													<input type="hidden" value="146169265" id="afsServiceIdInput">
+													<input type="hidden" value="7101715197" id="orderIdInput">
+													<input type="hidden" value="afs_detail" id="toImPageFlag">
+													<input type="hidden" value="1" id="changeNewChatFlag">
+												</strong><{$list['pro_name']}>&nbsp;&nbsp;&nbsp;<{$list['pro_subname']}>
+												
+										    </li>
+
+										</ul>
+
+									</div>
+									
+								</div>
+							</div>
+							<if condition="$sale['service_status'] eq 4">
+                                  <button type="button" class="btn btn-info" style="margin-top:20px;">服务单已取消</button>
+
+							<else/>
+							     <button type="button" class="btn btn-info" onclick="cancelService(<{$sale.id}>)" style="margin-top:20px;" id="cservice">取消服务单</button>
+							</if>
+						</div>
+						
+						<div id="air07" class="mod-main mod-comm">
+						    <div class="mt"><h3 style="font-size:13px;">跟踪信息</h3>
+								<div class="extra-r"><span class="btn-9 bts" href="javascript:void(0)">收起</span></div>
+							</div>
+						    <div class="mc" id="up">
+								<table class="tb-void tb-none" style="font-size:13px;">
+									<colgroup>
+										<col width="29%">
+										<col width="49%">
+										<col width="22%">
+									</colgroup>
+									<thead>
+										<tr>
+											<th>处理时间</th>
+											<th>处理信息</th>
+											<th>操作人</th>
+										</tr>
+									</thead>
+									<tbody id="service">
+									     <foreach name="details" item="v">
+									     <tr>
+										    <td><span class="ftx03"><{$v['time'] | date="Y-m-d H:i:s",###}></span></td>
+											<td><div class="al"><{$v.message}></div></td>
+											<td><span class="ftx03"><{$v.operator}></span></td>
+										 </tr>
+										 </foreach>
+                                         
+									</tbody>
+								</table>
+						    </div>
+						</div>
+						<div id="air08" class="mod-main mod-comm">
+						    <div class="mt">
+						        <h3 style="font-size:13px;">服务单信息</h3>
+						        <div class="extra-r">
+						            <span class="btn-9 btns" href="javascript:void(0)">收起</span>
+						        </div>
+						    </div>
+						    <div class="mc" id="show">
+						         <table class="tb-void tb-left">
+									   <colgroup>
+											<col width="110px">
+											<col>
+										</colgroup>
+										<tbody>
+											<tr>
+							                   <td>商品返回方式</td>
+							                   <td>客户期望返件方式为“客户发货”</td>
+							                </tr>
+						                    <tr>
+						                    <td>商品处理方式</td>
+						                    <td>
+						                        <if condition="$sale['service_type'] eq 1">
+						                        客户期望处理方式为“维修”
+						                        <elseif condition="$sale['service_type'] eq 2"/>
+						                         客户期望处理方式为“退货”
+						                         <else/>
+						                          客户期望处理方式为“换货”
+						                          </if>
+						                    </td>
+							                </tr>
+							                 <tr>
+							                    <td>问题描述</td>
+							                    <td>
+							                       <div class="row6col2"><{$sale['description']}></div>
+							                     </td>
+							                 </tr>
+							                  <tr>
+							                     <td>收货地址</td>
+							                     <td>
+							                        <div class="row7col2">
+							                           <{$sale['province']}> &nbsp;&nbsp;<{$sale['city']}> &nbsp;&nbsp;
+							                            <{$sale['area']}> &nbsp;&nbsp; <{$sale['street']}>
+							                        </div>
+							                     </td>
+							                   </tr>
+							                   <tr>
+							                        <td>联系信息</td>
+							                        <td>联系人：<{$sale['contact']}> &nbsp;&nbsp;手机：<{$sale['phone']}></td>
+							                    </tr>
+						               </tbody>
+						          </table>
+
+						    </div>
+						     <a  class="btn btn-primary" href="javascript:window.history.back()" style="color:#ffffff;">返回</a>
+						</div>			        
+		               <!--更换部分结束-->	                		
+			    </div>    
+			</block>

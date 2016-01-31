@@ -1,0 +1,33 @@
+*{
+    padding:0;
+    border:0;
+    margin:0;
+}
+
+#pay_ok{
+    height:400px;
+    width:100%;
+
+}
+
+.pay_ok_top{
+    height:40%;
+    width:100%;
+    text-align:center;
+    font-size:35px;
+    padding-top:70px;
+    color: #00ACFF;
+}
+.pay_ok_top p{
+    line-height:120%;
+}
+
+.pay_ok_bottom{
+    height:60%;
+
+}
+
+.pay_ok_bottom p{
+    text-align:center;
+    line-height:100px;
+}

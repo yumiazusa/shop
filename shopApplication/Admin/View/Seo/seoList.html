@@ -1,0 +1,149 @@
+<!-- =====================================================
+   SEO列表
+ ========================================================= -->
+<!-- 继承 公共模板 开始 -->
+<extend name="Public:blank" />
+<!-- 继承 公共模板 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部CSS文件 开始 -->
+<block name="cssFile">
+<link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap.min.css" />
+<link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap-responsive.min.css" />
+<link rel="stylesheet" href="__PUBLIC__/Admin/css/uniform.css" />
+<link rel="stylesheet" href="__PUBLIC__/Admin/css/select2.css" />
+<link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-style.css" />
+<link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-media.css" />
+<link rel="stylesheet" href="__PUBLIC__/Admin/css/adv.css" />
+<link href="__PUBLIC__/Admin/font-awesome/css/font-awesome.css" rel="stylesheet" />
+<style>
+</style>
+</block>
+<!-- 顶部CSS文件 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部JS文件 开始 -->
+<block name="topJsFile">
+   <script>
+        var _URL_ = "__CONTROLLER__";
+   </script>
+    <script src="__PUBLIC__/Admin/js/jquery.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/adv.js"></script>
+</block>
+<!-- 顶部JS文件 结束 -->
+
+<!-- ===================================================== -->
+<!-- 头部部分 开始 -->
+<block name="publicHead">
+    <div id="breadcrumb">
+        <a href="seolist.html" title="返回系统主页" class="tip-bottom">
+            <i class="icon-home"></i>
+            管理首页
+        </a>
+    </div>
+    <h1 style="margin-top:10px;">
+           
+
+    </h1>
+</block>
+<!-- 头部部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 公共Body部分 开始 -->
+<block name="publicBody">
+    <!-- 将主体包含在 .row-fluid 内部 -->
+    <div class="container-fluid">
+             <button class="btn btn-info"><b>SEO管理</b></button>
+            <div class="add-adv"> 
+             <!--  <a href="__CONTROLLER__/seoList" class="btn btn-info"><b>+ SEO管理</b></a> -->
+              <a href="__CONTROLLER__/addSeo" class="btn btn-info"><b>+ 添加SEO</b></a>
+            </div>
+       
+        <div class="row-fluid">
+            <div class="span12">
+            <div class="widget-box">
+
+          <div class="widget-content nopadding">
+            <table class="table table-bordered table-striped" style="font-size:14px;">
+              <thead>
+                <tr >
+
+                  <th style="font-size:14px;">SEO ID</th>
+                  <th style="font-size:14px;">SEO 识别码</th>
+                  <th style="font-size:14px;">网页标题</th>
+                  <th style="font-size:14px;">SEO keywords</th>
+                  <th style="font-size:14px;">SEO description</th>
+                 <!--  <th style="font-size:14px;">SEO affiliation</th> -->
+                  <th style="font-size:14px;">操作</th>
+                </tr>
+              </thead>
+              <tbody>
+               <foreach name="list" item="v">
+                <tr>
+                  <td style="text-align:center;"><{$v.id}></td>
+                  <td style="text-align:center;"><p><{$v.seoname}></p><p>(<{$v.ident}>)</p></td>
+                  <td style="text-align:center;"><{$v.title}></td>
+                  <td style="text-align:center;"><{$v.keywords}></td>
+                  <td style="text-align:center;"><{$v.description}></td>
+                  <!-- <td style="text-align:center;"><{$v.affiliation}></td> -->
+                  <td style="text-align:center;">
+                      <a href="__CONTROLLER__/editSeo/id/<{$v.id}>">
+                      <i class="icon-pencil"></i> 编辑</a> | 
+                      <a href="__CONTROLLER__/delSeo/id/<{$v.id}>" onclick="javascript:confirm('确定要删除吗？')" >
+                      删除
+                      </a>
+
+                  </td>   
+                </tr>
+               </foreach>
+                  <tr>
+                         <td colspan="6">
+                            <div class="pagination alternate">
+                              <ul style="float:right;">
+                                   <{$page}>
+                             </ul>
+                             </div>
+                         </td>
+                  </tr>
+              </tbody>
+            </table>
+
+          </div>
+
+        </div>
+            </div>
+        </div>
+    </div>
+</block>
+<!-- 公共Body部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- js文件模块 开始 -->
+<block name="footJsFile">
+    
+</block>
+<!-- js文件模块 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 底部JS执行区域 开始 -->
+<block name="footScript">
+    <script src="__PUBLIC__/Admin/js/jquery.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.ui.custom.js"></script> 
+    <script src="__PUBLIC__/Admin/js/bootstrap.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.uniform.js"></script> 
+    <script src="__PUBLIC__/Admin/js/select2.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.dataTables.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.tables.js"></script>
+    <script src="__PUBLIC__/Admin/js/muneopen.js"></script>
+    <script type="text/javascript">
+         
+    
+    </script>
+</block>
+<!-- 底部JS执行区域 结束 -->

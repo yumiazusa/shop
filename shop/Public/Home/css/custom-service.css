@@ -1,0 +1,49 @@
+
+.side{
+	position: fixed;
+	background:#333333;
+	width:54px;
+	height:53px;
+	top:579px;
+	right:0px;
+	z-index:100000;
+	
+}
+
+.side ul li{
+    width:54px;
+    height:54px;
+    position: relative;
+    list-style: none;
+   
+
+}
+.side ul li .sidebox{
+	position:absolute;
+	width:54px;
+	height:54px;
+	line-height:54px;
+	top:0;
+	right:0;
+	overflow: hidden;
+	background:#333333;
+    cursor: normal;
+    
+}
+.side ul li .sidebox:hover {
+	background:#A20303;
+	/*filter:alpha(opacity=80);
+	opacity:0.8;*/
+	cursor: pointer;
+}
+.side ul li:hover{
+	background:#A20303;
+}
+.side ul li .open{
+	color:#fff;
+
+}
+.sidebox img{
+	float:left;
+	
+}

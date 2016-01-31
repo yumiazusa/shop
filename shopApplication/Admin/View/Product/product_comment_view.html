@@ -1,0 +1,154 @@
+<!-- =====================================================
+    Author: Eden
+    Date:   2015-01-12
+    Function:   公共模板文件中定义的block区域，可以在子模板中继承和覆盖
+ ========================================================= -->
+<!-- 继承 公共模板 开始 -->
+<extend name="Public:blank" />
+<!-- 继承 公共模板 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部CSS文件 开始 -->
+<block name="cssFile">
+    <link href="__PUBLIC__/Admin/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link rel="stylesheet"href="__PUBLIC__/Admin/css/bootstrap.min.css" />
+    <link rel="stylesheet"href="__PUBLIC__/Admin/css/bootstrap-responsive.min.css" />
+    <link rel="stylesheet"href="__PUBLIC__/Admin/css/colorpicker.css" />
+    <link rel="stylesheet"href="__PUBLIC__/Admin/css/datepicker.css" />
+    <link rel="stylesheet"href="__PUBLIC__/Admin/css/uniform.css" />
+    <link rel="stylesheet"href="__PUBLIC__/Admin/css/select2.css" />
+    <link rel="stylesheet"href="__PUBLIC__/Admin/css/matrix-style.css" />
+    <link rel="stylesheet"href="__PUBLIC__/Admin/css/matrix-media.css" />
+    <link rel="stylesheet"href="__PUBLIC__/Admin/css/bootstrap-wysihtml5.css" />
+    <link rel="stylesheet" href="__PUBLIC__/editor/themes/default/default.css" />
+    <style>
+        img.thumb {
+            width:150px;
+            height:150px;
+        }
+    </style>
+</block>
+<!-- 顶部CSS文件 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部JS文件 开始 -->
+<block name="topJsFile">
+</block>
+<!-- 顶部JS文件 结束 -->
+
+<!-- ===================================================== -->
+<!-- 头部部分 开始 -->
+<block name="publicHead">
+    <div id="breadcrumb">
+        <a href="__APP__" title="返回系统首页" class="tip-bottom">
+            <i class="icon-home"></i>
+            管理首页</a>
+        <a href="__CONTROLLER__" class="current">用户管理</a>
+    </div>
+    <h1 style="margin-top:10px;">评价回复</h1>
+</block>
+<!-- 头部部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 公共Body部分 开始 -->
+<block name="publicBody">
+    <!-- 将主体包含在 .row-fluid 内部 -->
+    <div class="container-fluid">
+        <hr style="margin:0;">
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="widget-box">
+                    <div class="widget-title"> <span class="icon"> <i class="icon-info-sign"></i> </span>
+                        <h5>用户留言信息</h5>
+                    </div>
+                    <div class="widget-content nopadding">
+
+                        <form class="form-horizontal" method="post" action="<{:U('Product/doFeedbackAdd')}>" enctype="multipart/form-data" name="useradd"  novalidate="novalidate">
+                            <div class="control-group">
+                                <label class="control-label">留言信息：</label>
+                                <div class="controls" style="width:700px;">
+                                    <strong>用户：</strong><{$data.uname}>&nbsp;&nbsp;
+                                    <strong>发表于：</strong><{$data.comment_time|date='Y-m-d H:i', ###}><br/>
+                                    <strong>留言内容：</strong><{$data.content}>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">回复：</label>
+                                <div class="controls">
+                                    <textarea name="content" id="reply_content" style="width:700px; height:200px;"><{$data.replay_content}></textarea>
+                                </div>
+                            </div>
+                            <div class="form-actions">
+                                <input type="hidden" value="<{$data.uname}>" name="reply_uname">
+                                <input type="hidden" value="<{$data.replay_id}>" name="reply_id">
+                                <input type="hidden" value="<{$data.id}>" name="id"/>
+                                <input type="hidden" value="<{$data.replay_user_id}>" name="reply_user_id">
+
+                                <empty name="replyRes.id">
+                                    <input type="submit" value=" 提交回复 " id="sub" class="btn btn-primary" style="margin-left:179px; margin-right:30px;">
+                                    <else/>
+                                    <input type="submit" value=" 修改回复 " id="sub" class="btn btn-primary" style="margin-left:179px; margin-right:30px;">
+                                </empty>
+                                <a href="__CONTROLLER__/productAssess/id/<{$data.fid}>" class="btn btn-default">返回列表</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>
+<!-- 公共Body部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- js文件模块 开始 -->
+<block name="footJsFile">
+    <script src="__PUBLIC__/Admin/js/jquery.min.js"></script>
+    <script src="__PUBLIC__/Admin/js/jquery.ui.custom.js"></script>
+    <script src="__PUBLIC__/Admin/js/bootstrap.min.js"></script>
+    <script src="__PUBLIC__/Admin/js/bootstrap-colorpicker.js"></script>
+    <script src="__PUBLIC__/Admin/js/bootstrap-datepicker.js"></script>
+    <script src="__PUBLIC__/Admin/js/jquery.toggle.buttons.html"></script>
+    <script src="__PUBLIC__/Admin/js/masked.js"></script>
+    <script src="__PUBLIC__/Admin/js/jquery.uniform.js"></script>
+    <script src="__PUBLIC__/Admin/js/select2.min.js"></script>
+    <script src="__PUBLIC__/Admin/js/matrix.js"></script>
+    <script src="__PUBLIC__/Admin/js/matrix.form_common.js"></script>
+    <script src="__PUBLIC__/Admin/js/wysihtml5-0.3.0.js"></script>
+    <script src="__PUBLIC__/Admin/js/jquery.peity.min.js"></script>
+    <script src="__PUBLIC__/Admin/js/bootstrap-wysihtml5.js"></script>
+    <script charset="utf-8" src="__PUBLIC__/editor/kindeditor.js"></script>
+    <script charset="utf-8" src="__PUBLIC__/editor/lang/zh_CN.js"></script>
+    <script src="__PUBLIC__/Admin/js/muneopen.js"></script>
+</block>
+<!-- js文件模块 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 底部JS执行区域 开始 -->
+<block name="footScript">
+    <script>
+        var editor;
+        KindEditor.ready(function(K) {
+            editor = K.create('#reply_content', {
+                resizeType : 1,
+                allowPreviewEmoticons : false,
+                allowImageUpload : false,
+                items : [
+                    'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+                    'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+                    'insertunorderedlist', '|', 'emoticons', 'image', 'link']
+            });
+        });
+
+        function goBack(){
+            history.go(-1);
+        }
+
+    </script>
+</block>
+<!-- 底部JS执行区域 结束 -->

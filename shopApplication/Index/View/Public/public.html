@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Head BEGIN -->
+<head>
+  <meta charset="utf-8">
+  <empty name="title">
+  <title>错误</title>
+  <else />
+  <title><{$title}></title>
+  </empty>
+  <meta name="Keywords" content="<{$keywords}>">
+  <meta name="Description" content="<{$description}>">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <php>$logo5=C('logo5');</php>
+<link rel='icon' href='<{$logo5}>' type='image/x-ico' /> 
+  <link rel="shortcut icon" href="favicon.ico">
+
+  <!-- Fonts START -->
+  <!-- <link href='http://fonts.useso.com/css?family=Hind:400,500,300,600,700' rel='stylesheet' type='text/css'> -->
+  <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|PT+Sans+Narrow|Source+Sans+Pro:200,300,400,600,700,900&amp;subset=all" rel="stylesheet" type="text/css">
+  <!-- Fonts END -->
+
+  <!-- Global styles START -->
+  <link href="__Index__/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="__Index__/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Global styles END -->
+
+  <!-- Page level plugin styles START -->
+  <link href="__Index__/plugins/fancybox/source/jquery.fancybox.css" rel="stylesheet">
+  <!-- Page level plugin styles END -->
+
+  <!-- Theme styles START -->
+  <link href="__Index__/css/components.css" rel="stylesheet">
+  <link href="__Index__/frontend/layout/css/style.css" rel="stylesheet">
+  <link href="__Index__/frontend/layout/css/style-responsive.css" rel="stylesheet">
+  <link href="__Index__/frontend/layout/css/themes/red.css" rel="stylesheet" id="style-color">
+  <link href="__Index__/frontend/layout/css/custom.css" rel="stylesheet">
+  <style>
+body
+{
+font-family : 微软雅黑,宋体;
+}
+.pre-header{
+  color:#D8D8D8;
+  background: #313030;
+}
+.pre-footer a{
+  color: #C2C1C1;
+}
+</style>
+<block name="cssFile">
+</block>
+<block name="topJsFile">
+</block>
+  <!-- Theme styles END -->
+</head>
+<!-- Head END -->
+<!-- Body BEGIN -->
+<body class="corporate">
+
+    <!-- BEGIN TOP BAR -->
+    <php>
+             $logo4=C('logo4');
+             $sy_webemail=C('sy_webemail');
+             $sy_webtel=C('sy_webtel');
+        </php>
+    <div class="pre-header">
+        <div class="container">
+            <div class="row">
+                <!-- BEGIN TOP BAR LEFT PART -->
+                <div class="col-md-6 col-sm-6 additional-shop-info">
+                    <ul class="list-unstyled list-inline">
+                        <li><i class="fa fa-phone"></i><span><{$sy_webtel}></span></li>
+                        <li><i class="fa fa-envelope-o"></i><span><{$sy_webemail}></span></li>
+                    </ul>
+                </div>
+                <!-- END TOP BAR LEFT PART -->
+            </div>
+        </div>
+    </div>
+    <!-- END TOP BAR -->
+    <!-- BEGIN HEADER -->
+
+    <div class="header">
+      <div class="container">
+        <a class="site-logo" href="<{:U('Index/index')}>"><img src="<{$logo4}>" alt="Metronic FrontEnd"></a>
+
+        <a href="javascript:void(0);" class="mobi-toggler"><i class="fa fa-bars"></i></a>
+
+        <!-- BEGIN NAVIGATION -->
+        <div class="header-navigation pull-right font-transform-inherit">
+          <ul>
+            <li><a href="<{:U('News/newslist')}>">资讯中心</a></li>
+            <li><a href="<{:U('Blog/blogList')}>">博文中心</a></li>
+            <li><a href="<{:U('Gallery/gallery')}>">产品中心</a></li>
+          </ul>
+        </div>
+        <!-- END NAVIGATION -->
+      </div>
+    </div>
+    <!-- Header END -->
+    <block name="publicBody">
+
+  </block>
+  <!-- BEGIN PRE-FOOTER -->
+    <div class="pre-footer">
+      <div class="container">
+        <div class="row">
+          <!-- BEGIN BOTTOM ABOUT BLOCK -->
+          <div class="col-md-4 col-sm-6 pre-footer-col">
+            <h2>关于滇晟</h2>
+            <dl>
+            <dd><a target="_blank" href="__ROOT__/shop.php/Page/aboutUs">关于我们</a></dd>
+            <dd><a href="<{:U('Index/index')}>">滇晟首页</a></dd>
+            <dd><a href="<{:U('News/newslist')}>">新闻中心</a></dd>
+            <dd><a href="<{:U('Blog/blogList')}>">博文中心</a></dd>
+            <dd><a href="<{:U('Index/index#contactus')}>">联系我们</a></dd>
+            <dd><a href="<{:U('Index/index#contact')}>">友情链接</a></dd>
+            <dd><a target="_blank" href="__ROOT__/shop.php/Page/policy">法律声明</a></dd>
+          </dl>
+          </div>
+          <!-- END BOTTOM ABOUT BLOCK -->
+
+          <!-- BEGIN BOTTOM CONTACTS -->
+          <php>
+            $mail=C('sy_webemail');
+            $tel=C('sy_webtel');
+            $freetel=C('sy_freewebtel');
+            $work_time=C('work_time');
+            $QQ_KF=C('sy_qq');
+            $address=C('sy_webadd');
+          </php>
+          <div class="col-md-4 col-sm-6 pre-footer-col">
+            <h2>联系方式</h2>
+            <address class="margin-bottom-40">
+              公司地址:<{$address}><br>
+              电话: <{$tel}><br>
+              传真: <{$freetel}><br>
+              Email: <a href="mailto:<{$mail}>"><{$mail}></a><br>
+              <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=<{$QQ_KF}>&site=qq&menu=yes" class="btn btn-primary">在线客服</a>
+            </address>
+
+          </div>
+          <!-- END BOTTOM CONTACTS -->
+
+          <!-- BEGIN TWITTER BLOCK -->
+          <div class="col-md-4 col-sm-6 pre-footer-col wx">
+            <h2 class="margin-bottom-0">微信服务号</h2>
+            <div style="padding:2px;margin-top: 7px; border: 1px solid #C2C1C1;width:157px;text-align:center">
+            <img class="img-wx" src="__PUBLIC__/Home/images/tmp/vivo-sf-wechat.jpg" alt="" width="150px">
+          </div>
+          </div>
+          <!-- END TWITTER BLOCK -->
+        </div>
+      </div>
+    </div>
+    <!-- END PRE-FOOTER -->
+
+    <!-- BEGIN FOOTER -->
+    <php>
+    $right=C('sy_webcopyright');
+     $ICP=C('sy_webrecor');
+  </php>
+    <div class="footer">
+      <div class="container">
+        <div class="row">
+          <!-- BEGIN COPYRIGHT -->
+          <div class="col-md-6 col-sm-6 padding-top-10">
+            <p><{$right}></p>
+            <p>ICP备案号:<{$ICP}></p>
+          </div>
+          <!-- END COPYRIGHT -->
+          <!-- BEGIN PAYMENTS -->
+          <div class="col-md-6 col-sm-6">
+            <ul class="social-footer list-unstyled list-inline pull-right">
+              <li><a href="javascript:;"><i class="fa fa-facebook"></i></a></li>
+              <li><a href="javascript:;"><i class="fa fa-google-plus"></i></a></li>
+              <li><a href="javascript:;"><i class="fa fa-dribbble"></i></a></li>
+              <li><a href="javascript:;"><i class="fa fa-linkedin"></i></a></li>
+              <li><a href="javascript:;"><i class="fa fa-twitter"></i></a></li>
+              <li><a href="javascript:;"><i class="fa fa-skype"></i></a></li>
+              <li><a href="javascript:;"><i class="fa fa-github"></i></a></li>
+              <li><a href="javascript:;"><i class="fa fa-youtube"></i></a></li>
+              <li><a href="javascript:;"><i class="fa fa-dropbox"></i></a></li>
+            </ul>
+          </div>
+          <!-- END PAYMENTS -->
+        </div>
+      </div>
+    </div>
+    <!-- END FOOTER -->
+
+    <!-- Load javascripts at bottom, this will reduce page load time -->
+    <!-- BEGIN CORE PLUGINS (REQUIRED FOR ALL PAGES) -->
+    <!--[if lt IE 9]>
+    <script src="../../assets/global/plugins/respond.min.js"></script>
+    <![endif]-->
+    <script src="__Index__/plugins/jquery.min.js" type="text/javascript"></script>
+    <script src="__Index__/plugins/jquery-migrate.min.js" type="text/javascript"></script>
+    <script src="__Index__/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="__Index__/frontend/layout/scripts/back-to-top.js" type="text/javascript"></script>
+    <!-- END CORE PLUGINS -->
+
+    <!-- BEGIN PAGE LEVEL JAVASCRIPTS (REQUIRED ONLY FOR CURRENT PAGE) -->
+    <script src="__Index__/plugins/fancybox/source/jquery.fancybox.pack.js" type="text/javascript"></script><!-- pop up -->
+
+    <script src="__Index__/frontend/layout/scripts/layout.js" type="text/javascript"></script>
+    <script src="__PUBLIC__/Plugins/layer/layer.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            Layout.init();
+            Layout.initTwitter();
+            Portfolio.init();
+        });
+
+   $('.wx').click(function(){
+    layer.alert('<img src="__PUBLIC__/Home/images/tmp/vivo-sf-wechat.jpg"/>', {
+      title:'扫描二维码关注',
+        skin: 'layui-layer-lan',
+        closeBtn: 0
+        ,shift: 4 //动画类型
+    });
+  })
+    </script>
+    <!-- END PAGE LEVEL JAVASCRIPTS -->
+<block name="bottomJsFile">
+
+</block>
+</body>
+<!-- END BODY -->
+</html>

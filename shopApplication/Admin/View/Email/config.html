@@ -1,0 +1,256 @@
+<!-- =====================================================
+    Author: Eden
+    Date:   2015-01-12
+    Function:   公共模板文件中定义的block区域，可以在子模板中继承和覆盖
+ ========================================================= -->
+<!-- 继承 公共模板 开始 -->
+<extend name="Public:blank" />
+<!-- 继承 公共模板 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部CSS文件 开始 -->
+<block name="cssFile">
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap-responsive.min.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-style.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-media.css" />
+    <link href="__PUBLIC__/Admin/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/jquery.gritter.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/uniform.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/select2.css" />
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap-wysihtml5.css" />
+    <style>
+        th.list-title {
+            font-size:14px;
+        }
+        td.align-center {
+            text-align:center;
+        }
+        a {
+            color:#27A9E3;
+        }
+        a:hover {
+            color:#f70;
+            text-decoration:underline;
+        }
+    </style>
+</block>
+<!-- 顶部CSS文件 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部JS文件 开始 -->
+<block name="topJsFile">
+    
+</block>
+<!-- 顶部JS文件 结束 -->
+
+<!-- ===================================================== -->
+<!-- 头部部分 开始 -->
+<block name="publicHead">
+    <div id="breadcrumb"> 
+        <a href="__APP__" title="返回系统首页" class="tip-bottom">
+            <i class="icon-home"></i> 
+        管理首页</a> 
+        <a href="<{:U('Config/index')}>" class="current">系统配置</a> 
+        <a href="__CONTROLLER__/index" class="current">邮件设置</a> 
+    </div>
+    <h1 style="margin-top:10px;">邮件配置</h1>
+</block>
+<!-- 头部部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 公共Body部分 开始 -->
+<block name="publicBody">
+    <!-- 将主体包含在 .row-fluid 内部 -->
+    <div class="container-fluid">
+        <hr style="margin:0;">
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="widget-box">
+                    <div class="widget-title">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a data-toggle="tab" href="#tab1">邮件服务器</a></li>
+                            <li><a data-toggle="tab" href="#tab2">模板设置</a></li>
+                        </ul>
+                    </div>
+                    <div class="widget-content tab-content">
+                        <div id="tab1" class="tab-pane active">
+                            <div class="widget-content nopadding">
+                                <form action="__CONTROLLER__/saveConfig" method="post" class="form-horizontal">
+                                    <div class="control-group">
+                                        <label class="control-label">服务器地址 :</label>
+                                        <div class="controls">
+                                            <input type="text" class="span5 tip-right" name="email_serv_addr" value="<{$emailConfig['email_serv_addr']}>" data-original-title="您的smtp服务器的地址，如：smtp.163.com"/>
+                                            <span class="help-block span5 pull-right text-right">email_serv_addr</span>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">端口号 :</label>
+                                        <div class="controls">
+                                            <input type="text" class="span5 tip-right" name="email_serv_port" value="<{$emailConfig['email_serv_port']}>" data-original-title="默认端口：25" />
+                                            <span class="help-block span5 pull-right text-right">email_serv_port</span>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">登录用户名 :</label>
+                                        <div class="controls">
+                                            <input type="text" class="span5 tip-right" name="email_serv_uname" value="<{$emailConfig['email_serv_uname']}>" data-original-title="您注册的smtp服务器的用户名" />
+                                            <span class="help-block span5 pull-right text-right">email_serv_uname</span>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">登录密码 :</label>
+                                        <div class="controls">
+                                            <input type="password" class="span5 tip-right" name="email_serv_pwd" value="<{$emailConfig['email_serv_pwd']}>" data-original-title="您的服务器登录密码"/>
+                                            <span class="help-block span5 pull-right text-right">email_serv_pwd</span>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">邮件类型 :</label>
+                                        <div class="controls">
+                                            <input type="text" class="span2 tip-right" name="email_type" value="<{$emailConfig['email_type']}>"  data-original-title="支持TXT和HTML类型，建议使用HTML" />
+                                            <span class="help-block span5 pull-right text-right">email_type</span>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">邮件发送帐号 :</label>
+                                        <div class="controls">
+                                            <input type="text" class="span5 tip-right" name="email_sender_count" value="<{$emailConfig['email_sender_count']}>"  data-original-title="您发送邮件的邮箱"/>
+                                            <span class="help-block span5 pull-right text-right">email_sender_count</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-actions">
+                                        <button type="submit" style="margin-left:180px;" class="btn btn-primary"> 立即保存 </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div id="tab2" class="tab-pane">
+                            <div class="widget-content nopadding">
+                                <form action="__CONTROLLER__/saveConfig" method="post">
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td style="width:130px; text-align:center; font-size:14px;">会员注册通知</td>
+                                            <td style="width:150px;">
+                                                <div class="controls">
+                                                    <label style="float:left; margin-right:10px;">
+                                                        <input type="radio" name="email_send_reg" value="1" <if condition="$emailConfig['email_send_reg'] eq 1">checked</if>/>开启
+                                                    </label>
+                                                    <label style="float:left;"><input type="radio" name="email_send_reg" value="0" <if condition="$emailConfig['email_send_reg'] eq 0">checked</if> />关闭</label>
+                                                </div>
+                                            </td>
+                                            <td><a href="__CONTROLLER__/tmpEdit/ename/email_send_reg/tname/会员注册通知" style="font-size:14px;">编辑模板</a></td>
+                                            <td style="text-align:right;">email_send_reg</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:130px; text-align:center; font-size:14px;">注册邮箱验证</td>
+                                            <td style="width:150px;">
+                                                <div class="controls">
+                                                    <label style="float:left; margin-right:10px;"><input type="radio" name="email_send_verify" value="1" <if condition="$emailConfig['email_send_verify'] eq 1">checked</if>/>开启</label>
+                                                    <label style="float:left;"><input type="radio" name="email_send_verify" value="0" <if condition="$emailConfig['email_send_verify'] eq 0">checked</if> />关闭</label>
+                                                </div>
+                                            </td>
+                                            <td><a href="__CONTROLLER__/tmpEdit/ename/email_send_verify/tname/注册邮箱验证" style="font-size:14px;">编辑模板</a></td>
+                                            <td style="text-align:right;">email_send_verify</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:130px; text-align:center; font-size:14px;">找回密码</td>
+                                            <td style="width:150px;">
+                                                <div class="controls">
+                                                    <label style="float:left; margin-right:10px;"><input type="radio" name="email_get_pwd" value="1" <if condition="$emailConfig['email_get_pwd'] eq 1">checked</if>/>开启</label>
+                                                    <label style="float:left;"><input type="radio"  name="email_get_pwd" value="0" <if condition="$emailConfig['email_get_pwd'] eq 0">checked</if> />关闭</label>
+                                                </div>
+                                            </td>
+                                            <td><a href="__CONTROLLER__/tmpEdit/ename/email_get_pwd/tname/找回密码" style="font-size:14px;">编辑模板</a></td>
+                                            <td style="text-align:right;">email_get_pwd</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:130px; text-align:center; font-size:14px;">发货提醒</td>
+                                            <td style="width:150px;">
+                                                <div class="controls">
+                                                    <label style="float:left; margin-right:10px;"><input type="radio" name="email_delivery_remind" value="1"  <if condition="$emailConfig['email_delivery_remind'] eq 1">checked</if>/>开启</label>
+                                                    <label style="float:left;"><input type="radio" name="email_delivery_remind" value="0" <if condition="$emailConfig['email_delivery_remind'] eq 0">checked</if> />关闭</label>
+                                                </div>
+                                            </td>
+                                            <td><a href="__CONTROLLER__/tmpEdit/ename/email_delivery_remind/tname/发货提醒" style="font-size:14px;">编辑模板</a></td>
+                                            <td style="text-align:right;">email_delivery_remind</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:130px; text-align:center; font-size:14px;">付款成功</td>
+                                            <td style="width:150px;">
+                                                <div class="controls">
+                                                    <label style="float:left; margin-right:10px;"><input type="radio" name="email_payment_remind" value="1"  <if condition="$emailConfig['email_payment_remind'] eq 1">checked</if>/>开启</label>
+                                                    <label style="float:left;"><input type="radio" name="email_payment_remind" value="0" <if condition="$emailConfig['email_payment_remind'] eq 0">checked</if> />关闭</label>
+                                                </div>
+                                            </td>
+                                            <td><a href="__CONTROLLER__/tmpEdit/ename/email_payment_remind/tname/付款成功" style="font-size:14px;">编辑模板</a></td>
+                                            <td style="text-align:right;">email_payment_remind</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:130px; text-align:center; font-size:14px;">邀请面试</td>
+                                            <td style="width:150px;">
+                                                <div class="controls">
+                                                    <label style="float:left; margin-right:10px;"><input type="radio" name="email_interview" value="1" <if condition="$emailConfig['email_interview'] eq 1">checked</if>/>开启</label>
+                                                    <label style="float:left;"><input type="radio" name="email_interview" value="0"  <if condition="$emailConfig['email_interview'] eq 0">checked</if>/>关闭</label>
+                                                </div>
+                                            </td>
+                                            <td><a href="__CONTROLLER__/tmpEdit/ename/email_interview/tname/邀请面试" style="font-size:14px;">编辑模板</a></td>
+                                            <td style="text-align:right;">email_interview</td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td colspan="3">
+                                                <input type="submit" class="btn btn-primary" value="立即保存" >
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>
+<!-- 公共Body部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- js文件模块 开始 -->
+<block name="footJsFile">
+    <script src="__PUBLIC__/Admin/js/jquery.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.ui.custom.js"></script> 
+    <script src="__PUBLIC__/Admin/js/bootstrap.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.uniform.js"></script> 
+    <script src="__PUBLIC__/Admin/js/select2.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.dataTables.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.tables.js"></script>
+    <script src="__PUBLIC__/Admin/js/matrix.interface.js"></script>
+    <script src="__PUBLIC__/Admin/js/jquery.toggle.buttons.html"></script> 
+    <script src="__PUBLIC__/Admin/js/masked.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.form_common.js"></script> 
+    <script src="__PUBLIC__/Admin/js/wysihtml5-0.3.0.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.peity.min.js"></script> 
+    <script src="__PUBLIC__/Admin/js/bootstrap-wysihtml5.js"></script> 
+    <script src="__PUBLIC__/Admin/js/jquery.validate.js"></script> 
+    <script src="__PUBLIC__/Admin/js/matrix.popover.js"></script>
+    <script src="__PUBLIC__/Admin/js/muneopen.js"></script>
+</block>
+<!-- js文件模块 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 底部JS执行区域 开始 -->
+<block name="footScript">
+    <script type="text/javascript">
+        $('.textarea_editor').wysihtml5();
+    </script>
+</block>
+<!-- 底部JS执行区域 结束 -->

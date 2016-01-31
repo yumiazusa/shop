@@ -1,0 +1,23 @@
+<extend name="Public:public" />
+<block name="cssFile">
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/index.css">
+</block>
+<block name="publicBody">
+<div class="banner"></div>
+
+    <!-- BANNER START -->
+    <div class="banner"></div>
+    <!-- BANNER END -->
+    <div class="container archives" style="padding-bottom:40px; background:#FAFAFA;">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="page-header">
+                    <h3>法律声明</h3>
+                </div>
+                <div class="archive-body">
+                <{$list.contents|htmlspecialchars_decode}>
+            </div>
+            </div>
+        </div>
+    </div>
+    </block>

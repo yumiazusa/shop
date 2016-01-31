@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>注册</title>
+	<!-- 新 Bootstrap 核心 CSS 文件 -->
+	<link rel="stylesheet" href="__PUBLIC__/Home/css/bootstrap.min.css">
+	<!-- 可选的Bootstrap主题文件（一般不用引入） -->
+	<link rel="stylesheet" href="__PUBLIC__/Home/css/bootstrap-theme.min.css">
+	<!-- <link rel="stylesheet" href="__PUBLIC__/Home/css/user.public.css"> -->
+	<link rel="stylesheet" href="__PUBLIC__/Home/css/user.login.css">
+	<!-- <link href="//libs.baidu.com/fontawesome/4.0.3/css/font-awesome.min.css" rel="stylesheet"> -->
+	<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+	<script src="__PUBLIC__/Home/js/jquery.min.js"></script>
+	<script src="__PUBLIC__/plugins/layer/layer.js"></script>
+</head>
+<body>
+	<div class="container">
+		<php>
+             $logo2=C('logo2');
+        </php>
+		<div class="row">
+			<div class="col-md-12 logo"><a href="__APP__"><img src="<{$logo2}>" alt=""></a></div>
+		</div>
+		<div class="row">
+			<div class="col-md-8 col-md-offset-2 main">
+				<div class="cloud"></div>
+                <div class="regist-to-login">
+                    <a href="__CONTROLLER__/login">已有账号</a>
+                </div>
+				<div class="regist-way">
+					<button type="button" id="by-phone" class="regist-btn">手机号注册</button>
+					<button type="button" id="by-email" class="regist-btn active">邮箱注册</button>
+				</div>
+				<form style="display:none;" action="__CONTROLLER__/registByMobile" method="post" id="regist-by-mobile" name="regist-by-mobile">
+					<div class="form-group">
+						<input type="text" class="form-control input-lg bs-docs-popover txt-input" data-trigger="focus" data-container="body" name="mobile" id="mobile-num" mobile-exists="0" placeholder="手机号码" data-toggle="popover" data-placement="right" title="提示信息" data-content="输入11位手机号码，可用于登录和找回密码" />
+						<span></span>
+					</div>
+					<div class="input-group phone-box input-group-lg">
+				      	<input name="mobile_code" type="text" placeholder="验证号码" id="verify-num" class="form-control phone-txt" style="padding:10px;">
+				      	<span class="input-group-btn phone-btn" style="border-radius:0;">
+				        	<button type="button" class="btn btn-default" id="verify-btn" style="border-radius:0; height:40px; margin-top:-1px;">获取验证码</button>
+				      	</span>
+				    </div>
+					<div class="form-group">
+						<input type="password" class="form-control input-lg bs-docs-popover txt-input" data-trigger="focus" data-container="body" name="password" id="mobile-pwd" placeholder="密　　码" data-toggle="popover" data-placement="right" title="提示信息" data-content="长度为8到16个字符，至少包含两种类型" />
+						<span></span>
+					</div>
+					<div class="form-group">
+						<input type="password" class="form-control input-lg bs-docs-popover txt-input" data-trigger="focus" data-container="body" id="mobile-repwd" name="repassword" placeholder="重复密码" data-toggle="popover" data-placement="right" title="提示信息" data-content="请再次输入密码" />
+						<span></span>
+					</div>
+                     <div class="checkbox" style="padding:10px 0 15px;">
+                        <label>
+                          <input type="checkbox" name="agreement" value="1" checked id="mobile-agreement">  我已阅读并接受 <a href="###" class='xieyi'>《网站服务协议条款》</a>
+                          <span></span>
+                        </label>
+                    </div>
+					<div class="regist-way">
+						<!-- <input type="button" name="sub" id="phone" value="立即提交信息"> -->
+						<input type="submit" class="btn btn-info btn-input" value="立即注册">
+					</div>
+				</form>
+				<form action="__CONTROLLER__/checkEmail" method="post" name="regist-by-email">
+					<div class="form-group">
+						<input type="text" class="form-control input-lg bs-docs-popover txt-input" data-trigger="focus" data-container="body" name="email" id="email" placeholder="邮箱地址" data-toggle="popover" data-placement="right" title="提示信息" data-content="请输入常用邮箱地址" />
+						<span></span>
+					</div>
+					<div class="form-group">
+						<input type="password" class="form-control input-lg bs-docs-popover txt-input" data-trigger="focus" data-container="body" name="password" id="email-pwd" placeholder="密　　码" data-toggle="popover" data-placement="right" title="提示信息" data-content="长度为8到16个字符，至少包含两种类型" />
+						<span></span>
+					</div>
+					<div class="form-group">
+						<input type="password" name="repassword" class="form-control input-lg bs-docs-popover txt-input" data-trigger="focus" data-container="body" id="email-repwd" placeholder="重复密码" data-toggle="popover" data-placement="right" title="提示信息" data-content="长度为8到16个字符，至少包含两种类型" />
+						<span></span>
+					</div>
+					<div class="form-group code-area">
+						<input type="text" name="code" id="code" class="form-control input-lg bs-docs-popover txt-input" style="width:120px" placeholder="点击刷新" />
+						<div></div>
+						<img src="__CONTROLLER__/code" class="code-img" onclick="this.src=this.src + '?' + Math.random()" alt="">
+					</div>
+                     <div class="checkbox" style="padding:10px 0 15px;">
+                        <label>
+                          <input type="checkbox" checked name="agreement" value="1" id="email-agreement">  我已阅读并接受 <a href="###" class='xieyi'>《网站服务协议条款》</a>
+                        </label>
+                    </div>
+					<div class="regist-way">
+						<!-- <input type="button" name="sub" id="phone" value="立即提交信息"> -->
+						<input type="submit" class="btn btn-info btn-input" value="立即注册">
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="__PUBLIC__/Home/js/bootstrap.min.js"></script>
+<script src="__PUBLIC__/Home/js/docs.js"></script>
+<script src="__PUBLIC__/Home/js/h.js"></script>
+<script src="__PUBLIC__/Home/js/ie10-viewport-bug-workaround.js"></script>
+<script src="__PUBLIC__/Home/js/ie-emulation-modes-warning.js"></script>
+<script>
+	var url = '__CONTROLLER__';
+</script>
+<script src="__PUBLIC__/Home/js/user-regist.js"></script>
+<script>
+var xieyi ='<{:U("Login/contract")}>';
+$('.xieyi').click(function(){
+	layer.open({
+    type: 2,
+    title: '网站服务协议',
+    shadeClose: true,
+    shade: 0.8,
+    area: ['50%', '90%'],
+    content: xieyi, //iframe的url
+});
+})
+
+
+</script>
+</html>

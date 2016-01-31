@@ -1,0 +1,420 @@
+<extend name="Public:member1"/>
+<block name="cssFile">
+    <link href="__PUBLIC__/Home/css/member.css" rel="stylesheet" type="text/css">
+    <link href="__PUBLIC__/Home/css/order.css" rel="stylesheet" type="text/css">
+    <link href="__PUBLIC__/Home/css/pubmember.css" rel="stylesheet" type="text/css">
+</block>
+<block name="topJsFile">
+    <!--<script src="__PUBLIC__/Home/js/member.js"></script>-->
+
+    <!--<script src="__PUBLIC__/Home/js/order.js"></script>-->
+</block>
+<block name="publicBody">
+    <div class="member-zt-right display-inline-block">
+        <div class="member-address">
+            <span>我的收货地址</span>
+        </div>
+        <!--更换部分开始-->
+        <div class="member-address-add">
+            <input type="button" value="+ 添加收货地址 " class="btn-add-addr btton">
+            <label>
+                您已创建<span class="addr-num f-red" id="count"><{$count}></span>个地址，最多可创建<span class="f-red">10</span>个
+            </label>
+        </div>
+        <!--新添地址的弹框开始-->
+        <div id="pop-tk" class="pop-default" style="display:none;">
+            <div class="pop-mask" style="height: 434px;"></div>
+            <div class="pop-win">
+                <div style="height: auto;" class="pop-layout">
+                    <span title="关闭" class="pop-close"></span>
+
+                    <div class="pop-title"><strong>新增地址</strong></div>
+                    <div class="pop-content">
+                        <div id="add-addr" class="add-panel">
+                            <div>
+                                <input type="hidden" value="" id="a-addrId">
+                                <ul class="form-addr">
+                                    <li class="cf">
+                                        <label style="float:left;"><i>*</i> 收货人：</label>
+                                        <input type="text" value="" id="receiver" name="reciver_user" class="input">
+                                        <em class="validate_tip"></em>
+                                    </li>
+                                    <li id="address" class="cf">
+                                        <label style="float:left;"><i>*</i>收货地区：</label>
+                                        <span><{$city}></span>
+
+                                    </li>
+                                    <li class="cf"><label><i>*</i> 详细地址：</label>
+                                        <input type="text" value="" id="detail" name="street"
+                                               class="input detail-input">
+                                        <em class="validate_tip"></em>
+                                    </li>
+                                    <li class="cf">
+                                        <label style="float:left;" ><i>*</i> 手&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;机：</label>
+
+                                        <div style="overflow:hidden;*zoom:1;">
+                                            <input type="text" value="" id="mobile" name="reciver_phone" class="input">
+                                            <em class="validate_tip"></em>
+                                        </div>
+                                    </li>
+                                    <li id="default">
+                                        <input type="checkbox" checked="" id="isDefault" value="1" name="is_default"
+                                               class="checkbox"> 设为默认地址
+                                    </li>
+                                    <li>
+                                        <input type="submit" value="保存" class="btton btn-shop-red btn-shop-xs"
+                                               id="save-addr">
+                                        <input type="reset" value="重置" class="btton btn-shop-gray btn-shop-xs"
+                                               id="cancel-addr">
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pop-bottom" style="display:none;">
+                        <button class="pop-btn-ok">确定</button>
+                        <button class="pop-btn-cancel">取消</button>
+                    </div>
+                    <span class="pop-tip-arrow"></span>
+                </div>
+            </div>
+        </div>
+        <!--新添地址的弹框结束-->
+
+        <!--添加的地址列表开始-->
+        <foreach name="data" item="vo">
+            <if condition="($vo.is_default eq 1)">
+                <div id="list-addr" class="addr-list-box">
+                    <div class="box-addr uc-box-addr" id="addr">
+                        <input type="hidden" name="a-addr" id="add-1" class="radio a-addrId">
+                        <header>
+                            <div class="box-addr-title">
+                                <span class="a-alias"></span>
+                                <a class="f-blue a-del del1" is_default="<{$vo.is_default}>" id="<{$vo.id}>">删除</a>
+                                <a class="f-blue a-edit edit" id="<{$vo.id}>">编辑</a>
+                                <a class="f-blue a-setDefault hide-this " id="<{$vo.id}>">设为默认</a>
+                                <span class="a-isDefault default-addr"">默认地址</span>
+                            </div>
+                        </header>
+
+
+                        <ul class="box-addr-cont">
+                            <li>收　货　人：<span class="a-receiver" id="revi-1"> <{$vo.reciver_user}> </span></li>
+                            <li>地　　　址：
+                                <span class="a-province" id="pro-1"><{$vo.province}></span>
+                                <span class="a-city"><{$vo['city']}></span>
+                                <span class="a-district"><{$vo['district']}></span>
+                                <span class="a-street"><{$vo['street']}></span>
+                                <!--<span class="a-detail" id="det-1">shuangqiao</span>-->
+                            </li>
+                            <li>联系电话：
+                                <span class="a-mobile" id="mob-1"><{$vo['reciver_phone']}></span>
+                                <span class="a-tel"></span>
+                            </li>
+
+                        </ul>
+
+
+                    </div>
+
+
+                    <else/>
+                    <div class="box-addr uc-box-addr">
+                        <input type="hidden" value="343395" name="a-addrId" class="radio a-addrId">
+                        <header>
+                            <div class="box-addr-title">
+                                <span class="a-alias"></span>
+                                <a class="f-blue a-del del2" id="<{$vo.id}>">删除</a>
+                                <a class="f-blue a-edit edit" id="<{$vo.id}>">编辑</a>
+                                <a class="f-blue a-setDefault set_default" id="<{$vo.id}>">设为默认</a>
+                                <span class="a-isDefault default-addr hide-this">默认地址</span>
+                            </div>
+                        </header>
+                        <ul class="box-addr-cont">
+                            <li>收货人：<span class="a-receiver"> <{$vo.reciver_user}></span></li>
+                            <li>地　址：
+                                <span class="a-province"><{$vo.province}></span>
+                                <span class="a-city"><{$vo['city']}></span>
+                                <span class="a-district"><{$vo['district']}></span>
+                                <span class="a-street"><{$vo['street']}></span>
+                                <span class="a-detail">shu</span>
+                            </li>
+                            <li>联系电话：
+                                <span class="a-mobile"><{$vo['reciver_phone']}></span>
+                                <span class="a-tel"></span>
+                            </li>
+
+                        </ul>
+                    </div>
+            </if>
+        </foreach>
+    </div>
+    <!--添加的地址列表结束-->
+    <!--更换部分结束-->
+
+    </div>
+</block>
+<block name="bottomJsFile">
+<!--<script>-->
+<!--var _APP = "__APP__";-->
+<!--province();-->
+<!--</script>-->
+
+<script>
+    var data;
+    var oldid = 0;
+
+    //弹出添加新地址的弹框
+    $(".btn-add-addr").click(function () {
+        reset();
+        $('.pop-title strong').html('新增地址');
+        $('#default').css({'display': 'block'});
+        $("#save-addr2").attr('id', 'save-addr');
+        if ($('#count').html() >= 10) {
+            alert('地址数量已达到最大值');
+        } else {
+            $(".pop-default").css("display", "block");
+        }
+
+
+    });
+
+    //关闭新地址的弹框
+    $(".pop-close").click(function () {
+        $(".pop-default").css("display", "none");
+    });
+
+    //验证收货人
+    $("#receiver").blur(function () {
+        //alert("aaaa");
+        checkReciver();
+    });
+    //验证详细地址
+    $("#detail").blur(function () {
+        checkDetail();
+    });
+    //验证手机号
+    $("#mobile").blur(function () {
+        checkMobile();
+    });
+
+    //验证收货人
+    function checkReciver() {
+        var ischeckReciver = false;
+        var textcolor = "red";
+        var msg = "";
+        var _reciver = $("#receiver");
+        if (_reciver.val() == "") {
+            msg = "请填写收货人";
+            ischeckReciver = false;
+        } else {
+            msg = '';
+            ischeckReciver = true;
+        }
+        //alert(msg);
+        _reciver.next().html(msg);
+        return ischeckReciver;
+
+    }
+    //验证详细地址
+    function checkDetail() {
+        var ischeckDetail = false;
+        var textcolor = "red";
+        var msg = "";
+        var _detail = $("#detail");
+        if (_detail.val() == "") {
+            msg = "请填写详细的收货地址";
+            ischeckDetail = false;
+        } else {
+            msg = '';
+            ischeckDetail = true;
+        }
+        //alert(msg);
+        _detail.next().html(msg);
+        return ischeckDetail;
+
+    }
+    //验证手机号
+    function checkMobile() {
+        var ischeckMobile = false;
+        var textcolor = "red";
+        var msg = "";
+        var _mobile = $("#mobile");
+        var re = /^1[3|4|5|8][0-9]\d{4,8}$/;
+        if (_mobile.val() == "") {
+            msg = "请填写手机号码";
+        } else if (_mobile.val().match(re) == null) {
+            msg = "请填写正确的手机号码";
+            ischeckMobile = false;
+        } else {
+            msg = '';
+            ischeckMobile = true;
+        }
+        //alert(msg);
+        _mobile.next().html(msg);
+        return ischeckMobile;
+
+    }
+    //删除地址
+    //对于默认地址的操作
+    $('.del1').bind('click', function (event) {
+
+        if (confirm("确认要删除吗?")) {
+            data = {'id': $(this).attr('id'), 'is_default': $(this).attr('is_default')};
+            $.post('__CONTROLLER__/addressDel', data, function (a) {
+                if (a > 0) {
+                    alert('地址删除成功!');
+                    window.location.reload();
+
+
+                } else {
+                    alert('地址删除失败!');
+                }
+            });
+
+        }
+    });
+
+    //对于非默认地址的操作
+    $('.del2').bind('click', function (event) {
+
+        if (confirm("确认要删除吗?")) {
+            data = {'id': $(this).attr('id')};
+            $.post('__CONTROLLER__/addressDel', data, function (a) {
+                if (a > 0) {
+                    alert('地址删除成功!');
+                    window.location.reload();
+
+
+                } else {
+                    alert('地址删除失败!');
+                }
+            });
+
+        }
+    });
+
+
+    //                function del(obj) {
+    //                    alert($(this).attr('id'))
+    //                    if (confirm("确认要删除吗?")) {
+    //                        obj.slideUp();
+    //                    }
+    //
+    //
+    //                }
+    //修改地址时弹框并带数据
+    $('.edit').bind('click', function () {
+        $('.pop-title strong').html('修改地址');
+        $('#default').css({'display': 'none'});
+        $(".pop-default").css("display", "block");
+
+
+        data = {'id': $(this).attr('id')};
+        $.post('__CONTROLLER__/addressGet', data, function (a) {
+            oldid = a.id;
+            $('#receiver').val(a.reciver_user);
+            $('#province').val(a.province);
+            $('#city').val(a.city);
+            $('#area').val(a.area);
+            $('#detail').val(a.street);
+            $('#mobile').val(a.reciver_phone);
+        })
+
+
+    })
+
+
+    //修改地址
+    function editAddress(obj) {
+        var _id = obj;
+        var _reciver = "#revi-" + _id;
+        var _detail = "#det-" + _id;
+        var _mobile = "#mob-" + _id;
+        var _editReceiver = $("input[name=receiver]").val();
+        var _editDetail = $("input[name=detail]").val();
+        var _editMobile = $("input[name=mobile]").val();
+        var isReciver = checkReciver();
+        var isDetail = checkDetail();
+        var isMobild = checkMobile();
+        if (isReciver && isDetail && isMobild) {
+            $(_reciver).html(_editReceiver);
+            $(_detail).html(_editDetail);
+            $(_mobile).html(_editMobile);
+            $(".pop-default").css("display", "none");
+        } else {
+            return false;
+        }
+
+    }
+
+
+</script>
+<script>
+    //新增地址
+    $('#save-addr').bind('click', function () {
+
+        cMobile = checkMobile();
+        cDetail = checkDetail();
+        cReciver = checkReciver();
+
+        if (cMobile && cDetail && cReciver) {
+            data = {
+                'id': oldid,
+                'reciver_user': $('#receiver').val(),
+                'province': $('#province').val(),
+                'city': $('#city').val(),
+                'area': $('#area').val(),
+                'street': $('#detail').val(),
+                'reciver_phone': $('#mobile').val(),
+                'is_default': $('#isDefault').is(":checked") ? 1 : 0
+            };
+
+            $.post('__CONTROLLER__/addressAdd', data, function (a) {
+
+                alert(a);
+                window.location.reload();
+
+            })
+
+
+        }
+
+    });
+
+
+    //设为默认
+    $('.set_default').bind('click', function () {
+        data = {'id': $(this).attr('id')};
+        $.post('__CONTROLLER__/addressDefault', data, function (a) {
+            if (a > 0) {
+                alert('已经设为默认地址');
+                window.location.reload();
+            } else {
+                alert('设置失败!');
+            }
+        })
+    });
+
+
+    //新增地址重置
+    $('#cancel-addr').click(function () {
+        reset();
+
+    });
+
+    //地址重置
+    function reset() {
+        $('#receiver').val('');
+        $('#provice').val('');
+        $('#city').val('');
+        $('#area').val('');
+        $('#detail').val('');
+        $('#mobile').val('');
+        $('#province').val('');
+
+    }
+
+</script>
+
+</block>

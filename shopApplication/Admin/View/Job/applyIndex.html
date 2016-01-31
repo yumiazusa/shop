@@ -1,0 +1,244 @@
+<!-- =====================================================
+    Author: Eden
+    Date:   2015-01-12
+    Function:   公共模板文件中定义的block区域，可以在子模板中继承和覆盖
+ ========================================================= -->
+<!-- 继承 公共模板 开始 -->
+<extend name="Public:blank"/>
+<!-- 继承 公共模板 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部CSS文件 开始 -->
+<block name="cssFile">
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap-responsive.min.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/uniform.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/select2.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-style.css"/>
+    <link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-media.css"/>
+    <link href="__PUBLIC__/Admin/font-awesome/css/font-awesome.css" rel="stylesheet"/>
+    <style>
+        td.text-center {
+            text-align: center;
+        }
+
+        a.title-link {
+            color: #0066ff;
+        }
+
+        .gritter-item {
+            background: none repeat scroll 0 0 #f74d4d;
+            box-shadow: 3px 3px 20px #000;
+            display: none;
+            color: #fff;
+            font-size: 14px;
+            padding: 7px 10px 10px;
+            width: 250px;
+            position: fixed;
+            z-index: 1999;
+            top: 150px;
+            right: 100px;
+        }
+
+        .addShippingInfoBox {
+            background: none repeat scroll 0 0 rgba(0, 0, 0, 0.42);
+            box-shadow: 3px 3px 20px #000;
+            display: none;
+            color: #fff;
+            font-size: 14px;
+            padding: 7px 10px 10px;
+            width: 250px;
+            position: fixed;
+            z-index: 1899;
+            top: 10px;
+        }
+    </style>
+</block>
+<!-- 顶部CSS文件 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部JS文件 开始 -->
+<block name="topJsFile">
+
+</block>
+<!-- 顶部JS文件 结束 -->
+
+<!-- ===================================================== -->
+<!-- 头部部分 开始 -->
+<block name="publicHead">
+    <div id="breadcrumb">
+        <a href="index.html" title="返回系统主页" class="tip-bottom">
+            <i class="icon-home"></i>
+            管理首页
+            <a href="#" class="current">人才招聘</a>
+        </a>
+    </div>
+    <h1 style="margin-top:10px;">求职信息</h1>
+</block>
+<!-- 头部部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 公共Body部分 开始 -->
+<block name="publicBody">
+<!-- 将主体包含在 .row-fluid 内部 -->
+<div class="container-fluid">
+    <hr style="margin:0;">
+    <div class="row-fluid">
+        <div class="span12">
+            <div>
+                <div class="control-group">
+                    <!--<div class="controls">-->
+                        <!--<form action="__CONTROLLER__/index" method="get" class="span3">-->
+                            <!--<input type="text" name="order_sn" placeholder="订单号码查询" style="width:150px;">-->
+                            <!--<input type="submit" name="sn_sub" class="btn btn-primary" style="margin-top:-10px;"-->
+                                   <!--value="提交">-->
+                        <!--</form>-->
+
+                        <!--<form action="__CONTROLLER__/index" method="get" class="span3">-->
+                            <!--<input type="text" name="order_num" placeholder="快递单号查询" style="width:150px;">-->
+                            <!--<input type="submit" name="num_sub" class="btn btn-primary" style="margin-top:-10px;"-->
+                                   <!--value="提交">-->
+                        <!--</form>-->
+                        <!--<form action="__CONTROLLER__/index" method="get" class="span3">-->
+                            <!--<select name="order_status" style="width:150px;">-->
+                                <!--<option value="999">按订单状态查询</option>-->
+                                <!--<option value="0">已取消</option>-->
+                                <!--<option value="1">等待付款</option>-->
+                                <!--<option value="2">等待发货</option>-->
+                                <!--<option value="3">已发货</option>-->
+                                <!--<option value="4">已完成</option>-->
+                            <!--</select>-->
+                            <!--<input type="submit" name="status_sub" class="btn btn-primary" style=""-->
+                                   <!--value="提交">-->
+                        <!--</form>-->
+                    <!--</div>-->
+                </div>
+            </div>
+            <div class="widget-box">
+                <div class="widget-title"> <span class="icon">
+            <input type="checkbox" id="title-checkbox" name="title-checkbox"/>
+            </span>
+                    <h5>求职列表</h5>
+                </div>
+                <div class="widget-content nopadding">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <th style="width:40px;">编号</th>
+                            <th style="width:70px;">选择职位</th>
+                            <th style="width:70px;">姓名</th>
+                            <th style="width:136px;">性别</th>
+                            <th style="width:115px;">年龄</th>
+                            <th style="width:80px;">毕业院校</th>
+                            <th style="width:30px;">专业</th>
+                            <th style="width:100px;">学历</th>
+                            <th style="width:90px;">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <foreach name="data" item="fo">
+                            <tr>
+
+                                <td class="text-center"><{$fo.id}></td>
+                                <td class="text-center"><{$fo.job_name}></td>
+                                <td class="text-center"><{$fo.name}></td>
+
+                                <td class="text-center order_status_now<{$fo.id}>">
+                                    <eq name="fo.sex" value="0">女</eq>
+                                    <eq name="fo.sex" value="1">男</eq>
+
+                                </td>
+                                <td class="text-center"><{$fo.age}></td>
+                                <td class="text-center"><{$fo.school}></td>
+                                <td class="text-center"><{$fo.discipline}></td>
+                                <td class="text-center"><{$fo.education}></td>
+
+                                <td class="text-center" >
+                                    <a href="__CONTROLLER__/applyInfo/id/<{$fo.id}>"
+                                       title="查看"
+                                       class="btn btn-success btn-mini"> <i class="icon-print"></i> </a>
+
+                                    <a href="javascript:applyDel(<{$fo.id}>)" title="删除"
+                                       class="btn btn-danger btn-mini"> <i class="icon-trash"></i> </a>
+                                </td>
+                            </tr>
+                        </foreach>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <td colspan="9">
+                                <div class="pagination alternate text-right">
+                                    <{$page}>
+                                </div>
+                            </td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+</div>
+
+
+
+</block>
+<!-- 公共Body部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- js文件模块 开始 -->
+<block name="footJsFile">
+    <script src="__PUBLIC__/Admin/js/jquery.min.js"></script>
+    <script src="__PUBLIC__/Admin/js/jquery.ui.custom.js"></script>
+    <script src="__PUBLIC__/Admin/js/bootstrap.min.js"></script>
+    <script src="__PUBLIC__/Admin/js/jquery.uniform.js"></script>
+    <script src="__PUBLIC__/Admin/js/select2.min.js"></script>
+    <script src="__PUBLIC__/Admin/js/jquery.dataTables.min.js"></script>
+    <script src="__PUBLIC__/Admin/js/matrix.js"></script>
+    <script src="__PUBLIC__/Admin/js/matrix.tables.js"></script>
+    <script src="__PUBLIC__/Admin/js/muneopen.js"></script>
+</block>
+<!-- js文件模块 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 底部JS执行区域 开始 -->
+<block name="footScript">
+
+    <script>
+
+        //取消订单
+        function applyDel(id){
+            var oid = id;
+            if(oid==''){
+                alert('id 不存在!');
+                return false;
+            }
+            if(confirm("确定要删除?")){
+
+                data = {'id':oid};
+                $.post('__CONTROLLER__/applyDel/',data,function(a){
+                    if(a>0){
+                        alert('删除成功!')
+                        window.location.reload();
+                    }else{
+                        alert('删除失败!');
+                    }
+                })
+            }
+
+        }
+
+
+    </script>
+</block>
+<!-- 底部JS执行区域 结束 -->

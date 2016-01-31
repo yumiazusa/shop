@@ -8,8 +8,6 @@ class IndexController extends MyController {
 
 
     public function index(){
-        dump(C('logo'));
-        die;
         //SEO
         $ident ="Indexindex";
         $idents =$this->seo($ident);

@@ -111,6 +111,7 @@ class LoginController extends Controller
 		$username = I('post.username');
 		$password = I('post.password');
         $cart     = I('post.cart');
+        $getIp = I('server.REMOTE_ADDR');
 		$verify = new \Think\Verify();
 
 		// 检查验证码
@@ -119,16 +120,22 @@ class LoginController extends Controller
 			$this->error('验证码错误。');
 			exit;
 		}
-		
+
 		// 验证用户是否存在
-		if ( ! $userInfo = $this->_checkUserLogin($username, $password))
+		$userInfo = $this->_checkUserLogin($username, $password);
+
+		if ( ! $userInfo)
 		{
 			$this->error('用户名或密码错误', 'regist');
 			exit;
+		}else{
+			$data1['last_login_time'] = time();
+		    $data1['last_login_ip']   = ip2long($getIp);
+		    M('users')->where(array('id'=>$userInfo['id']))->save($data1);
 		}
 
 		// 保存SESSION
-		$this->_saveSession($userInfo['id'], $userInfo['uname'],$userInfo['level']);
+		$this->_saveSession($userInfo['id'], $userInfo['uname'],$userInfo['level'],$userInfo['confirmation']);
 
 		if (session('?username') && session('?userid'))
 		{
@@ -166,16 +173,21 @@ class LoginController extends Controller
 	{
 		$username = I('post.username');
 		$password = I('post.password');
-
+		$getIp = I('server.REMOTE_ADDR');
 		// 验证用户是否存在
-		if ( ! $userInfo = $this->_checkUserLogin($username, $password))
+		$userInfo = $this->_checkUserLogin($username, $password);
+		if ( ! $userInfo)
 		{
 			$this->error('用户名或密码错误', 'regist');
 			exit;
+		}else{
+			$data1['last_login_time'] = time();
+		    $data1['last_login_ip']   = ip2long($getIp);
+		    M('users')->where(array('id'=>$userInfo['id']))->save($data1);
 		}
 
 		// 保存SESSION
-		$this->_saveSession($userInfo['id'], $userInfo['uname'],$userInfo['level']);
+		$this->_saveSession($userInfo['id'], $userInfo['uname'],$userInfo['level'],$userInfo['confirmation']);
 
 		if (session('?username') && session('?userid'))
 		{
@@ -194,7 +206,7 @@ class LoginController extends Controller
 	 * @param  [string] $userName [自动生成的用户名]
 	 * @return [void]   
 	 */
-	protected function _saveSession($userId, $userName,$userlevel)
+	protected function _saveSession($userId, $userName,$userlevel,$userconfirmation)
 	{
 		// 加密干扰字符串
 		$discrubleCode = md5($userId . 'Diansheng');
@@ -202,6 +214,7 @@ class LoginController extends Controller
 		session('username', $userName);
 		session('userid', $userId);
 		session('userlevel', $userlevel);
+		session('userconfirmation',$userconfirmation);
 		session('usermd5', $discrubleCode);
 	}
 

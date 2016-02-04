@@ -331,6 +331,7 @@ class LoginController extends Controller
 			$ip = I('server.REMOTE_ADDR');
 			$codePass = md5($password);
 			$userData['email'] 			 = $email;
+			$userData['thumb']           ='/Public/Index/Header/1.png';
 			$userData['uname']			 = 'DS' . substr($uName, 0, 5);
 			$userData['password']		 = sha1($password);
 			$userData['create_time']	 = time();

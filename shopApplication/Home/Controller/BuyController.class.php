@@ -113,6 +113,13 @@ class BuyController extends MyController{
         if($user_id ==""){
              $this->redirect("Login/login");
         }else{
+
+          $user_confirmation = $_SESSION['user']['userconfirmation'];
+        if(!$user_confirmation){
+             $this->error('购买前，请先补全个人信息！',U('Member/information'),3);
+             exit;
+        }
+
             //物流信息
             $shipping = M("shippings");
             $ship_company = M("shipping_company");

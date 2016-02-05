@@ -528,7 +528,7 @@ class LoginController extends Controller
 		$newContent 	= preg_replace($pattern, $replacement, $content);
 		$newContent 	= htmlspecialchars_decode($newContent);
 		$send			= $objEmail->sendmail($email,$sender,$newSubject,$newContent,'HTML');
-		return $send;
+		$this->ajaxReturn($send);
 	}
 
 

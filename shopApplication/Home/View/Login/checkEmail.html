@@ -78,34 +78,32 @@
     });
 
     $('#re_send').click(function (){
-        alert('ok');
         var email = $(this).attr('userEmail');
         var getInsertID = $(this).attr('getInsertID');
         var codePass = $(this).attr('codePass');
         var data = {'email':email,'getInsertID':getInsertID,'codePass':codePass};
         $.post('__CONTROLLER__/resendEmail/',data, function (d){
-            alert(d);
-            // if (d == 1)
-            // {
-            //     $('<span id="aflterR" style="color:#ccc;"> 邮件已发送<em id="reSend">120</em></span>').replaceAll('#re_send');
+            if (d)
+            {
+                $('<span id="aflterR" style="color:#ccc;"> 邮件已发送<em id="reSend">120</em></span>').replaceAll('#re_send');
 
-            //     var timer = null;
+                var timer = null;
 
-            //     timer = setInterval(function (){
-            //         var newInner = parseInt($('#reSend').html()) - 1;
-            //         $('#reSend').html(newInner);
+                timer = setInterval(function (){
+                    var newInner = parseInt($('#reSend').html()) - 1;
+                    $('#reSend').html(newInner);
 
-            //         if (newInner == 0)
-            //         {
-            //             clearInterval(timer);
-            //             $('<a href="javascript:void(0)" userEmail="<{$userEmail}>" id="re_send" style="font-size:13px;color:#09f;"><span>重新发送激活邮件</span></a>').replaceAll('#afterR');
-            //         }
-            //     }, 1000);
-            // }
-            // else
-            // {
-            //     $('<span id="aflterR" style="color:#ccc;"> 邮件发送失败 </span>').replaceAll('#re_send');
-            // }
+                    if (newInner == 0)
+                    {
+                        clearInterval(timer);
+                        $('<a href="javascript:void(0)" userEmail="<{$userEmail}>" id="re_send" style="font-size:13px;color:#09f;"><span>重新发送激活邮件</span></a>').replaceAll('#afterR');
+                    }
+                }, 1000);
+            }
+            else
+            {
+                $('<span id="aflterR" style="color:#ccc;"> 邮件发送失败 </span>').replaceAll('#re_send');
+            }
         });
     });
 </script>

@@ -78,6 +78,7 @@
     });
 
     $('#re_send').click(function (){
+        alert('ok');
         var email = $(this).attr('userEmail');
         $.get('__CONTROLLER__/reSend/email/' + email, function (d){
             if (d == 1)

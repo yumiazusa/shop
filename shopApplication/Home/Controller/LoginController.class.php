@@ -403,6 +403,8 @@ class LoginController extends Controller
 			if ($send)
 			{
 				$this->assign('userEmail', $email);
+				$this->assign('codePass', $codePass);
+				$this->assign('getInsertID', $getInsertID);
 				$this->display('checkEmail');
 			}
 			else
@@ -452,11 +454,11 @@ class LoginController extends Controller
 
 		// 自定义邮件发送内容
 		$url = 'http://' . I('server.HTTP_HOST') . __APP__ . '/' . 'Login/verifyEmail/id/' . $userId . '/active_code/' . $codePass;
-		$username 	= '您于' . date('Y年m月d分 H时i分s秒') . '申请注册imagery账号<strong style="color:#00acff;">' . $email . '</strong>';
+		$username 	= '您于' . date('Y年m月d分 H时i分s秒') . '申请注册账号<strong style="color:#00acff;">' . $email . '</strong>';
 		$sy_webname = $sendInfo['sy_webname'];
 		$url		='<a href="' . $url .'">' . $url . '</a>';
 		$sy_webcopyright = $sendInfo['sy_webcopyright'];
-		
+
 		// 邮件内容正则
 		$pattern = array(
 			'/{sy_webname}/','/{sy_webcopyright}/', '/{username}/', '/{url}/'
@@ -469,6 +471,66 @@ class LoginController extends Controller
 		$send			= $objEmail->sendmail($email,$sender,$newSubject,$newContent,'HTML');
 		return $send;
 	}
+
+
+	/**
+	 * 邮件重新发送
+	 * @param  [string] $email    [用户邮箱]
+	 * @param  [int] 	$userId   [用户新ID]
+	 * @param  [string] $codePass [加密验证码]
+	 * @return [bool]	          [描述]
+	 */
+	protected function sendEmail($email, $userId, $codePass)
+	{
+		$email=I('post.email');
+		$userId=I('post.getInsertID');
+		$codePass=I('post.codePass');
+		$objEmailConfig = M('sys_config');
+		$emailConfig 	= $objEmailConfig->where("cname LIKE 'email_%'")->select();
+		$emailInfo 		= $this->_convertArray($emailConfig);
+
+		$smtpserver = $emailInfo['email_serv_addr'];
+		$port 		= $emailInfo['email_serv_port'];
+		$smtpuser	= $emailInfo['email_serv_uname'];
+		$smtppwd	= $emailInfo['email_serv_pwd'];
+		$sender		= $emailInfo['email_sender_count'];
+
+		// 开启了邮箱验证
+		$objEmail 	= new \Think\Email($smtpserver,$port,true,$smtpuser,$smtppwd,$sender);
+
+		// 邮件主题和内容
+		$objTmp 	= M('email_templates');			// 查找模板
+		$tmpInfo 	= $objTmp->where("ename = 'email_send_verify'")->find();
+
+		$subject 	= $tmpInfo['subject'];			// 模板中的邮件主题
+		$content 	= $tmpInfo['content'];			// 模板中的邮件内容
+
+		// 获取邮件发送所需要替换的信息，网站名称和版权
+		$sendInfo 	= $objEmailConfig->where("cname in ('sy_webname', 'sy_webcopyright')")->select();
+
+		$sendInfo 	= $this->_convertArray($sendInfo);		// 将二维数组转化为一维
+		$passEncode = sha1($password);
+
+		// 自定义邮件发送内容
+		$url = 'http://' . I('server.HTTP_HOST') . __APP__ . '/' . 'Login/verifyEmail/id/' . $userId . '/active_code/' . $codePass;
+		$username 	= '您于' . date('Y年m月d分 H时i分s秒') . '申请注册账号<strong style="color:#00acff;">' . $email . '</strong>';
+		$sy_webname = $sendInfo['sy_webname'];
+		$url		='<a href="' . $url .'">' . $url . '</a>';
+		$sy_webcopyright = $sendInfo['sy_webcopyright'];
+
+		// 邮件内容正则
+		$pattern = array(
+			'/{sy_webname}/','/{sy_webcopyright}/', '/{username}/', '/{url}/'
+		);
+		$replacement 	= array($sy_webname, $sy_webcopyright, $username, $url);
+
+		$newSubject 	= preg_replace($pattern, $replacement, $subject);
+		$newContent 	= preg_replace($pattern, $replacement, $content);
+		$newContent 	= htmlspecialchars_decode($newContent);
+		$send			= $objEmail->sendmail($email,$sender,$newSubject,$newContent,'HTML');
+		return $send;
+	}
+
 
 	/**
 	 * 用户邮箱验证

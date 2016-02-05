@@ -480,7 +480,7 @@ class LoginController extends Controller
 	 * @param  [string] $codePass [加密验证码]
 	 * @return [bool]	          [描述]
 	 */
-	protected function sendEmail($email, $userId, $codePass)
+	protected function resendEmail()
 	{
 		$email=I('post.email');
 		$userId=I('post.getInsertID');

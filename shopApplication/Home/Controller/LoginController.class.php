@@ -581,7 +581,7 @@ class LoginController extends Controller
 			}
 			else
 			{
-				if ($userActiveCode) == $userInfo['active_code'])
+				if ($userActiveCode == $userInfo['active_code'])
 				{
 					
 					if ($modelUsers->where("id={$userId}")->save(array('email_state'=>1)))

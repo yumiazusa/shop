@@ -570,10 +570,9 @@ class LoginController extends Controller
 			$emailTime = $userInfo['create_time'];
 			if ($nowTime - $emailTime > 86400)
 			{	
-				echo 1111;
 				$User=M('users');
 				$eamil=$User->where(array('id'=>$userId))->getField('email');
-				$this->assign('tigMsg', '验证邮件已过期');
+				$this->assign('tipMsg', '验证邮件已过期');
 				$this->assign('userEmail', $email);
 				$this->assign('codePass', $userActiveCode);
 				$this->assign('getInsertID', $userId);

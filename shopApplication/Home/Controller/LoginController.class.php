@@ -572,7 +572,7 @@ class LoginController extends Controller
 			{
 				$this->assign('timMsg', '验证邮件已过期');
 				$User=M('users');
-				$eamil=$User->where(array('id'=>$userId))->getField('eamil');
+				$eamil=$User->where(array('id'=>$userId))->getField('email');
 				$this->assign('userEmail', $email);
 				$this->assign('codePass', $userActiveCode);
 				$this->assign('getInsertID', $userId);

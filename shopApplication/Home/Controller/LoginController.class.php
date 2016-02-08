@@ -485,6 +485,7 @@ class LoginController extends Controller
 		$email=I('post.email');
 		$userId=I('post.getInsertID');
 		$codePass=I('post.codePass');
+
 		$objEmailConfig = M('sys_config');
 		$emailConfig 	= $objEmailConfig->where("cname LIKE 'email_%'")->select();
 		$emailInfo 		= $this->_convertArray($emailConfig);
@@ -571,7 +572,7 @@ class LoginController extends Controller
 			if ($nowTime - $emailTime > 86400)
 			{	
 				$User=M('users');
-				$eamil=$User->where(array('id'=>$userId))->getField('email');
+				$email=$User->where(array('id'=>$userId))->getField('email');
 				$this->assign('tipMsg', '验证邮件已过期');
 				$this->assign('userEmail', $email);
 				$this->assign('codePass', $userActiveCode);

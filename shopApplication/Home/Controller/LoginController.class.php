@@ -337,7 +337,7 @@ class LoginController extends Controller
 			$userData['create_time']	 = time();
 			$userData['last_login_time'] = time();
 			$userData['last_login_ip']	 = ip2long($ip);
-			$userData['active_code']	 = md5($userData['create_time'] . $codePass);
+			$userData['active_code']	 = $codePass;
 
 
 			// 用户存在但 state 为0
@@ -581,7 +581,7 @@ class LoginController extends Controller
 			}
 			else
 			{
-				if (md5($userInfo['create_time'] . $userActiveCode) == $userInfo['active_code'])
+				if ($userActiveCode) == $userInfo['active_code'])
 				{
 					
 					if ($modelUsers->where("id={$userId}")->save(array('email_state'=>1)))

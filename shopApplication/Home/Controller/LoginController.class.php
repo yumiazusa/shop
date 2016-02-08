@@ -528,7 +528,12 @@ class LoginController extends Controller
 		$newContent 	= preg_replace($pattern, $replacement, $content);
 		$newContent 	= htmlspecialchars_decode($newContent);
 		$send			= $objEmail->sendmail($email,$sender,$newSubject,$newContent,'HTML');
+		$User=M('users');
+		$retime['create_time']=time();
+		$User->where("id = '{$userId}'")->save($retime);
+		if($User){
 		$this->ajaxReturn($send);
+		}
 	}
 
 
@@ -566,7 +571,11 @@ class LoginController extends Controller
 			if ($nowTime - $emailTime > 86400)
 			{
 				$this->assign('timMsg', '验证邮件已过期');
-				$this->assign('url', 'http://' . I('server.HTTP_HOST') . __APP__ . '/Login/login');
+				$User=M('users');
+				$eamil=$User->where(array('id'=>$userId))->getField('eamil');
+				$this->assign('userEmail', $email);
+				$this->assign('codePass', $userActiveCode);
+				$this->assign('getInsertID', $userId);
 				$this->display('checkEmail_error');
 			}
 			else

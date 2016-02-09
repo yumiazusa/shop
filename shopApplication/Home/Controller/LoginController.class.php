@@ -688,9 +688,16 @@ class LoginController extends Controller
 
 	public function checkPwdcode(){
 		$email=I('post.email');
-		$email=I('post.code');
-		
-		$this->display();
+		$sn=I('post.code');
+		$User=M('users');
+		$code=$User->where(array('email'=>$eamil,'get_pass_code'=>$sn)->find();
+		if($code){
+			$this->display();
+		}else{
+			$this->assign('tipMsg', '错误：密码修改验证码错误，请重试！');
+			$this->assign('url', U('Login/getBackPassword'));
+			$this->display('checkEmail_error');
+		}
 	}
 
 	/**

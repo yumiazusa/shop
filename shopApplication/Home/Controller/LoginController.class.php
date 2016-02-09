@@ -701,6 +701,42 @@ class LoginController extends Controller
 		}
 	}
 
+	public function changePwd(){
+		$captcha 	= I('post.code');
+		$password 	= I('post.password');
+		$repassword = I('post.repassword');
+		$email 		= I('post.email');
+
+		// 验证验证码
+		$objCaptcha = new \Think\Verify();
+		if ( ! $objCaptcha->check($captcha))
+		{
+			$this->error('验证码不正确');
+			exit;
+		}
+
+		// 验证密码长度和丙次密码是否相等
+		if (strcmp($repassword, $password) != 0)
+		{
+			$this->error('两次密码不一致');
+			exit;
+		}
+
+		$data['password']=sha1($password);
+		// 验证邮箱有没有被占用
+		$objUser = M('users');
+		$changePwd = $objUser->where(array('email'=>$email))->save($data);
+		if($changePwd){
+			$this->assign('tipMsg', '密码修改成功');
+			$this->assign('url', 'http://' . I('server.HTTP_HOST') . __APP__ . '/Login/login');
+			$this->display('checkEmail_ok');
+		}else{
+			$this->assign('tipMsg', '错误：密码修改失败，请重试！');
+			$this->assign('url', U('Login/getBackPassword'));
+			$this->display('checkEmail_warning');
+		}
+	}
+
 	/**
 	 * 密码找回邮件发送
 	 * @param  [string] $email    [用户邮箱]

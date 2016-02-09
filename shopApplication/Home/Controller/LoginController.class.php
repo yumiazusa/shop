@@ -706,6 +706,9 @@ class LoginController extends Controller
 		$password 	= I('post.password');
 		$repassword = I('post.repassword');
 		$email 		= I('post.email');
+		dump($email);
+		dump($password);
+		die;
 
 		// 验证验证码
 		$objCaptcha = new \Think\Verify();

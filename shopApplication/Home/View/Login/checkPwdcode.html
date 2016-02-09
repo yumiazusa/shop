@@ -12,7 +12,6 @@
 	<!-- <link href="//libs.baidu.com/fontawesome/4.0.3/css/font-awesome.min.css" rel="stylesheet"> -->
 	<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
 	<script src="__PUBLIC__/Home/js/jquery.min.js"></script>
-	<script src="__PUBLIC__/plugins/layer/layer.js"></script>
 </head>
 <body>
 	<div class="container">
@@ -64,19 +63,4 @@
 	var url = '__CONTROLLER__';
 </script>
 <script src="__PUBLIC__/Home/js/user-regist.js"></script>
-<script>
-var xieyi ='<{:U("Login/contract")}>';
-$('.xieyi').click(function(){
-	layer.open({
-    type: 2,
-    title: '网站服务协议',
-    shadeClose: true,
-    shade: 0.8,
-    area: ['50%', '90%'],
-    content: xieyi, //iframe的url
-});
-})
-
-
-</script>
 </html>

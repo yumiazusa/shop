@@ -690,7 +690,7 @@ class LoginController extends Controller
 		$email=I('post.email');
 		$sn=I('post.code');
 		$User=M('users');
-		$code=$User->where(array('email'=>$eamil,'get_pass_code'=>$sn)->find();
+		$code=$User->where(array('email'=>$eamil,'get_pass_code'=>$sn))->find();
 		if($code){
 			$this->display();
 		}else{

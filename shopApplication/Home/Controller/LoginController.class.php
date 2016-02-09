@@ -129,7 +129,7 @@ class LoginController extends Controller
 			$this->error('用户名或密码错误', 'regist');
 			exit;
 		}else{
-			if($userInfo['eamil_status']==0){
+			if($userInfo['email_status']==0){
 				$this->assign('tipMsg', '您的邮箱账号还未验证，请验证');
 				$this->assign('userEmail', $userInfo['email']);
 				$this->assign('codePass', $userInfo['active_code']);
@@ -193,7 +193,7 @@ class LoginController extends Controller
 			$this->error('用户名或密码错误', 'regist');
 			exit;
 		}else{
-		if($userInfo['eamil_status'] ==0){
+		if($userInfo['email_status'] ==0){
 				$this->assign('tipMsg', '您的邮箱账号还未验证，请验证');
 				$this->assign('userEmail', $userInfo['email']);
 				$this->assign('codePass', $userInfo['active_code']);

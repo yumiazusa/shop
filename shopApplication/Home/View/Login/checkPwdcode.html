@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>注册</title>
+	<!-- 新 Bootstrap 核心 CSS 文件 -->
+	<link rel="stylesheet" href="__PUBLIC__/Home/css/bootstrap.min.css">
+	<!-- 可选的Bootstrap主题文件（一般不用引入） -->
+	<link rel="stylesheet" href="__PUBLIC__/Home/css/bootstrap-theme.min.css">
+	<!-- <link rel="stylesheet" href="__PUBLIC__/Home/css/user.public.css"> -->
+	<link rel="stylesheet" href="__PUBLIC__/Home/css/user.login.css">
+	<!-- <link href="//libs.baidu.com/fontawesome/4.0.3/css/font-awesome.min.css" rel="stylesheet"> -->
+	<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+	<script src="__PUBLIC__/Home/js/jquery.min.js"></script>
+	<script src="__PUBLIC__/plugins/layer/layer.js"></script>
+</head>
+<body>
+	<div class="container">
+		<php>
+             $logo2=C('logo2');
+        </php>
+		<div class="row">
+			<div class="col-md-12 logo"><a href="__APP__"><img src="<{$logo2}>" alt=""></a></div>
+		</div>
+		<div class="row">
+			<div class="col-md-8 col-md-offset-2 main">
+				<div class="cloud"></div>
+                <div class="regist-to-login">
+                    <a href="<{:U('Login/getBackPassword')}>">修改密码</a>
+                </div>
+				<form action="__CONTROLLER__/checkEmail" method="post" name="regist-by-email">
+					<div class="form-group">
+						<input type="text" class="form-control input-lg bs-docs-popover txt-input" data-trigger="focus" data-container="body" name="email" id="email" placeholder="邮箱地址" data-toggle="popover" data-placement="right" title="提示信息" data-content="请输入常用邮箱地址" value="<{$email}>" disabled="disabled"/>
+						<span></span>
+					</div>
+					<div class="form-group">
+						<input type="password" class="form-control input-lg bs-docs-popover txt-input" data-trigger="focus" data-container="body" name="password" id="email-pwd" placeholder="新密码" data-toggle="popover" data-placement="right" title="提示信息" data-content="长度为8到16个字符，至少包含两种类型" />
+						<span></span>
+					</div>
+					<div class="form-group">
+						<input type="password" name="repassword" class="form-control input-lg bs-docs-popover txt-input" data-trigger="focus" data-container="body" id="email-repwd" placeholder="重复密码" data-toggle="popover" data-placement="right" title="提示信息" data-content="长度为8到16个字符，至少包含两种类型" />
+						<span></span>
+					</div>
+					<div class="form-group code-area">
+						<input type="text" name="code" id="code" class="form-control input-lg bs-docs-popover txt-input" style="width:120px" placeholder="点击刷新" />
+						<div></div>
+						<img src="__CONTROLLER__/code" class="code-img" onclick="this.src=this.src + '?' + Math.random()" alt="">
+					</div>
+					<div class="regist-way">
+						<input type="submit" class="btn btn-info btn-input" value="立即修改">
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="__PUBLIC__/Home/js/bootstrap.min.js"></script>
+<script src="__PUBLIC__/Home/js/docs.js"></script>
+<script src="__PUBLIC__/Home/js/h.js"></script>
+<script src="__PUBLIC__/Home/js/ie10-viewport-bug-workaround.js"></script>
+<script src="__PUBLIC__/Home/js/ie-emulation-modes-warning.js"></script>
+<script>
+	var url = '__CONTROLLER__';
+</script>
+<script src="__PUBLIC__/Home/js/user-regist.js"></script>
+<script>
+var xieyi ='<{:U("Login/contract")}>';
+$('.xieyi').click(function(){
+	layer.open({
+    type: 2,
+    title: '网站服务协议',
+    shadeClose: true,
+    shade: 0.8,
+    area: ['50%', '90%'],
+    content: xieyi, //iframe的url
+});
+})
+
+
+</script>
+</html>

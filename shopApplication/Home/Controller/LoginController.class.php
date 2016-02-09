@@ -692,6 +692,7 @@ class LoginController extends Controller
 		$User=M('users');
 		$code=$User->where(array('email'=>$email,'get_pass_code'=>$sn))->find();
 		if($code){
+			$this->assign('email',$email);
 			$this->display();
 		}else{
 			$this->assign('tipMsg', '错误：密码修改验证码错误，请重试！');

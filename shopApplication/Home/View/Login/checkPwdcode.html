@@ -29,7 +29,8 @@
                 </div>
 				<form action="__CONTROLLER__/changePwd" method="post" name="regist-by-email">
 					<div class="form-group">
-						<input type="text" class="form-control input-lg bs-docs-popover txt-input" data-trigger="focus" data-container="body" name="email" id="email" placeholder="邮箱地址" data-toggle="popover" data-placement="right" title="提示信息" data-content="请输入常用邮箱地址" value="<{$email}>" readonly="true"/>
+						<h3><{$eamil}></h3>
+						<input type="hidden" name="email" id="email"value="<{$email}>"/>
 						<span></span>
 					</div>
 					<div class="form-group">

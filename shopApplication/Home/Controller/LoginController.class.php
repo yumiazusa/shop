@@ -681,7 +681,7 @@ class LoginController extends Controller
 	    }else{
 	    	$this->assign('tipMsg', '错误：密码修改验证码发送失败，请重试！');
 			$this->assign('url', U('Login/getBackPassword'));
-			$this->display('checkEmail_error');
+			$this->display('checkEmail_warning');
 	   		 }
 		}
 	}
@@ -696,7 +696,7 @@ class LoginController extends Controller
 		}else{
 			$this->assign('tipMsg', '错误：密码修改验证码错误，请重试！');
 			$this->assign('url', U('Login/getBackPassword'));
-			$this->display('checkEmail_error');
+			$this->display('checkEmail_warning');
 		}
 	}
 

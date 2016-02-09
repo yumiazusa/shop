@@ -705,7 +705,7 @@ class LoginController extends Controller
 		$captcha 	= I('post.code');
 		$password 	= I('post.password');
 		$repassword = I('post.repassword');
-		$email 		= I('post.email');
+		$email		= I('post.email');
 		dump($email);
 		dump($password);
 		die;

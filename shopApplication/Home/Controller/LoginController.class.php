@@ -129,10 +129,20 @@ class LoginController extends Controller
 			$this->error('用户名或密码错误', 'regist');
 			exit;
 		}else{
+			if(!$userInfo['eamil_status']){
+				$this->assign('tipMsg', '您的邮箱账号还未验证，请验证');
+				$this->assign('userEmail', $userInfo['email']);
+				$this->assign('codePass', $userInfo['active_code']);
+				$this->assign('getInsertID', $userInfo['id']);
+				$this->display('checkEmail_error');
+				exit;
+			}else{
+
+
+
 			$data1['last_login_time'] = time();
 		    $data1['last_login_ip']   = ip2long($getIp);
 		    M('users')->where(array('id'=>$userInfo['id']))->save($data1);
-		}
 
 		// 保存SESSION
 		$this->_saveSession($userInfo['id'], $userInfo['uname'],$userInfo['level'],$userInfo['confirmation']);
@@ -151,6 +161,8 @@ class LoginController extends Controller
 		{
 			$this->error('登录失败');
 		}
+	  }
+	  }
 	}
 
 	/**
@@ -181,10 +193,17 @@ class LoginController extends Controller
 			$this->error('用户名或密码错误', 'regist');
 			exit;
 		}else{
+		if(!$userInfo['eamil_status']){
+				$this->assign('tipMsg', '您的邮箱账号还未验证，请验证');
+				$this->assign('userEmail', $userInfo['email']);
+				$this->assign('codePass', $userInfo['active_code']);
+				$this->assign('getInsertID', $userInfo['id']);
+				$this->display('checkEmail_error');
+				exit;
+			}else{
 			$data1['last_login_time'] = time();
 		    $data1['last_login_ip']   = ip2long($getIp);
 		    M('users')->where(array('id'=>$userInfo['id']))->save($data1);
-		}
 
 		// 保存SESSION
 		$this->_saveSession($userInfo['id'], $userInfo['uname'],$userInfo['level'],$userInfo['confirmation']);
@@ -198,6 +217,8 @@ class LoginController extends Controller
 		{
 			$this->error('登录失败');
 		}
+	  }
+	 }
 	}
 
 	/**
@@ -228,7 +249,7 @@ class LoginController extends Controller
 	{
 		$modelUsers = M('users');
 		$password = sha1($password);
-		$where = "(mobile = '{$username}' AND password = '{$password}' AND email_state=1 AND status=1) OR (email = '{$username}' AND password = '{$password}' AND email_state=1 AND status=1)";
+		$where = "(mobile = '{$username}' AND password = '{$password}' AND email_state=1 AND status=1) OR (email = '{$username}' AND password = '{$password}')";
 
 		$userInfo = $modelUsers->where($where)->find();
 
@@ -625,10 +646,41 @@ class LoginController extends Controller
 
 
 	// 找回密码
-	public function getBackPassword()
-	{
-
+	public function getBackPassword(){
+		$this->display();
 	}
+
+	public function getBackemail(){
+		$email=I('post.email');
+		$captcha 	= I('post.code');
+
+		// 验证验证码
+		// $objCaptcha = new \Think\Verify();
+		// if ( ! $objCaptcha->check($captcha))
+		// {
+		// 	$this->error('验证码不正确');
+		// 	exit;
+		// }
+
+		$User=M('users');
+		$user=$User->where(array('email'=>$email))->find();
+		// if(!$user){
+		// 	$this->error('没有此用户，请检查！');
+		// 	exit;
+		// }else{
+		$this->assign('email',$email);
+		$this->assign('tipMsg', '验证码已发送至您的邮箱，请在120秒内输入正确验证码后跳转密码修改页面');
+		$this->display('getBackcode');
+		// }
+	}
+
+	public function checkPwdcode(){
+		$email=I('post.email');
+		$email=I('post.code');
+		
+		$this->display();
+	}
+
 
 	// 手机注册
 	public function registByMobile() {

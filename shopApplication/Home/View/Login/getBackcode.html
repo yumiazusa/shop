@@ -27,21 +27,18 @@
                 <div class="regist-to-login">
                     <a href="<{:U('Login/getBackPassword')}>">找回密码</a>
                 </div>
-                <form action="__CONTROLLER__/getBackemail" method="post" class="bs-example tooltip-demo" name="login-form">
+                <form action="__CONTROLLER__/checkPwdcode" method="post" class="bs-example tooltip-demo" name="login-form">
+                    <input type="hidden" value="<{$email}>" name="email" />
                     <div class="regist-way">
-                        <h3 class="welcome-back">请输入注册邮箱</h3>
+                        <h3 class="welcome-back" style="text-align: left;"><{$tipMsg}>(<span id="time"></span>)</h3>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control input-lg txt-input" data-trigger="focus" name="email" id="username" placeholder="注册邮箱" class="btn btn-default" data-toggle="tooltip" data-placement="right" title="请填写注册时的邮箱" />
+                        <input type="text" class="form-control input-lg txt-input" data-trigger="focus" name="code" id="code" placeholder="邮件中的验证码" class="btn btn-default" data-toggle="tooltip" data-placement="right" title="请填写邮件中的验证码" />
                         <span></span>
                     </div>
-                    <div class="form-group code-area">
-                        <input type="text" name="code" id="code" class="form-control input-lg txt-input" style="width:120px" placeholder="点击刷新" />
-                        <div></div>
-                        <img src="__CONTROLLER__/code" class="code-img" onclick="this.src=this.src + '?' + Math.random()" alt="">
-                    </div>
                     <div class="regist-way">
-                        <input type="submit" class="btn btn-info btn-input" value="确认发送">
+                        <input type="submit" class="btn btn-info btn-input btninput1" value="确认发送">
+                         <input type="button" style="display:none;" class="btn btn-info btn-input btninput2" value="返回重试">
                     </div>
                 </form>
             </div>
@@ -55,31 +52,40 @@
 <script src="__PUBLIC__/Home/js/ie10-viewport-bug-workaround.js"></script>
 <script src="__PUBLIC__/Home/js/ie-emulation-modes-warning.js"></script>
 <script>
+    var time= 120;
 
-    $('#username').blur(function () {
+    var timer = setInterval(function(){
+        $('#time').html(time+'秒');
+        time--;
+        if (time == -1){
+            clearInterval(timer);
+            $('#code').attr('disabled','disabled');
+            $('.btninput1').css('display','none');
+            $('.btninput2').css('display','block');
+            }
+                }, 1000);
+
+    $('#code').blur(function () {
         checkUserName(this);
     });
 
-    $('#code').blur(function () {
-        checkCaptcha(this);
-    });
-
     $('form[name="login-form"]').submit(function (){
-        var uNameValue = $('#username')[0];
-        var uCaptcha   = $('#code')[0];
+        var uNameValue = $('#code')[0];
 
-        if (checkUserName(uNameValue) && checkCaptcha(uCaptcha))
+        if (checkUserName(uNameValue))
         {
             return true;
         }
         return false;
     });
 
-    // 验证码判断
-    function checkCaptcha(obj)
+
+    // 验证用户账户
+    function checkUserName(obj) 
     {
         var v = $(obj).val();
-        var oSpan = $(obj).next('div');
+        var oSpan = $(obj).next('span');
+        var bool = false;
         if (v.length < 4 || v.length > 5)
         {
             oSpan.html('验证码长度不合法').css({'font-size':'12px', 'color':'red'});
@@ -90,32 +96,12 @@
             oSpan.html('验证码合法').css({'font-size':'12px', 'color':'green'});
             return true;
         }
-    }
-
-
-    // 验证用户账户
-    function checkUserName(obj) 
-    {
-        var v = $(obj).val();
-        var oSpan = $(obj).next('span');
-        var bool = false;
-        if (v.length == 0)
-        {
-            oSpan.html('用户账户不能为空').css({'font-size':'12px', 'color':'red'});
-        }
-        else
-        {
-            if (v.match(/^1{1}[3578]{1}\w{9}$/) || v.match(/^[1-9a-zA-Z]+\w+@[\w-]+\.[0-9a-zA-Z]+$/i))
-            {
-                oSpan.html('账号可用').css({'font-size':'12px', 'color':'green'});
-                bool = true; 
-            }
-            else 
-            {
-                oSpan.html('账号不合法').css({'font-size':'12px', 'color':'red'});
-            }
-        }
         return bool;
     }
+
+    $('.btninput2').click(function(){
+        var _url='<{:U("Login/getBackPassword")}>'
+        window.location.href=_url;
+    })
 </script>
 </html>

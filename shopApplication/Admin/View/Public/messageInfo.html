@@ -1,17 +1,15 @@
 <li class="dropdown" id="menu-messages">
     <a href="#" data-toggle="dropdown" data-target="#menu-messages" class="dropdown-toggle">
         <i class="icon icon-envelope"></i> 
-        <span class="text"> 收件箱 </span> 
-        <span class="label label-important">5</span> 
+        <span class="text">留言箱</span> 
+        <span class="badge badge-important messagetotal"></span> 
         <b class="caret"></b>
     </a>
     <ul class="dropdown-menu">
-        <li><a class="sAdd" title="" href="#"><i class="icon-plus"></i> new message</a></li>
+        <li><a target="_blank" class="sAdd" title="" href="<{:U('Feedback/indexContact')}>"><i class="icon-plus"></i> 首页留言 <span class="badge badge-warning" id="indexfeedbackspan"></span></a></li>
         <li class="divider"></li>
-        <li><a class="sInbox" title="" href="#"><i class="icon-envelope"></i> inbox</a></li>
+        <li><a target="_blank" class="sInbox" title="" href="<{:U('Feedback/index')}>"><i class="icon-envelope"></i> 商城留言 <span class="badge badge-important" id="feedbackspan"></span></a></li>
         <li class="divider"></li>
-        <li><a class="sOutbox" title="" href="#"><i class="icon-arrow-up"></i> outbox</a></li>
-        <li class="divider"></li>
-        <li><a class="sTrash" title="" href="#"><i class="icon-trash"></i> trash</a></li>
+        <li><a target="_blank" class="sOutbox" title="" href="<{:U('Product/productList')}>"><i class="icon-arrow-up"></i> 商品评论 <span class="badge badge-info" id="productfeedbackspan"></span></a></li>
     </ul>
 </li>

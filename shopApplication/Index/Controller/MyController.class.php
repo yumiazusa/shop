@@ -23,7 +23,24 @@ date_default_timezone_set(PRC);
         	C('URL_MODEL',1);
         	C('URL_HTML_SUFFIX','html');
         }
+        $this->visit();
  	  }
+
+    public function visit(){
+      $vtime = date("Y-m-d",time());
+      if($_SESSION['visit1']==""){
+        $db = M("index_visit");
+        $rt =$db->where("vtime = '".$vtime."'")->find();
+        if($rt){
+           $db->where("vtime = '".$vtime."'")->setInc('visit_count',1); 
+        }else{
+           $data['vtime'] = $vtime;
+           $data['visit_count'] =1;
+           $db->add($data);
+        }
+        $_SESSION['visit1'] =1;
+      }
+    }
 
  	  public function seo($ident){
           $seo =M("seo");

@@ -30,7 +30,8 @@ date_default_timezone_set(PRC);
         }
  	  	$this->visit();
  	  }
- 	  public function visit(){
+ 	  
+    public function visit(){
  	  	$vtime = date("Y-m-d",time());
  	  	if($_SESSION['visit']==""){
  	  		$db = M("visit");
@@ -45,6 +46,7 @@ date_default_timezone_set(PRC);
  	  		$_SESSION['visit'] =1;
  	  	}
  	  }
+    
  	  public function seo($ident){
           $seo =M("seo");
           $map['ident'] = array("eq",$ident);

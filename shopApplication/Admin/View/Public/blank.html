@@ -26,7 +26,8 @@
         </style>
         <!-- //////////////////////////////////////////////////////////////////// -->
         <!-- ///////////////////////// 顶部JS 文件 ////////////////////////////// -->
-        <block name="topJsFile"></block>
+        <block name="topJsFile"></script>
+        </block>
         <!-- //////////////////////////////////////////////////////////////////// -->
         <!-- //////////////////////////////////////////////////////////////////// -->
     </head>
@@ -40,18 +41,31 @@
 <!--top-Header-menu-->
 <div id="user-nav" class="navbar navbar-inverse">
     <ul class="nav">
+
         <{:W('TopInfo/userInfo')}>
+        <li class="">
+            <a title="" href="<{:U('SystemConfig/webConfig')}>">
+                <i class="icon icon-cog"></i> 
+                <span class="text">网站设置</span>
+            </a>
+        </li>
         <{:W('TopInfo/messageInfo')}>
         <li class="">
-            <a title="" href="#">
-                <i class="icon icon-cog"></i> 
-                <span class="text">设置</span>
+            <a title="" target="_blank" href="<{:U('OrderInfo/index')}>">
+                <i class="icon icon-shopping-cart"></i> 
+                <span class="text">新订单 <span class="label label-important" id="neworders"></span></span>
             </a>
         </li>
         <li class="">
-            <a title="" href="__ROOT__/index.php">
+            <a title="" target="_blank" href="__ROOT__/index.php">
                 <i class="icon icon-share-alt"></i> 
                 <span class="text">前往首页</span>
+            </a>
+        </li>
+        <li class="">
+            <a title="" target="_blank" href="__ROOT__/shop.php">
+                <i class="icon icon-share-alt"></i> 
+                <span class="text">前往商城</span>
             </a>
         </li>
     </ul>
@@ -98,7 +112,7 @@
 <div class="row-fluid">
     <div id="footer" class="span12"> 2015 &copy; Reagan By <i>Hello World</i> Team <a href="">Reagan.Lee</a> </div>
 </div>
-
+<div id="alarm" width="0" height="0"></div>
 <!--end-Footer-part-->
 <!-- ////////////////////////////////////////////////////////// -->
 <!-- ///////////////////// 底部JS文件 开始   //////////////////// -->
@@ -157,6 +171,14 @@
     function resetMenu() {
        document.gomenu.selector.selectedIndex = 2;
     }
+
+
+
+
+
+
+    
+
     </script>
 </block>
 <!-- 底部JS脚本 -->

@@ -56,12 +56,18 @@
         <!-- 头部系统信息 开始 -->
         <div class="widget-box widget-plain">
             <div class="center">
-                <ul class="stat-boxes2">
+                <ul class="stat-boxes2" style="text-align:left;">
+                    <li>
+                        <div class="left peity_bar_neutral"><span><span style="display: none;">5,4,9,7,12,10,12</span>
+                        <canvas width="50" height="24"></canvas>
+                        </span>+<{$counts.indexvisit_today}></div>
+                        <div class="right"> <strong><{$counts.indexvisit_counts}></strong> 首页访问 </div>
+                    </li>
                     <li>
                         <div class="left peity_bar_neutral"><span><span style="display: none;">2,4,9,7,12,10,12</span>
                         <canvas width="50" height="24"></canvas>
                         </span>+<{$counts.visit_today}></div>
-                        <div class="right"> <strong><{$counts.visit_counts}></strong> 访问总量 </div>
+                        <div class="right"> <strong><{$counts.visit_counts}></strong> 商城访问 </div>
                     </li>
                     <li>
                         <div class="left peity_line_neutral">
@@ -87,7 +93,15 @@
                     </li>
                     <li>
                         <div class="left peity_bar_good"><span>12,6,9,23,14,10,13</span>+<{$counts.feedback_today}></div>
-                        <div class="right"> <strong><{$counts.feedback}></strong> 最新留言</div>
+                        <div class="right"> <strong><{$counts.feedback}></strong> 商城留言</div>
+                    </li>
+                    <li>
+                        <div class="left peity_bar_good"><span>12,6,9,23,14,10,13</span>+<{$counts.indexfeedback_today}></div>
+                        <div class="right"> <strong><{$counts.indexfeedback}></strong> 首页留言</div>
+                    </li>
+                    <li>
+                        <div class="left peity_bar_good"><span>12,6,9,23,14,10,13</span>+<{$counts.productfeedback_today}></div>
+                        <div class="right"> <strong><{$counts.productfeedback}></strong> 商品评论</div>
                     </li>
                 </ul>
             </div>
@@ -101,15 +115,15 @@
                     </div>
                     <div class="widget-content" style="min-height:220px;">
                         <ul class="quick-actions">
-                            <li class="bg_lb"> <a href="__ROOT__/index.php"> <i class="icon-home"></i> 前台首页 </a> </li>
+                            <li class="bg_lb"> <a href="__ROOT__/index.php"> <i class="icon-home"></i> 网站首页 </a> </li>
+                            <li class="bg_lb"> <a href="__ROOT__/shop.php"> <i class="icon-file"></i> 商城首页 </a> </li>
                             <li class="bg_ly"> <a href="<{:U('SystemConfig/webConfig')}>"> <i class="icon-cogs"></i> 基本设置 </a> </li>
                             <li class="bg_lo"> <a href="<{:U('Product/productList')}>"> <i class="icon-list"></i> 产品列表</a> </li>
                             <li class="bg_lg"> <a href="<{:U('Product/productAdd')}>"> <i class="icon-plus"></i> 添加商品</a> </li>
                             <li class="bg_ls"> <a href="<{:U('User/index')}>"> <i class="icon-user"></i> 会员管理 </a> </li>
                             <li class="bg_lo"> <a href="<{:U('OrderInfo/index')}>"> <i class="icon-search"></i> 查看订单 </a> </li>
                             <li class="bg_ly"> <a href="<{:U('Feedback/index')}>"> <i class="icon-comments"></i> 用户留言 </a> </li>
-                            <li class="bg_lb"> <a href="<{:U('Administrator/profile')}>"> <i class="icon-file"></i> 修改资料 </a> </li>
-                            <li class="bg_ly"> <a href="<{:U('News/newsManager')}>"> <i class="icon-picture"></i> 新闻管理 </a> </li>
+                            <li class="bg_ly"> <a href="<{:U('Feedback/indexContact')}>"> <i class="icon-picture"></i> 首页留言 </a> </li>
                             <li class="bg_lo"> <a href="<{:U('Log/index')}>"> <i class="icon-reorder"></i> 系统日志 </a> </li>
                         </ul>
                     </div>
@@ -181,6 +195,7 @@
     <script src="__PUBLIC__/Admin/js/jquery.dataTables.min.js"></script> 
     <script src="__PUBLIC__/Admin/js/matrix.tables.js"></script>
     <script src="__PUBLIC__/Admin/js/muneopen.js"></script>
+    <script src="__PUBLIC__/Admin/js/alarm.js"></script>
 </block>
 <!-- js文件模块 结束 -->
 

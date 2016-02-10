@@ -226,7 +226,7 @@
                        $str .= '<div class="detail-list">';
                        $str .= '<div class="user-precent-left display-inline-block">';
                        if($v['thumb'] ==""){
-		                  $str .='<img alt="头像" src="__PUBLIC__/User/default.jpg" class="np-avatar">';
+		                  $str .='<img alt="头像" src="/Public/User/default.jpg" class="np-avatar">';
 		                }else{
 		                 $str .='<img alt="头像" src="'.$v['thumb'].'" class="np-avatar">';
 		                }

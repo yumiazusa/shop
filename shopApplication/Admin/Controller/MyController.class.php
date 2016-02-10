@@ -20,6 +20,8 @@ class MyController extends Controller {
         C($config);
         $this->_checkLogin();
         $this->_checkAuth();
+        $username=session('username');
+        $this->assign('indexusername',$username);
     }
 
     /**

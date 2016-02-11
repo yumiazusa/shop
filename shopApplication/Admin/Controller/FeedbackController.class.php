@@ -129,6 +129,7 @@ class FeedbackController extends MyController
             $data['reply_time'] = time();
             $data['admin_id'] = $post['admin_id'];
 
+
             $getFId = $post['reply_id'];
 
             $affectedRows = $modelReply->where("id='{$getFId}'")->data($data)->save();
@@ -141,6 +142,9 @@ class FeedbackController extends MyController
         } else {
             if ($modelReply->create($post)) {
                 if ($modelReply->add()) {
+                    $Feedback=M('feedbacks');
+                    $save['status']=1;
+                    $Feedback->where(array('id'=>$post['feedback_id']))->save($save);
                     $this->success('添加成功');
                     exit;
                 }

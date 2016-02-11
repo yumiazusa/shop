@@ -1004,6 +1004,9 @@ class ProductController extends MyController{
         } else {
             if ($reply->create($data)) {
                 if ($reply->add()) {
+                    $pro_comments = M('product_comments');
+                    $save['status']=1;
+                    $pro_comments->where(array('id'=> $data['comment_id']))->save($save);
                     $this->success('添加成功');
                     exit;
                 }

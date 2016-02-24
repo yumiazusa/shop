@@ -125,7 +125,7 @@ document.getElementById('pagestyle').setAttribute('href', sheet);
     </head>
 
 <body>
-<!-- <div class="themeControll">
+<div class="themeControll">
 <h3 style="width: 60px; font-size: 10px; line-height: 12px;" class="uppercase color-white text-center"> Choose your colour </h3>
 <a onclick="swapStyleSheet('assets/css/skin-1.css')" style="background:#4ec67f;border-top: 12px solid #27AE60;"> </a>
 <a onclick="swapStyleSheet('assets/css/skin-8.css')" style="background:#3BCA95;border-top: 12px solid #34BC8A"> </a>
@@ -142,7 +142,7 @@ document.getElementById('pagestyle').setAttribute('href', sheet);
 <br>
  <a style="color:#fff" href="../index.html"><i class="fa fa-angle-double-left"></i> Theme Chooser </a> </h3>
 <p class="tbtn">  <i class="fa fa-angle-double-left"></i></p>
-</div> -->
+</div>
 
 
 <!-- Modal Login start -->
@@ -664,44 +664,18 @@ document.getElementById('pagestyle').setAttribute('href', sheet);
   <!-- Main component call to action -->
   <div class=" image-show-case-wrapper center-block relative col-lg-12">
     <div id="imageShowCase" class="owl-carousel owl-theme">
+      <foreach name="bannerRes" item="banners">
       <div class="product-slide">
-        <div class="box-content-overly box-content-overly-white">
-          <div class="box-text-table">
-            <div class="box-text-cell ">
-              <div class="box-text-cell-inner ">
-                <h1>On sale</h1>
-                <a class="btn btn-stroke-light"> SHOP NOW</a> </div>
-            </div>
-          </div>
-        </div>
-        <a href="#"><img class="img-responsive" src="__PUBLIC__/Mobile/images/slider/single-img/1.jpg" alt="img"></a> </div>
+        <if condition="$banners['is_connect'] eq 1">
+        <a href="<{:U('ProductDetail/detail',array('id'=>$banners['product_id']))}>" target="_blank">
+          </if>
+          <img class="img-responsive" src="__PUBLIC__/Adv/<{$banners.thumbnail}>" alt="img">
+        <if condition="$banners['is_connect'] eq 1">
+        </a> 
+        </if>
+      </div>
       <!-- /.product-slide  -->
-      
-      <div class="product-slide">
-        <div class="box-content-overly box-content-overly-white">
-          <div class="box-text-table">
-            <div class="box-text-cell ">
-              <div class="box-text-cell-inner ">
-                <h1>DISCOUNTS UP TO 50% OFF</h1>
-                <a class="btn btn-stroke-light"> SHOP NOW</a> </div>
-            </div>
-          </div>
-        </div>
-        <a href="#"><img class="img-responsive" src="__PUBLIC__/Mobile/images/slider/single-img/2.jpg" alt="img"></a> </div>
-      <!-- /.product-slide  -->
-      
-      <div class="product-slide">
-        <div class="box-content-overly box-content-overly-white">
-          <div class="box-text-table">
-            <div class="box-text-cell ">
-              <div class="box-text-cell-inner ">
-                <h1>NEW Accessories</h1>
-                <a class="btn btn-stroke-light"> SHOP NOW</a> </div>
-            </div>
-          </div>
-        </div>
-        <a href="#"><img class="img-responsive" src="__PUBLIC__/Mobile/images/slider/single-img/3.jpg" alt="img"></a> </div>
-      <!-- /.product-slide  --> 
+    </foreach>
     </div>
     <!--/#imageShowCase -->
     

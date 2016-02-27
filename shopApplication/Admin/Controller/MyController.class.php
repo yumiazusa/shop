@@ -18,6 +18,7 @@ class MyController extends Controller {
         parent::__construct();
         $config=M('sys_config')->getField('cname,cvalue');
         C($config);
+
         $this->_checkLogin();
         $this->_checkAuth();
         $username=session('username');

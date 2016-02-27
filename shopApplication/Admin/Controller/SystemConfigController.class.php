@@ -79,6 +79,8 @@ class SystemConfigController extends MyController{
             $res = $db ->where("cname='logo4'") -> save($data);
         }else if($id == 5){
             $res = $db ->where("cname='logo5'") -> save($data);
+        }else if($id == 6){
+            $res = $db ->where("cname='logo6'") -> save($data);
         }else{}
         if($res){
             $this->success('Logo修改成功','webConfig');

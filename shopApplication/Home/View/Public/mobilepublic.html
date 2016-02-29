@@ -57,29 +57,21 @@
 <!-- Modal Login start -->
 <div class="modal signUpContent fade" id="ModalLogin" tabindex="-1" role="dialog" >
   <div class="modal-dialog ">
+    <form action="<{:U('Login/mobileindexLogin')}>" method="post">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times; </button>
-        <h3 class="modal-title-site text-center" > Login  to TSHOP </h3>
+        <h3 class="modal-title-site text-center" > 登陆 </h3>
       </div>
       <div class="modal-body">
         <div class="form-group login-username">
           <div >
-            <input name="log" id="login-user" class="form-control input"  size="20" placeholder="Enter Username" type="text">
+            <input id="login-user" class="form-control input"  size="20" name="username"  placeholder="邮箱账号" type="text">
           </div>
         </div>
         <div class="form-group login-password">
           <div >
-            <input name="Password" id="login-password" class="form-control input"  size="20" placeholder="Password" type="password">
-          </div>
-        </div>
-        <div class="form-group">
-          <div >
-            <div class="checkbox login-remember">
-              <label>
-                <input name="rememberme"  value="forever" checked="checked" type="checkbox">
-                Remember Me </label>
-            </div>
+            <input name="password" id="login-password" class="form-control input"  size="20" placeholder="密码" type="password">
           </div>
         </div>
         <div >
@@ -96,7 +88,7 @@
       </div>
     </div>
     <!-- /.modal-content --> 
-    
+    </form>
   </div>
   <!-- /.modal-dialog --> 
   
@@ -177,9 +169,10 @@ $logo=C('logo6');
         <div class="col-lg-6 col-sm-6 col-xs-6 col-md-6 no-margin no-padding">
           <div class="pull-right">
             <ul class="userMenu">
-              <li> <a href="account-1.html"><i class="glyphicon glyphicon-user hide visible-xs "></i></a> </li>
-              <li> <a href="#"  data-toggle="modal" data-target="#ModalLogin"><i class="glyphicon glyphicon-log-in hide visible-xs "></i> </a> </li>
-              <li> <a href="#"  data-toggle="modal" data-target="#ModalSignup"><i class="glyphicon glyphicon-cloud-upload hide visible-xs "></i></a> </li>
+              <{:W('Login/topmobileLogin')}>
+              <!-- <li> <a href="account-1.html"><i class="glyphicon glyphicon-user hide visible-xs "></i></a> </li> -->
+              <!-- <li> <a href="#"  data-toggle="modal" data-target="#ModalLogin"><i class="glyphicon glyphicon-log-in hide visible-xs "></i> </a> </li>
+              <li> <a href="#"  data-toggle="modal" data-target="#ModalSignup"><i class="glyphicon glyphicon-cloud-upload hide visible-xs "></i></a> </li> -->
             </ul>
           </div>
         </div>
@@ -316,7 +309,7 @@ $logo=C('logo6');
 
 </block>
 
-<footer style="width:100%">
+<footer>
   <php>
             $mail=C('sy_webemail');
             $tel=C('sy_webtel');

@@ -178,6 +178,18 @@ class LoginController extends Controller
 	}
 
 	/**
+	 * 移动商城退出登录
+	 * @return void
+	 */	
+	public function mobilelogout()
+	{
+		session('user', NULL);
+		session('order', NULL);
+		$jumpURL = U('Mobileindex/mobileindex');
+		$this->success('再见，下次再来', $jumpURL);
+	}
+
+	/**
 	 * 首页登录处理
 	 * @return void 
 	 */
@@ -220,6 +232,52 @@ class LoginController extends Controller
 	  }
 	 }
 	}
+
+
+	/**
+	 * 移动商城首页登录处理
+	 * @return void 
+	 */
+	public function mobileindexLogin()
+	{
+		$username = I('post.username');
+		$password = I('post.password');
+		$getIp = I('server.REMOTE_ADDR');
+		// 验证用户是否存在
+		$userInfo = $this->_checkUserLogin($username, $password);
+		if ( ! $userInfo)
+		{
+			$this->error('用户名或密码错误', 'regist');
+			exit;
+		}else{
+		if($userInfo['email_state'] ==0){
+				$this->assign('tipMsg', '您的邮箱账号还未验证，请验证');
+				$this->assign('userEmail', $userInfo['email']);
+				$this->assign('codePass', $userInfo['active_code']);
+				$this->assign('getInsertID', $userInfo['id']);
+				$this->display('checkEmail_error');
+				exit;
+			}else{
+			$data1['last_login_time'] = time();
+		    $data1['last_login_ip']   = ip2long($getIp);
+		    M('users')->where(array('id'=>$userInfo['id']))->save($data1);
+
+		// 保存SESSION
+		$this->_saveSession($userInfo['id'], $userInfo['uname'],$userInfo['level'],$userInfo['confirmation']);
+
+		if (session('?username') && session('?userid'))
+		{
+			$jumpURL = U('Mobileindex/mobileindex');
+			$this->success('欢迎回来', $jumpURL);
+		}
+		else
+		{
+			$this->error('登录失败');
+		}
+	  }
+	 }
+	}
+
 
 	/**
 	 * 登录用户保存SESSION信息

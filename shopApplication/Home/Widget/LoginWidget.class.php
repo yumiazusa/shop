@@ -119,4 +119,18 @@ class LoginWidget extends Controller
          $this->display('Public:img');
      }
 
+
+     public function topmobileLogin ()
+    {
+        $userSession = session('?user');
+
+        if ( ! $userSession)
+        {
+            $this->display('Public:topmobileLogin');
+        }
+        else
+        {
+            $this->display('Public:topmobileAfterLogin');
+        }
+    }
 }

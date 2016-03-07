@@ -494,6 +494,129 @@ class LoginController extends Controller
 		}	
 	}
 
+	/**
+	 * 移动商城验证邮箱
+	 * @return [type] [description]
+	 */
+	public function mobilecheckEmail()
+	{
+		$password 	= I('post.password');
+		$repassword = I('post.repassword');
+		$email 		= I('post.email');
+
+
+		// 验证密码长度和两次密码是否相等
+		if (strcmp($repassword, $password) != 0)
+		{
+			$this->error('两次密码不一致');
+		}
+
+		// 验证邮箱有没有被占用
+		$objUser = M('users');
+		$getUserEmail = $objUser->field('id, email, email_state, create_time')
+								->where("email = '{$email}'")
+								->find();
+
+		// 如果数据库中存在，则检查状态1:已注册，0:未注册
+		if ( ! empty($getUserEmail) && $getUserEmail['email_state'] != 0) 
+		{
+			$this->error('该帐户已注册');
+			exit;
+		}
+		else
+		{
+			// 发送邮件激活码生成规则：md5(创建时间, md5(用户邮箱))
+			// 随机用户名生成规则：'DS'开头 + md5(用户邮箱)的前五个字符
+			$ts = time();
+			$uName = md5($ts);
+
+			// 没有注册将用户信息保存起来（插入）
+			$ip = I('server.REMOTE_ADDR');
+			$codePass = md5($password);
+			$userData['email'] 			 = $email;
+			$userData['thumb']           ='/Public/Index/Header/1.png';
+			$userData['uname']			 = 'DS' . substr($uName, 0, 5);
+			$userData['password']		 = sha1($password);
+			$userData['create_time']	 = time();
+			$userData['last_login_time'] = time();
+			$userData['last_login_ip']	 = ip2long($ip);
+			$userData['active_code']	 = $codePass;
+
+
+			// 用户存在但 state 为0
+			if ( ! empty($getUserEmail) && $getUserEmail['email_state'] == 0)
+			{
+				// 修改
+				$objUser->where("id = '{$getUserEmail['id']}'")->save($userData);
+				$getInsertID = $getUserEmail['id'];
+			}
+			else
+			{
+				// 插入
+				if($objUser->create($userData))
+				{
+					$objUserInfo = M('user_info');
+					$getInsertID = $objUser->add();
+					$insertInfoTable = $objUserInfo->data(array('user_id' => $getInsertID))->add();
+					if (!$getInsertID || !$insertInfoTable)
+					{
+						$this->error('未知错误.');
+						exit;
+					}
+				}
+			}
+		}
+		
+		// 实例化邮件发送类
+		// $smtp = new smtp($smtpserver,$port,true,$smtpuser,$smtppwd,$sender);
+		$objEmailConfig = M('sys_config');
+		$emailConfig 	= $objEmailConfig->where("cname LIKE 'email_%'")->select();
+		$emailInfo 		= $this->_convertArray($emailConfig);
+
+		// 查看配置文件中用户注册是否开启验证，若开启走验证邮箱的流程
+		// 如果未开启，则不走验证邮箱的流程
+		if ( ! $emailInfo['email_send_verify'])
+		{
+			// 没有开启邮箱验证
+			$affectedRows = $objUser->where("id='{$getInsertID}'")->data(array('email_state' => 1))->save();
+			if ($affectedRows > 0)
+			{
+				// 写入SESSION
+				session('user', NULL);
+				$this->_saveSession($getInsertID, $userData['uname'],0);
+				// 提示跳转
+				$this->assign('tipMsg', '恭喜您，注册成功');
+				$this->assign('url', 'http://' . I('server.HTTP_HOST') . __APP__ . '/Member/member');
+				$this->display('checkEmail_ok');
+				exit;
+			}
+			else
+			{
+				$this->assign('tipMsg', '错误：邮件验证失败');
+				$this->assign('url', 'http://' . I('server.HTTP_HOST') . __APP__);
+				$this->display('checkEmail_error');
+				exit;
+			}
+		}	
+		else
+		{
+			$type=1;
+			$send = $this->sendEmail($email, $getInsertID, $codePass,$type);
+
+			if ($send)
+			{
+				$this->assign('userEmail', $email);
+				$this->assign('codePass', $codePass);
+				$this->assign('getInsertID', $getInsertID);
+				$this->display('mobilecheckEmail');
+			}
+			else
+			{
+				$this->error('邮件发送失败，返回重试');
+				exit;
+			}
+		}	
+	}
 
 	/**
 	 * 邮件发送
@@ -502,9 +625,8 @@ class LoginController extends Controller
 	 * @param  [string] $codePass [加密验证码]
 	 * @return [bool]	          [描述]
 	 */
-	protected function sendEmail($email, $userId, $codePass)
+	protected function sendEmail($email, $userId, $codePass,$type = null)
 	{
-
 		$objEmailConfig = M('sys_config');
 		$emailConfig 	= $objEmailConfig->where("cname LIKE 'email_%'")->select();
 		$emailInfo 		= $this->_convertArray($emailConfig);
@@ -531,8 +653,11 @@ class LoginController extends Controller
 		$sendInfo 	= $this->_convertArray($sendInfo);		// 将二维数组转化为一维
 		$passEncode = sha1($password);
 
-		// 自定义邮件发送内容
-		$url = 'http://' . I('server.HTTP_HOST') . __APP__ . '/' . 'Login/verifyEmail/id/' . $userId . '/active_code/' . $codePass;
+		if($type == 1 ){
+			$url = 'http://' . I('server.HTTP_HOST') . __APP__ . '/' . 'Login/verifyEmail/id/' . $userId . '/type/' . $type .'/active_code/' . $codePass;
+		}else{
+			$url = 'http://' . I('server.HTTP_HOST') . __APP__ . '/' . 'Login/verifyEmail/id/' . $userId . '/active_code/' . $codePass;
+		}
 		$username 	= '您于' . date('Y年m月d分 H时i分s秒') . '申请注册账号<strong style="color:#00acff;">' . $email . '</strong>';
 		$sy_webname = $sendInfo['sy_webname'];
 		$url		='<a href="' . $url .'">' . $url . '</a>';
@@ -564,6 +689,7 @@ class LoginController extends Controller
 		$email=I('post.email');
 		$userId=I('post.getInsertID');
 		$codePass=I('post.codePass');
+		$type=I('post.type');
 
 		$objEmailConfig = M('sys_config');
 		$emailConfig 	= $objEmailConfig->where("cname LIKE 'email_%'")->select();
@@ -592,7 +718,11 @@ class LoginController extends Controller
 		$passEncode = sha1($password);
 
 		// 自定义邮件发送内容
-		$url = 'http://' . I('server.HTTP_HOST') . __APP__ . '/' . 'Login/verifyEmail/id/' . $userId . '/active_code/' . $codePass;
+		if($type){
+			$url = 'http://' . I('server.HTTP_HOST') . __APP__ . '/' . 'Login/verifyEmail/id/' . $userId .'/type/' . $type. '/active_code/' . $codePass;
+		}else{
+			$url = 'http://' . I('server.HTTP_HOST') . __APP__ . '/' . 'Login/verifyEmail/id/' . $userId . '/active_code/' . $codePass;
+		}
 		$username 	= '您于' . date('Y年m月d分 H时i分s秒') . '申请注册账号<strong style="color:#00acff;">' . $email . '</strong>';
 		$sy_webname = $sendInfo['sy_webname'];
 		$url		='<a href="' . $url .'">' . $url . '</a>';
@@ -626,6 +756,7 @@ class LoginController extends Controller
 
 		$userId = I('get.id');
 		$userActiveCode = I('get.active_code');
+		$type = I('get.type');
 
 		if (empty($userId))
 		{
@@ -640,8 +771,12 @@ class LoginController extends Controller
 		if ($userInfo['email_state'])
 		{
 			$this->assign('tipMsg', '该账号已完成验证，链接过期');
+			if($type ==1){
+			$this->display('mobilecheckEmail_warning');
+			}else{
 			$this->assign('url', 'http://' . I('server.HTTP_HOST') . __APP__ . '/Login/login');
 			$this->display('checkEmail_warning');
+		    }
 			exit;
 		}
 		else
@@ -656,26 +791,37 @@ class LoginController extends Controller
 				$this->assign('userEmail', $email);
 				$this->assign('codePass', $userActiveCode);
 				$this->assign('getInsertID', $userId);
+				if($type ==1){
+				$this->display('mobilecheckEmail_error');
+				}else{
 				$this->display('checkEmail_error');
+		    	}
 			}
 			else
 			{
 				if ($userActiveCode == $userInfo['active_code'])
 				{
-					
 					if ($modelUsers->where("id={$userId}")->save(array('email_state'=>1)))
 					{
+						if($type ==1){
+						$this->display('mobilecheckEmail_ok');
+						}else{
 						$this->assign('tipMsg', '恭喜您，邮件验证成功');
 						$this->assign('url', 'http://' . I('server.HTTP_HOST') . __APP__ . '/Login/login');
 						$this->display('checkEmail_ok');
+		    			}
 					}
-					
 				}
 				else
 				{
-					$this->assign('tipMsg', '错误：邮件验证失败');
-					$this->assign('url', 'http://' . I('server.HTTP_HOST') . __APP__);
-					$this->display('checkEmail_error');
+						if($type ==1){
+						$this->assign('tipMsg', '错误：邮件验证失败');
+						$this->display('mobilecheckEmail_error');
+						}else{
+						$this->assign('tipMsg', '错误：邮件验证失败');
+						$this->assign('url', 'http://' . I('server.HTTP_HOST') . __APP__);
+						$this->display('checkEmail_error');
+		    			}
 				}
 			}
 		}

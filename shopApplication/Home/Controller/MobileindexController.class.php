@@ -38,4 +38,8 @@ class MobileindexController extends MyController {
         }
         return $arr1;
     }
+
+    public function forgetPass(){
+        $this->display();
+    }
 }

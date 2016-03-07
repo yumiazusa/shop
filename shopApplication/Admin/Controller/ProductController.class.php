@@ -1572,4 +1572,51 @@ class ProductController extends MyController{
             $this->error('商品促销添加失败');
         }
     }
+
+    public function productNav(){
+        $db = M("productnav");
+        $list = $db->select();
+        $this->assign("list",$list);
+        $this->display('product_nav');
+    }
+
+    public function editNav(){
+        $id = I("get.id");
+        $db = M("productnav");
+        $list = $db->find($id);
+        $this->assign("data",$list);
+        $this->display('product_navedit');
+    }
+
+    public function navSave(){
+        $data=I('post.');
+        if($_FILES['image']['name']!=""){
+             $data['image']='/Public/Index/Nav/'.$this->uploadnavs();
+            }
+        $db=M('productnav');
+        $rt=$db->where(array('id'=>$data['id']))->save($data);
+        if($rt){
+             $this->success("修改成功",U("productNav"));
+             exit;
+        }else{
+            $this->error("修改失败");
+        }
+    }
+
+    //单图片上传
+    public function uploadnavs(){
+        $upload = new \Think\Upload();
+        $upload->maxSize = 3145728;
+        $upload->exts    =array('jpg','gif','png','jpeg');
+         $upload->rootPath="Public/Index/Nav/";
+         $upload->savePath="";
+         $info=$upload->upload();
+         if(!$info) {
+                  $this->error($upload->getError());
+          }else{                                                 // 上传成功 获取上传文件信息
+             foreach($info as $file){
+               return $file['savepath'].$file['savename'];
+             }
+         }
+    }
 }

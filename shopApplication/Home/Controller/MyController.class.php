@@ -28,6 +28,8 @@ date_default_timezone_set(PRC);
         	C('URL_MODEL',1);
         	C('URL_HTML_SUFFIX','html');
         }
+      $navlist=M('productnav')->select();
+      $this->assign('navlist',$navlist);
  	  	$this->visit();
  	  }
  	  

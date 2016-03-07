@@ -1,0 +1,152 @@
+<!-- =====================================================
+  首页焦点图管理
+ ========================================================= -->
+<!-- 继承 公共模板 开始 -->
+<extend name="Public:blank" />
+<!-- 继承 公共模板 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部CSS文件 开始 -->
+<block name="cssFile">
+  <link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap.min.css" />
+<link rel="stylesheet" href="__PUBLIC__/Admin/css/bootstrap-responsive.min.css" />
+<link rel="stylesheet" href="__PUBLIC__/Admin/css/uniform.css" />
+<link rel="stylesheet" href="__PUBLIC__/Admin/css/select2.css" />
+<link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-style.css" />
+<link rel="stylesheet" href="__PUBLIC__/Admin/css/matrix-media.css" />
+<link href="__PUBLIC__/Admin/font-awesome/css/font-awesome.css" rel="stylesheet" />
+<link rel="stylesheet" href="__PUBLIC__/Admin/css/adv.css" />
+</block>
+<!-- 顶部CSS文件 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 顶部JS文件 开始 -->
+<block name="topJsFile">
+    
+</block>
+<!-- 顶部JS文件 结束 -->
+
+<!-- ===================================================== -->
+<!-- 头部部分 开始 -->
+<block name="publicHead">
+    <div id="breadcrumb">
+        <a href="index.html" title="返回系统主页" class="tip-bottom">
+            <i class="icon-home"></i>
+           商城管理
+        </a>
+    </div>
+   
+</block>
+<!-- 头部部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 公共Body部分 开始 -->
+<block name="publicBody">
+    <!-- 将主体包含在 .row-fluid 内部 -->
+    <div class="container-fluid">
+          <div class="row-fluid">
+             <div class="span12">
+              <div class="widget-box">
+                  <div class="widget-title"> 
+                        <span class="icon"><i class="icon-th"></i> </span>
+                  </div>
+                  <div class="widget-content nopadding">
+                    <table class="table table-bordered table-striped">
+                      <thead>
+
+                        <tr>
+                          <th style="font-size:14px;">导航名称</th>
+                          <th style="font-size:14px;">导航图标</th>
+                          <th style="font-size:14px;">导航图标宽高</th>
+                           <th style="font-size:14px;">导航标题</th>
+                          <!-- <th style="font-size:14px;">是否显示</th> -->
+                          <th style="font-size:14px;">操作</th>
+                        </tr>
+                      </thead>
+                      <tbody style="font-size:14px;">
+                       <foreach name="list" item="v">
+                         <tr class="odd gradeX" >
+                          <input type='hidden' value='<{$v.id}>'>
+                          <td style="text-align:center;"><{$v.name}></td>
+                          <td style="text-align:center;"><img src="<{$v.image}>" width="20%" /></td>
+                          <td style="text-align:center;">宽:<{$v.width}>   /   高:<{$v.height}> </td>
+                          <td style="text-align:center;"><{$v.nav_title}></td>
+                          <!-- <td style="text-align:center;">
+                             <if condition="$v.status eq 1">
+                                  <a data-status='1' title='点击切换' class='is_show' style="color:red; cursor: pointer;" href='#'>显示中</a>
+                             <else /><a data-status='0' title='点击切换' class='is_show' style="cursor: pointer;" href='#'>未使用</a>
+                             </if>
+                          </td> -->
+                          <td class="center" style="text-align:center;">
+                            <a href="__CONTROLLER__/editNav/id/<{$v.id}>"><i class="icon-pencil"></i>编辑</a>
+                          </td>
+                        </tr>
+                        </foreach>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</block>
+<!-- 公共Body部分 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- js文件模块 开始 -->
+<block name="footJsFile">
+    
+</block>
+<!-- js文件模块 结束 -->
+
+<!-- ===================================================== -->
+
+<!-- 底部JS执行区域 开始 -->
+<block name="footScript">
+<script src="__PUBLIC__/Admin/js/jquery.min.js"></script> 
+<script src="__PUBLIC__/Admin/js/jquery.ui.custom.js"></script> 
+<script src="__PUBLIC__/Admin/js/bootstrap.min.js"></script> 
+<script src="__PUBLIC__/Admin/js/jquery.uniform.js"></script> 
+<script src="__PUBLIC__/Admin/js/select2.min.js"></script> 
+<script src="__PUBLIC__/Admin/js/jquery.dataTables.min.js"></script> 
+<script src="__PUBLIC__/Admin/js/matrix.js"></script> 
+<script src="__PUBLIC__/Admin/js/matrix.tables.js"></script>
+<script src="__PUBLIC__/Admin/js/muneopen.js"></script> 
+    <script type="text/javascript">
+      // This function is called from the pop-up menus to transfer to
+      // a different page. Ignore if the value returned is a null string:
+      function goPage (newURL) {
+
+          // if url is empty, skip the menu dividers and reset the menu selection to default
+          if (newURL != "") {
+          
+              // if url is "-", it is this page -- reset the menu:
+              if (newURL == "-" ) {
+                  resetMenu();            
+              } 
+              // else, send page to designated URL            
+              else {  
+                document.location.href = newURL;
+              }
+          }
+      }
+
+    // resets the menu selection upon entry to this page:
+    function resetMenu() {
+       document.gomenu.selector.selectedIndex = 2;
+    }
+
+    $('.is_show').click(function(){
+      var status=$(this).data('status');
+      var id=$(this).parent().parent().find('input').val();
+      $.get('__CONTROLLER__/statusChange',{'id':id,'status':status},function(data){
+         location.reload();
+      });
+    })
+    </script>
+</block>
+<!-- 底部JS执行区域 结束 -->

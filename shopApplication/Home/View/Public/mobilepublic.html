@@ -276,10 +276,10 @@ $logo=C('logo6');
                 <li> <a href="category.html"> 聚抢购 </a> </li>
               </ul> -->
               <ul class="col-lg-3  col-sm-3 col-md-3  col-xs-4">
-                <li> <a class="newProductMenuBlock" href="product-details.html"> <img class="img-responsive" src="<{$navlist[2][image]}>" alt="<{$navlist[0][nav_title]}>"> <span class="ProductMenuCaption"> <i class="fa fa-caret-right"> </i> <{$navlist[2][nav_title]}> </span> </a> </li>
+                <li> <a class="newProductMenuBlock" href="<{:U('Mobileproduct/productList',array('type'=>shop,'cat'=>all))}>"> <img class="img-responsive" src="<{$navlist[2][image]}>" alt="<{$navlist[0][nav_title]}>"> <span class="ProductMenuCaption"> <i class="fa fa-caret-right"> </i> <{$navlist[2][nav_title]}> </span> </a> </li>
               </ul>
               <ul class="col-lg-3  col-sm-3 col-md-3 col-xs-4">
-                <li> <a class="newProductMenuBlock" href="product-details.html"> <img class="img-responsive" src="<{$navlist[3][image]}>" alt="<{$navlist[3][nav_title]}>"> <span class="ProductMenuCaption"> <i class="fa fa-caret-right"> </i> <{$navlist[3][nav_title]}> </span> </a> </li>
+                <li> <a class="newProductMenuBlock" href="<{:U('Mobileproduct/promoteList')}>"> <img class="img-responsive" src="<{$navlist[3][image]}>" alt="<{$navlist[3][nav_title]}>"> <span class="ProductMenuCaption"> <i class="fa fa-caret-right"> </i> <{$navlist[3][nav_title]}> </span> </a> </li>
               </ul>
             </li>
           </ul>
@@ -357,7 +357,9 @@ $logo=C('logo6');
 </body>
 <!-- Le javascript
 ================================================== --> 
+<block name="bottomJsFile">
 
+</block>
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="__PUBLIC__/Mobile/assets/bootstrap/js/bootstrap.min.js"></script> 
 
@@ -393,8 +395,6 @@ $logo=C('logo6');
 
 <!-- include custom script for site  --> 
 <script src="__PUBLIC__/Mobile/assets/js/script.js"></script>
-<block name="bottomJsFile">
 
-</block>
 
 </html>

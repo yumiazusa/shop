@@ -2252,7 +2252,7 @@ h1.bolder-style.dark, h1.bolder-style.dark a {
 	-o-transition: all 0.3s ease 0s;
 	-ms-transition: all 0.3s ease 0s;
 	margin-bottom: 15px;
-	height: 480px;
+	/*height: 480px;*/
 }
 #SimilarProductSlider .item {
 	height: auto !important;

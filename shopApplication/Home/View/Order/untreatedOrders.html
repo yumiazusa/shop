@@ -84,13 +84,13 @@
                                 </td>
                                 <td width="85" class="color_red color-font" rowspan="2"> ¥<{$v.real_price}>&nbsp;(含邮费)</td>
                                 <td width="75" rowspan="2" class="color-font" style="font-size:12px;" id="st<{$v.id}>">
-                                   <if condition="$v['pay_type'] eq 0">
+                                   <if condition="$v['pay_status'] eq 0">
                                        <if condition="$v['order_status'] eq 1">
                                          待付款
                                         <else/>
                                         已取消
                                         </if>
-                                   <elseif condition="$v['pay_type'] eq 1"/>
+                                   <elseif condition="$v['pay_status'] eq 1"/>
                                          待发货
                                    </if>
                                 </td>

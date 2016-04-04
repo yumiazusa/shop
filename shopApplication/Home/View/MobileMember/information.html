@@ -1,0 +1,128 @@
+<extend name="Public:mobilepublic" />
+
+<block name="cssFile">
+<link href="__PUBLIC__/Mobile/assets/css/animate.min.css" rel="stylesheet">
+<style>
+</style>
+</block>
+<block name="topJsFile">
+</block>
+<block name="publicBody">
+<!-- /.Fixed navbar  --><div class="container main-container headerOffset">
+  <div class="row">
+    <div class="breadcrumbDiv col-lg-12">
+      <ul class="breadcrumb">
+        <li> <a href="<{:U('Mobileindex/mobileindex')}>">首页</a> </li>
+        <li> <a href="<{:U('MobileMember/member')}>">个人中心</a> </li>
+        <li class="active">个人信息</li>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-9 col-md-9 col-sm-7">
+      <h1 class="section-title-inner"><span><i class="glyphicon glyphicon-user"></i> 个人中心 </span></h1>
+      <div class="row userInfo">
+        <div class="col-lg-12">
+          <p class="required"><sup>*</sup> 号项目为必填</p>
+        </div>
+        <form>
+          <div class="col-xs-12 col-sm-6">
+            <div class="form-group required">
+              <label for="uname">用户名 <sup>*</sup> </label>
+              <input required  type="text" name="uname" class="form-control" id="uname" placeholder="用户名" value="<{$users.uname}>">
+            </div>
+            <div class="form-group required">
+              <label for="sex">性别<sup>*</sup> </label></br><input class="sex" type="radio" value="1" name="sex"
+                    <if condition="$info['sex'] eq 1">checked='checked'</if>
+                    >男
+                    <input class="sex" type="radio" value="0" name="sex"
+                    <if condition="$info['sex'] eq 0">checked='checked'</if>
+                    >女
+                    <input class="sex" type="radio" value="2" name="sex"
+                    <if condition="$info['sex'] eq 2">checked='checked'</if>
+                    >保密
+            </div>
+            <div class="form-group required">
+              <label for="true_name"> 真实姓名 <sup>*</sup> </label>
+              <input type="text" class="form-control" id="true_name" placeholder="真实姓名" value="<{$info.true_name}>">
+            </div>
+            <div class="form-group required">
+              <label for="true_name"> 身份证号 <sup>*</sup> </label>
+              <input type="text" class="form-control" id="identity" placeholder="身份证号" value="<{$info.identity}>">
+            </div>
+			<div class="form-group required">
+              <label for="true_name"> 邮箱 <sup>*</sup> </label>
+              <{$users.email}>
+            </div>
+
+
+          <div class="col-lg-12">
+            <button type="button" class="btn btn-primary" id="sub"><i class="fa fa-save"></i> &nbsp; 保存 </button><span style="color:red;display:none;" id="concern">&nbsp;（*）为必填项目</span>
+          </div>
+        </form>
+        <div class="col-lg-12 clearfix">
+          <ul class="pager">
+            <li class="previous pull-right"><a href="<{:U('Mobileindex/mobileindex')}>"> <i class="fa fa-home"></i> 首页 </a></li>
+            <li class="next pull-left"><a href="<{:U('MobileMember/member')}>"> &larr; 返回个人中心</a></li>
+          </ul>
+        </div>
+      </div>
+      <!--/row end--> 
+      
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-5"> </div>
+  </div>
+  <!--/row-->
+  
+  <div style="clear:both"></div>
+</div>
+<!-- /main-container -->
+
+
+
+
+
+<block name="bottomJsFile">
+<script type="text/javascript" src="__PUBLIC__/Mobile/assets/js/jquery/1.8.3/jquery.js"></script>
+<script src="__PUBLIC__/Mobile/assets/js/jquery.easing.1.3.js"></script>
+<script>
+$('#sub').bind('click', function () {
+            if ($('.sex').eq(0).is(":checked")) {
+                sex = 1;
+            }
+            else if ($('.sex').eq(1).is(":checked")) {
+                sex = 0;
+            } else {
+                sex = 2;
+            }
+           
+
+        var true_name=$.trim($('#true_name').val());
+        var identity=$.trim($('#identity').val());
+        var uname=$.trim($('#uname').val());
+        if(true_name =='' || identity ==''){
+            $('#concern').css('display','inline');
+            return false;
+        }
+            data = {
+                'uname': uname, 'sex': sex, 'true_name': true_name,'identity':identity
+            };
+
+            $.post('__CONTROLLER__/saveInformation', data, function (a) {
+                if (a == 1) {
+                    alert('更新成功!');
+                    window.location.reload();
+                } else {
+                    if(a ==400){
+                    alert('身份证有误请检查!');
+                    }else{
+                    alert('更新失败!');
+                    }
+                }
+            })
+
+        })
+</script>
+</block>
+
+</block>

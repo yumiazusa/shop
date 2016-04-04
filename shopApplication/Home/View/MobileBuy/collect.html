@@ -1,0 +1,400 @@
+<extend name="Public:mobilepublic" />
+
+<block name="cssFile">
+<style>
+
+</style>
+</block>
+<block name="topJsFile">
+</block>
+<block name="publicBody">
+
+
+<div class="container main-container headerOffset">
+  <div class="row">
+    <div class="breadcrumbDiv col-lg-12">
+      <ul class="breadcrumb">
+        <li> <a href="<{:U('Mobileindex/mobileindex')}>">首页</a> </li>
+        <li>立即购买</li>
+      </ul>
+    </div>
+  </div>
+  <!--/.row-->
+
+  <div class="row">
+    <div class="col-lg-9 col-md-9 col-sm-7">
+      <h1 class="section-title-inner"><span><i class="glyphicon glyphicon-shopping-cart"></i>立即购买</span></h1>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-5 rightSidebar">
+      <h4 class="caps"><a href="<{:U('Mobileindex/mobileindex')}>"><i class="fa fa-chevron-left"></i>返回继续购物</a></h4>
+    </div>
+  </div> <!--/.row-->
+
+<div class="row">
+    <div class="col-lg-9 col-md-9 col-sm-12">
+      <div class="row userInfo">
+        <div class="col-xs-12 col-sm-12">
+
+
+          <div class="w100 clearfix">
+            <ul class="orderStep orderStepLook2">
+              <li class="active"> <a href="#1F"> <i class="fa fa fa-envelope  "></i> <span> 送货地址 </span></a></li>
+              <li> <a href="#3F"><i class="fa fa-money  "> </i><span>支付方式</span> </a> </li>
+              <li> <a href="#2F"><i class="fa fa-truck "> </i><span>送货方式</span> </a> </li>
+              <li> <a href="#4F"><i class="fa fa-check-square "> </i><span>确认订单</span></a> </li>
+            </ul>
+            <!--/.orderStep end--> 
+          </div>
+          <form method="post" action="<{:U('pay')}>" id="infoform">
+          <notempty name="buy_now">
+          <input type='hidden' name='buy_now' value="<{$buy_now}>">
+          </notempty>
+          <!--确认送货地址-->
+          <div class="w100 clearfix" >
+          	<a name="1F"></a>
+            <div class="row userInfo">
+              <div class="col-lg-12">
+                <h2 class="collecttitle">确认收货地址</h2>
+              </div>
+               
+              <div class="col-xs-12 col-sm-6">
+                <div class="collect_address_box">
+                <foreach name="address" item="v">
+                    <p style="font-family:微软雅黑;font-size:14px;">
+                        <input type="radio" <eq name="v.is_default" value='1'> checked='checked' </eq> name="shipping_addr_id" value="<{$v.id}>" id="shipping_addr_id"/>
+                        <span class="collect_address_box_name mr3"><{$v.reciver_user}></span>
+                        <span class="collect_address_box_tphone mr3"><{$v.reciver_phone}></span>
+                        <span class="collect_address_box_province mr3"><{$v.province}></span>
+                        <span class="collect_address_box_city mr3"><{$v.city}></span>
+                        <span class="collect_address_box_district mr3"><{$v.area}></span>
+                        <span class="collect_address_box_street mr3"><{$v.street}></span>
+                    </p>
+                </foreach>
+
+
+             <p style="font-family:微软雅黑;font-size:15px;"><input type="radio" name="shipping_addr_id" id="shipping_addr_id" value="0"/>使用新地址</p>
+            </div>
+                 </div>
+                 </br>
+              <div class="col-xs-12 col-sm-6 addressform">
+                <div class="form-group required">
+                  <label for="InputName">收件人姓名<sup>*</sup> </label>
+                  <input required type="text" class="form-control" id="InputName" name="reciver_user" placeholder="收件人姓名">
+                </div>
+                <div class="form-group required">
+                  <label for="InputState">省份<sup>*</sup> </label>
+                  <select name="province">
+                                                  <option value="北京">北京市</option>
+                                                  <option value="浙江省">浙江省</option>
+                                                  <option value="天津市">天津市</option>
+                                                  <option value="安徽省">安徽省</option>
+                                                  <option value="上海市">上海市</option>
+                                                  <option value="福建省">福建省</option>
+                                                  <option value="重庆市">重庆市</option>
+                                                  <option value="江西省">江西省</option>
+                                                  <option value="山东省">山东省</option>
+                                                  <option value="河南省">河南省</option>
+                                                  <option value="湖北省">湖北省</option>
+                                                  <option value="湖南省">湖南省</option>
+                                                  <option value="广东省">广东省</option>
+                                                  <option value="海南省">海南省</option>
+                                                  <option value="山西省">山西省</option>
+                                                  <option value="青海省">青海省</option>
+                                                  <option value="江苏省">江苏省</option>
+                                                  <option value="辽宁省">辽宁省</option>
+                                                  <option value="吉林省">吉林省</option>
+                                                  <option value="台湾省">台湾省</option>
+                                                  <option value="河北省">河北省</option>
+                                                  <option value="贵州省">贵州省</option>
+                                                  <option value="四川省">四川省</option>
+                                                  <option value="云南省">云南省</option>
+                                                  <option value="陕西省">陕西省</option>
+                                                  <option value="甘肃省">甘肃省</option>
+                                                  <option value="黑龙江省">黑龙江省</option>
+                                                  <option value="香港特别行政区">香港特别行政区</option>
+                                                  <option value="澳门特别行政区">澳门特别行政区</option>
+                                                  <option value="广西壮族自治区">广西壮族自治区</option>
+                                                  <option value="宁夏回族自治区">宁夏回族自治区</option>
+                                                  <option value="新疆维吾尔自治区">新疆维吾尔自治区</option>
+                                                  <option value="内蒙古自治区">内蒙古自治区</option>
+                                                  <option value="西藏自治区">西藏自治区</option>
+                </select>
+                </div>
+                <div class="form-group required">
+                  <label for="InputAddress">城市 <sup>*</sup> </label>
+                  <input required type="text" class="form-control" id="InputAddress" name="city" placeholder="城市">
+                </div>
+                <div class="form-group">
+                  <label for="InputAddress2">区/县</label>
+                  <input type="text" class="form-control" id="InputAddress2" name="area" placeholder="区/县">
+                </div>
+                <div class="form-group required">
+                  <label for="InputCity">详细地址 <sup>*</sup> </label>
+                  <input required type="text" class="form-control" id="InputCity" name="street" placeholder="详细地址">
+                </div>
+              
+                <div class="form-group required">
+                  <label for="InputZip">邮政编码<sup>*</sup> </label>
+                  <input required type="text" class="form-control" id="InputZip" name="zipcode" placeholder="邮政编码">
+                </div>
+                <!-- <div class="form-group">
+                  <label for="InputAdditionalInformation">Additional information</label>
+                  <textarea rows="3" cols="26" name="InputAdditionalInformation" class="form-control" id="other"></textarea>
+                </div> -->
+                <div class="form-group required">
+                  <label for="InputMobile">联系电话<sup>*</sup></label>
+                  <input  required type="tel" class="form-control" name="reciver_phone" id="InputMobile" placeholder="联系电话">
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--确认送货地址完-->
+  
+          <!--确认支付方式-->
+    <div class="w100 clearfix">
+      <a name="3F"></a>
+            <div class="row userInfo">
+              <div class="col-lg-12">
+                <h2 class="collecttitle">确认支付方式</h2>
+              </div>
+              <div class="col-xs-12 col-sm-12">
+                <div class="paymentBox">
+                  <div class="panel-group paymentMethod" id="accordion">
+                    <div class="panel panel-default">
+                      <div class="panel-heading panel-heading-custom">
+                        <h4 class="panel-title"> <a class="cashOnDelivery" data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><strong>在线支付</strong> </a> </h4>
+                      </div>
+                      <div id="collapseOne" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                          <p>为保证及时处理您的订单，请您于下单后2小时内完成付款。超出2小时订单将被自动取消。</p>
+                          <br>
+                            <input name="pay_type" value="0" checked type="radio">
+                            在线支付
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                
+                <!--/row--> 
+                
+              </div>
+            </div>
+          </div>
+    <!--确认支付方式完-->
+
+
+		  <!--确认快递方式-->
+		  <div class="w100 clearfix">
+		  	<a name="2F"></a>
+            <div class="row userInfo">
+              <div class="col-lg-12">
+                <h2 class="collecttitle">确认送货方式</h2>
+              </div>
+              <div class="col-xs-12 col-sm-12">
+                <div class="w100 row">
+                  <div class="form-group col-lg-12 col-sm-12 col-md-12 -col-xs-12">
+                    <table style="width:100%"  class="table-bordered table tablelook2">
+                      <tbody>
+                        <tr >
+                          <td>选择</td>
+                          <td >快递公司</td>
+                          <td >备注</td>
+                        </tr>
+                        <foreach name="ships" item="v">
+                        <tr >
+                          <td class="collect_pay_box">
+                              <input type="radio" value="<{$v.sid}>" <eq name="v.is_default" value="1"> checked </eq> name="shipping_way">
+                              </td>
+                          <td ><{$v['cname'].cname}></td>
+                          <td><{$v.shipping_desc}></td>
+                        </tr>
+                        </foreach>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                
+                <!--/row-->
+     
+              </div>
+            </div>
+          </div>
+          <!--确认快递方式完-->
+        <div class="w100 clearfix">
+
+                <h2 class="collecttitle">备注</h2>
+  
+        <div class="form-group">
+  
+                  <textarea rows="3" cols="26" name="comment" class="form-control" id="other"></textarea>
+                  <div class="clr">(50字以内)</div>
+                </div>
+        </div>
+
+
+			
+		<!--确认订单-->
+		<div class="w100 clearfix">
+		<a name="4F"></a>
+
+        	<div class="row userInfo">
+
+                <div class="col-lg-12">
+                    <h2 class="block-title-2"> 确认订单 </h2>
+                </div>
+
+
+
+            	<div class="col-xs-12 col-sm-12">
+                      <div class="cartContent w100 checkoutReview ">
+                        <table class="cartTable table-responsive"   style="width:100%">
+                          <tbody>
+                            <tr class="CartProduct cartTableHeader">
+                              <th style="width:15%"> 产品 </th>
+                              <th class="checkoutReviewTdDetails"  >描述</th>
+                              <th style="width:15%">重量</th>
+                              <th style="width:15%">小计</th>
+                            </tr>
+                            <foreach name="goods" item="v">
+                            <tr class="CartProduct">
+                              <td class="CartProductThumb" style="padding-left:5px;"><img class="cart_image" src="__PUBLIC__/Product/thumb/<{$v.img}>" width="100%"/></td>
+                              <td style="text-align: center;"><div class="CartDescription">
+                                  <h4> <a href="product-details.html"><a href="<{:U('ProductDetail/detail',array('id'=>$v['id']))}>"><{$v.pro_name}>&nbsp;&nbsp;<{$v.color.prop_name}>&nbsp;&nbsp;<{$v.version.prop_name}></a></a> </h4>
+                                  <span class="size">单价：¥<{$v.price}></span>
+
+                                </div>
+                            <if condition="$v['promote']['status'] eq 3">
+                                        <p style="font-family:微软雅黑;font-size:14px;"> 赠送:
+                                            <a href="<{:U('Mobileproductdetail/detail',array('id'=>$v['promote']['gift']['id']))}>" target="_blank"><{$v['promote']['gift']['pro_name']}></a>x<span
+                                                    class="gift_qty">1</span></p>
+                            <elseif condition="$v['promote']['status'] eq 4" />
+                            <if condition="$v['ordernum'] egt $v['promote']['condition']">
+                                <p style="font-family:微软雅黑;font-size:14px;"> 赠送:
+                                            <a href="<{:U('Mobileproductdetail/detail',array('id'=>$v['promote']['gift']['id']))}>" target="_blank"><{$v['promote']['gift']['pro_name']}></a>x<span
+                                                    class="gift_qty">1</span></p>
+                            </if>
+                            </if>
+                              </td>
+                              <td class="delete"><{$v.unit_weight}>(<{$v.weight_unit}>)</td>
+                              <td class="price">¥<{$v['price'] * $v['ordernum']}></td>
+                            </tr>
+                           </foreach>
+                          </tbody>
+                        </table>
+                      </div>
+                      <!--cartContent-->
+
+                      <div class="w100 costDetails">
+                        <div class="table-block" id="order-detail-content">
+                          <table class="std table" id="cart-summary">
+                            <tr >
+                              <td>商品金额</td>
+                              <td  class="price">¥<{$sum}></td>
+                            </tr>
+                            <tr style="" >
+                              <td>运费</td>
+                              <td  class="price"><span class="success" id="shipfee"></span></td>
+                            </tr>
+                            <tr >
+                              <td > 总额 <input type="hidden" name="deail_price" value="<{$sum}>"/>
+                               <input type="hidden" name="real_price" value=""/></td>
+                               
+                              <td id="total-price" class="price">$216.51 </td>
+                            </tr>
+                            <tbody>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+        </div>
+                </div>
+            </div><!--/row end-->
+		<!--确认订单完-->
+		<div class="cartFooter w100">
+            <div class="box-footer">
+               <div class="pull-right">
+                <a href="#" class="btn btn-primary btn-small" id="sub">
+					提交订单 &nbsp; <i class="fa fa-check"></i>
+                 </a>
+              </div>
+            </div>
+          </div>
+          </form>
+        </div>
+      </div>
+      <!--/row end--> 
+      
+    </div>
+
+    
+  </div>
+
+
+  <div style="clear:both"></div>
+</div>
+<!-- /.main-container-->
+<div class="gap"> </div>
+<block name="bottomJsFile">
+<script type="text/javascript" src="__PUBLIC__/Mobile/assets/js/jquery/1.8.3/jquery.js"></script>
+<script src="__PUBLIC__/Mobile/assets/js/jquery.easing.1.3.js"></script>
+<script>
+var weight='<{$weight}>';
+var total;
+	$('.orderStepLook2').find('li').click(function(){
+		$('.orderStepLook2').find('li').removeClass('active');
+		$(this).addClass('active');
+	});
+
+  function checkshipfee(){
+    var ship= $('.collect_pay_box input[name="shipping_way"]:checked').val();
+    var price =eval($('input[name="deail_price"]').val());
+    $.ajax({
+          url: '__CONTROLLER__/shipfee',
+          data:{'ship':ship,'weight':weight},
+          type:"post",
+          success:function(d){
+                if(d ==0){
+                    total = eval(d)+ price;
+                    $('#shipfee').html('运费：包邮');
+                    $('#total-price').html(total.toFixed(2));
+                    $('input[name="real_price"]').val(total.toFixed(2));
+                }else{
+                    total = eval(d)+ price;
+                    $('#shipfee').html('运费：¥'+d);
+                    $('#total-price').html(total.toFixed(2));
+                    $('input[name="real_price"]').val(total.toFixed(2));
+                }
+          }
+       });
+    }
+
+    checkshipfee();
+
+    $('input[name="shipping_addr_id"]').change(function(){
+      var shipping_addrid=$(this).val();
+      if(shipping_addrid == 0){
+        $('.addressform').css('display','block');
+      }else{
+        $('.addressform').css('display','none');
+       }
+    });
+
+    //提交订单
+$('#sub').click(function () {
+    var _address = $("input[name=shipping_addr_id]:checked").val();
+    var _pay = $("input[name=pay_type]:checked").val();
+    if (_address == undefined) {
+        alert("请选择收货地址");
+        return false;
+    }
+    if (_pay == undefined) {
+        alert("请选择支付方式");
+        return false;
+    }
+    $('#infoform').submit();
+});
+</script>
+</block>
+</block>

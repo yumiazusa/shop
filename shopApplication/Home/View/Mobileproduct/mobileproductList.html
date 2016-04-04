@@ -69,30 +69,7 @@
       <div class="w100 clearfix category-top">
         <h2><if condition="$cat eq 'all'"><else /><{$cat}></if> </h2>
       </div>
-      <!--/.category-top-->
-      
-      <!-- <div class="row subCategoryList clearfix">
-        <div class="col-lg-2 col-md-2 col-sm-3 col-xs-4  text-center ">
-          <div class="thumbnail equalheight"> <a class="subCategoryThumb" href="sub-category.html"><img src="__PUBLIC__/Mobile/images/product/3.jpg" class="img-rounded " alt="img"> </a> <a  class="subCategoryTitle"><span> T shirt </span></a></div>
-        </div>
-        <div class="col-lg-2 col-md-2 col-sm-3 col-xs-4  text-center">
-          <div class="thumbnail equalheight"> <a class="subCategoryThumb" href="sub-category.html"><img src="__PUBLIC__/Mobile/images/site/casual.jpg" class="img-rounded " alt="img"> </a> <a  class="subCategoryTitle"><span> Shirt </span></a></div>
-        </div>
-        <div class="col-lg-2 col-md-2 col-sm-3 col-xs-4  text-center">
-          <div class="thumbnail equalheight"> <a class="subCategoryThumb" href="sub-category.html"><img src="__PUBLIC__/Mobile/images/site/shoe.jpg" class="img-rounded " alt="img"> </a> <a  class="subCategoryTitle"><span> shoes </span></a></div>
-        </div>
-        <div class="col-lg-2 col-md-2 col-sm-3 col-xs-4  text-center">
-          <div class="thumbnail equalheight"> <a class="subCategoryThumb" href="sub-category.html"><img src="__PUBLIC__/Mobile/images/site/jewelry.jpg" class="img-rounded " alt="img"> </a> <a  class="subCategoryTitle"><span> Accessories </span></a></div>
-        </div>
-        <div class="col-lg-2 col-md-2 col-sm-3 col-xs-4  text-center">
-          <div class="thumbnail equalheight"> <a class="subCategoryThumb" href="sub-category.html"><img src="__PUBLIC__/Mobile/images/site/winter.jpg" class="img-rounded  " alt="img"> </a> <a  class="subCategoryTitle"><span> Winter Collection </span></a></div>
-        </div>
-        <div class="col-lg-2 col-md-2 col-sm-3 col-xs-4  text-center">
-          <div class="thumbnail equalheight"> <a class="subCategoryThumb" href="sub-category.html"><img src="__PUBLIC__/Mobile/images/site/Male-Fragrances.jpg" class="img-rounded " alt="img"> </a> <a  class="subCategoryTitle"><span> Fragrances </span></a></div>
-        </div>
-      </div> -->
-      <!--/.subCategoryList-->
-      
+
       <div class="w100 productFilter clearfix">
         <p class="pull-left"> 共 <strong><{$counts}></strong> 件商品 </p>
         <div class="pull-right ">
@@ -107,7 +84,7 @@
           
 
             <div class="image">
-          <a href="product-details.html"><img src="__PUBLIC__/Product/thumb/<{$pro.list_image}>" alt="img" class="img-responsive"></a>
+          <a href="<{:U('Mobileproductdetail/detail',array('id'=>$pro['id']))}>"><img src="__PUBLIC__/Product/thumb/<{$pro.list_image}>" alt="img" class="img-responsive"></a>
               <div class="promotion">
               <if condition="$pro.is_new eq 1">
                             <span class="new-product">新品</span> 
@@ -118,7 +95,7 @@
                  </div>
             </div>
             <div class="description">
-              <h4><a href="product-details.html"><{$pro.pro_name}></a></h4>
+              <h4><a href="<{:U('Mobileproductdetail/detail',array('id'=>$pro['id']))}>"><{$pro.pro_name}></a></h4>
               <div class="grid-description">
                 <p><{$pro.pro_subname}></p>
               </div>
@@ -127,7 +104,7 @@
               </div>
               <span class="size"><b>¥</b><del><{$pro.market_price}></del></span> </div>
             <div class="price"> <span><b>¥</b><{$pro.promote_price}></span></div>
-            <div class="action-control"> <a class="btn btn-primary"> <span class="add2cart"><i class="glyphicon glyphicon-shopping-cart"> </i> 查看详情 </span> </a> </div>
+            <div class="action-control"> <a href="<{:U('Mobileproductdetail/detail',array('id'=>$pro['id']))}>" class="btn btn-primary"> <span class="add2cart"><i class="glyphicon glyphicon-shopping-cart"> </i> 查看详情 </span> </a> </div>
           </div>
         </div>
         <!--/.item-->

@@ -37,13 +37,13 @@
           
 
             <div class="image">
-          <a href="product-details.html"><img src="__PUBLIC__/Product/thumb/<{$pro.list_image}>" alt="img" class="img-responsive"></a>
+          <a href="<{:U('Mobileproductdetail/detail',array('id'=>$pro['id']))}>"><img src="__PUBLIC__/Product/thumb/<{$pro.list_image}>" alt="img" class="img-responsive"></a>
               <div class="promotion">
                             <span class="discount">活动</span>
                  </div>
             </div>
             <div class="description">
-              <h4><a href="product-details.html"><{$pro.pro_name}></a></h4>
+              <h4><a href="<{:U('Mobileproductdetail/detail',array('id'=>$pro['id']))}>"><{$pro.pro_name}></a></h4>
               <div class="grid-description">
                 <p><{$pro.pro_subname}></p>
               </div>
@@ -60,7 +60,7 @@
                         $now=time();
                         </php>
                         <if condition="$pro['start_time'] egt $now">
-                        <p><font size='6' color="#c71c60">即将开始</font>
+                        <p><font size='4' color="#c71c60">即将开始</font>
                         </p>
                         <else />
                             <p>
@@ -72,7 +72,7 @@
                         </div>
                             </p>
                             </if>
-            <div class="action-control"> <a class="btn btn-primary"> <span class="lala"><i class="glyphicon glyphicon-shopping-cart"> </i> 查看详情 </span> </a> </div>
+            <div class="action-control"> <a href="<{:U('Mobileproductdetail/detail',array('id'=>$pro['id']))}>" class="btn btn-primary"> <span class="lala"><i class="glyphicon glyphicon-shopping-cart"> </i> 查看详情 </span> </a> </div>
           </div>
         </div>
         <!--/.item-->

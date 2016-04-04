@@ -1,0 +1,108 @@
+<extend name="Public:mobilepublic" />
+
+<block name="cssFile">
+<link href="__PUBLIC__/Mobile/assets/css/animate.min.css" rel="stylesheet">
+<style>
+</style>
+</block>
+<block name="topJsFile">
+</block>
+<block name="publicBody">
+
+
+<div class="container main-container headerOffset">
+  <div class="row">
+    <div class="breadcrumbDiv col-lg-12">
+      <ul class="breadcrumb">
+        <li> <a href="<{:U('Mobileindex/mobileindex')}>">首页</a> </li>
+        <li> <a href="<{:U('MobileMember/member')}>">个人中心</a> </li>
+        <li class="active"> 送货地址 </li>
+      </ul>
+    </div>
+  </div><!--/.row-->
+  
+  
+  <div class="row">
+  
+    <div class="col-lg-9 col-md-9 col-sm-7">
+      <h1 class="section-title-inner"><span><i class="fa fa-map-marker"></i> 送货地址 </span></h1>
+
+      <div class="row userInfo">
+      
+        <div class="col-lg-12">
+          <h2 class="block-title-2"> 您已创建(<{$count}>)个地址 </h2>
+
+        </div>
+        
+        <div class="w100 clearfix">
+        <volist name="data" id="vo" key="k">
+          <div class="col-xs-12 col-sm-6 col-md-4">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title"><strong>送货地址<{$k}></strong></h3>
+                <if condition="($vo.is_default eq 1)">
+                <p>(默认地址)</p>
+                </if>
+              </div>
+              <div class="panel-body">
+                <ul>
+                  <input type="hidden" name="id" id="id" value="<{$vo.id}>">
+                  <input type="hidden" name="is_default" id="is_default" value="<{$vo.is_default}>">
+                  <li> <span class="address-name"> <strong>收货人:<{$vo.reciver_user}></strong></span></li>
+                  <li> <span class="address-company"><strong>地址:</strong><{$vo.province}>&nbsp;<{$vo['city']}>&nbsp;<{$vo['area']}>&nbsp;<{$vo['street']}></span></li>
+                  <li> <span class="address-line1"><strong>联系电话:</strong> <{$vo['reciver_phone']}></span></li>
+                </ul>
+              </div>
+              <div class="panel-footer panel-footer-address">
+                <a class="btn btn-sm btn-danger del"> <i class="fa fa-minus-circle"></i> 删除 </a>
+              </div>
+            </div>
+          </div>
+		</volist>
+          
+          
+          
+        </div><!--/.w100-->
+        
+        
+         
+        <div class="col-lg-12 clearfix">
+          <ul class="pager">
+            <li class="previous pull-right"><a href="<{:U('Mobileindex/mobileindex')}>"> <i class="fa fa-home"></i> 首页 </a></li>
+            <li class="next pull-left"><a href="<{:U('MobileMember/member')}>">&larr; 返回个人中心</a></li>
+          </ul>
+        </div>
+        
+      </div> <!--/row end--> 
+    </div>
+    
+    <div class="col-lg-3 col-md-3 col-sm-5"> </div>
+    
+  </div> <!--/row-->
+  
+  <div style="clear:both"></div>
+</div> <!-- /.main-container -->
+
+<block name="bottomJsFile">
+<script type="text/javascript" src="__PUBLIC__/Mobile/assets/js/jquery/1.8.3/jquery.js"></script>
+<script type="text/javascript">
+  $('.del').click(function(){
+    var _this =$(this).parent().parent();
+    var id=_this.find('#id').val();
+    var is_default=_this.find('#is_default').val();
+    if (confirm("确认要删除吗?")) {
+            data = {'id': id, 'is_default': is_default};
+            $.post('__CONTROLLER__/addressDel', data, function (a) {
+                if (a > 0) {
+                    alert('地址删除成功!');
+                    window.location.reload();
+                } else {
+                    alert('地址删除失败!');
+                }
+            });
+
+        }
+  })
+</script>
+</block>
+</block>

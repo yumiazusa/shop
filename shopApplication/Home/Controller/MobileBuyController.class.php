@@ -3,7 +3,7 @@
 namespace Home\Controller;
 use Think\Controller;
 use Think\Area;
-class BuyController extends MyController{
+class MobileBuyController extends MyController{
     public function __construct() {
         parent::__construct();
     }
@@ -116,7 +116,7 @@ class BuyController extends MyController{
 
           $user_confirmation = $_SESSION['user']['userconfirmation'];
         if(!$user_confirmation){
-             $this->error('购买前，请先补全个人信息！',U('Member/information'),3);
+             $this->error('购买前，请先补全个人信息！',U('MobileMember/information'),3);
              exit;
         }
 
@@ -127,6 +127,8 @@ class BuyController extends MyController{
             foreach($ships as &$v1){
             	$v1['cname'] = $ship_company->field("cname")->where("id = ".$v1['sid'])->find();
             }
+            // dump($ships);
+            // die;
             $this->assign("ships",$ships);
             //收货地址
             //$user_id = $_SESSION['user']['userid'];
@@ -139,6 +141,7 @@ class BuyController extends MyController{
         }else{
         $cart = isset($_COOKIE['cart']) ? unserialize($_COOKIE['cart']) : array();
         }
+
         // 循环每一个商品取出详情信息
         $db = M("product");
         $list = M("products_attr");
@@ -231,6 +234,8 @@ class BuyController extends MyController{
             //三级联动
             $city = array("--请选择省--", "--市--", "--区县--");
             $c = Area::city($city);
+            // dump($c);
+            // die;
             $this->assign("city", $c);
             $this->display();
          }
@@ -259,17 +264,32 @@ class BuyController extends MyController{
         $cart = isset($_COOKIE['cart']) ? unserialize($_COOKIE['cart']) : array();
         }
         if(!$cart){
-            $this->error('订单失效，请前往个人中心查看！',U('order/untreatedOrders'));
+            $this->error('订单失效，请前往个人中心查看！',U('Mobileindex/mobileindex'));
             exit;
         }
         $_POST['user_id'] = $_SESSION['user']['userid'];
         $user = $_SESSION['user']['username'];
         $addr  = M("user_address");
-        $useraddid = $addr->where(array('user_id'=>$_POST['user_id'],'id'=>$_POST['shipping_addr_id']))->find();
+        if($_POST['shipping_addr_id'] ==0){
+          $data2['user_id']=$_POST['user_id'];
+          $data2['reciver_user']=$_POST['reciver_user'];
+          $data2['province']=$_POST['province'];
+          $data2['city']=$_POST['city'];
+          $data2['area']=$_POST['area'];
+          $data2['street']=$_POST['street'];
+          $data2['zipcode']=$_POST['zipcode'];
+          $data2['reciver_phone']=$_POST['reciver_phone'];
+          $useraddid=$addr->add($data2);
+          $_POST['shipping_addr_id']=$useraddid;
+        }else{
+          $useraddid = $addr->where(array('user_id'=>$_POST['user_id'],'id'=>$_POST['shipping_addr_id']))->find();
+            }
+
         if(!$useraddid){
             $this->error('收货地址不存在，请检查！');
             exit;
         }
+
         if(!in_array($_POST['pay_type'],array(0,1))){
             $this->error('支付方式错误，请检查！');
             exit;
@@ -288,10 +308,7 @@ class BuyController extends MyController{
             $this->error('物流方式有误，请检查！');
             exit;
         }
-        if(!in_array($_POST['send_time'],array(0,1,2,3))){
-            $this->error('送货时间有误，请检查！');
-            exit;
-        }
+        
         $_POST['order_sn']     = date("YmdHis").mt_rand(1,1000);
         $_POST['order_date']   = time();
         $_POST['order_status'] = 1;

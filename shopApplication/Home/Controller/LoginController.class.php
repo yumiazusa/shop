@@ -247,7 +247,7 @@ class LoginController extends Controller
 		$userInfo = $this->_checkUserLogin($username, $password);
 		if ( ! $userInfo)
 		{
-			$this->error('用户名或密码错误', 'regist');
+			$this->error('用户名或密码错误', U('Mobileindex/mobileindex'),3);
 			exit;
 		}else{
 		if($userInfo['email_state'] ==0){
@@ -261,7 +261,6 @@ class LoginController extends Controller
 			$data1['last_login_time'] = time();
 		    $data1['last_login_ip']   = ip2long($getIp);
 		    M('users')->where(array('id'=>$userInfo['id']))->save($data1);
-
 		// 保存SESSION
 		$this->_saveSession($userInfo['id'], $userInfo['uname'],$userInfo['level'],$userInfo['confirmation']);
 

@@ -166,12 +166,12 @@ $(document).ready(function() {
     });
 
 
-    // product details color switch 
-    $(".swatches li").click(function() {
-        $(".swatches li.selected").removeClass("selected");
-        $(this).addClass('selected');
+    // // product details color switch 
+    // $(".swatches li").click(function() {
+    //     $(".swatches li.selected").removeClass("selected");
+    //     $(this).addClass('selected');
 
-    });
+    // });
 	
 	// Modal thumb link selected 
     $(".modal-product-thumb a").click(function() {

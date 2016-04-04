@@ -1,0 +1,344 @@
+<extend name="Public:mobilepublic" />
+
+<block name="cssFile">
+	<link rel="stylesheet" href="__PUBLIC__/Mobile/assets/css/smoothproducts.css">
+	<link href="__PUBLIC__/Mobile/assets/css/owl.carousel.css" rel="stylesheet">
+    <link href="__PUBLIC__/Mobile/assets/css/owl.theme.css" rel="stylesheet">
+<style>
+  .time-item strong{background:#C71C60;color:#fff;font-size:15px;font-family:Arial;padding:0 6px;border-radius:5px;box-shadow:1px 1px 3px rgba(0,0,0,0.2);}
+    .day_show{color:#c71c60;font-size:25px;margin:0 5px;font-family:Arial, Helvetica, sans-serif;}
+    </style>
+</style>
+</block>
+<block name="topJsFile">
+    </block>
+<block name="publicBody">
+
+<div class="container main-container headerOffset">
+  
+  <div class="row transitionfx">
+  
+   <!-- left column -->
+    <div class="col-lg-6 col-md-6 col-sm-6">
+    	<!-- product Image and Zoom -->
+
+    <div class="main-image sp-wrap col-lg-12 no-padding style2 style2look2">
+    	<foreach name="goodimgs" item="v">
+        <a href="<{$v.images}>"><img src="<{$v.images}>" class="img-responsive" alt="img"></a> 
+        </foreach>
+      </div>
+    </div><!--/ left column end -->
+    
+                      <php>
+            if($promote){
+                        if($promote['status']==1){
+                        $price=($data['promote_price'] + $ls[0][prop_price] + $ls1[0][prop_price])*($promote['rate']/100);
+                      }elseif($_SESSION['user'] and $promote['status']==2){
+                        $price=($data['promote_price'] + $ls[0][prop_price] + $ls1[0][prop_price])*($promote['rate']/100);
+                      }elseif(!$_SESSION['user'] and $promote['status']==2){
+                        $price=$data['promote_price'] + $ls[0][prop_price] + $ls1[0][prop_price];
+                      }elseif($promote['status']==3 or $promote['status']==4){
+                        $price=$data['promote_price'] + $ls[0][prop_price] + $ls1[0][prop_price];
+                      }elseif($promote['status']==5){
+                            if($promote['time']==0 or $promote['time']==1){
+                            $price=$data['promote_price'] + $ls[0][prop_price] + $ls1[0][prop_price];
+                            }else{
+                            $price=($data['promote_price'] + $ls[0][prop_price] + $ls1[0][prop_price])*($promote['rate']/100);
+                            }
+                      }
+            }else{
+                        $price=$data['promote_price'] + $ls[0][prop_price] + $ls1[0][prop_price];
+                        }
+                  </php>
+    <!-- right column -->
+    <div class="col-lg-6 col-md-6 col-sm-5">
+    
+      <h1 class="product-title"><{$data.pro_name}></h1>
+      <h3 class="product-code">
+      	<if condition="$promote['status'] eq 1">
+                      <font size="4" color="red">特惠折扣~</font>
+                      <elseif condition="$promote['status'] eq 2" />
+                      <font size="4" color="red">会员特惠~</font>
+                      <elseif condition="$promote['status'] eq 3" />
+                      <font size="4" color="red">购买就赠~</font>
+                      <elseif condition="$promote['status'] eq 4" />
+                      <font size="4" color="red">买满就赠~</font>
+                      <elseif condition="($promote['status'] eq 5) and ($promote['time'] gt 0)" />
+                      <font size="4" color="red">限时抢购~</font>
+                    </if>
+      </h3>
+      <input type="hidden" value="<{$data.cat_id}>" name="cat_id">
+                <input type="hidden" value="<{$data.id}>" name="proid" id="proid">
+                <input type="hidden" value="<{$data.promote_price}>" name="promote_price" id="promote_price">
+                <input type="hidden" value="<{$price}>" name="price" id="price">
+                <notempty name='promote'>
+                <if condition="$promote['status'] eq 5">
+                  <if condition="$promote['time'] gt 1">
+                  <input type="hidden" value="<{$promote['rate']}>" name="promote" id="promote">
+                  </if>
+                <else />
+                <input type="hidden" value="<{$promote['rate']}>" name="promote" id="promote">
+                </if>
+                </notempty>
+      <div class="product-price"> 
+          <span class="price-sales">
+          	<if condition="$promote['status'] eq 1">
+                        折扣价:￥<span class="newer"><{$price}></span>
+                      <elseif condition="$promote['status'] eq 2" />
+                        会员价:￥<span class="newer"><{$price}></span>
+                        <else />
+                        本店价:￥<span class="newer"><{$price}></span>
+                      </if>
+          </span> 
+          <span class="price-standard">市场价:￥<{$data.market_price}></span> 
+      </div>
+      
+      <div class="details-description">
+        <p><{$data.description}></p>
+      </div>
+
+      <if condition="$promote['status'] eq 3">
+      <div class="color-details"> 
+       <span class="selected-color"><strong>赠品</strong></span>
+       <div class="giftdiv">
+          <ul>
+            <li>
+              <img src="__PUBLIC__/Product/thumb/<{$promote['gift']['list_image']}>"
+                                width="10%">
+                <div class="giftdiv">
+                  <a class="" href="<{:U('ProductDetail/detail',array('id'=>$promote['gift']['id']))}>" target='_blank'><{$promote['gift']['pro_name']}></a>
+                    <span class="num">×1</span>
+                </div>
+              </li>
+            </ul>
+        </div>
+      </div>
+      <elseif condition="$promote['status'] eq 4" />
+      <div class="color-details"> 
+       <span class="selected-color"><strong>赠品</strong></span>
+       <div class="giftdiv">
+          <ul>
+            <li>
+              <img src="__PUBLIC__/Product/thumb/<{$promote['gift']['list_image']}>"
+                                width="10%">
+                <div class="giftdiv">
+                  <a class="" href="<{:U('ProductDetail/detail',array('id'=>$promote['gift']['id']))}>" target='_blank'><{$promote['gift']['pro_name']}></a>
+                    <span class="num">×1&nbsp;&nbsp;&nbsp;(买<{$promote['condition']}><{$data.unit}>就赠)</span>
+                </div>
+              </li>
+            </ul>
+        </div>
+      </div>
+      </if>
+
+      <if condition="($promote['status']) eq 5 and ($promote['time'] eq 1)">
+      
+      <div class="color-details"> 
+       <span class="selected-color"><strong>限时抢购</strong></span>
+       <div class="giftdiv">
+                        <ul>
+                            <li class="name">
+                                <div class="display-inline-block">
+                                <php>
+                                $discountrate=$promote['rate']/10;
+                                </php>
+                                  <span class="newer" style="color:red;">(<{$discountrate}>折~) <small><i>即将开始</i></small></span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+      </div>
+
+
+      <elseif condition="($promote['status'] eq 5) and ($promote['time'] gt 1)" />
+      <div class="color-details"> 
+       <span class="selected-color"><strong>限时抢购</strong></span>
+       <div class="giftdiv">
+                        <ul>
+                            <li class="name">
+                                <div class="display-inline-block">
+                                  <span>
+                        <div class="time-item">
+                        <span class="day_show" id="day_show<{$data.id}>">0天</span>
+                        <strong id="hour_show<{$data.id}>">0时</strong>
+                        <strong id="minute_show<{$data.id}>">0分</strong>
+                        <strong id="second_show<{$data.id}>">0秒</strong>
+                        </div>
+                                  </span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+     </div>
+
+
+      </if>
+
+
+      <div class="color-details"> 
+      	<span class="selected-color"><strong>选择包装</strong></span>
+        <ul class="swatches Color">
+          <foreach name="ls" item="v">
+          <li class="color-pick <if condition='$key eq 0'>selected</if>"><a style="background-color:<{$v.prop_value}>;" title="<{$v.prop_name}>"> </a> <input type="hidden" name="upprice1" id="upprice1" value="<{$v.prop_price}>">
+                                <input type="hidden" name="attr_id1" id="attr_id1" value="<{$v.id}>"></li>
+          </foreach>
+        </ul>
+      </div>
+      <!--/.color-details-->
+      
+      <div class="productFilter productFilterLook2">
+        <span class="selected-color"><strong>选择规格</strong></span>
+            <ul>
+              <foreach name="nc" item="v">
+                <li class="display-inline-block ">
+                  <div <if condition="$key eq 0">
+                    class="size-pick detail-con-vsion detail-con-change"
+                      <else/>
+                    class="size-pick detail-con-vsion"
+                      </if> >
+                  <{$v.prop_name}>
+                                    <input type="hidden" name="attr_id2" id="attr_id2"  value="<{$v.id}>">
+                                    <input type="hidden" name="upprice2" value="<{$v.prop_price}>">
+                            </li>
+                  </foreach>
+            </ul>
+
+
+
+          <!-- <ul>
+            <li><div class="size-pick detail-con-vsion detail-con-change">lalala</div></li>
+            <li><div div class="size-pick detail-con-vsion">lalala</div></li>
+            <li><div div class="size-pick detail-con-vsion">lalala</div></li>
+          </ul> -->
+          <!-- <select class="size-pick">
+            <option value="strawberries" selected>Quantity</option>
+            <option value="mango">1</option>
+            <option value="bananas">2</option>
+            <option value="watermelon">3</option>
+            <option value="grapes">4</option>
+            <option value="oranges">5</option>
+            <option value="pineapple">6</option>
+            <option value="peaches">7</option>
+            <option value="cherries">8</option>
+          </select> -->
+      
+      </div>
+      <!-- productFilter -->
+      
+      <div class="cart-actions">
+        <h3 class="incaps"><i class="fa fa fa-check-circle-o color-in"></i>库存量——<sapn class="storeNum"></span></h3>
+        <h3 style="display:none" class="incaps"><i class="fa fa-minus-circle color-out"></i> 无货</h3>
+        <div style="clear:both"></div>
+        <div class="addto">
+          <button id="buy_now" class="button btn-cart cart first" title="Add to Cart" type="button" style="display:none;">立刻购买</button>
+          <a class="link-wishlist wishlist" style="display: none;" disabled="disabled">暂时缺货</a> </div>
+          
+        <div style="clear:both"></div>
+        
+        
+      </div>
+      <!--/.cart-actions-->
+      
+      <div class="clear"></div>
+      
+      <div class="product-tab w100 clearfix">
+      
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="#details" data-toggle="tab">产品细节</a></li>
+          <li> <a href="#size" data-toggle="tab">产品参数</a></li>
+        </ul>
+        
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <div class="tab-pane active" id="details">
+            <div class="detaillist">
+             <{$data.feacher}>
+            </div>
+          </div>
+          <div class="tab-pane" id="size">
+            <div class="detail-cs-right">
+                <foreach name="gplist" item="vo">
+                  <h2><{$vo.param_title}></h2>
+                  <div>
+                      <{$vo.param_content}>
+                  </div>
+                  <hr>
+                  </foreach>
+                  </div>
+          </div>
+          
+          
+          
+        </div> <!-- /.tab content -->
+        
+      </div><!--/.product-tab-->
+      
+      <div style="clear:both"></div>
+      
+      <div class="product-share clearfix">
+        
+        
+      </div>
+      <!--/.product-share--> 
+      
+    </div><!--/ right column end -->
+    
+  </div>
+  <!--/.row-->
+</div>
+
+
+
+
+
+
+<block name="bottomJsFile">
+<script type="text/javascript" src="__PUBLIC__/Mobile/assets/js/jquery/1.8.3/jquery.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Mobile/assets/js/smoothproducts.min.js"></script>
+<script src="__PUBLIC__/Mobile/assets/js/jquery.easing.1.3.js"></script>
+<script src="__PUBLIC__/Mobile/assets/js/detail.js"></script>
+<script src="__PUBLIC__/Mobile/assets/js/cart.js"></script>
+<script>
+var data=<{$goodsData}>;
+var _url ="__CONTROLLER__";
+var _APP ="__APP__";
+var _user ="<{$users}>";
+var time ="<{$promote['time']}>";
+var n="<{$data['id']}>";
+goods();
+timerr();
+
+function timerr (){
+      if(time>1){
+        timer(time,n);
+      }
+}
+
+
+
+function timer(intDiff,id){
+    window.setInterval(function(){
+    var day=0,
+        hour=0,
+        minute=0,
+        second=0;//时间默认值
+    if(intDiff > 0){
+        day = Math.floor(intDiff / (60 * 60 * 24));
+        hour = Math.floor(intDiff / (60 * 60)) - (day * 24);
+        minute = Math.floor(intDiff / 60) - (day * 24 * 60) - (hour * 60);
+        second = Math.floor(intDiff) - (day * 24 * 60 * 60) - (hour * 60 * 60) - (minute * 60);
+    }
+    if (minute <= 9) minute = '0' + minute;
+    if (second <= 9) second = '0' + second;
+    $('#day_show'+id).html(day+"天");
+    $('#hour_show'+id).html('<s id="h"></s>'+hour+'时');
+    $('#minute_show'+id).html('<s></s>'+minute+'分');
+    $('#second_show'+id).html('<s></s>'+second+'秒');
+    intDiff--;
+    }, 1000);
+}
+</script>
+</block>
+
+
+</block>

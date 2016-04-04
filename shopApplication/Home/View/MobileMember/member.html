@@ -1,0 +1,54 @@
+<extend name="Public:mobilepublic" />
+
+<block name="cssFile">
+<link href="__PUBLIC__/Mobile/assets/css/animate.min.css" rel="stylesheet">
+<style>
+</style>
+</block>
+<block name="topJsFile">
+</block>
+<block name="publicBody">
+
+<div class="container main-container headerOffset">
+  <div class="row">
+    <div class="breadcrumbDiv col-lg-12">
+      <ul class="breadcrumb">
+        <li> <a href="<{:U('Mobileindex/mobileindex')}>">首页</a> </li>
+        <li class="active"> 个人中心 </li>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-9 col-md-9 col-sm-7">
+      <h1 class="section-title-inner"><span><i class="fa fa-unlock-alt"></i> 个人中心 </span></h1>
+      <div class="row userInfo">
+        <div class="col-xs-12 col-sm-12">
+          <h2 class="block-title-2"><span>欢迎来到个人中心</span></h2>
+          <ul class="myAccountList row">
+            <li class="col-lg-2 col-md-2 col-sm-3 col-xs-4  text-center ">
+              <div class="thumbnail equalheight"> <a title="Orders" href="<{:U('MobileOrder/orderList')}>"><i class="fa fa-calendar"></i> 交易记录 </a> </div>
+            </li>
+            <li class="col-lg-2 col-md-2 col-sm-3 col-xs-4  text-center ">
+              <div class="thumbnail equalheight"> <a title="Personal information" href="<{:U('MobileMember/information')}>"><i class="fa fa-cog"></i> 个人信息</a> </div>
+            </li>
+            <li class="col-lg-2 col-md-2 col-sm-3 col-xs-4  text-center ">
+              <div class="thumbnail equalheight"> <a title="My addresses" href="<{:U('MobileMember/address')}>"><i  class="fa fa-map-marker"></i> 送货地址</a> </div>
+            </li>
+          </ul>
+          <div class="clear clearfix"> </div>
+        </div>
+      </div>
+      <!--/row end--> 
+      
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-5"> </div>
+  </div>
+  <!--/row-->
+  
+  <div style="clear:both"></div>
+</div>
+
+<block name="bottomJsFile">
+<script type="text/javascript" src="__PUBLIC__/Mobile/assets/js/jquery/1.8.3/jquery.js"></script>
+</block>
+</block>

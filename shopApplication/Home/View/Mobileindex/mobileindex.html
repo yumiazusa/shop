@@ -18,7 +18,7 @@
       <foreach name="bannerRes" item="banners">
       <div class="product-slide">
         <if condition="$banners['is_connect'] eq 1">
-        <a href="<{:U('ProductDetail/detail',array('id'=>$banners['product_id']))}>" target="_blank">
+        <a href="<{:U('Mobileproductdetail/detail',array('id'=>$banners['product_id']))}>" target="_blank">
           </if>
           <img class="img-responsive" src="__PUBLIC__/Adv/<{$banners.thumbnail}>" alt="img">
         <if condition="$banners['is_connect'] eq 1">
